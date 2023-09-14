@@ -112,7 +112,7 @@ public partial class FrmVisualizarDadosIndividual : Form
             ausenciaBancoHora += $"Data: {DateTime.Parse(item.Data!):dd/MM/yyyy}\n" +
                                  $"\tTipo de Ausência ou Compensação: {item.TipoAusenOuComp!.Trim()} - " +
                                  $"{tipoAusencia[int.Parse(item.TipoAusenOuComp!.Trim())]}\n" +
-                                 $"\tTipo Movimento Banco: {item.TipoMovBH!.Trim()}" +
+                                 $"\tTipo Movimento Banco: {item.TipoMovBH!.Trim()} - " +
                                  $"{tipoMov[int.Parse(item.TipoMovBH!.Trim())]}\n";
         }
     }
