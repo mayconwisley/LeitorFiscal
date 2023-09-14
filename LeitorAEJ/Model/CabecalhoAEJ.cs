@@ -5,25 +5,25 @@ namespace LeitorAEJ.Model;
 
 public class CabecalhoAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; private set; }
-    [MaxLength(1)]
+    [MaxLength(1, ErrorMessage = "O campo TpIdtEmpregador deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
     public string? TpIdtEmpregador { get; private set; }
-    [MaxLength(14)]
+    [MaxLength(14, ErrorMessage = "O campo IdtEmpregador deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '14'")]
     public string? IdtEmpregador { get; private set; }
-    [MaxLength(14)]
+    [MaxLength(14, ErrorMessage = "O campo Caepf deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '14'")]
     public string? Caepf { get; private set; }
-    [MaxLength(12)]
+    [MaxLength(12, ErrorMessage = "O campo Cno deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '12'")]
     public string? Cno { get; private set; }
-    [MaxLength(150)]
+    [MaxLength(150, ErrorMessage = "O campo RazaoOuNome deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '150'")]
     public string? RazaoOuNome { get; private set; }
-    [MaxLength(10)]
+    [MaxLength(10, ErrorMessage = "O campo DataInicialAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '10'")]
     public string? DataInicialAej { get; private set; }
-    [MaxLength(10)]
+    [MaxLength(10, ErrorMessage = "O campo DataFinalAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '10'")]
     public string? DataFinalAej { get; private set; }
-    [MaxLength(24)]
+    [MaxLength(24, ErrorMessage = "O campo DataHoraGerAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '24'")]
     public string? DataHoraGerAej { get; private set; }
-    [MaxLength(3)]
+    [MaxLength(3, ErrorMessage = "O campo VersaoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '3'")]
     public string? VersaoAej { get; private set; } = "001";
 
     public static List<CabecalhoAEJ> CabecalhoAEJList { get; private set; } = new();

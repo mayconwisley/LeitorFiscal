@@ -5,13 +5,13 @@ namespace LeitorAEJ.Model;
 
 public class VinculosAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; private set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? IdtVinculoAej { get; private set; }
-    [MaxLength(11)]
+    [MaxLength(11, ErrorMessage = "O campo CPF deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '11'")]
     public string? CPF { get; private set; }
-    [MaxLength(150)]
+    [MaxLength(150, ErrorMessage = "O campo NomeEmp deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '150'")]
     public string? NomeEmp { get; private set; }
 
     public static List<VinculosAEJ> VinculosAEJList { get; private set; } = new();

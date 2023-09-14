@@ -5,23 +5,23 @@ namespace LeitorAEJ.Model;
 
 public class TrailerAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo01 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo01 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo02 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo02 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo03 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo03 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo04 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo04 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo05 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo05 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo06 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo06 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo07 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo07 { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo QtRegistrosTipo08 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? QtRegistrosTipo08 { get; set; }
 
     public static List<TrailerAEJ> TrailerAEJList { get; private set; } = new();

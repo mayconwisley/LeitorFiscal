@@ -5,19 +5,19 @@ namespace LeitorAEJ.Model;
 
 public class HorarioContratualAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; set; }
-    [MaxLength(30)]
+    [MaxLength(30, ErrorMessage = "O campo CodHorContratual deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '30'")]
     public string? CodHorContratual { get; set; }
-    [MaxLength(12)]
+    [MaxLength(12, ErrorMessage = "O campo DurJornada deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '12'")]
     public string? DurJornada { get; set; }
-    [MaxLength(4)]
+    [MaxLength(4, ErrorMessage = "O campo HrEntrada01 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '4'")]
     public string? HrEntrada01 { get; set; }
-    [MaxLength(4)]
+    [MaxLength(4, ErrorMessage = "O campo HrSaida01 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '4'")]
     public string? HrSaida01 { get; set; }
-    [MaxLength(4)]
+    [MaxLength(4, ErrorMessage = "O campo HrEntrada02 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '4'")]
     public string? HrEntrada02 { get; set; }
-    [MaxLength(4)]
+    [MaxLength(4, ErrorMessage = "O campo HrSaida02 deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '4'")]
     public string? HrSaida02 { get; set; }
 
     public static List<HorarioContratualAEJ> HorarioContratualAEJList { get; private set; } = new();

@@ -5,19 +5,19 @@ namespace LeitorAEJ.Model;
 
 public class IdentificacaoPTRPAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; private set; }
-    [MaxLength(150)]
+    [MaxLength(150, ErrorMessage = "O campo NomeProg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '150'")]
     public string? NomeProg { get; private set; }
-    [MaxLength(8)]
+    [MaxLength(8, ErrorMessage = "O campo VersaoProg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '8'")]
     public string? VersaoProg { get; private set; }
-    [MaxLength(1)]
+    [MaxLength(1, ErrorMessage = "O campo TpIdtDesenv deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
     public string? TpIdtDesenv { get; private set; }
-    [MaxLength(14)]
+    [MaxLength(14, ErrorMessage = "O campo IdtDesenv deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '14'")]
     public string? IdtDesenv { get; private set; }
-    [MaxLength(150)]
+    [MaxLength(150, ErrorMessage = "O campo RazaoNomeDesenv deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '150'")]
     public string? RazaoNomeDesenv { get; private set; }
-    [MaxLength(50)]
+    [MaxLength(50, ErrorMessage = "O campo EmailDesenv deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '50'")]
     public string? EmailDesenv { get; private set; }
 
     public static List<IdentificacaoPTRPAEJ> IdentificacaoPTRPAEJList { get; private set; } = new();

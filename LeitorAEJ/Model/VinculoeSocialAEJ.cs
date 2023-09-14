@@ -5,11 +5,11 @@ namespace LeitorAEJ.Model;
 
 public class VinculoeSocialAEJ
 {
-    [MaxLength(2)]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
     public string? TipoReg { get; set; }
-    [MaxLength(9)]
+    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
     public string? IdtVinculoAej { get; set; }
-    [MaxLength(30)]
+    [MaxLength(30, ErrorMessage = "O campo MatEsocial deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '30'")]
     public string? MatEsocial { get; set; }
 
     public static List<VinculoeSocialAEJ> VinculoeSocialAEJList { get; private set; } = new();
