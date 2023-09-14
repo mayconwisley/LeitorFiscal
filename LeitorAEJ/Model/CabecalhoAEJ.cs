@@ -55,54 +55,59 @@ public class CabecalhoAEJ
             {
                 CabecalhoAEJList.Add(cabecalho);
             }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
+
         }
         else
         {
             CabecalhoAEJList.Add(cabecalho);
         }
     }
-    
-    private static bool ValidarTipoDados(CabecalhoAEJ cabecalho)
+
+    private static bool ValidarTipoDados(CabecalhoAEJ cabecalhoAEJ)
     {
 
         var camposComErro = new List<string>();
 
-        if (!int.TryParse(cabecalho.TipoReg, out _))
+        if (!int.TryParse(cabecalhoAEJ.TipoReg, out _))
         {
             camposComErro.Add("TipoReg");
         }
 
-        if (!int.TryParse(cabecalho.TpIdtEmpregador, out _))
+        if (!int.TryParse(cabecalhoAEJ.TpIdtEmpregador, out _))
         {
             camposComErro.Add("TpIdtEmpregador");
         }
 
-        if (!double.TryParse(cabecalho.IdtEmpregador, out _))
+        if (!double.TryParse(cabecalhoAEJ.IdtEmpregador, out _))
         {
             camposComErro.Add("IdtEmpregador");
         }
 
-        if (!double.TryParse(cabecalho.Caepf, out _))
+        if (!double.TryParse(cabecalhoAEJ.Caepf, out _))
         {
             camposComErro.Add("Caepf");
         }
 
-        if (!double.TryParse(cabecalho.Cno, out _))
+        if (!double.TryParse(cabecalhoAEJ.Cno, out _))
         {
             camposComErro.Add("Cno");
         }
 
-        if (!DateTime.TryParse(cabecalho.DataInicialAej, out _))
+        if (!DateTime.TryParse(cabecalhoAEJ.DataInicialAej, out _))
         {
             camposComErro.Add("DataInicialAej");
         }
 
-        if (!DateTime.TryParse(cabecalho.DataFinalAej, out _))
+        if (!DateTime.TryParse(cabecalhoAEJ.DataFinalAej, out _))
         {
             camposComErro.Add("DataFinalAej");
         }
 
-        if (!DateTime.TryParse(cabecalho.DataHoraGerAej, out _))
+        if (!DateTime.TryParse(cabecalhoAEJ.DataHoraGerAej, out _))
         {
             camposComErro.Add("DataHoraGerAej");
         }

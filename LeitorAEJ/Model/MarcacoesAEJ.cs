@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LeitorAEJ.Model.Ultil;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
 
@@ -16,7 +17,7 @@ public class MarcacoesAEJ
     public string? TpMarc { get; private set; }
     [MaxLength(3)]
     public string? SeqEntSaida { get; private set; }
-    [MaxLength(12)] //validar portaria 671 o tamanho é 1
+    [MaxLength(12)]
     public string? FonteMarc { get; private set; }
     [MaxLength(30)]
     public string? CodHorContratual { get; private set; }
@@ -24,12 +25,12 @@ public class MarcacoesAEJ
     public string? Motivo { get; private set; }
 
     public static List<MarcacoesAEJ> MarcacoesAEJList { get; private set; } = new();
-    public static string ErroValidacao { get; set; } = string.Empty;
+    public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetMarcacoes(string linhaMarcacoes)
+    public static void GetMarcacoes(string linhaMarcacoes, bool validarPortaria)
     {
         string[] itemLinha = linhaMarcacoes.Split("|");
-        ErroValidacao = string.Empty;
+        ErrosValidacao.Clear();
 
         var marcacoes = new MarcacoesAEJ
         {
@@ -43,19 +44,61 @@ public class MarcacoesAEJ
             CodHorContratual = itemLinha[7],
             Motivo = itemLinha[8]
         };
-        var validarResultados = new List<ValidationResult>();
-        var validarContexto = new ValidationContext(marcacoes, null, null);
-
-        if (Validator.TryValidateObject(marcacoes, validarContexto, validarResultados, true))
+        if (validarPortaria)
         {
-            MarcacoesAEJList.Add(marcacoes);
+            if (ValidacaoTamanhoDado.ValidarTamanho(marcacoes) && ValidarTipoDados(marcacoes))
+            {
+                MarcacoesAEJList.Add(marcacoes);
+            }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
         }
         else
         {
-            foreach (ValidationResult validarResultado in validarResultados)
-            {
-                ErroValidacao += validarResultado.ErrorMessage + "\n";
-            }
+            MarcacoesAEJList.Add(marcacoes);
+        }
+    }
+
+    private static bool ValidarTipoDados(MarcacoesAEJ marcacoesAEJ)
+    {
+
+        var camposComErro = new List<string>();
+
+        if (!int.TryParse(marcacoesAEJ.TipoReg, out _))
+        {
+            camposComErro.Add("TipoReg");
+        }
+
+        if (!double.TryParse(marcacoesAEJ.IdtVinculoAej, out _))
+        {
+            camposComErro.Add("IdtVinculoAej");
+        }
+
+        if (!DateTime.TryParse(marcacoesAEJ.DataHoraMarc, out _))
+        {
+            camposComErro.Add("DataHoraMarc");
+        }
+
+        if (!double.TryParse(marcacoesAEJ.IdRepAej, out _))
+        {
+            camposComErro.Add("IdRepAej");
+        }
+
+        if (!int.TryParse(marcacoesAEJ.SeqEntSaida, out _))
+        {
+            camposComErro.Add("SeqEntSaida");
+        }
+
+        if (camposComErro.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            return false;
         }
     }
 }

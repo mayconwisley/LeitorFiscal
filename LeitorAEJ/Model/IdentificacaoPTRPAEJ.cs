@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LeitorAEJ.Model.Ultil;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
 
@@ -20,12 +21,12 @@ public class IdentificacaoPTRPAEJ
     public string? EmailDesenv { get; private set; }
 
     public static List<IdentificacaoPTRPAEJ> IdentificacaoPTRPAEJList { get; private set; } = new();
-    public static string ErroValidacao { get; set; } = string.Empty;
+    public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetIdentificacaoPTRP(string linhaIdentificacaoPTRPAEJ)
+    public static void GetIdentificacaoPTRP(string linhaIdentificacaoPTRPAEJ, bool validarPortaria)
     {
         string[] itemLinha = linhaIdentificacaoPTRPAEJ.Split("|");
-        ErroValidacao = string.Empty;
+        ErrosValidacao.Clear();
 
         var identificacaoPTRP = new IdentificacaoPTRPAEJ
         {
@@ -38,19 +39,49 @@ public class IdentificacaoPTRPAEJ
             EmailDesenv = itemLinha[6]
         };
 
-        var validarResultados = new List<ValidationResult>();
-        var validarContexto = new ValidationContext(identificacaoPTRP, null, null);
-
-        if (Validator.TryValidateObject(identificacaoPTRP, validarContexto, validarResultados, true))
+        if (validarPortaria)
         {
-            IdentificacaoPTRPAEJList.Add(identificacaoPTRP);
+            if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP) && ValidarTipoDados(identificacaoPTRP))
+            {
+                IdentificacaoPTRPAEJList.Add(identificacaoPTRP);
+            }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
         }
         else
         {
-            foreach (ValidationResult validarResultado in validarResultados)
-            {
-                ErroValidacao += validarResultado.ErrorMessage +"\n";
-            }
+            IdentificacaoPTRPAEJList.Add(identificacaoPTRP);
+        }
+    }
+    private static bool ValidarTipoDados(IdentificacaoPTRPAEJ identificacaoPTRP)
+    {
+        var camposComErro = new List<string>();
+
+        if (!int.TryParse(identificacaoPTRP.TipoReg, out _))
+        {
+            camposComErro.Add("TipoReg");
+        }
+
+        if (!int.TryParse(identificacaoPTRP.TpIdtDesenv, out _))
+        {
+            camposComErro.Add("TpIdtDesenv");
+        }
+
+        if (!double.TryParse(identificacaoPTRP.IdtDesenv, out _))
+        {
+            camposComErro.Add("IdtDesenv");
+        }
+        
+        if (camposComErro.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            return false;
         }
     }
 }

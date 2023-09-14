@@ -45,6 +45,10 @@ public class HorarioContratualAEJ
             {
                 HorarioContratualAEJList.Add(horarioContratual);
             }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
         }
         else
         {
@@ -75,7 +79,7 @@ public class HorarioContratualAEJ
 
             if (horas >= 0 && horas <= 23 && minutos >= 0 && minutos <= 59)
             {
-                DateTime hora = DateTime.Today.AddHours(horas).AddMinutes(minutos);
+                _ = DateTime.Today.AddHours(horas).AddMinutes(minutos);
 
             }
             else
@@ -91,7 +95,7 @@ public class HorarioContratualAEJ
 
             if (horas >= 0 && horas <= 23 && minutos >= 0 && minutos <= 59)
             {
-                DateTime hora = DateTime.Today.AddHours(horas).AddMinutes(minutos);
+                _ = DateTime.Today.AddHours(horas).AddMinutes(minutos);
 
             }
             else
@@ -107,7 +111,7 @@ public class HorarioContratualAEJ
 
             if (horas >= 0 && horas <= 23 && minutos >= 0 && minutos <= 59)
             {
-                DateTime hora = DateTime.Today.AddHours(horas).AddMinutes(minutos);
+                _ = DateTime.Today.AddHours(horas).AddMinutes(minutos);
 
             }
             else
@@ -123,7 +127,7 @@ public class HorarioContratualAEJ
 
             if (horas >= 0 && horas <= 23 && minutos >= 0 && minutos <= 59)
             {
-                DateTime hora = DateTime.Today.AddHours(horas).AddMinutes(minutos);
+                _ = DateTime.Today.AddHours(horas).AddMinutes(minutos);
 
             }
             else

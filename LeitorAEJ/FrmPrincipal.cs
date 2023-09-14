@@ -28,7 +28,6 @@ public partial class FrmPrincipal : Form
             {
                 validarPortaria = true;
             }
-
         }
     }
 
@@ -39,10 +38,6 @@ public partial class FrmPrincipal : Form
         DgvListCabecalho.DataSource = CabecalhoAEJ.CabecalhoAEJList;
 
         foreach (var item in CabecalhoAEJ.ErrosValidacao)
-        {
-            RTxtLogCabecalho.AppendText(item);
-        }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
             RTxtLogCabecalho.AppendText(item);
         }
@@ -57,10 +52,6 @@ public partial class FrmPrincipal : Form
         {
             RTxtLogRepUtilizado.AppendText(item);
         }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-        {
-            RTxtLogRepUtilizado.AppendText(item);
-        }
     }
     private void VinculosAej()
     {
@@ -68,10 +59,6 @@ public partial class FrmPrincipal : Form
         DgvListVinculo.DataSource = null;
         DgvListVinculo.DataSource = VinculosAEJ.VinculosAEJList;
         foreach (var item in VinculosAEJ.ErrosValidacao)
-        {
-            RTxtLogVinculo.AppendText(item);
-        }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
             RTxtLogVinculo.AppendText(item);
         }
@@ -85,45 +72,56 @@ public partial class FrmPrincipal : Form
         {
             RTxtLogHorarioContratual.AppendText(item);
         }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-        {
-            RTxtLogHorarioContratual.AppendText(item);
-        }
     }
     private void MarcacoesAej()
     {
         RTxtLogMarcacoes.Clear();
         DgvListMarcacao.DataSource = null;
         DgvListMarcacao.DataSource = MarcacoesAEJ.MarcacoesAEJList;
-        RTxtLogMarcacoes.Text = MarcacoesAEJ.ErroValidacao;
+        foreach (var item in MarcacoesAEJ.ErrosValidacao)
+        {
+            RTxtLogMarcacoes.AppendText(item);
+        }
     }
     private void VinculoeSocialAej()
     {
         RTxtLogVinculoeSocial.Clear();
         DgvListVinculoeSocial.DataSource = null;
         DgvListVinculoeSocial.DataSource = VinculoeSocialAEJ.VinculoeSocialAEJList;
-        RTxtLogVinculoeSocial.Text = VinculoeSocialAEJ.ErroValidacao;
+        foreach (var item in VinculoeSocialAEJ.ErrosValidacao)
+        {
+            RTxtLogVinculoeSocial.AppendText(item);
+        }
     }
     private void AusenciaBancoHorasAej()
     {
         RTxtLogAusenciaBancoHoras.Clear();
         DgvListAusenciaBancoHoras.DataSource = null;
         DgvListAusenciaBancoHoras.DataSource = AusenciaBancoHorasAEJ.AusenciaBancoHorasAEJList;
-        RTxtLogAusenciaBancoHoras.Text = AusenciaBancoHorasAEJ.ErroValidacao;
+        foreach (var item in AusenciaBancoHorasAEJ.ErrosValidacao)
+        {
+            RTxtLogAusenciaBancoHoras.AppendText(item);
+        }
     }
     private void IdentificaoPTRPAej()
     {
         RTxtLogIdentificaoPTRP.Clear();
         DgvListIdentificaoPTRP.DataSource = null;
         DgvListIdentificaoPTRP.DataSource = IdentificacaoPTRPAEJ.IdentificacaoPTRPAEJList;
-        RTxtLogIdentificaoPTRP.Text = IdentificacaoPTRPAEJ.ErroValidacao;
+        foreach (var item in IdentificacaoPTRPAEJ.ErrosValidacao)
+        {
+            RTxtLogIdentificaoPTRP.AppendText(item);
+        }
     }
     private void TrailerAej()
     {
         RTxtLogTrailer.Clear();
         DgvListTrailer.DataSource = null;
         DgvListTrailer.DataSource = TrailerAEJ.TrailerAEJList;
-        RTxtLogTrailer.Text = TrailerAEJ.ErroValidacao;
+        foreach (var item in TrailerAEJ.ErrosValidacao)
+        {
+            RTxtLogTrailer.AppendText(item);
+        }
     }
 
     private void SubMenuLerArquivo_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using LeitorAEJ.Model;
+using LeitorAEJ.Model.Ultil;
 using System.Text;
 
 namespace LeitorAEJ.LeituraArquivo;
@@ -18,6 +19,7 @@ public class LerArquivoAEJ
         AusenciaBancoHorasAEJ.AusenciaBancoHorasAEJList.Clear();
         IdentificacaoPTRPAEJ.IdentificacaoPTRPAEJList.Clear();
         TrailerAEJ.TrailerAEJList.Clear();
+        ValidacaoTamanhoDado.ErrosValidacao.Clear();
 
         while ((linha = sr.ReadLine()) != null)
         {
@@ -38,19 +40,19 @@ public class LerArquivoAEJ
                     HorarioContratualAEJ.GetHorarioContratual(linha, validarPortaria);
                     break;
                 case "05": //Marcações
-                    MarcacoesAEJ.GetMarcacoes(linha);
+                    MarcacoesAEJ.GetMarcacoes(linha, validarPortaria);
                     break;
                 case "06": //Identificação da matrícula do vínculo no eSocial, para empregados com mais de um vínculo no AEJ
-                    VinculoeSocialAEJ.GetVinculoeSocial(linha);
+                    VinculoeSocialAEJ.GetVinculoeSocial(linha, validarPortaria);
                     break;
                 case "07": //Ausências e Banco de Horas
-                    AusenciaBancoHorasAEJ.GetAusenciaBancoHoras(linha);
+                    AusenciaBancoHorasAEJ.GetAusenciaBancoHoras(linha, validarPortaria);
                     break;
                 case "08": //Identificação do PTRP (Programa de Tratamento de Registro de Ponto)
-                    IdentificacaoPTRPAEJ.GetIdentificacaoPTRP(linha);
+                    IdentificacaoPTRPAEJ.GetIdentificacaoPTRP(linha, validarPortaria);
                     break;
                 case "99": //Trailer
-                    TrailerAEJ.GetTrailer(linha);
+                    TrailerAEJ.GetTrailer(linha, validarPortaria);
                     break;
                 default:
                     MessageBox.Show($"Tipo de registro inválido: {itemLinha}");

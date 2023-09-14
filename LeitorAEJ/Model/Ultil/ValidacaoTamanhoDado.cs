@@ -10,9 +10,10 @@ public static class ValidacaoTamanhoDado
     public static bool ValidarTamanho<T>(T objeto)
     {
         var validarResultados = new List<ValidationResult>();
-        var validarContexto = new ValidationContext(objeto, null, null);
+        var validarContexto = new ValidationContext(objeto!, null, null);
+        ErrosValidacao.Clear();
 
-        if (Validator.TryValidateObject(objeto, validarContexto, validarResultados, true))
+        if (Validator.TryValidateObject(objeto!, validarContexto, validarResultados, true))
         {
             return true;
         }
@@ -33,14 +34,14 @@ public static class ValidacaoTamanhoDado
         {
             if (prop.PropertyType == typeof(int) || prop.PropertyType == typeof(double))
             {
-                if (!ValidarTipoNumero(prop.GetValue(objeto)))
+                if (!ValidarTipoNumero(prop.GetValue(objeto)!))
                 {
                     camposComErro.Add(prop.Name);
                 }
             }
             else if (prop.PropertyType == typeof(DateTime))
             {
-                if (!ValidarTipoData(prop.GetValue(objeto)))
+                if (!ValidarTipoData(prop.GetValue(objeto)!))
                 {
                     camposComErro.Add(prop.Name);
                 }

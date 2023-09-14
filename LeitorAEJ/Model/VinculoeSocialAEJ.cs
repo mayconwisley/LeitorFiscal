@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LeitorAEJ.Model.Ultil;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
 
@@ -12,13 +13,13 @@ public class VinculoeSocialAEJ
     public string? MatEsocial { get; set; }
 
     public static List<VinculoeSocialAEJ> VinculoeSocialAEJList { get; private set; } = new();
-    public static string ErroValidacao { get; set; } = string.Empty;
+    public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetVinculoeSocial(string linhaVinculoeSocial)
+    public static void GetVinculoeSocial(string linhaVinculoeSocial, bool validarPortaria)
     {
 
         string[] itemLinha = linhaVinculoeSocial.Split("|");
-        ErroValidacao = string.Empty;
+        ErrosValidacao.Clear();
 
         var vinculoeSocial = new VinculoeSocialAEJ
         {
@@ -27,19 +28,46 @@ public class VinculoeSocialAEJ
             MatEsocial = itemLinha[2]
         };
 
-        var validarResultados = new List<ValidationResult>();
-        var validarContexto = new ValidationContext(vinculoeSocial, null, null);
-
-        if (Validator.TryValidateObject(vinculoeSocial, validarContexto, validarResultados, true))
+        if (validarPortaria)
         {
-            VinculoeSocialAEJList.Add(vinculoeSocial);
+            if (ValidacaoTamanhoDado.ValidarTamanho(vinculoeSocial) && ValidarTipoDados(vinculoeSocial))
+            {
+                VinculoeSocialAEJList.Add(vinculoeSocial);
+            }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
         }
         else
         {
-            foreach (ValidationResult validarResultado in validarResultados)
-            {
-                ErroValidacao += validarResultado.ErrorMessage + "\n";
-            }
+            VinculoeSocialAEJList.Add(vinculoeSocial);
+        }
+    }
+
+    private static bool ValidarTipoDados(VinculoeSocialAEJ vinculoeSocialAEJ)
+    {
+
+        var camposComErro = new List<string>();
+
+        if (!int.TryParse(vinculoeSocialAEJ.TipoReg, out _))
+        {
+            camposComErro.Add("TipoReg");
+        }
+
+        if (!double.TryParse(vinculoeSocialAEJ.IdtVinculoAej, out _))
+        {
+            camposComErro.Add("IdtVinculoAej");
+        }
+
+        if (camposComErro.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            return false;
         }
     }
 }

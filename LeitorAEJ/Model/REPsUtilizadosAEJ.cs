@@ -37,6 +37,10 @@ public class REPsUtilizadosAEJ
             {
                 REPsUtilizadosAEJList.Add(repsUtilizado);
             }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item);
+            }
         }
         else
         {
