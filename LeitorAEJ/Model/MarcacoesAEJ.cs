@@ -34,15 +34,15 @@ public class MarcacoesAEJ
 
         var marcacoes = new MarcacoesAEJ
         {
-            TipoReg = itemLinha[0],
-            IdtVinculoAej = itemLinha[1],
-            DataHoraMarc = itemLinha[2],
-            IdRepAej = itemLinha[3],
-            TpMarc = itemLinha[4],
-            SeqEntSaida = itemLinha[5],
-            FonteMarc = itemLinha[6],
-            CodHorContratual = itemLinha[7],
-            Motivo = itemLinha[8]
+            TipoReg = itemLinha[0].Trim(),
+            IdtVinculoAej = itemLinha[1].Trim(),
+            DataHoraMarc = itemLinha[2].Trim(),
+            IdRepAej = itemLinha[3].Trim(),
+            TpMarc = itemLinha[4].Trim(),
+            SeqEntSaida = itemLinha[5].Trim(),
+            FonteMarc = itemLinha[6].Trim(),
+            CodHorContratual = itemLinha[7].Trim(),
+            Motivo = itemLinha[8].Trim()
         };
         if (validarPortaria)
         {

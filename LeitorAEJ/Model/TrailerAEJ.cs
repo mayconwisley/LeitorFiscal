@@ -34,15 +34,15 @@ public class TrailerAEJ
 
         var trailer = new TrailerAEJ
         {
-            TipoReg = itemLinha[0],
-            QtRegistrosTipo01 = itemLinha[1],
-            QtRegistrosTipo02 = itemLinha[2],
-            QtRegistrosTipo03 = itemLinha[3],
-            QtRegistrosTipo04 = itemLinha[4],
-            QtRegistrosTipo05 = itemLinha[5],
-            QtRegistrosTipo06 = itemLinha[6],
-            QtRegistrosTipo07 = itemLinha[7],
-            QtRegistrosTipo08 = itemLinha[8],
+            TipoReg = itemLinha[0].Trim(),
+            QtRegistrosTipo01 = itemLinha[1].Trim(),
+            QtRegistrosTipo02 = itemLinha[2].Trim(),
+            QtRegistrosTipo03 = itemLinha[3].Trim(),
+            QtRegistrosTipo04 = itemLinha[4].Trim(),
+            QtRegistrosTipo05 = itemLinha[5].Trim(),
+            QtRegistrosTipo06 = itemLinha[6].Trim(),
+            QtRegistrosTipo07 = itemLinha[7].Trim(),
+            QtRegistrosTipo08 = itemLinha[8].Trim(),
         };
 
 

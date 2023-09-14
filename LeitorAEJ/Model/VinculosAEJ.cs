@@ -24,10 +24,10 @@ public class VinculosAEJ
 
         var vinculo = new VinculosAEJ
         {
-            TipoReg = itemLinha[0],
-            IdtVinculoAej = itemLinha[1],
-            CPF = itemLinha[2],
-            NomeEmp = itemLinha[3]
+            TipoReg = itemLinha[0].Trim(),
+            IdtVinculoAej = itemLinha[1].Trim(),
+            CPF = itemLinha[2].Trim(),
+            NomeEmp = itemLinha[3].Trim()
         };
 
         if (validarPortaria)

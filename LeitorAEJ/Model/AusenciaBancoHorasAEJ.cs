@@ -28,12 +28,12 @@ public class AusenciaBancoHorasAEJ
 
         var ausenciaBancoHoras = new AusenciaBancoHorasAEJ
         {
-            TipoReg = itemLinha[0],
-            IdtVinculoAej = itemLinha[1],
-            TipoAusenOuComp = itemLinha[2],
-            Data = itemLinha[3],
-            QtMinutos = itemLinha[4],
-            TipoMovBH = itemLinha[5]
+            TipoReg = itemLinha[0].Trim(),
+            IdtVinculoAej = itemLinha[1].Trim(),
+            TipoAusenOuComp = itemLinha[2].Trim(),
+            Data = itemLinha[3].Trim(),
+            QtMinutos = itemLinha[4].Trim(),
+            TipoMovBH = itemLinha[5].Trim()
         };
 
         if (validarPortaria)

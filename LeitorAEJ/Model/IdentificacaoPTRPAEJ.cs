@@ -30,13 +30,13 @@ public class IdentificacaoPTRPAEJ
 
         var identificacaoPTRP = new IdentificacaoPTRPAEJ
         {
-            TipoReg = itemLinha[0],
-            NomeProg = itemLinha[1],
-            VersaoProg = itemLinha[2],
-            TpIdtDesenv = itemLinha[3],
-            IdtDesenv = itemLinha[4],
-            RazaoNomeDesenv = itemLinha[5],
-            EmailDesenv = itemLinha[6]
+            TipoReg = itemLinha[0].Trim(),
+            NomeProg = itemLinha[1].Trim(),
+            VersaoProg = itemLinha[2].Trim(),
+            TpIdtDesenv = itemLinha[3].Trim(),
+            IdtDesenv = itemLinha[4].Trim(),
+            RazaoNomeDesenv = itemLinha[5].Trim(),
+            EmailDesenv = itemLinha[6].Trim()
         };
 
         if (validarPortaria)

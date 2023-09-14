@@ -25,10 +25,10 @@ public class REPsUtilizadosAEJ
 
         var repsUtilizado = new REPsUtilizadosAEJ
         {
-            TipoReg = itemLinha[0],
-            IdRepAej = itemLinha[1],
-            TpRep = itemLinha[2],
-            NrRep = itemLinha[3],
+            TipoReg = itemLinha[0].Trim(),
+            IdRepAej = itemLinha[1].Trim(),
+            TpRep = itemLinha[2].Trim(),
+            NrRep = itemLinha[3].Trim(),
         };
 
         if (validarPortaria)

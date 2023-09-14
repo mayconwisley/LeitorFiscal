@@ -37,16 +37,16 @@ public class CabecalhoAEJ
 
         var cabecalho = new CabecalhoAEJ
         {
-            TipoReg = itemLinha[0],
-            TpIdtEmpregador = itemLinha[1],
-            IdtEmpregador = itemLinha[2],
-            Caepf = itemLinha[3],
-            Cno = itemLinha[4],
-            RazaoOuNome = itemLinha[5],
-            DataInicialAej = itemLinha[6],
-            DataFinalAej = itemLinha[7],
-            DataHoraGerAej = itemLinha[8],
-            VersaoAej = itemLinha[9]
+            TipoReg = itemLinha[0].Trim(),
+            TpIdtEmpregador = itemLinha[1].Trim(),
+            IdtEmpregador = itemLinha[2].Trim(),
+            Caepf = itemLinha[3].Trim(),
+            Cno = itemLinha[4].Trim(),
+            RazaoOuNome = itemLinha[5].Trim(),
+            DataInicialAej = itemLinha[6].Trim(),
+            DataFinalAej = itemLinha[7].Trim(),
+            DataHoraGerAej = itemLinha[8].Trim(),
+            VersaoAej = itemLinha[9].Trim()
         };
 
         if (validarPortaria)

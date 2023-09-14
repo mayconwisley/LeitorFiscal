@@ -23,9 +23,9 @@ public class VinculoeSocialAEJ
 
         var vinculoeSocial = new VinculoeSocialAEJ
         {
-            TipoReg = itemLinha[0],
-            IdtVinculoAej = itemLinha[1],
-            MatEsocial = itemLinha[2]
+            TipoReg = itemLinha[0].Trim(),
+            IdtVinculoAej = itemLinha[1].Trim(),
+            MatEsocial = itemLinha[2].Trim()
         };
 
         if (validarPortaria)

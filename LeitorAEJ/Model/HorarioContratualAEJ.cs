@@ -30,13 +30,13 @@ public class HorarioContratualAEJ
 
         var horarioContratual = new HorarioContratualAEJ
         {
-            TipoReg = itemLinha[0],
-            CodHorContratual = itemLinha[1],
-            DurJornada = itemLinha[2],
-            HrEntrada01 = itemLinha[3],
-            HrSaida01 = itemLinha[4],
-            HrEntrada02 = itemLinha[5],
-            HrSaida02 = itemLinha[6]
+            TipoReg = itemLinha[0].Trim(),
+            CodHorContratual = itemLinha[1].Trim(),
+            DurJornada = itemLinha[2].Trim(),
+            HrEntrada01 = itemLinha[3].Trim(),
+            HrSaida01 = itemLinha[4].Trim(),
+            HrEntrada02 = itemLinha[5].Trim(),
+            HrSaida02 = itemLinha[6].Trim()
         };
 
         if (validarPortaria)
