@@ -1,6 +1,6 @@
 ﻿namespace LeitorAEJ
 {
-    partial class FrmRelatorio
+    partial class FrmVisualizarDadosIndividual
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +39,7 @@
             groupBox1.Controls.Add(CbxVinculos);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(434, 61);
+            groupBox1.Size = new Size(439, 61);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Vinculos";
@@ -48,7 +48,7 @@
             // 
             CbxVinculos.DisplayMember = "NomeEmp";
             CbxVinculos.FormattingEnabled = true;
-            CbxVinculos.Location = new Point(6, 22);
+            CbxVinculos.Location = new Point(8, 19);
             CbxVinculos.Name = "CbxVinculos";
             CbxVinculos.Size = new Size(422, 23);
             CbxVinculos.TabIndex = 0;
@@ -57,22 +57,24 @@
             // 
             // RTxtMarcacaoIndividual
             // 
+            RTxtMarcacaoIndividual.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RTxtMarcacaoIndividual.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             RTxtMarcacaoIndividual.Location = new Point(12, 79);
             RTxtMarcacaoIndividual.Name = "RTxtMarcacaoIndividual";
-            RTxtMarcacaoIndividual.Size = new Size(814, 436);
+            RTxtMarcacaoIndividual.Size = new Size(1024, 468);
             RTxtMarcacaoIndividual.TabIndex = 1;
             RTxtMarcacaoIndividual.Text = "";
             // 
-            // FrmRelatorio
+            // FrmVisualizarDadosIndividual
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(838, 527);
+            ClientSize = new Size(1048, 559);
             Controls.Add(RTxtMarcacaoIndividual);
             Controls.Add(groupBox1);
-            Name = "FrmRelatorio";
+            Name = "FrmVisualizarDadosIndividual";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Relatório";
+            Text = "Visualizar Dados Individual";
             Load += FrmRelatorio_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);

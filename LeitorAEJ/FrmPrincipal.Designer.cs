@@ -219,7 +219,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(RTxtLogRepUtilizado);
-            groupBox1.Location = new Point(6, 375);
+            groupBox1.Location = new Point(3, 375);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1028, 136);
             groupBox1.TabIndex = 2;
@@ -312,7 +312,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(RTxtLogHorarioContratual);
-            groupBox3.Location = new Point(3, 372);
+            groupBox3.Location = new Point(3, 375);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(1028, 136);
             groupBox3.TabIndex = 2;
@@ -335,7 +335,7 @@
             DgvListHorarioContratual.BackgroundColor = SystemColors.Control;
             DgvListHorarioContratual.BorderStyle = BorderStyle.Fixed3D;
             DgvListHorarioContratual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListHorarioContratual.Location = new Point(0, 0);
+            DgvListHorarioContratual.Location = new Point(3, 3);
             DgvListHorarioContratual.MultiSelect = false;
             DgvListHorarioContratual.Name = "DgvListHorarioContratual";
             DgvListHorarioContratual.ReadOnly = true;
@@ -358,7 +358,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(RTxtLogMarcacoes);
-            groupBox4.Location = new Point(3, 372);
+            groupBox4.Location = new Point(3, 375);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(1028, 136);
             groupBox4.TabIndex = 2;
@@ -381,7 +381,7 @@
             DgvListMarcacao.BackgroundColor = SystemColors.Control;
             DgvListMarcacao.BorderStyle = BorderStyle.Fixed3D;
             DgvListMarcacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListMarcacao.Location = new Point(0, 0);
+            DgvListMarcacao.Location = new Point(3, 3);
             DgvListMarcacao.MultiSelect = false;
             DgvListMarcacao.Name = "DgvListMarcacao";
             DgvListMarcacao.ReadOnly = true;
@@ -404,7 +404,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(RTxtLogVinculoeSocial);
-            groupBox5.Location = new Point(3, 372);
+            groupBox5.Location = new Point(3, 375);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(1028, 136);
             groupBox5.TabIndex = 2;
@@ -427,7 +427,7 @@
             DgvListVinculoeSocial.BackgroundColor = SystemColors.Control;
             DgvListVinculoeSocial.BorderStyle = BorderStyle.Fixed3D;
             DgvListVinculoeSocial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListVinculoeSocial.Location = new Point(0, 0);
+            DgvListVinculoeSocial.Location = new Point(3, 3);
             DgvListVinculoeSocial.MultiSelect = false;
             DgvListVinculoeSocial.Name = "DgvListVinculoeSocial";
             DgvListVinculoeSocial.ReadOnly = true;
@@ -450,7 +450,7 @@
             // groupBox6
             // 
             groupBox6.Controls.Add(RTxtLogAusenciaBancoHoras);
-            groupBox6.Location = new Point(3, 372);
+            groupBox6.Location = new Point(3, 375);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(1028, 136);
             groupBox6.TabIndex = 2;
@@ -473,7 +473,7 @@
             DgvListAusenciaBancoHoras.BackgroundColor = SystemColors.Control;
             DgvListAusenciaBancoHoras.BorderStyle = BorderStyle.Fixed3D;
             DgvListAusenciaBancoHoras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListAusenciaBancoHoras.Location = new Point(0, 0);
+            DgvListAusenciaBancoHoras.Location = new Point(3, 3);
             DgvListAusenciaBancoHoras.MultiSelect = false;
             DgvListAusenciaBancoHoras.Name = "DgvListAusenciaBancoHoras";
             DgvListAusenciaBancoHoras.ReadOnly = true;
@@ -496,7 +496,7 @@
             // groupBox7
             // 
             groupBox7.Controls.Add(RTxtLogIdentificaoPTRP);
-            groupBox7.Location = new Point(3, 372);
+            groupBox7.Location = new Point(3, 375);
             groupBox7.Name = "groupBox7";
             groupBox7.Size = new Size(1028, 136);
             groupBox7.TabIndex = 2;
@@ -519,7 +519,7 @@
             DgvListIdentificaoPTRP.BackgroundColor = SystemColors.Control;
             DgvListIdentificaoPTRP.BorderStyle = BorderStyle.Fixed3D;
             DgvListIdentificaoPTRP.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListIdentificaoPTRP.Location = new Point(0, 0);
+            DgvListIdentificaoPTRP.Location = new Point(3, 3);
             DgvListIdentificaoPTRP.MultiSelect = false;
             DgvListIdentificaoPTRP.Name = "DgvListIdentificaoPTRP";
             DgvListIdentificaoPTRP.ReadOnly = true;
@@ -542,7 +542,7 @@
             // groupBox8
             // 
             groupBox8.Controls.Add(RTxtLogTrailer);
-            groupBox8.Location = new Point(3, 372);
+            groupBox8.Location = new Point(3, 375);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(1028, 136);
             groupBox8.TabIndex = 2;
@@ -565,7 +565,7 @@
             DgvListTrailer.BackgroundColor = SystemColors.Control;
             DgvListTrailer.BorderStyle = BorderStyle.Fixed3D;
             DgvListTrailer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListTrailer.Location = new Point(0, 0);
+            DgvListTrailer.Location = new Point(3, 3);
             DgvListTrailer.MultiSelect = false;
             DgvListTrailer.Name = "DgvListTrailer";
             DgvListTrailer.ReadOnly = true;

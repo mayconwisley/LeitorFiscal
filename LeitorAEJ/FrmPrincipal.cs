@@ -149,7 +149,7 @@ public partial class FrmPrincipal : Form
 
     private void SubMenuRelatorioListar_Click(object sender, EventArgs e)
     {
-        FrmRelatorio frmRelatorio = new();
+        FrmVisualizarDadosIndividual frmRelatorio = new();
         frmRelatorio.ShowDialog();
     }
 }

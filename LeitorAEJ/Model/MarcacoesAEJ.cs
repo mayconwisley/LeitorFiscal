@@ -17,7 +17,7 @@ public class MarcacoesAEJ
     public string? TpMarc { get; private set; }
     [MaxLength(3)]
     public string? SeqEntSaida { get; private set; }
-    [MaxLength(12)]
+    [MaxLength(1)]
     public string? FonteMarc { get; private set; }
     [MaxLength(30)]
     public string? CodHorContratual { get; private set; }
