@@ -31,8 +31,8 @@
             MenuPrincipal = new MenuStrip();
             MenuAej = new ToolStripMenuItem();
             SubMenuLerArquivo = new ToolStripMenuItem();
-            MenuRelatorio = new ToolStripMenuItem();
-            SubMenuRelatorioListar = new ToolStripMenuItem();
+            MenuVisualizar = new ToolStripMenuItem();
+            SubMenuVisualizarListar = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             Cabecalho = new TabPage();
             GbValidacao = new GroupBox();
@@ -104,7 +104,7 @@
             // MenuPrincipal
             // 
             MenuPrincipal.BackColor = Color.Transparent;
-            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuRelatorio });
+            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
             MenuPrincipal.Size = new Size(1069, 24);
@@ -125,19 +125,19 @@
             SubMenuLerArquivo.Text = "&Ler Arquivo";
             SubMenuLerArquivo.Click += SubMenuLerArquivo_Click;
             // 
-            // MenuRelatorio
+            // MenuVisualizar
             // 
-            MenuRelatorio.DropDownItems.AddRange(new ToolStripItem[] { SubMenuRelatorioListar });
-            MenuRelatorio.Name = "MenuRelatorio";
-            MenuRelatorio.Size = new Size(66, 20);
-            MenuRelatorio.Text = "Relatório";
+            MenuVisualizar.DropDownItems.AddRange(new ToolStripItem[] { SubMenuVisualizarListar });
+            MenuVisualizar.Name = "MenuVisualizar";
+            MenuVisualizar.Size = new Size(123, 20);
+            MenuVisualizar.Text = "Visualizar Individual";
             // 
-            // SubMenuRelatorioListar
+            // SubMenuVisualizarListar
             // 
-            SubMenuRelatorioListar.Name = "SubMenuRelatorioListar";
-            SubMenuRelatorioListar.Size = new Size(102, 22);
-            SubMenuRelatorioListar.Text = "Listar";
-            SubMenuRelatorioListar.Click += SubMenuRelatorioListar_Click;
+            SubMenuVisualizarListar.Name = "SubMenuVisualizarListar";
+            SubMenuVisualizarListar.Size = new Size(102, 22);
+            SubMenuVisualizarListar.Text = "Listar";
+            SubMenuVisualizarListar.Click += SubMenuRelatorioListar_Click;
             // 
             // tabControl1
             // 
@@ -659,7 +659,7 @@
         private RichTextBox RTxtLogIdentificaoPTRP;
         private GroupBox groupBox8;
         private RichTextBox RTxtLogTrailer;
-        private ToolStripMenuItem MenuRelatorio;
-        private ToolStripMenuItem SubMenuRelatorioListar;
+        private ToolStripMenuItem MenuVisualizar;
+        private ToolStripMenuItem SubMenuVisualizarListar;
     }
 }
