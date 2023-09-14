@@ -86,7 +86,7 @@ public class AusenciaBancoHorasAEJ
         {
             camposComErro.Add("Data");
         }
-               
+
         if (camposComErro.Count == 0)
         {
             return true;
