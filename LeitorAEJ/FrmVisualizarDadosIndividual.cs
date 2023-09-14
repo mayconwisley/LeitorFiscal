@@ -52,11 +52,11 @@ public partial class FrmVisualizarDadosIndividual : Form
                 .ToList();
             foreach (var itemHora in marcacoesAtual)
             {
-                horaMarcacao += $"\tHora: {DateTime.Parse(itemHora.DataHoraMarc!.Trim()):HH:mm} " +
-                         $"Tipo de Marcação: {itemHora.TpMarc!.Trim()} " +
-                         $"Sequencia: {itemHora.SeqEntSaida!.Trim()} " +
-                         $"Fonte da Marcação: {itemHora.FonteMarc!.Trim()} " +
-                         $"Horário Contratual: {itemHora.CodHorContratual!.Trim()} " +
+                horaMarcacao += $"\tHora: {DateTime.Parse(itemHora.DataHoraMarc!.Trim()):HH:mm}, " +
+                         $"Tipo de Marcação: {itemHora.TpMarc!.Trim()}, " +
+                         $"Sequencia: {itemHora.SeqEntSaida!.Trim()}, " +
+                         $"Fonte da Marcação: {itemHora.FonteMarc!.Trim()}, " +
+                         $"Horário Contratual: {itemHora.CodHorContratual!.Trim()}, " +
                          $"Motivo: {itemHora.Motivo!.Trim()}\n";
             }
             dataMarcacao += horaMarcacao + "\n";
