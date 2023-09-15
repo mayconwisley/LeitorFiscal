@@ -58,9 +58,14 @@ public class HorarioContratualAEJ
             DurJornada = itemLinha[2].Trim(),
             HrEntrada01 = itemLinha[3].Trim(),
             HrSaida01 = itemLinha[4].Trim(),
-            HrEntrada02 = itemLinha[5].Trim(),
-            HrSaida02 = itemLinha[6].Trim()
+
         };
+
+        if (itemLinha.Length == 7)
+        {
+            horarioContratual.HrEntrada02 = itemLinha[5].Trim();
+            horarioContratual.HrSaida02 = itemLinha[6].Trim();
+        }
 
         if (itemLinha.Length == 9)
         {
@@ -120,48 +125,48 @@ public class HorarioContratualAEJ
             camposComErro.Add("HrSaida01");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada02, out _) && horarioContratualAEJ.HrEntrada02 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada02, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrEntrada02))
         {
             camposComErro.Add("HrEntrada02");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida02, out _) && horarioContratualAEJ.HrSaida02 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida02, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrSaida02))
         {
             camposComErro.Add("HrSaida02");
         }
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada03, out _) && horarioContratualAEJ.HrEntrada03 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada03, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrEntrada03))
         {
             camposComErro.Add("HrEntrada03");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida03, out _) && horarioContratualAEJ.HrSaida03 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida03, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrSaida03))
         {
             camposComErro.Add("HrSaida03");
         }
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada04, out _) && horarioContratualAEJ.HrEntrada04 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada04, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrEntrada04))
         {
             camposComErro.Add("HrEntrada04");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida04, out _) && horarioContratualAEJ.HrSaida04 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida04, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrSaida04))
         {
             camposComErro.Add("HrSaida04");
         }
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada05, out _) && horarioContratualAEJ.HrEntrada05 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada05, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrEntrada05))
         {
             camposComErro.Add("HrEntrada05");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida05, out _) && horarioContratualAEJ.HrSaida05 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida05, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrSaida05))
         {
             camposComErro.Add("HrSaida05");
         }
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada06, out _) && horarioContratualAEJ.HrEntrada06 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada06, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrEntrada06))
         {
             camposComErro.Add("HrEntrada06");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida06, out _) && horarioContratualAEJ.HrSaida06 is not null)
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida06, out _) && !string.IsNullOrEmpty(horarioContratualAEJ.HrSaida06))
         {
             camposComErro.Add("HrSaida06");
         }
