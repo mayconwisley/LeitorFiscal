@@ -6,10 +6,11 @@ namespace LeitorAEJ.LeituraArquivo;
 
 public class LerArquivoAEJ
 {
-    public static void Arquivo(string caminho, bool validarPortaria)
+    public static void Arquivo(string caminho)
     {
-        using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 64);
+        using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
+
         CabecalhoAEJ.CabecalhoAEJList.Clear();
         REPsUtilizadosAEJ.REPsUtilizadosAEJList.Clear();
         VinculosAEJ.VinculosAEJList.Clear();
@@ -28,34 +29,35 @@ public class LerArquivoAEJ
             switch (itemLinha)
             {
                 case "01": //Cabeçalho
-                    CabecalhoAEJ.GetCabecalhos(linha, validarPortaria);
+                    CabecalhoAEJ.GetCabecalhos(linha);
                     break;
                 case "02": //REPs Utilizados
-                    REPsUtilizadosAEJ.GetREPsUtilizados(linha, validarPortaria);
+                    REPsUtilizadosAEJ.GetREPsUtilizados(linha);
                     break;
                 case "03": //Vinculos
-                    VinculosAEJ.GetVinculos(linha, validarPortaria);
+                    VinculosAEJ.GetVinculos(linha);
                     break;
                 case "04": //Horário contratual
-                    HorarioContratualAEJ.GetHorarioContratual(linha, validarPortaria);
+                    HorarioContratualAEJ.GetHorarioContratual(linha);
                     break;
                 case "05": //Marcações
-                    MarcacoesAEJ.GetMarcacoes(linha, validarPortaria);
+                    MarcacoesAEJ.GetMarcacoes(linha);
                     break;
                 case "06": //Identificação da matrícula do vínculo no eSocial, para empregados com mais de um vínculo no AEJ
-                    VinculoeSocialAEJ.GetVinculoeSocial(linha, validarPortaria);
+                    VinculoeSocialAEJ.GetVinculoeSocial(linha);
                     break;
                 case "07": //Ausências e Banco de Horas
-                    AusenciaBancoHorasAEJ.GetAusenciaBancoHoras(linha, validarPortaria);
+                    AusenciaBancoHorasAEJ.GetAusenciaBancoHoras(linha);
                     break;
                 case "08": //Identificação do PTRP (Programa de Tratamento de Registro de Ponto)
-                    IdentificacaoPTRPAEJ.GetIdentificacaoPTRP(linha, validarPortaria);
+                    IdentificacaoPTRPAEJ.GetIdentificacaoPTRP(linha);
                     break;
                 case "99": //Trailer
-                    TrailerAEJ.GetTrailer(linha, validarPortaria);
+                    TrailerAEJ.GetTrailer(linha);
                     break;
                 default:
-                    MessageBox.Show($"Tipo de registro inválido: {itemLinha}");
+                    MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    sr.ReadToEnd();
                     break;
             }
         }

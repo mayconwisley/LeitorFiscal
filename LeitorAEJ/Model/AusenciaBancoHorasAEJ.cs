@@ -8,10 +8,12 @@ public class AusenciaBancoHorasAEJ
     [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
     public string? TipoReg { get; private set; }
     [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
+    [MinLength(1, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
     public string? IdtVinculoAej { get; private set; }
     [MaxLength(1, ErrorMessage = "O campo TipoAusenOuComp deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
     public string? TipoAusenOuComp { get; private set; }
     [MaxLength(10, ErrorMessage = "O campo Data deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '10'")]
+    [MinLength(10, ErrorMessage = "O campo Data deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '10'")]
     public string? Data { get; private set; }
     [MaxLength(12, ErrorMessage = "O campo QtMinutos deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '12'")]
     public string? QtMinutos { get; private set; }
@@ -21,7 +23,7 @@ public class AusenciaBancoHorasAEJ
     public static List<AusenciaBancoHorasAEJ> AusenciaBancoHorasAEJList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetAusenciaBancoHoras(string linhaAusenciaBancoHoras, bool validarPortaria)
+    public static void GetAusenciaBancoHoras(string linhaAusenciaBancoHoras)
     {
         string[] itemLinha = linhaAusenciaBancoHoras.Split("|");
         ErrosValidacao.Clear();
@@ -36,21 +38,15 @@ public class AusenciaBancoHorasAEJ
             TipoMovBH = itemLinha[5].Trim()
         };
 
-        if (validarPortaria)
-        {
-            if (ValidacaoTamanhoDado.ValidarTamanho(ausenciaBancoHoras) && ValidarTipoDados(ausenciaBancoHoras))
-            {
-                AusenciaBancoHorasAEJList.Add(ausenciaBancoHoras);
-            }
-            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-            {
-                ErrosValidacao.Add(item);
-            }
-        }
-        else
+        if (ValidacaoTamanhoDado.ValidarTamanho(ausenciaBancoHoras) && ValidarTipoDados(ausenciaBancoHoras))
         {
             AusenciaBancoHorasAEJList.Add(ausenciaBancoHoras);
         }
+        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+        {
+            ErrosValidacao.Add(item);
+        }
+
     }
     private static bool ValidarTipoDados(AusenciaBancoHorasAEJ ausenciaBancoHorasAEJ)
     {

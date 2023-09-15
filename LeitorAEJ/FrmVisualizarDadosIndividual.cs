@@ -23,8 +23,8 @@ public partial class FrmVisualizarDadosIndividual : Form
         {
             CbxVinculos.DataSource = lista.Select(s => new
             {
-                IdtVinculoAej = s.IdtVinculoAej!.Trim(),
-                NomeEmp = s.CPF + " - " + s.NomeEmp!.Trim()
+                s.IdtVinculoAej,
+                NomeEmp = s.CPF + " - " + s.NomeEmp
             }).ToList();
         }
     }
@@ -32,15 +32,12 @@ public partial class FrmVisualizarDadosIndividual : Form
     private void ListarMarcacao(string idtVinculoAej)
     {
         var marcacoes = MarcacoesAEJ.MarcacoesAEJList
-           .Where(w => w.IdtVinculoAej!.Trim() == idtVinculoAej)
+           .Where(w => w.IdtVinculoAej == idtVinculoAej)
            .ToList();
 
         var marcacoesData = marcacoes
            .GroupBy(g => DateTime.Parse(g.DataHoraMarc!).ToString("dd/MM/yyyy"))
            .ToList();
-
-        var marcacaoContratual = HorarioContratualAEJ.HorarioContratualAEJList
-          .ToList();
 
         foreach (var item in marcacoesData)
         {
@@ -52,12 +49,12 @@ public partial class FrmVisualizarDadosIndividual : Form
                 .ToList();
             foreach (var itemHora in marcacoesAtual)
             {
-                horaMarcacao += $"\tHora: {DateTime.Parse(itemHora.DataHoraMarc!.Trim()):HH:mm}, " +
-                         $"Tipo de Marcação: {itemHora.TpMarc!.Trim()}, " +
-                         $"Sequencia: {itemHora.SeqEntSaida!.Trim()}, " +
-                         $"Fonte da Marcação: {itemHora.FonteMarc!.Trim()}, " +
-                         $"Horário Contratual: {itemHora.CodHorContratual!.Trim()}, " +
-                         $"Motivo: {itemHora.Motivo!.Trim()}\n";
+                horaMarcacao += $"\tHora: {DateTime.Parse(itemHora.DataHoraMarc!):HH:mm}, " +
+                         $"Tipo de Marcação: {itemHora.TpMarc}, " +
+                         $"Sequencia: {itemHora.SeqEntSaida}, " +
+                         $"Fonte da Marcação: {itemHora.FonteMarc}, " +
+                         $"Horário Contratual: {itemHora.CodHorContratual}, " +
+                         $"Motivo: {itemHora.Motivo}\n";
             }
             dataMarcacao += horaMarcacao + "\n";
         }
@@ -66,7 +63,7 @@ public partial class FrmVisualizarDadosIndividual : Form
     private void ListarHorarioContrato(string idtVinculoAej)
     {
         var marcacoes = MarcacoesAEJ.MarcacoesAEJList
-            .Where(w => w.IdtVinculoAej!.Trim() == idtVinculoAej.Trim())
+            .Where(w => w.IdtVinculoAej == idtVinculoAej.Trim())
             .Select(s => new
             {
                 s.CodHorContratual
@@ -76,11 +73,11 @@ public partial class FrmVisualizarDadosIndividual : Form
         foreach (var item in marcacoes)
         {
             var marcacaoContratual = HorarioContratualAEJ.HorarioContratualAEJList
-                .Where(w => w.CodHorContratual!.Trim() == item.Key!.Trim())
+                .Where(w => w.CodHorContratual == item.Key)
                 .ToList();
             foreach (var itemHora in marcacaoContratual)
             {
-                horaContrato += $"\t{itemHora.CodHorContratual!.Trim()} - " +
+                horaContrato += $"\t{itemHora.CodHorContratual} - " +
                                 $"{itemHora.HrEntrada01!.Insert(2, ":")} - " +
                                 $"{itemHora.HrSaida01!.Insert(2, ":")} - " +
                                 $"{itemHora.HrEntrada02!.Insert(2, ":")} - " +
@@ -92,17 +89,17 @@ public partial class FrmVisualizarDadosIndividual : Form
     private void ListarVinculoeSocial(string idtVinculoAej)
     {
         var vinculoeSocial = VinculoeSocialAEJ.VinculoeSocialAEJList
-            .Where(w => w.IdtVinculoAej!.Trim() == idtVinculoAej)
+            .Where(w => w.IdtVinculoAej == idtVinculoAej)
             .ToList();
         foreach (var item in vinculoeSocial)
         {
-            matEsocial += item.MatEsocial!.Trim() + "\n";
+            matEsocial += item.MatEsocial + "\n";
         }
     }
     private void ListarAusenciaBancoHoras(string idtVinculoAej)
     {
         var ausenciaBancoHoras = AusenciaBancoHorasAEJ.AusenciaBancoHorasAEJList
-            .Where(w => w.IdtVinculoAej!.Trim() == idtVinculoAej)
+            .Where(w => w.IdtVinculoAej == idtVinculoAej)
             .ToList();
 
         string[] tipoAusencia = { "", "Descanso Semanal Remunerado (DSR)", "Falta não justificada", "Movimento no banco de horas", "Folga compensatória de feriado" };
@@ -110,10 +107,10 @@ public partial class FrmVisualizarDadosIndividual : Form
         foreach (var item in ausenciaBancoHoras)
         {
             ausenciaBancoHora += $"Data: {DateTime.Parse(item.Data!):dd/MM/yyyy}\n" +
-                                 $"\tTipo de Ausência ou Compensação: {item.TipoAusenOuComp!.Trim()} - " +
-                                 $"{tipoAusencia[int.Parse(item.TipoAusenOuComp!.Trim())]}\n" +
-                                 $"\tTipo Movimento Banco: {item.TipoMovBH!.Trim()} - " +
-                                 $"{tipoMov[int.Parse(item.TipoMovBH!.Trim())]}\n";
+                                 $"\tTipo de Ausência ou Compensação: {item.TipoAusenOuComp} - " +
+                                 $"{tipoAusencia[int.Parse(item.TipoAusenOuComp!)]}\n" +
+                                 $"\tTipo Movimento Banco: {item.TipoMovBH} - " +
+                                 $"{tipoMov[int.Parse(item.TipoMovBH!)]}\n";
         }
     }
 

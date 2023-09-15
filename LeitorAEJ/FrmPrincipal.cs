@@ -6,7 +6,6 @@ namespace LeitorAEJ;
 public partial class FrmPrincipal : Form
 {
     string caminhoArquivo = string.Empty;
-    bool validarPortaria = false;
     public FrmPrincipal()
     {
         InitializeComponent();
@@ -18,15 +17,10 @@ public partial class FrmPrincipal : Form
         openFileDialog.Filter = "Arquivos de texto (*.txt)|*.txt";
         openFileDialog.Multiselect = false;
         openFileDialog.Title = "Abrir arquivo";
-        validarPortaria = false;
+
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
             caminhoArquivo = openFileDialog.FileName;
-
-            if (MessageBox.Show("Deseja validar o arquivo com a Portaria 671?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                validarPortaria = true;
-            }
         }
     }
 
@@ -129,7 +123,7 @@ public partial class FrmPrincipal : Form
 
         try
         {
-            LerArquivoAEJ.Arquivo(caminhoArquivo, validarPortaria);
+            LerArquivoAEJ.Arquivo(caminhoArquivo);
             CabecalhoAej();
             RepUtilizadosAej();
             VinculosAej();
