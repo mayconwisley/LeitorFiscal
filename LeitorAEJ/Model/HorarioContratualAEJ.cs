@@ -62,6 +62,29 @@ public class HorarioContratualAEJ
             HrSaida02 = itemLinha[6].Trim()
         };
 
+        if (itemLinha.Length == 9)
+        {
+            horarioContratual.HrEntrada03 = itemLinha[7].Trim();
+            horarioContratual.HrSaida03 = itemLinha[8].Trim();
+        }
+
+        if (itemLinha.Length == 11)
+        {
+            horarioContratual.HrEntrada04 = itemLinha[9].Trim();
+            horarioContratual.HrSaida04 = itemLinha[10].Trim();
+        }
+
+        if (itemLinha.Length == 13)
+        {
+            horarioContratual.HrEntrada05 = itemLinha[11].Trim();
+            horarioContratual.HrSaida05 = itemLinha[12].Trim();
+        }
+
+        if (itemLinha.Length == 15)
+        {
+            horarioContratual.HrEntrada06 = itemLinha[13].Trim();
+            horarioContratual.HrSaida06 = itemLinha[14].Trim();
+        }
 
         if (ValidacaoTamanhoDado.ValidarTamanho(horarioContratual) && ValidarTipoDados(horarioContratual))
         {
@@ -71,12 +94,10 @@ public class HorarioContratualAEJ
         {
             ErrosValidacao.Add(item);
         }
-
     }
 
     private static bool ValidarTipoDados(HorarioContratualAEJ horarioContratualAEJ)
     {
-
         var camposComErro = new List<string>();
 
         if (!int.TryParse(horarioContratualAEJ.TipoReg, out _))
@@ -99,14 +120,50 @@ public class HorarioContratualAEJ
             camposComErro.Add("HrSaida01");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada02, out _))
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada02, out _) && horarioContratualAEJ.HrEntrada02 is not null)
         {
             camposComErro.Add("HrEntrada02");
         }
 
-        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida02, out _))
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida02, out _) && horarioContratualAEJ.HrSaida02 is not null)
         {
             camposComErro.Add("HrSaida02");
+        }
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada03, out _) && horarioContratualAEJ.HrEntrada03 is not null)
+        {
+            camposComErro.Add("HrEntrada03");
+        }
+
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida03, out _) && horarioContratualAEJ.HrSaida03 is not null)
+        {
+            camposComErro.Add("HrSaida03");
+        }
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada04, out _) && horarioContratualAEJ.HrEntrada04 is not null)
+        {
+            camposComErro.Add("HrEntrada04");
+        }
+
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida04, out _) && horarioContratualAEJ.HrSaida04 is not null)
+        {
+            camposComErro.Add("HrSaida04");
+        }
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada05, out _) && horarioContratualAEJ.HrEntrada05 is not null)
+        {
+            camposComErro.Add("HrEntrada05");
+        }
+
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida05, out _) && horarioContratualAEJ.HrSaida05 is not null)
+        {
+            camposComErro.Add("HrSaida05");
+        }
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrEntrada06, out _) && horarioContratualAEJ.HrEntrada06 is not null)
+        {
+            camposComErro.Add("HrEntrada06");
+        }
+
+        if (!TimeSpan.TryParse(horarioContratualAEJ.HrSaida06, out _) && horarioContratualAEJ.HrSaida06 is not null)
+        {
+            camposComErro.Add("HrSaida06");
         }
 
         if (camposComErro.Count == 0)

@@ -38,6 +38,8 @@ public partial class FrmVisualizarDadosIndividual : Form
         var marcacoesData = marcacoes
            .GroupBy(g => DateTime.Parse(g.DataHoraMarc!).ToString("dd/MM/yyyy"))
            .ToList();
+        
+        dataMarcacao = string.Empty;
 
         foreach (var item in marcacoesData)
         {
@@ -70,11 +72,15 @@ public partial class FrmVisualizarDadosIndividual : Form
             })
           .GroupBy(g => g.CodHorContratual)
           .ToList();
+        
+        horaContrato = string.Empty;
+
         foreach (var item in marcacoes)
         {
             var marcacaoContratual = HorarioContratualAEJ.HorarioContratualAEJList
                 .Where(w => w.CodHorContratual == item.Key)
                 .ToList();
+        
             foreach (var itemHora in marcacaoContratual)
             {
                 horaContrato += $"\t{itemHora.CodHorContratual} - " +
@@ -91,6 +97,9 @@ public partial class FrmVisualizarDadosIndividual : Form
         var vinculoeSocial = VinculoeSocialAEJ.VinculoeSocialAEJList
             .Where(w => w.IdtVinculoAej == idtVinculoAej)
             .ToList();
+        
+        matEsocial = string.Empty;
+
         foreach (var item in vinculoeSocial)
         {
             matEsocial += item.MatEsocial + "\n";
@@ -101,6 +110,8 @@ public partial class FrmVisualizarDadosIndividual : Form
         var ausenciaBancoHoras = AusenciaBancoHorasAEJ.AusenciaBancoHorasAEJList
             .Where(w => w.IdtVinculoAej == idtVinculoAej)
             .ToList();
+
+        ausenciaBancoHora = string.Empty;
 
         string[] tipoAusencia = { "", "Descanso Semanal Remunerado (DSR)", "Falta não justificada", "Movimento no banco de horas", "Folga compensatória de feriado" };
         string[] tipoMov = { "", "Inclusão de horas no banco de horas", "Compensação de horas do banco de horas" };
@@ -117,10 +128,13 @@ public partial class FrmVisualizarDadosIndividual : Form
     private void MostrarDadosTela()
     {
         RTxtMarcacaoIndividual.Clear();
-        RTxtMarcacaoIndividual.Text = $"Matrícula eSocial: {matEsocial}\n\n" +
-                                      $"Horário Contratual:\n{horaContrato}\n" +
-                                      $"{dataMarcacao}\n" +
-                                      $"Ausência e Banco de Horas:\n{ausenciaBancoHora}";
+
+        var info = $"Matrícula eSocial: {matEsocial}\n\n" +
+                   $"Horário Contratual:\n{horaContrato}\n" +
+                   $"{dataMarcacao}\n" +
+                   $"Ausência e Banco de Horas:\n{ausenciaBancoHora}";
+
+        RTxtMarcacaoIndividual.AppendText(info);
     }
 
     private void FrmRelatorio_Load(object sender, EventArgs e)

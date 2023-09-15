@@ -46,6 +46,12 @@ public class IdentificacaoPTRPAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP) && ValidarTipoDados(identificacaoPTRP))
         {
+            if (decimal.Parse(identificacaoPTRP.IdtDesenv) > 11 && decimal.Parse(identificacaoPTRP.IdtDesenv) < 14)
+            {
+                ErrosValidacao.Add("O campo IdtDesenv deve ter o valor igual a '11' ou '14'");
+                return;
+            }
+
             IdentificacaoPTRPAEJList.Add(identificacaoPTRP);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
