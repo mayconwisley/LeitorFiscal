@@ -26,7 +26,6 @@ public class AusenciaBancoHorasAEJ
     public static void GetAusenciaBancoHoras(string linhaAusenciaBancoHoras)
     {
         string[] itemLinha = linhaAusenciaBancoHoras.Split("|");
-        ErrosValidacao.Clear();
 
         var ausenciaBancoHoras = new AusenciaBancoHorasAEJ
         {

@@ -19,9 +19,7 @@ public class VinculoeSocialAEJ
 
     public static void GetVinculoeSocial(string linhaVinculoeSocial)
     {
-
         string[] itemLinha = linhaVinculoeSocial.Split("|");
-        ErrosValidacao.Clear();
 
         var vinculoeSocial = new VinculoeSocialAEJ
         {

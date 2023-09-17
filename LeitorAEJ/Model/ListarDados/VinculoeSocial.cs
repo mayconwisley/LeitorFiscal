@@ -13,6 +13,6 @@ public class VinculoeSocial
         {
             matEsocial += item.MatEsocial + "\n";
         }
-        return $"Matrícula eSocial mais de um vínculo:\n\t{matEsocial}\n\n";
+        return $"Matrícula eSocial mais de um vínculo:\n\t{matEsocial}\n";
     }
 }

@@ -40,7 +40,6 @@ public class CabecalhoAEJ
     public static void GetCabecalhos(string linhaCabecalho)
     {
         string[] itemLinha = linhaCabecalho.Split("|");
-        ErrosValidacao.Clear();
 
         var cabecalho = new CabecalhoAEJ
         {
@@ -59,6 +58,13 @@ public class CabecalhoAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho) && ValidarTipoDados(cabecalho))
         {
+            if (cabecalho.TpIdtEmpregador != "1" & cabecalho.TpIdtEmpregador != "2")
+            {
+                ErrosValidacao.Add("O campo TpIdtEmpregador deve ter o valor '1' ou '2'.");
+                return;
+            }
+
+
             if (cabecalho.VersaoAej != "001")
             {
                 ErrosValidacao.Add("O campo VersaoAej deve ter o valor '001'.");

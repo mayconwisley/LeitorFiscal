@@ -31,7 +31,6 @@ public class IdentificacaoPTRPAEJ
     public static void GetIdentificacaoPTRP(string linhaIdentificacaoPTRPAEJ)
     {
         string[] itemLinha = linhaIdentificacaoPTRPAEJ.Split("|");
-        ErrosValidacao.Clear();
 
         var identificacaoPTRP = new IdentificacaoPTRPAEJ
         {

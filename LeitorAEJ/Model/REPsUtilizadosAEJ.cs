@@ -24,7 +24,6 @@ public class REPsUtilizadosAEJ
     public static void GetREPsUtilizados(string linhaRep)
     {
         string[] itemLinha = linhaRep.Split("|");
-        ErrosValidacao.Clear();
 
         var repsUtilizado = new REPsUtilizadosAEJ
         {
@@ -36,7 +35,16 @@ public class REPsUtilizadosAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(repsUtilizado) && ValidarTipoDados(repsUtilizado))
         {
-            REPsUtilizadosAEJList.Add(repsUtilizado);
+            if (repsUtilizado.TpRep == "1" || repsUtilizado.TpRep == "2" || repsUtilizado.TpRep == "3")
+            {
+                REPsUtilizadosAEJList.Add(repsUtilizado);
+            }
+            else
+            {
+                ErrosValidacao.Add("Tipo de REP inválido");
+
+            }
+
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {

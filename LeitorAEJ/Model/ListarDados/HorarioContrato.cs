@@ -32,6 +32,6 @@ public class HorarioContrato
             }
         }
 
-        return $"Horário Contratual:\n{horaContrato}\n\n";
+        return $"Horário Contratual:\n{horaContrato}\n";
     }
 }

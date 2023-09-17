@@ -38,7 +38,6 @@ public class TrailerAEJ
     public static void GetTrailer(string linhaTrailer)
     {
         string[] itemLinha = linhaTrailer.Split("|");
-        ErrosValidacao.Clear();
 
         var trailer = new TrailerAEJ
         {
@@ -63,6 +62,60 @@ public class TrailerAEJ
             ErrosValidacao.Add(item);
         }
     }
+
+    public static bool ValidarResgistrosAEJ(int reg01, int reg02, int reg03, int reg04, int reg05, int reg06, int reg07, int reg08)
+    {
+        int count = 0;
+        foreach (var item in TrailerAEJList)
+        {
+            if (int.Parse(item.QtRegistrosTipo01!) != reg01)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '01 - Cabecalho' inválido, quantidade verificada: {reg01}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo01}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo02!) != reg02)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '02 - REPs utilizados' inválido, quantidade verificada: {reg02}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo02}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo03!) != reg03)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '03 - Vínculos' inválido, quantidade verificada: {reg03}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo03}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo04!) != reg04)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '04 - Horário contratual' inválido, quantidade verificada: {reg04}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo04}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo05!) != reg05)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '05 - Marcações' inválido, quantidade verificada: {reg05}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo05}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo06!) != reg06)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '06 - Identificação da matrícula do vínculo no eSocial' inválido, quantidade verificada: {reg06}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo06}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo07!) != reg07)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '07 - Ausências e Banco de Horas' inválido, quantidade verificada: {reg07}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo07}\n");
+                count++;
+            }
+            if (int.Parse(item.QtRegistrosTipo08!) != reg08)
+            {
+                ErrosValidacao.Add($"Quantidade de registros '08 - Identificação do PTRP' inválido, quantidade verificada: {reg08}, quantidade no registro 99 - Trailer: {item.QtRegistrosTipo08}\n");
+                count++;
+            }
+            if (count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static bool ValidarTipoDados(TrailerAEJ trailerAEJ)
     {
 

@@ -49,7 +49,6 @@ public class HorarioContratualAEJ
     public static void GetHorarioContratual(string linhaHoraContratual)
     {
         string[] itemLinha = linhaHoraContratual.Split("|");
-        ErrosValidacao.Clear();
 
         var horarioContratual = new HorarioContratualAEJ
         {

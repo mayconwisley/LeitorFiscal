@@ -192,6 +192,8 @@
             // 
             DgvListCabecalho.AllowUserToAddRows = false;
             DgvListCabecalho.AllowUserToDeleteRows = false;
+            DgvListCabecalho.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListCabecalho.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListCabecalho.BackgroundColor = SystemColors.Control;
             DgvListCabecalho.BorderStyle = BorderStyle.Fixed3D;
             DgvListCabecalho.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -239,6 +241,8 @@
             // 
             DgvListRepsUtilizados.AllowUserToAddRows = false;
             DgvListRepsUtilizados.AllowUserToDeleteRows = false;
+            DgvListRepsUtilizados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListRepsUtilizados.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListRepsUtilizados.BackgroundColor = SystemColors.Control;
             DgvListRepsUtilizados.BorderStyle = BorderStyle.Fixed3D;
             DgvListRepsUtilizados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -286,6 +290,8 @@
             // 
             DgvListVinculo.AllowUserToAddRows = false;
             DgvListVinculo.AllowUserToDeleteRows = false;
+            DgvListVinculo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListVinculo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListVinculo.BackgroundColor = SystemColors.Control;
             DgvListVinculo.BorderStyle = BorderStyle.Fixed3D;
             DgvListVinculo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -332,6 +338,8 @@
             // 
             DgvListHorarioContratual.AllowUserToAddRows = false;
             DgvListHorarioContratual.AllowUserToDeleteRows = false;
+            DgvListHorarioContratual.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListHorarioContratual.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListHorarioContratual.BackgroundColor = SystemColors.Control;
             DgvListHorarioContratual.BorderStyle = BorderStyle.Fixed3D;
             DgvListHorarioContratual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -378,6 +386,8 @@
             // 
             DgvListMarcacao.AllowUserToAddRows = false;
             DgvListMarcacao.AllowUserToDeleteRows = false;
+            DgvListMarcacao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListMarcacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListMarcacao.BackgroundColor = SystemColors.Control;
             DgvListMarcacao.BorderStyle = BorderStyle.Fixed3D;
             DgvListMarcacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -424,6 +434,8 @@
             // 
             DgvListVinculoeSocial.AllowUserToAddRows = false;
             DgvListVinculoeSocial.AllowUserToDeleteRows = false;
+            DgvListVinculoeSocial.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListVinculoeSocial.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListVinculoeSocial.BackgroundColor = SystemColors.Control;
             DgvListVinculoeSocial.BorderStyle = BorderStyle.Fixed3D;
             DgvListVinculoeSocial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -470,6 +482,8 @@
             // 
             DgvListAusenciaBancoHoras.AllowUserToAddRows = false;
             DgvListAusenciaBancoHoras.AllowUserToDeleteRows = false;
+            DgvListAusenciaBancoHoras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListAusenciaBancoHoras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListAusenciaBancoHoras.BackgroundColor = SystemColors.Control;
             DgvListAusenciaBancoHoras.BorderStyle = BorderStyle.Fixed3D;
             DgvListAusenciaBancoHoras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -516,6 +530,8 @@
             // 
             DgvListIdentificaoPTRP.AllowUserToAddRows = false;
             DgvListIdentificaoPTRP.AllowUserToDeleteRows = false;
+            DgvListIdentificaoPTRP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListIdentificaoPTRP.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListIdentificaoPTRP.BackgroundColor = SystemColors.Control;
             DgvListIdentificaoPTRP.BorderStyle = BorderStyle.Fixed3D;
             DgvListIdentificaoPTRP.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -562,6 +578,8 @@
             // 
             DgvListTrailer.AllowUserToAddRows = false;
             DgvListTrailer.AllowUserToDeleteRows = false;
+            DgvListTrailer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListTrailer.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             DgvListTrailer.BackgroundColor = SystemColors.Control;
             DgvListTrailer.BorderStyle = BorderStyle.Fixed3D;
             DgvListTrailer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;

@@ -23,7 +23,6 @@ public class VinculosAEJ
     public static void GetVinculos(string linhaVinculo)
     {
         string[] itemLinha = linhaVinculo.Split("|");
-        ErrosValidacao.Clear();
 
         var vinculo = new VinculosAEJ
         {
