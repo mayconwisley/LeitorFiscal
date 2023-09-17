@@ -1,4 +1,4 @@
-﻿using LeitorAEJ.Model.Ultil;
+﻿using LeitorAEJ.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
@@ -50,27 +50,27 @@ public class MarcacoesAEJ
         };
         if (ValidacaoTamanhoDado.ValidarTamanho(marcacoes) && ValidarTipoDados(marcacoes))
         {
-            if (marcacoes.TpMarc != "E" & marcacoes.TpMarc != "S" & marcacoes.TpMarc != "D")
+            if (marcacoes.TpMarc != "E" && marcacoes.TpMarc != "S" && marcacoes.TpMarc != "D")
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'TpMarc' com o valor ({marcacoes.TpMarc}) inválido, deve ter os valores 'E' ou 'S' ou 'D'.\n");
                 return;
 
             }
 
-            if (marcacoes.FonteMarc != "O" & marcacoes.FonteMarc != "I" & marcacoes.FonteMarc != "P" & marcacoes.FonteMarc != "X" & marcacoes.FonteMarc != "T")
+            if (marcacoes.FonteMarc != "O" && marcacoes.FonteMarc != "I" && marcacoes.FonteMarc != "P" && marcacoes.FonteMarc != "X" && marcacoes.FonteMarc != "T")
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'FonteMarc' com o valor ({marcacoes.FonteMarc}) inválido, deve ter os valores 'O' ou 'I' ou 'P' ou 'X' ou 'T'.\n");
                 return;
 
             }
 
-            if (marcacoes.TpMarc == "E" & marcacoes.SeqEntSaida == "1" & marcacoes.CodHorContratual == "")
+            if (marcacoes.TpMarc == "E" && marcacoes.SeqEntSaida == "1" && marcacoes.CodHorContratual == "")
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'CodHorContratual' com o valor ({marcacoes.CodHorContratual}) inválido, deve ser informado quando o TpMarc = 'E' e SeqEntSaida = '1'.\n");
                 return;
             }
 
-            if (marcacoes.TpMarc == "D" & marcacoes.FonteMarc == "I")
+            if (marcacoes.TpMarc == "D" && marcacoes.FonteMarc == "I")
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'Motivo' inválido, campo OBRIGATÓRIO quando o TpMarc = 'D' e FonteMarc = 'I'.\n");
                 return;
@@ -119,7 +119,7 @@ public class MarcacoesAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
             return false;
         }
     }

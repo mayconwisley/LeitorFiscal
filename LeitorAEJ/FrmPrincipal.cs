@@ -140,9 +140,15 @@ public partial class FrmPrincipal : Form
         }
     }
 
-    private void SubMenuRelatorioListar_Click(object sender, EventArgs e)
+    private void SubMenuVisualizarListar_Click(object sender, EventArgs e)
     {
-        FrmVisualizarDadosIndividual frmRelatorio = new();
-        frmRelatorio.ShowDialog();
+        FrmVisualizarDadosIndividual frmVisualizarDadosIndividual = new();
+        frmVisualizarDadosIndividual.ShowDialog();
+    }
+
+    private void SubMenuValidacaoListar_Click(object sender, EventArgs e)
+    {
+        FrmListarValidacao frmListarValidacao = new();
+        frmListarValidacao.ShowDialog();
     }
 }

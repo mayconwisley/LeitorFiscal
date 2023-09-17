@@ -1,4 +1,4 @@
-﻿using LeitorAEJ.Model.Ultil;
+﻿using LeitorAEJ.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
@@ -66,7 +66,7 @@ public class VinculosAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
             return false;
         }
     }

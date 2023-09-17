@@ -1,4 +1,4 @@
-﻿using LeitorAEJ.Model.Ultil;
+﻿using LeitorAEJ.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.Model;
@@ -45,16 +45,16 @@ public class IdentificacaoPTRPAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP) && ValidarTipoDados(identificacaoPTRP))
         {
-            if (identificacaoPTRP.TpIdtDesenv != "1" & identificacaoPTRP.TpIdtDesenv != "2")
+            if (identificacaoPTRP.TpIdtDesenv != "1" && identificacaoPTRP.TpIdtDesenv != "2")
             {
-                ErrosValidacao.Add($"O campo 'TpIdtDesenv' esta com o valor ({identificacaoPTRP.TpIdtDesenv}) inválido, deve ter o valor igual a '1' ou '2'");
+                ErrosValidacao.Add($"O campo 'TpIdtDesenv' esta com o valor ({identificacaoPTRP.TpIdtDesenv}) inválido, deve ter o valor igual a '1' ou '2'\n");
                 return;
             }
 
 
             if (decimal.Parse(identificacaoPTRP.IdtDesenv) > 11 && decimal.Parse(identificacaoPTRP.IdtDesenv) < 14)
             {
-                ErrosValidacao.Add($"O campo 'IdtDesenv' esta com a quantidade de digitos inválidos ({identificacaoPTRP.IdtDesenv.Length}) deve ter a quantidade igual a '11' ou '14'");
+                ErrosValidacao.Add($"O campo 'IdtDesenv' esta com a quantidade de digitos inválidos ({identificacaoPTRP.IdtDesenv.Length}) deve ter a quantidade igual a '11' ou '14'\n");
                 return;
             }
 
@@ -91,7 +91,7 @@ public class IdentificacaoPTRPAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
             return false;
         }
     }

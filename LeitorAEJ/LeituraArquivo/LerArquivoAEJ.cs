@@ -1,5 +1,5 @@
 ﻿using LeitorAEJ.Model;
-using LeitorAEJ.Model.Ultil;
+using LeitorAEJ.Model.Util;
 using System.Text;
 
 namespace LeitorAEJ.LeituraArquivo;

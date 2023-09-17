@@ -33,6 +33,8 @@
             SubMenuLerArquivo = new ToolStripMenuItem();
             MenuVisualizar = new ToolStripMenuItem();
             SubMenuVisualizarListar = new ToolStripMenuItem();
+            MenuValidacao = new ToolStripMenuItem();
+            SubMenuValidacaoListar = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             Cabecalho = new TabPage();
             GbValidacao = new GroupBox();
@@ -104,7 +106,7 @@
             // MenuPrincipal
             // 
             MenuPrincipal.BackColor = Color.Transparent;
-            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar });
+            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
             MenuPrincipal.Size = new Size(1069, 24);
@@ -137,7 +139,21 @@
             SubMenuVisualizarListar.Name = "SubMenuVisualizarListar";
             SubMenuVisualizarListar.Size = new Size(102, 22);
             SubMenuVisualizarListar.Text = "Listar";
-            SubMenuVisualizarListar.Click += SubMenuRelatorioListar_Click;
+            SubMenuVisualizarListar.Click += SubMenuVisualizarListar_Click;
+            // 
+            // MenuValidacao
+            // 
+            MenuValidacao.DropDownItems.AddRange(new ToolStripItem[] { SubMenuValidacaoListar });
+            MenuValidacao.Name = "MenuValidacao";
+            MenuValidacao.Size = new Size(74, 20);
+            MenuValidacao.Text = "Validações";
+            // 
+            // SubMenuValidacaoListar
+            // 
+            SubMenuValidacaoListar.Name = "SubMenuValidacaoListar";
+            SubMenuValidacaoListar.Size = new Size(180, 22);
+            SubMenuValidacaoListar.Text = "Listar";
+            SubMenuValidacaoListar.Click += SubMenuValidacaoListar_Click;
             // 
             // tabControl1
             // 
@@ -679,5 +695,7 @@
         private RichTextBox RTxtLogTrailer;
         private ToolStripMenuItem MenuVisualizar;
         private ToolStripMenuItem SubMenuVisualizarListar;
+        private ToolStripMenuItem MenuValidacao;
+        private ToolStripMenuItem SubMenuValidacaoListar;
     }
 }

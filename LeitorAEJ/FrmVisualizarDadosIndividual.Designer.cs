@@ -72,6 +72,7 @@
             ClientSize = new Size(1048, 559);
             Controls.Add(RTxtMarcacaoIndividual);
             Controls.Add(groupBox1);
+            MinimizeBox = false;
             Name = "FrmVisualizarDadosIndividual";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Visualizar Dados Individual";

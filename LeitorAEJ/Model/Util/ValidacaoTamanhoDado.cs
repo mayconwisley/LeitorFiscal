@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LeitorAEJ.Model.Ultil;
+namespace LeitorAEJ.Model.Util;
 
 public static class ValidacaoTamanhoDado
 {
@@ -20,7 +20,7 @@ public static class ValidacaoTamanhoDado
         {
             foreach (ValidationResult validarResultado in validarResultados)
             {
-                ErrosValidacao.Add(validarResultado.ErrorMessage!);
+                ErrosValidacao.Add(validarResultado.ErrorMessage! + "\n");
             }
             return false;
         }
