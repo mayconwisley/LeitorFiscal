@@ -60,31 +60,31 @@ public class CabecalhoAEJ
         {
             if (cabecalho.TpIdtEmpregador != "1" & cabecalho.TpIdtEmpregador != "2")
             {
-                ErrosValidacao.Add("O campo TpIdtEmpregador deve ter o valor '1' ou '2'.");
+                ErrosValidacao.Add($"O campo 'TpIdtEmpregador' esta com o valor ({cabecalho.TpIdtEmpregador}) inválido, deve ter o valor '1' ou '2'.");
                 return;
             }
 
 
             if (cabecalho.VersaoAej != "001")
             {
-                ErrosValidacao.Add("O campo VersaoAej deve ter o valor '001'.");
+                ErrosValidacao.Add($"O campo 'VersaoAej' esta com o valor ({cabecalho.VersaoAej}) inválido, deve ter o valor '001'.");
                 return;
             }
 
             if (decimal.Parse(cabecalho.IdtEmpregador) > 11 && decimal.Parse(cabecalho.IdtEmpregador) < 14)
             {
-                ErrosValidacao.Add("O campo IdtEmpregador deve ter o valor igual a '11' ou '14'");
+                ErrosValidacao.Add($"O campo 'IdtEmpregador' esta com o valor ({cabecalho.IdtEmpregador.Length}) inválido, deve ter a quantidade de digitos igual a '11' ou '14'");
                 return;
             }
 
             if (decimal.Parse(cabecalho.Caepf) != 0 && decimal.Parse(cabecalho.Caepf) < 14)
             {
-                ErrosValidacao.Add("O campo Caepf deve ter o valor igual a '14'");
+                ErrosValidacao.Add($"O campo 'Caepf' esta com o valor ({cabecalho.Caepf.Length}) inválido, deve ter o valor igual a '14'");
                 return;
             }
             if (decimal.Parse(cabecalho.Cno) != 0 && decimal.Parse(cabecalho.Cno) < 12)
             {
-                ErrosValidacao.Add("O campo Cno deve ter o valor igual a '12'");
+                ErrosValidacao.Add($"O campo 'Cno' esta com o valor ({cabecalho.Cno.Length}) inválido, deve ter o valor igual a '12'");
                 return;
             }
 

@@ -39,6 +39,19 @@ public class AusenciaBancoHorasAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(ausenciaBancoHoras) && ValidarTipoDados(ausenciaBancoHoras))
         {
+            if (ausenciaBancoHoras.TipoAusenOuComp != "1" & ausenciaBancoHoras.TipoAusenOuComp != "2" &
+                ausenciaBancoHoras.TipoAusenOuComp != "3" & ausenciaBancoHoras.TipoAusenOuComp != "4")
+            {
+                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoAusenOuComp' com o valor ({ausenciaBancoHoras.TipoAusenOuComp}) inválido, deve ter os valores '1' ou '2' ou '3' ou '4'.\n");
+                return;
+            }
+
+            if (ausenciaBancoHoras.TipoMovBH != "0" & ausenciaBancoHoras.TipoMovBH != "1" & ausenciaBancoHoras.TipoMovBH != "3")
+            {
+                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoMovBH' com o valor ({ausenciaBancoHoras.TipoMovBH}) inválido, deve ter os valores '0' ou '1' ou '2'.\n");
+                return;
+            }
+
             AusenciaBancoHorasAEJList.Add(ausenciaBancoHoras);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)

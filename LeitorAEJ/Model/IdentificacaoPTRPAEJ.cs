@@ -45,9 +45,16 @@ public class IdentificacaoPTRPAEJ
 
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP) && ValidarTipoDados(identificacaoPTRP))
         {
+            if (identificacaoPTRP.TpIdtDesenv != "1" & identificacaoPTRP.TpIdtDesenv != "2")
+            {
+                ErrosValidacao.Add($"O campo 'TpIdtDesenv' esta com o valor ({identificacaoPTRP.TpIdtDesenv}) inválido, deve ter o valor igual a '1' ou '2'");
+                return;
+            }
+
+
             if (decimal.Parse(identificacaoPTRP.IdtDesenv) > 11 && decimal.Parse(identificacaoPTRP.IdtDesenv) < 14)
             {
-                ErrosValidacao.Add("O campo IdtDesenv deve ter o valor igual a '11' ou '14'");
+                ErrosValidacao.Add($"O campo 'IdtDesenv' esta com a quantidade de digitos inválidos ({identificacaoPTRP.IdtDesenv.Length}) deve ter a quantidade igual a '11' ou '14'");
                 return;
             }
 
