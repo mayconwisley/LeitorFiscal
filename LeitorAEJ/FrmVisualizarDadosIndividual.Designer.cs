@@ -46,7 +46,7 @@
             // 
             // CbxVinculos
             // 
-            CbxVinculos.DisplayMember = "NomeEmp";
+            CbxVinculos.DisplayMember = "NomeEmpregado";
             CbxVinculos.FormattingEnabled = true;
             CbxVinculos.Location = new Point(8, 19);
             CbxVinculos.Name = "CbxVinculos";
