@@ -61,6 +61,7 @@
             RTxtMarcacaoIndividual.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             RTxtMarcacaoIndividual.Location = new Point(12, 79);
             RTxtMarcacaoIndividual.Name = "RTxtMarcacaoIndividual";
+            RTxtMarcacaoIndividual.ReadOnly = true;
             RTxtMarcacaoIndividual.Size = new Size(1024, 468);
             RTxtMarcacaoIndividual.TabIndex = 1;
             RTxtMarcacaoIndividual.Text = "";

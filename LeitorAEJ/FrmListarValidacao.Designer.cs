@@ -36,6 +36,7 @@
             RTxtListaValidacao.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             RTxtListaValidacao.Location = new Point(12, 12);
             RTxtListaValidacao.Name = "RTxtListaValidacao";
+            RTxtListaValidacao.ReadOnly = true;
             RTxtListaValidacao.Size = new Size(937, 452);
             RTxtListaValidacao.TabIndex = 0;
             RTxtListaValidacao.Text = "";

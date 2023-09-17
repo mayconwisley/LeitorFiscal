@@ -151,7 +151,7 @@
             // SubMenuValidacaoListar
             // 
             SubMenuValidacaoListar.Name = "SubMenuValidacaoListar";
-            SubMenuValidacaoListar.Size = new Size(180, 22);
+            SubMenuValidacaoListar.Size = new Size(102, 22);
             SubMenuValidacaoListar.Text = "Listar";
             SubMenuValidacaoListar.Click += SubMenuValidacaoListar_Click;
             // 
@@ -200,6 +200,7 @@
             RTxtLogCabecalho.Dock = DockStyle.Fill;
             RTxtLogCabecalho.Location = new Point(3, 19);
             RTxtLogCabecalho.Name = "RTxtLogCabecalho";
+            RTxtLogCabecalho.ReadOnly = true;
             RTxtLogCabecalho.Size = new Size(1022, 114);
             RTxtLogCabecalho.TabIndex = 0;
             RTxtLogCabecalho.Text = "";
@@ -249,6 +250,7 @@
             RTxtLogRepUtilizado.Dock = DockStyle.Fill;
             RTxtLogRepUtilizado.Location = new Point(3, 19);
             RTxtLogRepUtilizado.Name = "RTxtLogRepUtilizado";
+            RTxtLogRepUtilizado.ReadOnly = true;
             RTxtLogRepUtilizado.Size = new Size(1022, 114);
             RTxtLogRepUtilizado.TabIndex = 0;
             RTxtLogRepUtilizado.Text = "";
@@ -298,6 +300,7 @@
             RTxtLogVinculo.Dock = DockStyle.Fill;
             RTxtLogVinculo.Location = new Point(3, 19);
             RTxtLogVinculo.Name = "RTxtLogVinculo";
+            RTxtLogVinculo.ReadOnly = true;
             RTxtLogVinculo.Size = new Size(1022, 114);
             RTxtLogVinculo.TabIndex = 0;
             RTxtLogVinculo.Text = "";
@@ -346,6 +349,7 @@
             RTxtLogHorarioContratual.Dock = DockStyle.Fill;
             RTxtLogHorarioContratual.Location = new Point(3, 19);
             RTxtLogHorarioContratual.Name = "RTxtLogHorarioContratual";
+            RTxtLogHorarioContratual.ReadOnly = true;
             RTxtLogHorarioContratual.Size = new Size(1022, 114);
             RTxtLogHorarioContratual.TabIndex = 0;
             RTxtLogHorarioContratual.Text = "";
@@ -394,6 +398,7 @@
             RTxtLogMarcacoes.Dock = DockStyle.Fill;
             RTxtLogMarcacoes.Location = new Point(3, 19);
             RTxtLogMarcacoes.Name = "RTxtLogMarcacoes";
+            RTxtLogMarcacoes.ReadOnly = true;
             RTxtLogMarcacoes.Size = new Size(1022, 114);
             RTxtLogMarcacoes.TabIndex = 0;
             RTxtLogMarcacoes.Text = "";
@@ -442,6 +447,7 @@
             RTxtLogVinculoeSocial.Dock = DockStyle.Fill;
             RTxtLogVinculoeSocial.Location = new Point(3, 19);
             RTxtLogVinculoeSocial.Name = "RTxtLogVinculoeSocial";
+            RTxtLogVinculoeSocial.ReadOnly = true;
             RTxtLogVinculoeSocial.Size = new Size(1022, 114);
             RTxtLogVinculoeSocial.TabIndex = 0;
             RTxtLogVinculoeSocial.Text = "";
@@ -490,6 +496,7 @@
             RTxtLogAusenciaBancoHoras.Dock = DockStyle.Fill;
             RTxtLogAusenciaBancoHoras.Location = new Point(3, 19);
             RTxtLogAusenciaBancoHoras.Name = "RTxtLogAusenciaBancoHoras";
+            RTxtLogAusenciaBancoHoras.ReadOnly = true;
             RTxtLogAusenciaBancoHoras.Size = new Size(1022, 114);
             RTxtLogAusenciaBancoHoras.TabIndex = 0;
             RTxtLogAusenciaBancoHoras.Text = "";
@@ -538,6 +545,7 @@
             RTxtLogIdentificaoPTRP.Dock = DockStyle.Fill;
             RTxtLogIdentificaoPTRP.Location = new Point(3, 19);
             RTxtLogIdentificaoPTRP.Name = "RTxtLogIdentificaoPTRP";
+            RTxtLogIdentificaoPTRP.ReadOnly = true;
             RTxtLogIdentificaoPTRP.Size = new Size(1022, 114);
             RTxtLogIdentificaoPTRP.TabIndex = 0;
             RTxtLogIdentificaoPTRP.Text = "";
@@ -586,6 +594,7 @@
             RTxtLogTrailer.Dock = DockStyle.Fill;
             RTxtLogTrailer.Location = new Point(3, 19);
             RTxtLogTrailer.Name = "RTxtLogTrailer";
+            RTxtLogTrailer.ReadOnly = true;
             RTxtLogTrailer.Size = new Size(1022, 114);
             RTxtLogTrailer.TabIndex = 0;
             RTxtLogTrailer.Text = "";
