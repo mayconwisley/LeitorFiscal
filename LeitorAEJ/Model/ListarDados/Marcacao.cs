@@ -53,8 +53,8 @@ public class Marcacao
                          $"Tipo de Marcação: {itemHora.TpMarc}, " +
                          $"Sequencia: {itemHora.SeqEntSaida}, " +
                          $"Fonte da Marcação: {itemHora.FonteMarc}, " +
-                         $"Horário Contratual: {itemHora.CodHorContratual}, " +
-                         $"Motivo: {itemHora.Motivo}" +
+                         $"Horário Contratual: {itemHora.CodHorContratual}\n " +
+                         $"\tMotivo: {itemHora.Motivo}" +
                          $"{repUtilizado}\n";
 
                 CalcularMarcacoes(itemHora.TpMarc!, itemHora.DataHoraMarc!);

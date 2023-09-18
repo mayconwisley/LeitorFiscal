@@ -15,6 +15,7 @@
             foreach (var item in ausenciaBancoHoras)
             {
                 ausenciaBancoHora += $"Data: {DateTime.Parse(item.Data!):dd/MM/yyyy}\n" +
+                                     $"\tQuantidade Minutos: {item.QtMinutos}\n" +
                                      $"\tTipo de Ausência ou Compensação: {item.TipoAusenOuComp} - " +
                                      $"{tipoAusencia[int.Parse(item.TipoAusenOuComp!)]}\n" +
                                      $"\tTipo Movimento Banco: {item.TipoMovBH} - " +
