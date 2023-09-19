@@ -46,15 +46,25 @@ public class Marcacao
 
                 if (listRepUtilizado.Count == 0)
                 {
-                    repUtilizado = "\n\t\tTipo REP inválidos";
+                    repUtilizado = "";
                 }
+                string descTpMarc = itemHora.TpMarc == "E" ?
+                        "Entrada" : itemHora.TpMarc == "S" ?
+                        "Saída" :
+                        "Desconsiderada";
+                string descFonteMarc = itemHora.FonteMarc == "O" ?
+                        "Marcação original do REP" : itemHora.FonteMarc == "I" ?
+                        "Marcação incluída manualmente" : itemHora.FonteMarc == "P" ?
+                        "Marcação pré-assinalada" : itemHora.FonteMarc == "X" ?
+                        "Ponto por exceção" :
+                        "outras fontes de marcação";
 
                 horaMarcacao += $"\tHora: {DateTime.Parse(itemHora.DataHoraMarc!):HH:mm}, " +
-                         $"Tipo de Marcação: {itemHora.TpMarc}, " +
+                         $"Tipo de Marcação: {itemHora.TpMarc} - {descTpMarc}, " +
                          $"Sequencia: {itemHora.SeqEntSaida}, " +
-                         $"Fonte da Marcação: {itemHora.FonteMarc}, " +
                          $"Horário Contratual: {itemHora.CodHorContratual}\n " +
-                         $"\tMotivo: {itemHora.Motivo}" +
+                         $"\t\tFonte da Marcação: {itemHora.FonteMarc} - {descFonteMarc}, " +
+                         $"Motivo: {itemHora.Motivo}" +
                          $"{repUtilizado}\n";
 
                 CalcularMarcacoes(itemHora.TpMarc!, itemHora.DataHoraMarc!);

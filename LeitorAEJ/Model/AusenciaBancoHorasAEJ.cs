@@ -46,7 +46,7 @@ public class AusenciaBancoHorasAEJ
                 return;
             }
 
-            if (ausenciaBancoHoras.TipoMovBH != "0" && ausenciaBancoHoras.TipoMovBH != "1" && ausenciaBancoHoras.TipoMovBH != "3")
+            if (ausenciaBancoHoras.TipoMovBH != "0" && ausenciaBancoHoras.TipoMovBH != "1" && ausenciaBancoHoras.TipoMovBH != "2")
             {
                 ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoMovBH' com o valor ({ausenciaBancoHoras.TipoMovBH}) inválido, deve ter os valores '0' ou '1' ou '2'.\n");
                 return;
