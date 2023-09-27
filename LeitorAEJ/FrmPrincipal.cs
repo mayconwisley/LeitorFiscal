@@ -1,5 +1,6 @@
 using LeitorAEJ.LeituraArquivo;
 using LeitorAEJ.Model;
+using System.Diagnostics;
 
 namespace LeitorAEJ;
 
@@ -151,4 +152,6 @@ public partial class FrmPrincipal : Form
         FrmListarValidacao frmListarValidacao = new();
         frmListarValidacao.ShowDialog();
     }
+
+   
 }

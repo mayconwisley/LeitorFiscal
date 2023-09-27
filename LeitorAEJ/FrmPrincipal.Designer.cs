@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             MenuPrincipal = new MenuStrip();
             MenuAej = new ToolStripMenuItem();
             SubMenuLerArquivo = new ToolStripMenuItem();
@@ -123,7 +124,7 @@
             // SubMenuLerArquivo
             // 
             SubMenuLerArquivo.Name = "SubMenuLerArquivo";
-            SubMenuLerArquivo.Size = new Size(135, 22);
+            SubMenuLerArquivo.Size = new Size(180, 22);
             SubMenuLerArquivo.Text = "&Ler Arquivo";
             SubMenuLerArquivo.Click += SubMenuLerArquivo_Click;
             // 
@@ -624,9 +625,10 @@
             ClientSize = new Size(1069, 584);
             Controls.Add(tabControl1);
             Controls.Add(MenuPrincipal);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ARQUIVO ELETRÔNICO DE JORNADA - AEJ";
+            Text = "ARQUIVO ELETRÔNICO DE JORNADA - AEJ - Portaria 671 - 08/11/2021";
             MenuPrincipal.ResumeLayout(false);
             MenuPrincipal.PerformLayout();
             tabControl1.ResumeLayout(false);
