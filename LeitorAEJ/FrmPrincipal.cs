@@ -1,5 +1,5 @@
+using LeitorAEJ.AEJ;
 using LeitorAEJ.LeituraArquivo;
-using LeitorAEJ.Model;
 using System.Diagnostics;
 
 namespace LeitorAEJ;
@@ -153,5 +153,9 @@ public partial class FrmPrincipal : Form
         frmListarValidacao.ShowDialog();
     }
 
-   
+    private void testeToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        FrmLeitorAfd frmLeitorAfd = new();
+        frmLeitorAfd.ShowDialog();
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace LeitorAEJ.Model.ListarDados;
+﻿using LeitorAEJ.AEJ;
+
+namespace LeitorAEJ.Model.ListarDados;
 
 public static class Vinculos
 {

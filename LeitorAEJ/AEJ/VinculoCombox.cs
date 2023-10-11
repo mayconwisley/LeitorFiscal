@@ -1,4 +1,4 @@
-﻿namespace LeitorAEJ.Model
+﻿namespace LeitorAEJ.AEJ
 {
     public class VinculoCombox
     {

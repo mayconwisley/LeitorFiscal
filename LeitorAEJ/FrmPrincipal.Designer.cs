@@ -73,6 +73,7 @@
             groupBox8 = new GroupBox();
             RTxtLogTrailer = new RichTextBox();
             DgvListTrailer = new DataGridView();
+            testeToolStripMenuItem = new ToolStripMenuItem();
             MenuPrincipal.SuspendLayout();
             tabControl1.SuspendLayout();
             Cabecalho.SuspendLayout();
@@ -107,7 +108,7 @@
             // MenuPrincipal
             // 
             MenuPrincipal.BackColor = Color.Transparent;
-            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao });
+            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao, testeToolStripMenuItem });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
             MenuPrincipal.Size = new Size(1069, 24);
@@ -618,6 +619,13 @@
             DgvListTrailer.Size = new Size(1031, 366);
             DgvListTrailer.TabIndex = 0;
             // 
+            // testeToolStripMenuItem
+            // 
+            testeToolStripMenuItem.Name = "testeToolStripMenuItem";
+            testeToolStripMenuItem.Size = new Size(45, 20);
+            testeToolStripMenuItem.Text = "Teste";
+            testeToolStripMenuItem.Click += testeToolStripMenuItem_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -708,5 +716,6 @@
         private ToolStripMenuItem SubMenuVisualizarListar;
         private ToolStripMenuItem MenuValidacao;
         private ToolStripMenuItem SubMenuValidacaoListar;
+        private ToolStripMenuItem testeToolStripMenuItem;
     }
 }

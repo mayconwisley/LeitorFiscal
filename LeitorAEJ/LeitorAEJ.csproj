@@ -13,4 +13,8 @@
     <Content Include="AEJ.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AFD\Portaria_671\" />
+  </ItemGroup>
+
 </Project>

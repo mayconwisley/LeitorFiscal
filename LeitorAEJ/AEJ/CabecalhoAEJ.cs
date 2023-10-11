@@ -1,7 +1,7 @@
 ﻿using LeitorAEJ.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorAEJ.Model;
+namespace LeitorAEJ.AEJ;
 
 public class CabecalhoAEJ
 {

@@ -1,4 +1,6 @@
-﻿namespace LeitorAEJ.Model.ListarValidacao;
+﻿using LeitorAEJ.AEJ;
+
+namespace LeitorAEJ.Model.ListarValidacao;
 
 public class ValidacaoTrailer
 {
