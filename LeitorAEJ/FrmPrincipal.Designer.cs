@@ -36,6 +36,7 @@
             SubMenuVisualizarListar = new ToolStripMenuItem();
             MenuValidacao = new ToolStripMenuItem();
             SubMenuValidacaoListar = new ToolStripMenuItem();
+            testeToolStripMenuItem = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             Cabecalho = new TabPage();
             GbValidacao = new GroupBox();
@@ -73,7 +74,6 @@
             groupBox8 = new GroupBox();
             RTxtLogTrailer = new RichTextBox();
             DgvListTrailer = new DataGridView();
-            testeToolStripMenuItem = new ToolStripMenuItem();
             MenuPrincipal.SuspendLayout();
             tabControl1.SuspendLayout();
             Cabecalho.SuspendLayout();
@@ -125,7 +125,7 @@
             // SubMenuLerArquivo
             // 
             SubMenuLerArquivo.Name = "SubMenuLerArquivo";
-            SubMenuLerArquivo.Size = new Size(180, 22);
+            SubMenuLerArquivo.Size = new Size(135, 22);
             SubMenuLerArquivo.Text = "&Ler Arquivo";
             SubMenuLerArquivo.Click += SubMenuLerArquivo_Click;
             // 
@@ -156,6 +156,13 @@
             SubMenuValidacaoListar.Size = new Size(102, 22);
             SubMenuValidacaoListar.Text = "Listar";
             SubMenuValidacaoListar.Click += SubMenuValidacaoListar_Click;
+            // 
+            // testeToolStripMenuItem
+            // 
+            testeToolStripMenuItem.Name = "testeToolStripMenuItem";
+            testeToolStripMenuItem.Size = new Size(45, 20);
+            testeToolStripMenuItem.Text = "Teste";
+            testeToolStripMenuItem.Click += testeToolStripMenuItem_Click;
             // 
             // tabControl1
             // 
@@ -619,13 +626,6 @@
             DgvListTrailer.Size = new Size(1031, 366);
             DgvListTrailer.TabIndex = 0;
             // 
-            // testeToolStripMenuItem
-            // 
-            testeToolStripMenuItem.Name = "testeToolStripMenuItem";
-            testeToolStripMenuItem.Size = new Size(45, 20);
-            testeToolStripMenuItem.Text = "Teste";
-            testeToolStripMenuItem.Click += testeToolStripMenuItem_Click;
-            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -633,8 +633,12 @@
             ClientSize = new Size(1069, 584);
             Controls.Add(tabControl1);
             Controls.Add(MenuPrincipal);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FrmPrincipal";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ARQUIVO ELETRÔNICO DE JORNADA - AEJ - Portaria 671 - 08/11/2021";
             MenuPrincipal.ResumeLayout(false);

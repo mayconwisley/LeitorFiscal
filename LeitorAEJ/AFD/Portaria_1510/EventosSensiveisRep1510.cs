@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LeitorAEJ.AFD.Portaria_1510;
+﻿namespace LeitorAEJ.AFD.Portaria_1510;
 
 public class EventosSensiveisRep1510
 {
@@ -22,5 +16,18 @@ public class EventosSensiveisRep1510
         “06” para erro de impressão.
      */
 
+    public static List<EventosSensiveisRep1510> EventosSensiveisRep1510List { get; set; } = new();
+    public static void GetEventosSensiveis(string linhaCabecalho)
+    {
+        EventosSensiveisRep1510 eventosSensiveis = new()
+        {
+            Nsr = linhaCabecalho.Substring(0, 9).Trim(),
+            TpRegistro = linhaCabecalho.Substring(9, 1).Trim(),
+            DataRegistro = linhaCabecalho.Substring(10, 8).Trim(),
+            HoraRegistro = linhaCabecalho.Substring(18, 4).Trim(),
+            TpEvento = linhaCabecalho.Substring(22, 2).Trim()
+        };
 
+        EventosSensiveisRep1510List.Add(eventosSensiveis);
+    }
 }
