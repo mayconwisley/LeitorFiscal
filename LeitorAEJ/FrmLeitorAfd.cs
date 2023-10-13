@@ -1,21 +1,12 @@
-﻿using LeitorAEJ.AEJ;
-using LeitorAEJ.AFD.Portaria_1510;
+﻿using LeitorAEJ.AFD.Portaria_1510;
 using LeitorAEJ.LeituraArquivo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LeitorAEJ;
 
 public partial class FrmLeitorAfd : Form
 {
     string caminhoArquivo = string.Empty;
+    bool portaria595 = false;
     public FrmLeitorAfd()
     {
         InitializeComponent();
@@ -99,10 +90,15 @@ public partial class FrmLeitorAfd : Form
         openFileDialog.Filter = "Arquivos de texto (*.txt)|*.txt";
         openFileDialog.Multiselect = false;
         openFileDialog.Title = "Localizar arquivo AFD";
+        portaria595 = false;
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
             caminhoArquivo = openFileDialog.FileName;
+            if (MessageBox.Show("Verificar arquivo AFD com base na\nPortaria n.º 595, de 05 de dezembro de 2013", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                portaria595 = true;
+            }
         }
     }
 
@@ -112,7 +108,7 @@ public partial class FrmLeitorAfd : Form
 
         try
         {
-            LerArquivoAFD.Arquivo(caminhoArquivo);
+            LerArquivoAFD.Arquivo(caminhoArquivo, portaria595);
             ListarCabecalho1510();
             ListarIdentificacaoEmpresa1510();
             ListarMarcacaoPonto1510();
@@ -123,7 +119,6 @@ public partial class FrmLeitorAfd : Form
         }
         catch (Exception ex)
         {
-
             MessageBox.Show(ex.Message);
         }
     }

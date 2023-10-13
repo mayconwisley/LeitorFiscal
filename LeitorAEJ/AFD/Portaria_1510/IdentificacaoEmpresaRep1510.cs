@@ -29,8 +29,8 @@ public class IdentificacaoEmpresaRep1510
     [MinLength(1, ErrorMessage = "O campo TpIdentEmpregador deve ter um comprimento minimo de '1'")]
     public string? TpIdentEmpregador { get; set; } /*Tamanho: 1, Posição: 37 a 37, Tipo: numérico, Dado: = 1-CNPJ ou 2-CPF*/
 
-    [MaxLength(9, ErrorMessage = "O campo CnpjCpf deve ter um comprimento máximo de '14'")]
-    [MinLength(9, ErrorMessage = "O campo CnpjCpf deve ter um comprimento minimo de '14'")]
+    [MaxLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento máximo de '14'")]
+    [MinLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento minimo de '14'")]
     public string? CnpjCpf { get; set; } /*Tamanho: 14, Posição: 38 a 51, Tipo: numérico*/
 
     [MaxLength(12, ErrorMessage = "O campo Cei deve ter um comprimento máximo de '12'")]
@@ -52,31 +52,56 @@ public class IdentificacaoEmpresaRep1510
     public static List<IdentificacaoEmpresaRep1510> IdentificacaoEmpresaRep1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetIdentificadorEmpresa(string linhaArquivo)
+    public static void GetIdentificadorEmpresa(string linhaArquivo, bool portaria595)
     {
+        IdentificacaoEmpresaRep1510 identificacaoEmpresa;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 317)
+
+        if (portaria595)
         {
-            ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '317'. Tamanho encotrado {tamanhoLinha}\n");
-            return;
+            if (tamanhoLinha != 317)
+            {
+                ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '317'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
+
+            identificacaoEmpresa = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataGravacao = linhaArquivo.Substring(10, 8),
+                HoraGravacao = linhaArquivo.Substring(18, 4),
+                CpfResponsavel = linhaArquivo.Substring(22, 14),
+                TpIdentEmpregador = linhaArquivo.Substring(36, 1),
+                CnpjCpf = linhaArquivo.Substring(37, 14),
+                Cei = linhaArquivo.Substring(51, 12),
+                RazaoSocial = linhaArquivo.Substring(63, 150),
+                LocalPrestServico = linhaArquivo.Substring(213, 100),
+                Crc16 = linhaArquivo.Substring(313, 4)
+            };
         }
-
-        IdentificacaoEmpresaRep1510 identificacaoEmpresa = new()
+        else
         {
-            Nsr = linhaArquivo.Substring(0, 9),
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            DataGravacao = linhaArquivo.Substring(10, 8),
-            HoraGravacao = linhaArquivo.Substring(18, 4),
-            CpfResponsavel = linhaArquivo.Substring(22, 14),
-            TpIdentEmpregador = linhaArquivo.Substring(36, 1),
-            CnpjCpf = linhaArquivo.Substring(37, 14),
-            Cei = linhaArquivo.Substring(51, 12),
-            RazaoSocial = linhaArquivo.Substring(63, 150),
-            LocalPrestServico = linhaArquivo.Substring(213, 100),
-            Crc16 = linhaArquivo.Substring(313, 4)
-        };
+            if (tamanhoLinha != 299)
+            {
+                ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '299'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
 
+            identificacaoEmpresa = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataGravacao = linhaArquivo.Substring(10, 8),
+                HoraGravacao = linhaArquivo.Substring(18, 4),
+                TpIdentEmpregador = linhaArquivo.Substring(22, 1),
+                CnpjCpf = linhaArquivo.Substring(23, 14),
+                Cei = linhaArquivo.Substring(37, 12),
+                RazaoSocial = linhaArquivo.Substring(49, 150),
+                LocalPrestServico = linhaArquivo.Substring(199, 100),
+            };
+        }
 
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoEmpresa) && ValidarTipoDados(identificacaoEmpresa))
         {
@@ -92,6 +117,7 @@ public class IdentificacaoEmpresaRep1510
         {
             ErrosValidacao.Add(item + "\n");
         }
+
     }
     private static bool ValidarTipoDados(IdentificacaoEmpresaRep1510 identificacaoEmpresa)
     {
@@ -118,9 +144,12 @@ public class IdentificacaoEmpresaRep1510
             camposComErro.Add("HoraGravacao");
         }
 
-        if (!double.TryParse(identificacaoEmpresa.CpfResponsavel, out _))
+        if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.CpfResponsavel))
         {
-            camposComErro.Add("CpfResponsavel");
+            if (!double.TryParse(identificacaoEmpresa.CpfResponsavel, out _))
+            {
+                camposComErro.Add("CpfResponsavel");
+            }
         }
 
         if (!double.TryParse(identificacaoEmpresa.TpIdentEmpregador, out _))
@@ -141,10 +170,14 @@ public class IdentificacaoEmpresaRep1510
 
         }
 
-        if (!double.TryParse(identificacaoEmpresa.Crc16, out _))
+        if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.Crc16))
         {
-            camposComErro.Add("Crc16");
+            if (!double.TryParse(identificacaoEmpresa.Crc16, out _))
+            {
+                camposComErro.Add("Crc16");
+            }
         }
+
 
         if (camposComErro.Count == 0)
         {

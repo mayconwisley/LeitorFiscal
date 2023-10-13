@@ -37,8 +37,9 @@ public class EventosSensiveisRep1510
     public static List<EventosSensiveisRep1510> EventosSensiveisRep1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetEventosSensiveis(string linhaArquivo)
+    public static void GetEventosSensiveis(string linhaArquivo, bool portaria595)
     {
+        EventosSensiveisRep1510 eventosSensiveis;
         int tamanhoLinha = linhaArquivo.Length;
 
         if (tamanhoLinha != 24)
@@ -46,15 +47,19 @@ public class EventosSensiveisRep1510
             ErrosValidacao.Add($"O registro de '6 - Eventos Sensíveis' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '24'. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
-        EventosSensiveisRep1510 eventosSensiveis = new()
+
+        if (portaria595 == false)
         {
-            Nsr = linhaArquivo.Substring(0, 9),
+            ErrosValidacao.Add("Registro 6 - Eventos Sensíveis não faz parte da portaria 1510 de 21 de agosto de 2009\n");
+        }
+        eventosSensiveis = new()
+        {
+            Nsr = linhaArquivo[..9],
             TpRegistro = linhaArquivo.Substring(9, 1),
             DataRegistro = linhaArquivo.Substring(10, 8),
             HoraRegistro = linhaArquivo.Substring(18, 4),
             TpEvento = linhaArquivo.Substring(22, 2)
         };
-
 
         if (ValidacaoTamanhoDado.ValidarTamanho(eventosSensiveis) && ValidarTipoDados(eventosSensiveis))
         {

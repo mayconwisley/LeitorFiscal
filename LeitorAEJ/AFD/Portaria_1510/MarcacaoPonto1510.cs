@@ -32,40 +32,64 @@ public class MarcacaoPonto1510
     public static List<MarcacaoPonto1510> MarcacaoPonto1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetMarcacaoPonto(string linhaArquivo)
+    public static void GetMarcacaoPonto(string linhaArquivo, bool portaria595)
     {
+        MarcacaoPonto1510 marcacaoPonto;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 317)
-        {
-            ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '38'. Tamanho encotrado {tamanhoLinha}\n");
-            return;
-        }
-
-        MarcacaoPonto1510 marcacaoPonto = new()
-        {
-            Nsr = linhaArquivo.Substring(0, 9),
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            DataMarcacao = linhaArquivo.Substring(10, 8),
-            HoraMarcacao = linhaArquivo.Substring(18, 4),
-            Pis = linhaArquivo.Substring(22, 12),
-            Crc16 = linhaArquivo.Substring(34, 4)
-        };
-
-        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
-        {
-            if (marcacaoPonto.TpRegistro != "3")
+         if (portaria595)
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n");
-                return;
+                if (tamanhoLinha != 38)
+                {
+                    ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '38'. Tamanho encotrado {tamanhoLinha}\n");
+                    return;
+                }
+
+                marcacaoPonto = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataMarcacao = linhaArquivo.Substring(10, 8),
+                    HoraMarcacao = linhaArquivo.Substring(18, 4),
+                    Pis = linhaArquivo.Substring(22, 12),
+                    Crc16 = linhaArquivo.Substring(34, 4)
+                };
+            }
+            else
+            {
+                if (tamanhoLinha != 34)
+                {
+                    ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '34'. Tamanho encotrado {tamanhoLinha}\n");
+                    return;
+                }
+
+                marcacaoPonto = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataMarcacao = linhaArquivo.Substring(10, 8),
+                    HoraMarcacao = linhaArquivo.Substring(18, 4),
+                    Pis = linhaArquivo.Substring(22, 12)
+                };
             }
 
-            MarcacaoPonto1510List.Add(marcacaoPonto);
-        }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-        {
-            ErrosValidacao.Add(item + "\n");
-        }
+
+
+            if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
+            {
+                if (marcacaoPonto.TpRegistro != "3")
+                {
+                    ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n");
+                    return;
+                }
+
+                MarcacaoPonto1510List.Add(marcacaoPonto);
+            }
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item + "\n");
+            }
+       
     }
     private static bool ValidarTipoDados(MarcacaoPonto1510 marcacaoPonto1510)
     {

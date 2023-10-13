@@ -57,56 +57,83 @@ public class Cabecalho1510
 
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetCabecalho(string linhaArquivo)
+    public static void GetCabecalho(string linhaArquivo, bool portaria595)
     {
         Cabecalho1510 cabecalho;
 
         int tamanhoLinha = linhaArquivo.Length;
-
-        if (tamanhoLinha != 236)
-        {
-            ErrosValidacao.Add($"O registro de '1 - Cabeçalho' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '236'. Tamanho encontrado: {tamanhoLinha}\n");
-            return;
-        }
-
-        cabecalho = new()
-        {
-            Zeros = linhaArquivo.Substring(0, 9),
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            TpIdentEmpregador = linhaArquivo.Substring(10, 1),
-            CnpjCpf = linhaArquivo.Substring(11, 14),
-            Cei = linhaArquivo.Substring(25, 12),
-            RazaoSocial = linhaArquivo.Substring(37, 150),
-            NumeroFabRep = linhaArquivo.Substring(187, 17),
-            DataInicialRegistro = linhaArquivo.Substring(204, 8),
-            DataFinalRegistro = linhaArquivo.Substring(212, 8),
-            DataGeracao = linhaArquivo.Substring(220, 8),
-            HoraGeracao = linhaArquivo.Substring(228, 4),
-            Crc16 = linhaArquivo.Substring(232, 4)
-        };
-
-        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho) && ValidarTipoDados(cabecalho))
-        {
-            if (cabecalho.Zeros != "000000000")
+        
+            if (portaria595)
             {
-                ErrosValidacao.Add($"O campo 'Zeros' esta com o valor ({cabecalho.Zeros}) inválido, deve ter o valor '000000000'.\n");
-                return;
+                if (tamanhoLinha != 236)
+                {
+                    ErrosValidacao.Add($"O registro de '1 - Cabeçalho' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '236'. Tamanho encontrado: {tamanhoLinha}\n");
+                    return;
+                }
+
+                cabecalho = new()
+                {
+                    Zeros = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    TpIdentEmpregador = linhaArquivo.Substring(10, 1),
+                    CnpjCpf = linhaArquivo.Substring(11, 14),
+                    Cei = linhaArquivo.Substring(25, 12),
+                    RazaoSocial = linhaArquivo.Substring(37, 150),
+                    NumeroFabRep = linhaArquivo.Substring(187, 17),
+                    DataInicialRegistro = linhaArquivo.Substring(204, 8),
+                    DataFinalRegistro = linhaArquivo.Substring(212, 8),
+                    DataGeracao = linhaArquivo.Substring(220, 8),
+                    HoraGeracao = linhaArquivo.Substring(228, 4),
+                    Crc16 = linhaArquivo.Substring(232, 4)
+                };
+            }
+            else
+            {
+                if (tamanhoLinha != 232)
+                {
+                    ErrosValidacao.Add($"O registro de '1 - Cabeçalho' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '232'. Tamanho encontrado: {tamanhoLinha}\n");
+                    return;
+                }
+
+                cabecalho = new()
+                {
+                    Zeros = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    TpIdentEmpregador = linhaArquivo.Substring(10, 1),
+                    CnpjCpf = linhaArquivo.Substring(11, 14),
+                    Cei = linhaArquivo.Substring(25, 12),
+                    RazaoSocial = linhaArquivo.Substring(37, 150),
+                    NumeroFabRep = linhaArquivo.Substring(187, 17),
+                    DataInicialRegistro = linhaArquivo.Substring(204, 8),
+                    DataFinalRegistro = linhaArquivo.Substring(212, 8),
+                    DataGeracao = linhaArquivo.Substring(220, 8),
+                    HoraGeracao = linhaArquivo.Substring(228, 4)
+
+                };
             }
 
-
-            if (cabecalho.TpRegistro != "1")
+            if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho) && ValidarTipoDados(cabecalho))
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1'.\n");
-                return;
+                if (cabecalho.Zeros != "000000000")
+                {
+                    ErrosValidacao.Add($"O campo 'Zeros' esta com o valor ({cabecalho.Zeros}) inválido, deve ter o valor '000000000'.\n");
+                    return;
+                }
+
+
+                if (cabecalho.TpRegistro != "1")
+                {
+                    ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1'.\n");
+                    return;
+                }
+
+                Cabecalho1510List.Add(cabecalho);
             }
-
-            Cabecalho1510List.Add(cabecalho);
-        }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-        {
-            ErrosValidacao.Add(item + "\n");
-        }
-
+            foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+            {
+                ErrosValidacao.Add(item + "\n");
+            }
+       
 
     }
     private static bool ValidarTipoDados(Cabecalho1510 cabecalho1510)

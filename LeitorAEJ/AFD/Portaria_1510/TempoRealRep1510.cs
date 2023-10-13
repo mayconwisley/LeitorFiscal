@@ -41,27 +41,51 @@ public class TempoRealRep1510
     public static List<TempoRealRep1510> TempoRealRep1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetTempoReal(string linhaArquivo)
+    public static void GetTempoReal(string linhaArquivo, bool portaria595)
     {
+        TempoRealRep1510 tempoRealRep;
         int tamanhoLinha = linhaArquivo.Length;
-
-        if (tamanhoLinha != 49)
+        if (portaria595)
         {
-            ErrosValidacao.Add($"O registro de '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '49'. Tamanho encotrado {tamanhoLinha}\n");
-            return;
+            if (tamanhoLinha != 49)
+            {
+                ErrosValidacao.Add($"O registro de '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '49'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
+
+            tempoRealRep = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataAntesAjuste = linhaArquivo.Substring(10, 8),
+                HoraAntesAjuste = linhaArquivo.Substring(18, 4),
+                DataAjustada = linhaArquivo.Substring(22, 8),
+                HoraAjustada = linhaArquivo.Substring(30, 4),
+                CpfResponsavel = linhaArquivo.Substring(34, 11),
+                Crc16 = linhaArquivo.Substring(45, 4)
+            };
+        }
+        else
+        {
+            if (tamanhoLinha != 34)
+            {
+                ErrosValidacao.Add($"O registro de '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '34'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
+
+            tempoRealRep = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataAntesAjuste = linhaArquivo.Substring(10, 8),
+                HoraAntesAjuste = linhaArquivo.Substring(18, 4),
+                DataAjustada = linhaArquivo.Substring(22, 8),
+                HoraAjustada = linhaArquivo.Substring(30, 4)
+
+            };
+
         }
 
-        TempoRealRep1510 tempoRealRep = new()
-        {
-            Nsr = linhaArquivo.Substring(0, 9),
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            DataAntesAjuste = linhaArquivo.Substring(10, 8),
-            HoraAntesAjuste = linhaArquivo.Substring(18, 4),
-            DataAjustada = linhaArquivo.Substring(22, 8),
-            HoraAjustada = linhaArquivo.Substring(30, 4),
-            CpfResponsavel = linhaArquivo.Substring(34, 11),
-            Crc16 = linhaArquivo.Substring(45, 4)
-        };
 
         if (ValidacaoTamanhoDado.ValidarTamanho(tempoRealRep) && ValidarTipoDados(tempoRealRep))
         {
@@ -77,6 +101,7 @@ public class TempoRealRep1510
         {
             ErrosValidacao.Add(item + "\n");
         }
+
 
     }
     private static bool ValidarTipoDados(TempoRealRep1510 tempoRealRep)

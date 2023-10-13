@@ -1,40 +1,85 @@
 ﻿using LeitorAEJ.Model.Util;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeitorAEJ.AFD.Portaria_1510;
 
 public class Trailer1510
 {
+    [MaxLength(9, ErrorMessage = "O campo Noves deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo Noves deve ter um comprimento minimo de '9'")]
     public string? Noves { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico, Dado: = 999999999*/
+
+    [MaxLength(9, ErrorMessage = "O campo QtdRegTipo2 deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo QtdRegTipo2 deve ter um comprimento minimo de '9'")]
     public string? QtdRegTipo2 { get; set; } /*Tamanho: 9, Posição: 10 a 18, Tipo: numérico*/
+
+    [MaxLength(9, ErrorMessage = "O campo QtdRegTipo3 deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo QtdRegTipo3 deve ter um comprimento minimo de '9'")]
     public string? QtdRegTipo3 { get; set; } /*Tamanho: 9, Posição: 19 a 27, Tipo: numérico*/
+
+    [MaxLength(9, ErrorMessage = "O campo QtdRegTipo4 deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo QtdRegTipo4 deve ter um comprimento minimo de '9'")]
     public string? QtdRegTipo4 { get; set; } /*Tamanho: 9, Posição: 28 a 36, Tipo: numérico*/
+
+    [MaxLength(9, ErrorMessage = "O campo QtdRegTipo5 deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo QtdRegTipo5 deve ter um comprimento minimo de '9'")]
     public string? QtdRegTipo5 { get; set; } /*Tamanho: 9, Posição: 37 a 45, Tipo: numérico*/
+
+    [MaxLength(9, ErrorMessage = "O campo QtdRegTipo6 deve ter um comprimento máximo de '9'")]
+    [MinLength(9, ErrorMessage = "O campo QtdRegTipo6 deve ter um comprimento minimo de '9'")]
     public string? QtdRegTipo6 { get; set; } /*Tamanho: 9, Posição: 46 a 54, Tipo: numérico*/
+
+    [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
+    [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
     public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 55 a 55, Tipo: numérico, Dado: = 9*/
 
     public static List<Trailer1510> Trailer1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetTrailer(string linhaArquivo)
+    public static void GetTrailer(string linhaArquivo, bool portaria595)
     {
+        Trailer1510 trailer;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 55)
+
+        if (portaria595)
         {
-            ErrosValidacao.Add($"O registro de '9 - Trailer' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '55'. Tamanho encotrado {tamanhoLinha}\n");
-            return;
+            if (tamanhoLinha != 55)
+            {
+                ErrosValidacao.Add($"O registro de '9 - Trailer' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '55'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
+
+            trailer = new()
+            {
+                Noves = linhaArquivo[..9].Trim(),
+                QtdRegTipo2 = linhaArquivo.Substring(9, 9).Trim(),
+                QtdRegTipo3 = linhaArquivo.Substring(18, 9).Trim(),
+                QtdRegTipo4 = linhaArquivo.Substring(27, 9).Trim(),
+                QtdRegTipo5 = linhaArquivo.Substring(36, 9).Trim(),
+                QtdRegTipo6 = linhaArquivo.Substring(45, 9).Trim(),
+                TpRegistro = linhaArquivo.Substring(54, 1).Trim()
+            };
+        }
+        else
+        {
+            if (tamanhoLinha != 46)
+            {
+                ErrosValidacao.Add($"O registro de '9 - Trailer' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2013: '46'. Tamanho encotrado {tamanhoLinha}\n");
+                return;
+            }
+
+            trailer = new()
+            {
+                Noves = linhaArquivo[..9].Trim(),
+                QtdRegTipo2 = linhaArquivo.Substring(9, 9).Trim(),
+                QtdRegTipo3 = linhaArquivo.Substring(18, 9).Trim(),
+                QtdRegTipo4 = linhaArquivo.Substring(27, 9).Trim(),
+                QtdRegTipo5 = linhaArquivo.Substring(36, 9).Trim(),
+                TpRegistro = linhaArquivo.Substring(45, 1).Trim()
+            };
         }
 
-        Trailer1510 trailer = new()
-        {
-            Noves = linhaArquivo.Substring(0, 9).Trim(),
-            QtdRegTipo2 = linhaArquivo.Substring(9, 9).Trim(),
-            QtdRegTipo3 = linhaArquivo.Substring(18, 9).Trim(),
-            QtdRegTipo4 = linhaArquivo.Substring(27, 9).Trim(),
-            QtdRegTipo5 = linhaArquivo.Substring(36, 9).Trim(),
-            QtdRegTipo6 = linhaArquivo.Substring(45, 9).Trim(),
-            TpRegistro = linhaArquivo.Substring(54, 1).Trim()
-        };
 
         if (ValidacaoTamanhoDado.ValidarTamanho(trailer) && ValidarTipoDados(trailer))
         {
@@ -50,6 +95,7 @@ public class Trailer1510
         {
             ErrosValidacao.Add(item + "\n");
         }
+
     }
     public static bool ValidarResgistrosAEJ(int reg02, int reg03, int reg04, int reg05, int reg06)
     {
@@ -76,11 +122,15 @@ public class Trailer1510
                 ErrosValidacao.Add($"Quantidade de registros '5 - Empregado MT' inválido, quantidade verificada: {reg05}, quantidade no registro 9 - Trailer: {item.QtdRegTipo5}\n");
                 count++;
             }
-            if (int.Parse(item.QtdRegTipo6!) != reg06)
+            if (!string.IsNullOrWhiteSpace(item.QtdRegTipo6))
             {
-                ErrosValidacao.Add($"Quantidade de registros '6 - Eventos Sensíveis' inválido, quantidade verificada: {reg06}, quantidade no registro 9 - Trailer: {item.QtdRegTipo6}\n");
-                count++;
+                if (int.Parse(item.QtdRegTipo6!) != reg06)
+                {
+                    ErrosValidacao.Add($"Quantidade de registros '6 - Eventos Sensíveis' inválido, quantidade verificada: {reg06}, quantidade no registro 9 - Trailer: {item.QtdRegTipo6}\n");
+                    count++;
+                }
             }
+
 
             if (count > 0)
             {
@@ -124,9 +174,13 @@ public class Trailer1510
         {
             camposComErro.Add("QtdRegTipo5");
         }
-        if (!double.TryParse(trailer.QtdRegTipo6, out _))
+
+        if (!string.IsNullOrWhiteSpace(trailer.QtdRegTipo6))
         {
-            camposComErro.Add("QtdRegTipo6");
+            if (!double.TryParse(trailer.QtdRegTipo6, out _))
+            {
+                camposComErro.Add("QtdRegTipo6");
+            }
         }
 
         if (camposComErro.Count == 0)

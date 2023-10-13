@@ -1,6 +1,6 @@
 ﻿namespace LeitorAEJ
 {
-    partial class FrmPrincipal
+    partial class FrmLeitorAej
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLeitorAej));
             MenuPrincipal = new MenuStrip();
             MenuAej = new ToolStripMenuItem();
             SubMenuLerArquivo = new ToolStripMenuItem();
@@ -36,7 +36,6 @@
             SubMenuVisualizarListar = new ToolStripMenuItem();
             MenuValidacao = new ToolStripMenuItem();
             SubMenuValidacaoListar = new ToolStripMenuItem();
-            testeToolStripMenuItem = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             Cabecalho = new TabPage();
             GbValidacao = new GroupBox();
@@ -108,7 +107,7 @@
             // MenuPrincipal
             // 
             MenuPrincipal.BackColor = Color.Transparent;
-            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao, testeToolStripMenuItem });
+            MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
             MenuPrincipal.Size = new Size(1069, 24);
@@ -125,7 +124,7 @@
             // SubMenuLerArquivo
             // 
             SubMenuLerArquivo.Name = "SubMenuLerArquivo";
-            SubMenuLerArquivo.Size = new Size(135, 22);
+            SubMenuLerArquivo.Size = new Size(180, 22);
             SubMenuLerArquivo.Text = "&Ler Arquivo";
             SubMenuLerArquivo.Click += SubMenuLerArquivo_Click;
             // 
@@ -156,13 +155,6 @@
             SubMenuValidacaoListar.Size = new Size(102, 22);
             SubMenuValidacaoListar.Text = "Listar";
             SubMenuValidacaoListar.Click += SubMenuValidacaoListar_Click;
-            // 
-            // testeToolStripMenuItem
-            // 
-            testeToolStripMenuItem.Name = "testeToolStripMenuItem";
-            testeToolStripMenuItem.Size = new Size(45, 20);
-            testeToolStripMenuItem.Text = "Teste";
-            testeToolStripMenuItem.Click += testeToolStripMenuItem_Click;
             // 
             // tabControl1
             // 
@@ -626,7 +618,7 @@
             DgvListTrailer.Size = new Size(1031, 366);
             DgvListTrailer.TabIndex = 0;
             // 
-            // FrmPrincipal
+            // FrmLeitorAej
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -637,7 +629,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FrmPrincipal";
+            Name = "FrmLeitorAej";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ARQUIVO ELETRÔNICO DE JORNADA - AEJ - Portaria 671 - 08/11/2021";
@@ -720,6 +712,5 @@
         private ToolStripMenuItem SubMenuVisualizarListar;
         private ToolStripMenuItem MenuValidacao;
         private ToolStripMenuItem SubMenuValidacaoListar;
-        private ToolStripMenuItem testeToolStripMenuItem;
     }
 }

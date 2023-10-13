@@ -48,28 +48,54 @@ public class EmpregadoMtRep1510
     public static List<EmpregadoMtRep1510> EmpregadoMtRep1510List { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
-    public static void GetEmpregadoMtRep(string linhaArquivo)
+    public static void GetEmpregadoMtRep(string linhaArquivo, bool portaria595)
     {
+        EmpregadoMtRep1510 empregadoMt;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 106)
+
+        if (portaria595)
         {
-            ErrosValidacao.Add($"O registro de '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '106'. Tamanho encontrado: {tamanhoLinha}\n");
-            return;
+            if (tamanhoLinha != 106)
+            {
+                ErrosValidacao.Add($"O registro de '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '106'. Tamanho encontrado: {tamanhoLinha}\n");
+                return;
+            }
+            empregadoMt = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataGravacao = linhaArquivo.Substring(10, 8),
+                HoraGravacao = linhaArquivo.Substring(18, 4),
+                TpOperacao = linhaArquivo.Substring(22, 1),
+                Pis = linhaArquivo.Substring(23, 12),
+                Nome = linhaArquivo.Substring(35, 52),
+                DadosIdentificacao = linhaArquivo.Substring(87, 4),
+                CpfResponsavel = linhaArquivo.Substring(91, 11),
+                Crc16 = linhaArquivo.Substring(102, 4)
+            };
         }
-        EmpregadoMtRep1510 empregadoMt = new()
+        else
         {
-            Nsr = linhaArquivo.Substring(0, 9),
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            DataGravacao = linhaArquivo.Substring(10, 8),
-            HoraGravacao = linhaArquivo.Substring(18, 4),
-            TpOperacao = linhaArquivo.Substring(22, 1),
-            Pis = linhaArquivo.Substring(23, 12),
-            Nome = linhaArquivo.Substring(35, 52),
-            DadosIdentificacao = linhaArquivo.Substring(87, 4),
-            CpfResponsavel = linhaArquivo.Substring(91, 11),
-            Crc16 = linhaArquivo.Substring(102, 4)
-        };
+            if (tamanhoLinha != 87)
+            {
+                ErrosValidacao.Add($"O registro de '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '87'. Tamanho encontrado: {tamanhoLinha}\n");
+                return;
+            }
+            empregadoMt = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataGravacao = linhaArquivo.Substring(10, 8),
+                HoraGravacao = linhaArquivo.Substring(18, 4),
+                TpOperacao = linhaArquivo.Substring(22, 1),
+                Pis = linhaArquivo.Substring(23, 12),
+                Nome = linhaArquivo.Substring(35, 52)
+            };
+
+        }
+
+
 
 
         if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt) && ValidarTipoDados(empregadoMt))
@@ -86,6 +112,7 @@ public class EmpregadoMtRep1510
         {
             ErrosValidacao.Add(item + "\n");
         }
+
     }
     private static bool ValidarTipoDados(EmpregadoMtRep1510 empregadoMtRep)
     {
@@ -116,11 +143,13 @@ public class EmpregadoMtRep1510
         {
             camposComErro.Add("Pis");
         }
-        if (!double.TryParse(empregadoMtRep.CpfResponsavel, out _))
+        if (!string.IsNullOrWhiteSpace(empregadoMtRep.CpfResponsavel))
         {
-            camposComErro.Add("CpfResponsavel");
+            if (!double.TryParse(empregadoMtRep.CpfResponsavel, out _))
+            {
+                camposComErro.Add("CpfResponsavel");
+            }
         }
-
 
         if (camposComErro.Count == 0)
         {

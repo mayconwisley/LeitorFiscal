@@ -1,13 +1,11 @@
-﻿using LeitorAEJ.AEJ;
-using LeitorAEJ.AFD.Portaria_1510;
-using LeitorAEJ.Model.Util;
+﻿using LeitorAEJ.AFD.Portaria_1510;
 using System.Text;
 
 namespace LeitorAEJ.LeituraArquivo;
 
 public class LerArquivoAFD
 {
-    public static void Arquivo(string caminho)
+    public static void Arquivo(string caminho, bool portaria595)
     {
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
@@ -35,38 +33,56 @@ public class LerArquivoAFD
             string itemLinha = linha.Substring(9, 1);
             string itemTrailer = linha[..9];
 
-            if (itemTrailer == "999999999")
+            try
             {
-                itemLinha = linha.Substring(54, 1);
+                if (portaria595)
+                {
+                    if (itemTrailer == "999999999")
+                    {
+                        itemLinha = linha.Substring(54, 1);
+                    }
+                }
+                else
+                {
+                    if (itemTrailer == "999999999")
+                    {
+                        itemLinha = linha.Substring(45, 1);
+                    }
+                }
             }
+            catch
+            {
+                Trailer1510.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
+            }
+
 
             switch (itemLinha)
             {
                 case "1":
-                    Cabecalho1510.GetCabecalho(linha);
+                    Cabecalho1510.GetCabecalho(linha, portaria595);
                     break;
                 case "2":
                     countIdentEmpresa++;
-                    IdentificacaoEmpresaRep1510.GetIdentificadorEmpresa(linha);
+                    IdentificacaoEmpresaRep1510.GetIdentificadorEmpresa(linha, portaria595);
                     break;
                 case "3":
                     countMarcacaoPonto++;
-                    MarcacaoPonto1510.GetMarcacaoPonto(linha);
+                    MarcacaoPonto1510.GetMarcacaoPonto(linha, portaria595);
                     break;
                 case "4":
                     countTempoReal++;
-                    TempoRealRep1510.GetTempoReal(linha);
+                    TempoRealRep1510.GetTempoReal(linha, portaria595);
                     break;
                 case "5":
                     countEmpregadoMt++;
-                    EmpregadoMtRep1510.GetEmpregadoMtRep(linha);
+                    EmpregadoMtRep1510.GetEmpregadoMtRep(linha, portaria595);
                     break;
                 case "6":
                     countEventoSensiveis++;
-                    EventosSensiveisRep1510.GetEventosSensiveis(linha);
+                    EventosSensiveisRep1510.GetEventosSensiveis(linha, portaria595);
                     break;
                 case "9":
-                    Trailer1510.GetTrailer(linha);
+                    Trailer1510.GetTrailer(linha, portaria595);
                     break;
                 default:
                     MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -1,13 +1,12 @@
 using LeitorAEJ.AEJ;
 using LeitorAEJ.LeituraArquivo;
-using System.Diagnostics;
 
 namespace LeitorAEJ;
 
-public partial class FrmPrincipal : Form
+public partial class FrmLeitorAej : Form
 {
     string caminhoArquivo = string.Empty;
-    public FrmPrincipal()
+    public FrmLeitorAej()
     {
         InitializeComponent();
     }
@@ -17,7 +16,7 @@ public partial class FrmPrincipal : Form
         using OpenFileDialog openFileDialog = new();
         openFileDialog.Filter = "Arquivos de texto (*.txt)|*.txt";
         openFileDialog.Multiselect = false;
-        openFileDialog.Title = "Abrir arquivo";
+        openFileDialog.Title = "Abrir arquivo AEJ";
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
@@ -97,6 +96,7 @@ public partial class FrmPrincipal : Form
             RTxtLogAusenciaBancoHoras.AppendText(item);
         }
     }
+
     private void IdentificaoPTRPAej()
     {
         RTxtLogIdentificaoPTRP.Clear();
@@ -107,6 +107,7 @@ public partial class FrmPrincipal : Form
             RTxtLogIdentificaoPTRP.AppendText(item);
         }
     }
+
     private void TrailerAej()
     {
         RTxtLogTrailer.Clear();
@@ -151,11 +152,5 @@ public partial class FrmPrincipal : Form
     {
         FrmListarValidacao frmListarValidacao = new();
         frmListarValidacao.ShowDialog();
-    }
-
-    private void testeToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        FrmLeitorAfd frmLeitorAfd = new();
-        frmLeitorAfd.ShowDialog();
     }
 }
