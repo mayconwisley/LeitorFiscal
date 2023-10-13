@@ -487,7 +487,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Leitor Afd";
+            Text = "Arquivo-Fonte de Dados – AFD";
             MenuAfd.ResumeLayout(false);
             MenuAfd.PerformLayout();
             TabControlAfd.ResumeLayout(false);

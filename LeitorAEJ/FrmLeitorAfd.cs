@@ -78,12 +78,20 @@ public partial class FrmLeitorAfd : Form
         RTxtLogEventoSensiveis1510.Clear();
         DgvListEventoSensiveis1510.DataSource = null;
         DgvListEventoSensiveis1510.DataSource = EventosSensiveisRep1510.EventosSensiveisRep1510List;
+        foreach (var item in EventosSensiveisRep1510.ErrosValidacao)
+        {
+            RTxtLogEventoSensiveis1510.AppendText(item);
+        }
     }
     private void ListarTrailer1510()
     {
         RTxtLogTrailer1510.Clear();
         DgvListTrailer1510.DataSource = null;
         DgvListTrailer1510.DataSource = Trailer1510.Trailer1510List;
+        foreach (var item in Trailer1510.ErrosValidacao)
+        {
+            RTxtLogTrailer1510.AppendText(item);
+        }
     }
     private void LocalizarArquivo()
     {
