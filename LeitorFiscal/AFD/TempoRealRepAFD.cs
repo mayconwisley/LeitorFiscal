@@ -1,9 +1,9 @@
 ﻿using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorFiscal.AFD.Portaria_1510;
+namespace LeitorFiscal.AFD;
 
-public class TempoRealRep1510
+public class TempoRealRepAFD
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -38,12 +38,12 @@ public class TempoRealRep1510
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 46 a 49, Tipo: alfanumérico*/
 
 
-    public static List<TempoRealRep1510> TempoRealRep1510List { get; set; } = new();
+    public static List<TempoRealRepAFD> TempoRealRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetTempoReal(string linhaArquivo, bool portaria595)
     {
-        TempoRealRep1510 tempoRealRep;
+        TempoRealRepAFD tempoRealRep;
         int tamanhoLinha = linhaArquivo.Length;
         if (portaria595)
         {
@@ -95,7 +95,7 @@ public class TempoRealRep1510
                 return;
             }
 
-            TempoRealRep1510List.Add(tempoRealRep);
+            TempoRealRepAfdList.Add(tempoRealRep);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
@@ -104,7 +104,7 @@ public class TempoRealRep1510
 
 
     }
-    private static bool ValidarTipoDados(TempoRealRep1510 tempoRealRep)
+    private static bool ValidarTipoDados(TempoRealRepAFD tempoRealRep)
     {
 
         var camposComErro = new List<string>();

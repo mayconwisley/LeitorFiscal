@@ -1,4 +1,4 @@
-﻿using LeitorFiscal.AFD.Portaria_1510;
+﻿using LeitorFiscal.AFD;
 using LeitorFiscal.LeituraArquivo;
 
 namespace LeitorFiscal;
@@ -16,9 +16,9 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogCabecalho1510.Clear();
         DgvListCabecalho1510.DataSource = null;
-        DgvListCabecalho1510.DataSource = Cabecalho1510.Cabecalho1510List;
+        DgvListCabecalho1510.DataSource = CabecalhoAFD.CabecalhoAfdList;
 
-        foreach (var item in Cabecalho1510.ErrosValidacao)
+        foreach (var item in CabecalhoAFD.ErrosValidacao)
         {
             RTxtLogCabecalho1510.AppendText(item);
         }
@@ -28,8 +28,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogIdentificacaoEmpresa1510.Clear();
         DgvListIdentificacaoEmpresa1510.DataSource = null;
-        DgvListIdentificacaoEmpresa1510.DataSource = IdentificacaoEmpresaRep1510.IdentificacaoEmpresaRep1510List;
-        foreach (var item in IdentificacaoEmpresaRep1510.ErrosValidacao)
+        DgvListIdentificacaoEmpresa1510.DataSource = IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList;
+        foreach (var item in IdentificacaoEmpresaRepAFD.ErrosValidacao)
         {
             RTxtLogIdentificacaoEmpresa1510.AppendText(item);
         }
@@ -38,8 +38,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogMarcacaoPonto1510.Clear();
         DgvListMarcacaoPonto1510.DataSource = null;
-        DgvListMarcacaoPonto1510.DataSource = MarcacaoPonto1510.MarcacaoPonto1510List;
-        foreach (var item in MarcacaoPonto1510.ErrosValidacao)
+        DgvListMarcacaoPonto1510.DataSource = MarcacaoPontoAFD.MarcacaoPontoAfdList;
+        foreach (var item in MarcacaoPontoAFD.ErrosValidacao)
         {
             RTxtLogMarcacaoPonto1510.AppendText(item);
         }
@@ -48,8 +48,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogRelogioTempoReal1510.Clear();
         DgvListRelogioTempoReal1510.DataSource = null;
-        DgvListRelogioTempoReal1510.DataSource = TempoRealRep1510.TempoRealRep1510List;
-        foreach (var item in TempoRealRep1510.ErrosValidacao)
+        DgvListRelogioTempoReal1510.DataSource = TempoRealRepAFD.TempoRealRepAfdList;
+        foreach (var item in TempoRealRepAFD.ErrosValidacao)
         {
             RTxtLogRelogioTempoReal1510.AppendText(item);
         }
@@ -58,8 +58,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogEmpregadoMt1510.Clear();
         DgvListEmpregadoMt1510.DataSource = null;
-        DgvListEmpregadoMt1510.DataSource = EmpregadoMtRep1510.EmpregadoMtRep1510List;
-        foreach (var item in EmpregadoMtRep1510.ErrosValidacao)
+        DgvListEmpregadoMt1510.DataSource = EmpregadoMtRepAFD.EmpregadoMtRepAfdList;
+        foreach (var item in EmpregadoMtRepAFD.ErrosValidacao)
         {
             RTxtLogEmpregadoMt1510.AppendText(item);
         }
@@ -68,8 +68,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogEventoSensiveis1510.Clear();
         DgvListEventoSensiveis1510.DataSource = null;
-        DgvListEventoSensiveis1510.DataSource = EventosSensiveisRep1510.EventosSensiveisRep1510List;
-        foreach (var item in EventosSensiveisRep1510.ErrosValidacao)
+        DgvListEventoSensiveis1510.DataSource = EventosSensiveisRepAFD.EventosSensiveisRepAfdList;
+        foreach (var item in EventosSensiveisRepAFD.ErrosValidacao)
         {
             RTxtLogEventoSensiveis1510.AppendText(item);
         }
@@ -78,8 +78,8 @@ public partial class FrmLeitorAfd : Form
     {
         RTxtLogTrailer1510.Clear();
         DgvListTrailer1510.DataSource = null;
-        DgvListTrailer1510.DataSource = Trailer1510.Trailer1510List;
-        foreach (var item in Trailer1510.ErrosValidacao)
+        DgvListTrailer1510.DataSource = TrailerAFD.TrailerAfdList;
+        foreach (var item in TrailerAFD.ErrosValidacao)
         {
             RTxtLogTrailer1510.AppendText(item);
         }

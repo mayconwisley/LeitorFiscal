@@ -1,9 +1,9 @@
 ﻿using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorFiscal.AFD.Portaria_1510;
+namespace LeitorFiscal.AFD;
 
-public class EventosSensiveisRep1510
+public class EventosSensiveisRepAFD
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -34,12 +34,12 @@ public class EventosSensiveisRep1510
      */
 
 
-    public static List<EventosSensiveisRep1510> EventosSensiveisRep1510List { get; set; } = new();
+    public static List<EventosSensiveisRepAFD> EventosSensiveisRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetEventosSensiveis(string linhaArquivo, bool portaria595)
     {
-        EventosSensiveisRep1510 eventosSensiveis;
+        EventosSensiveisRepAFD eventosSensiveis;
         int tamanhoLinha = linhaArquivo.Length;
 
         if (tamanhoLinha != 24)
@@ -69,14 +69,14 @@ public class EventosSensiveisRep1510
                 return;
             }
 
-            EventosSensiveisRep1510List.Add(eventosSensiveis);
+            EventosSensiveisRepAfdList.Add(eventosSensiveis);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(EventosSensiveisRep1510 eventosSensiveis)
+    private static bool ValidarTipoDados(EventosSensiveisRepAFD eventosSensiveis)
     {
 
         var camposComErro = new List<string>();

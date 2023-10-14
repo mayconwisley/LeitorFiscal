@@ -1,4 +1,4 @@
-﻿using LeitorFiscal.AFD.Portaria_1510;
+﻿using LeitorFiscal.AFD;
 using System.Text;
 
 namespace LeitorFiscal.LeituraArquivo;
@@ -13,20 +13,20 @@ public class LerArquivoAFD
         int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
         int countEventoSensiveis = 0;
 
-        Cabecalho1510.Cabecalho1510List.Clear();
-        Cabecalho1510.ErrosValidacao.Clear();
-        IdentificacaoEmpresaRep1510.IdentificacaoEmpresaRep1510List.Clear();
-        IdentificacaoEmpresaRep1510.ErrosValidacao.Clear();
-        MarcacaoPonto1510.MarcacaoPonto1510List.Clear();
-        MarcacaoPonto1510.ErrosValidacao.Clear();
-        TempoRealRep1510.TempoRealRep1510List.Clear();
-        TempoRealRep1510.ErrosValidacao.Clear();
-        EmpregadoMtRep1510.EmpregadoMtRep1510List.Clear();
-        EmpregadoMtRep1510.ErrosValidacao.Clear();
-        EventosSensiveisRep1510.EventosSensiveisRep1510List.Clear();
-        EventosSensiveisRep1510.ErrosValidacao.Clear();
-        Trailer1510.Trailer1510List.Clear();
-        Trailer1510.ErrosValidacao.Clear();
+        CabecalhoAFD.CabecalhoAfdList.Clear();
+        CabecalhoAFD.ErrosValidacao.Clear();
+        IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList.Clear();
+        IdentificacaoEmpresaRepAFD.ErrosValidacao.Clear();
+        MarcacaoPontoAFD.MarcacaoPontoAfdList.Clear();
+        MarcacaoPontoAFD.ErrosValidacao.Clear();
+        TempoRealRepAFD.TempoRealRepAfdList.Clear();
+        TempoRealRepAFD.ErrosValidacao.Clear();
+        EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
+        EmpregadoMtRepAFD.ErrosValidacao.Clear();
+        EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
+        EventosSensiveisRepAFD.ErrosValidacao.Clear();
+        TrailerAFD.TrailerAfdList.Clear();
+        TrailerAFD.ErrosValidacao.Clear();
 
         while ((linha = sr.ReadLine()) != null)
         {
@@ -52,37 +52,37 @@ public class LerArquivoAFD
             }
             catch
             {
-                Trailer1510.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
+                TrailerAFD.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
             }
 
 
             switch (itemLinha)
             {
                 case "1":
-                    Cabecalho1510.GetCabecalho(linha, portaria595);
+                    CabecalhoAFD.GetCabecalho(linha, portaria595);
                     break;
                 case "2":
                     countIdentEmpresa++;
-                    IdentificacaoEmpresaRep1510.GetIdentificadorEmpresa(linha, portaria595);
+                    IdentificacaoEmpresaRepAFD.GetIdentificadorEmpresa(linha, portaria595);
                     break;
                 case "3":
                     countMarcacaoPonto++;
-                    MarcacaoPonto1510.GetMarcacaoPonto(linha, portaria595);
+                    MarcacaoPontoAFD.GetMarcacaoPonto(linha, portaria595);
                     break;
                 case "4":
                     countTempoReal++;
-                    TempoRealRep1510.GetTempoReal(linha, portaria595);
+                    TempoRealRepAFD.GetTempoReal(linha, portaria595);
                     break;
                 case "5":
                     countEmpregadoMt++;
-                    EmpregadoMtRep1510.GetEmpregadoMtRep(linha, portaria595);
+                    EmpregadoMtRepAFD.GetEmpregadoMtRep(linha, portaria595);
                     break;
                 case "6":
                     countEventoSensiveis++;
-                    EventosSensiveisRep1510.GetEventosSensiveis(linha, portaria595);
+                    EventosSensiveisRepAFD.GetEventosSensiveis(linha, portaria595);
                     break;
                 case "9":
-                    Trailer1510.GetTrailer(linha, portaria595);
+                    TrailerAFD.GetTrailer(linha, portaria595);
                     break;
                 default:
                     MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -91,15 +91,15 @@ public class LerArquivoAFD
             }
         }
 
-        if (Trailer1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis))
+        if (TrailerAFD.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis))
         {
             MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            IdentificacaoEmpresaRep1510.IdentificacaoEmpresaRep1510List.Clear();
-            MarcacaoPonto1510.MarcacaoPonto1510List.Clear();
-            TempoRealRep1510.TempoRealRep1510List.Clear();
-            EmpregadoMtRep1510.EmpregadoMtRep1510List.Clear();
-            EventosSensiveisRep1510.EventosSensiveisRep1510List.Clear();
+            IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList.Clear();
+            MarcacaoPontoAFD.MarcacaoPontoAfdList.Clear();
+            TempoRealRepAFD.TempoRealRepAfdList.Clear();
+            EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
+            EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
         }
     }
 }

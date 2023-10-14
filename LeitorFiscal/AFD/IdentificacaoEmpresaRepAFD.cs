@@ -1,9 +1,9 @@
 ﻿using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorFiscal.AFD.Portaria_1510;
+namespace LeitorFiscal.AFD;
 
-public class IdentificacaoEmpresaRep1510
+public class IdentificacaoEmpresaRepAFD
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -49,12 +49,12 @@ public class IdentificacaoEmpresaRep1510
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 314 a 317, Tipo: alfanumérico*/
 
-    public static List<IdentificacaoEmpresaRep1510> IdentificacaoEmpresaRep1510List { get; set; } = new();
+    public static List<IdentificacaoEmpresaRepAFD> IdentificacaoEmpresaRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetIdentificadorEmpresa(string linhaArquivo, bool portaria595)
     {
-        IdentificacaoEmpresaRep1510 identificacaoEmpresa;
+        IdentificacaoEmpresaRepAFD identificacaoEmpresa;
         int tamanhoLinha = linhaArquivo.Length;
 
 
@@ -111,7 +111,7 @@ public class IdentificacaoEmpresaRep1510
                 return;
             }
 
-            IdentificacaoEmpresaRep1510List.Add(identificacaoEmpresa);
+            IdentificacaoEmpresaRepAfdList.Add(identificacaoEmpresa);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
@@ -119,7 +119,7 @@ public class IdentificacaoEmpresaRep1510
         }
 
     }
-    private static bool ValidarTipoDados(IdentificacaoEmpresaRep1510 identificacaoEmpresa)
+    private static bool ValidarTipoDados(IdentificacaoEmpresaRepAFD identificacaoEmpresa)
     {
 
         var camposComErro = new List<string>();

@@ -1,9 +1,9 @@
 ﻿using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorFiscal.AFD.Portaria_1510;
+namespace LeitorFiscal.AFD;
 
-public class Trailer1510
+public class TrailerAFD
 {
     [MaxLength(9, ErrorMessage = "O campo Noves deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Noves deve ter um comprimento minimo de '9'")]
@@ -33,12 +33,12 @@ public class Trailer1510
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
     public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 55 a 55, Tipo: numérico, Dado: = 9*/
 
-    public static List<Trailer1510> Trailer1510List { get; set; } = new();
+    public static List<TrailerAFD> TrailerAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetTrailer(string linhaArquivo, bool portaria595)
     {
-        Trailer1510 trailer;
+        TrailerAFD trailer;
         int tamanhoLinha = linhaArquivo.Length;
 
 
@@ -89,7 +89,7 @@ public class Trailer1510
                 return;
             }
 
-            Trailer1510List.Add(trailer);
+            TrailerAfdList.Add(trailer);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
@@ -100,7 +100,7 @@ public class Trailer1510
     public static bool ValidarResgistrosAEJ(int reg02, int reg03, int reg04, int reg05, int reg06)
     {
         int count = 0;
-        foreach (var item in Trailer1510List)
+        foreach (var item in TrailerAfdList)
         {
             if (int.Parse(item.QtdRegTipo2!) != reg02)
             {
@@ -131,7 +131,6 @@ public class Trailer1510
                 }
             }
 
-
             if (count > 0)
             {
                 return true;
@@ -140,7 +139,7 @@ public class Trailer1510
         return false;
     }
 
-    private static bool ValidarTipoDados(Trailer1510 trailer)
+    private static bool ValidarTipoDados(TrailerAFD trailer)
     {
 
         var camposComErro = new List<string>();

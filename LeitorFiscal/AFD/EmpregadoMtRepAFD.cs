@@ -1,9 +1,9 @@
 ﻿using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeitorFiscal.AFD.Portaria_1510;
+namespace LeitorFiscal.AFD;
 
-public class EmpregadoMtRep1510
+public class EmpregadoMtRepAFD
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -45,12 +45,12 @@ public class EmpregadoMtRep1510
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 103 a 106, Tipo: alfanumérico*/
 
-    public static List<EmpregadoMtRep1510> EmpregadoMtRep1510List { get; set; } = new();
+    public static List<EmpregadoMtRepAFD> EmpregadoMtRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetEmpregadoMtRep(string linhaArquivo, bool portaria595)
     {
-        EmpregadoMtRep1510 empregadoMt;
+        EmpregadoMtRepAFD empregadoMt;
         int tamanhoLinha = linhaArquivo.Length;
 
 
@@ -106,7 +106,7 @@ public class EmpregadoMtRep1510
                 return;
             }
 
-            EmpregadoMtRep1510List.Add(empregadoMt);
+            EmpregadoMtRepAfdList.Add(empregadoMt);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
@@ -114,7 +114,7 @@ public class EmpregadoMtRep1510
         }
 
     }
-    private static bool ValidarTipoDados(EmpregadoMtRep1510 empregadoMtRep)
+    private static bool ValidarTipoDados(EmpregadoMtRepAFD empregadoMtRep)
     {
 
         var camposComErro = new List<string>();
