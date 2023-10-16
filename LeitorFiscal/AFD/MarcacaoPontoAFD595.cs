@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
 
-public class MarcacaoPontoAFD
+public class MarcacaoPontoAFD595
 {
+
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
     public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
@@ -29,22 +30,23 @@ public class MarcacaoPontoAFD
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 35 a 38, Tipo: alfanumérico*/
 
-    public static List<MarcacaoPontoAFD> MarcacaoPontoAfdList { get; set; } = new();
+    public static List<MarcacaoPontoAFD595> MarcacaoPontoAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
-
-    public static void GetMarcacaoPonto(string linhaArquivo, bool portaria595)
+    public static string? Portaria { get; set; }
+    #region Funções
+    public static void GetMarcacaoPonto(string linhaArquivo)
     {
-        MarcacaoPontoAFD marcacaoPonto;
+        MarcacaoPontoAFD595 marcacaoPonto;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (portaria595)
+        if (tamanhoLinha != 38)
         {
-            if (tamanhoLinha != 38)
-            {
-                ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '38'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
-
+            ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encotrado {tamanhoLinha}\n");
+            return;
+        }
+        else
+        {
+            Portaria = "Portaria n.º 595, de 05 de dezembro de 2013";
             marcacaoPonto = new()
             {
                 Nsr = linhaArquivo[..9],
@@ -55,26 +57,6 @@ public class MarcacaoPontoAFD
                 Crc16 = linhaArquivo.Substring(34, 4)
             };
         }
-        else
-        {
-            if (tamanhoLinha != 34)
-            {
-                ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '34'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
-
-            marcacaoPonto = new()
-            {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataMarcacao = linhaArquivo.Substring(10, 8),
-                HoraMarcacao = linhaArquivo.Substring(18, 4),
-                Pis = linhaArquivo.Substring(22, 12)
-            };
-        }
-
-
-
         if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
         {
             if (marcacaoPonto.TpRegistro != "3")
@@ -89,9 +71,8 @@ public class MarcacaoPontoAFD
         {
             ErrosValidacao.Add(item + "\n");
         }
-
     }
-    private static bool ValidarTipoDados(MarcacaoPontoAFD marcacaoPonto1510)
+    private static bool ValidarTipoDados(MarcacaoPontoAFD595 marcacaoPonto1510)
     {
 
         var camposComErro = new List<string>();
@@ -131,4 +112,5 @@ public class MarcacaoPontoAFD
             return false;
         }
     }
+    #endregion
 }

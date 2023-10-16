@@ -1,9 +1,14 @@
 ﻿using LeitorFiscal.Model.Util;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LeitorFiscal.AFD;
 
-public class IdentificacaoEmpresaRepAFD
+public class IdentificacaoEmpresaAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -13,101 +18,81 @@ public class IdentificacaoEmpresaRepAFD
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
     public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 2*/
 
-    [MaxLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento máximo de '8'")]
-    [MinLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento minimo de '8'")]
-    public string? DataGravacao { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
-
-    [MaxLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento máximo de '4'")]
-    [MinLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento minimo de '4'")]
-    public string? HoraGravacao { get; set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
+    [MaxLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento máximo de '24'")]
+    [MinLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento minimo de '24'")]
+    public string? DataHoraGravacao { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
 
     [MaxLength(14, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento máximo de '14'")]
     [MinLength(14, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento minimo de '14'")]
-    public string? CpfResponsavel { get; set; } /*Tamanho: 14, Posição: 23 a 36, Tipo: numérico*/
+    public string? CpfResponsavel { get; set; } /*Tamanho: 14, Posição: 35 a 48, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpIdentEmpregador deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpIdentEmpregador deve ter um comprimento minimo de '1'")]
-    public string? TpIdentEmpregador { get; set; } /*Tamanho: 1, Posição: 37 a 37, Tipo: numérico, Dado: = 1-CNPJ ou 2-CPF*/
+    public string? TpIdentEmpregador { get; set; } /*Tamanho: 1, Posição: 49 a 49, Tipo: numérico, Dado: = 1-CNPJ ou 2-CPF*/
 
     [MaxLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento máximo de '14'")]
     [MinLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento minimo de '14'")]
-    public string? CnpjCpf { get; set; } /*Tamanho: 14, Posição: 38 a 51, Tipo: numérico*/
+    public string? CnpjCpf { get; set; } /*Tamanho: 14, Posição: 50 a 63, Tipo: numérico*/
 
-    [MaxLength(12, ErrorMessage = "O campo Cei deve ter um comprimento máximo de '12'")]
-    [MinLength(12, ErrorMessage = "O campo Cei deve ter um comprimento minimo de '12'")]
-    public string? Cei { get; set; } /*Tamanho: 12, Posição: 52 a 63, Tipo: numérico, Não Obrigatório*/
+    [MaxLength(14, ErrorMessage = "O campo Cei deve ter um comprimento máximo de '14'")]
+    [MinLength(14, ErrorMessage = "O campo Cei deve ter um comprimento minimo de '14'")]
+    public string? Cno { get; set; } /*Tamanho: 14, Posição: 64 a 77, Tipo: numérico, Não Obrigatório*/
 
     [MaxLength(150, ErrorMessage = "O campo RazaoSocial deve ter um comprimento máximo de '150'")]
     [MinLength(150, ErrorMessage = "O campo RazaoSocial deve ter um comprimento minimo de '150'")]
-    public string? RazaoSocial { get; set; } /*Tamanho: 150, Posição: 64 a 213, Tipo: alfanumérico*/
+    public string? RazaoSocial { get; set; } /*Tamanho: 150, Posição: 78 a 227, Tipo: alfanumérico*/
 
     [MaxLength(100, ErrorMessage = "O campo LocalPrestServico deve ter um comprimento máximo de '100'")]
     [MinLength(100, ErrorMessage = "O campo LocalPrestServico deve ter um comprimento minimo de '100'")]
-    public string? LocalPrestServico { get; set; } /*Tamanho: 100, Posição: 214 a 313, Tipo: alfanumérico*/
+    public string? LocalPrestServico { get; set; } /*Tamanho: 100, Posição: 228 a 327, Tipo: alfanumérico*/
 
     [MaxLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
-    public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 314 a 317, Tipo: alfanumérico*/
+    public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 328 a 331, Tipo: alfanumérico*/
 
-    public static List<IdentificacaoEmpresaRepAFD> IdentificacaoEmpresaRepAfdList { get; set; } = new();
+    public static List<IdentificacaoEmpresaAFD671> IdentificacaoEmpresaRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
-
-    public static void GetIdentificadorEmpresa(string linhaArquivo, bool portaria595)
+    public static string? Portaria { get; set; }
+    #region Funções
+    public static void GetIdentificadorEmpresa(string linhaArquivo)
     {
-        IdentificacaoEmpresaRepAFD identificacaoEmpresa;
+        IdentificacaoEmpresaAFD671 identificacaoEmpresa;
         int tamanhoLinha = linhaArquivo.Length;
 
-
-        if (portaria595)
+        if (tamanhoLinha != 331)
         {
-            if (tamanhoLinha != 317)
-            {
-                ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '317'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
-
-            identificacaoEmpresa = new()
-            {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataGravacao = linhaArquivo.Substring(10, 8),
-                HoraGravacao = linhaArquivo.Substring(18, 4),
-                CpfResponsavel = linhaArquivo.Substring(22, 14),
-                TpIdentEmpregador = linhaArquivo.Substring(36, 1),
-                CnpjCpf = linhaArquivo.Substring(37, 14),
-                Cei = linhaArquivo.Substring(51, 12),
-                RazaoSocial = linhaArquivo.Substring(63, 150),
-                LocalPrestServico = linhaArquivo.Substring(213, 100),
-                Crc16 = linhaArquivo.Substring(313, 4)
-            };
+            ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
+            return;
         }
         else
         {
-            if (tamanhoLinha != 299)
-            {
-                ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '299'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
+            Portaria = "Portaria Nº 671, de 8 de novembro de 2021";
 
             identificacaoEmpresa = new()
             {
                 Nsr = linhaArquivo[..9],
                 TpRegistro = linhaArquivo.Substring(9, 1),
-                DataGravacao = linhaArquivo.Substring(10, 8),
-                HoraGravacao = linhaArquivo.Substring(18, 4),
-                TpIdentEmpregador = linhaArquivo.Substring(22, 1),
-                CnpjCpf = linhaArquivo.Substring(23, 14),
-                Cei = linhaArquivo.Substring(37, 12),
-                RazaoSocial = linhaArquivo.Substring(49, 150),
-                LocalPrestServico = linhaArquivo.Substring(199, 100),
+                DataHoraGravacao = linhaArquivo.Substring(10, 24),
+                CpfResponsavel = linhaArquivo.Substring(34, 14),
+                TpIdentEmpregador = linhaArquivo.Substring(48, 1),
+                CnpjCpf = linhaArquivo.Substring(49, 14),
+                Cno = linhaArquivo.Substring(63, 14),
+                RazaoSocial = linhaArquivo.Substring(77, 150),
+                LocalPrestServico = linhaArquivo.Substring(227, 100),
+                Crc16 = linhaArquivo.Substring(327, 4)
             };
         }
-
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoEmpresa) && ValidarTipoDados(identificacaoEmpresa))
         {
             if (identificacaoEmpresa.TpRegistro != "2")
             {
                 ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({identificacaoEmpresa.TpRegistro}) inválido, deve ter o valor '2'.\n");
+                return;
+            }
+
+            if (identificacaoEmpresa.TpIdentEmpregador != "2" && identificacaoEmpresa.TpIdentEmpregador != "1")
+            {
+                ErrosValidacao.Add($"O campo 'TpIdentEmpregador' esta com o valor ({identificacaoEmpresa.TpIdentEmpregador}) inválido, deve ter o valor '1' ou '2'.\n");
                 return;
             }
 
@@ -119,9 +104,8 @@ public class IdentificacaoEmpresaRepAFD
         }
 
     }
-    private static bool ValidarTipoDados(IdentificacaoEmpresaRepAFD identificacaoEmpresa)
+    private static bool ValidarTipoDados(IdentificacaoEmpresaAFD671 identificacaoEmpresa)
     {
-
         var camposComErro = new List<string>();
 
         if (!int.TryParse(identificacaoEmpresa.Nsr, out _))
@@ -134,16 +118,11 @@ public class IdentificacaoEmpresaRepAFD
             camposComErro.Add("TpRegistro");
         }
 
-        if (!double.TryParse(identificacaoEmpresa.DataGravacao, out _))
+        if (!DateTime.TryParse(identificacaoEmpresa.DataHoraGravacao, out _))
         {
-            camposComErro.Add("DataGravacao");
+            camposComErro.Add("DataHoraGravacao");
         }
-
-        if (!double.TryParse(identificacaoEmpresa.HoraGravacao, out _))
-        {
-            camposComErro.Add("HoraGravacao");
-        }
-
+      
         if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.CpfResponsavel))
         {
             if (!double.TryParse(identificacaoEmpresa.CpfResponsavel, out _))
@@ -161,13 +140,12 @@ public class IdentificacaoEmpresaRepAFD
             camposComErro.Add("CnpjCpf");
         }
 
-        if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.Cei))
+        if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.Cno))
         {
-            if (!double.TryParse(identificacaoEmpresa.Cei, out _))
+            if (!double.TryParse(identificacaoEmpresa.Cno, out _))
             {
-                camposComErro.Add("Cei");
+                camposComErro.Add("Cno");
             }
-
         }
 
         if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.Crc16))
@@ -177,7 +155,6 @@ public class IdentificacaoEmpresaRepAFD
                 camposComErro.Add("Crc16");
             }
         }
-
 
         if (camposComErro.Count == 0)
         {
@@ -189,5 +166,5 @@ public class IdentificacaoEmpresaRepAFD
             return false;
         }
     }
-
+    #endregion
 }

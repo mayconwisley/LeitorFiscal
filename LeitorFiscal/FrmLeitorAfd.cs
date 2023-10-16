@@ -14,34 +14,117 @@ public partial class FrmLeitorAfd : Form
 
     private void ListarCabecalho1510()
     {
-        RTxtLogCabecalho1510.Clear();
-        DgvListCabecalho1510.DataSource = null;
-        DgvListCabecalho1510.DataSource = CabecalhoAFD.CabecalhoAfdList;
+        RTxtLogCabecalho.Clear();
+        DgvListCabecalho.DataSource = null;
 
-        foreach (var item in CabecalhoAFD.ErrosValidacao)
+        if (CabecalhoAFD1510.Portaria!.Contains("1510"))
         {
-            RTxtLogCabecalho1510.AppendText(item);
+            DgvListCabecalho.DataSource = CabecalhoAFD1510.CabecalhoAfdList;
+            if (DgvListCabecalho.RowCount > 0)
+            {
+                RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD1510.Portaria}");
+            }
+        }
+
+        if (CabecalhoAFD595.Portaria!.Contains("595"))
+        {
+            DgvListCabecalho.DataSource = CabecalhoAFD595.CabecalhoAfdList;
+            if (DgvListCabecalho.RowCount > 0)
+            {
+                RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD595.Portaria}");
+            }
+        }
+
+        if (CabecalhoAFD671.Portaria!.Contains("671"))
+        {
+            DgvListCabecalho.DataSource = CabecalhoAFD671.CabecalhoAfdList;
+            if (DgvListCabecalho.RowCount > 0)
+            {
+                RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD671.Portaria}");
+            }
+        }
+
+        foreach (var item in CabecalhoAFD1510.ErrosValidacao)
+        {
+            RTxtLogCabecalho.AppendText(item);
         }
     }
 
     private void ListarIdentificacaoEmpresa1510()
     {
-        RTxtLogIdentificacaoEmpresa1510.Clear();
-        DgvListIdentificacaoEmpresa1510.DataSource = null;
-        DgvListIdentificacaoEmpresa1510.DataSource = IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList;
-        foreach (var item in IdentificacaoEmpresaRepAFD.ErrosValidacao)
+        RTxtLogIdentificacaoEmpresa.Clear();
+        DgvListIdentificacaoEmpresa.DataSource = null;
+
+        if (IdentificacaoEmpresaAFD1510.Portaria!.Contains("1510"))
         {
-            RTxtLogIdentificacaoEmpresa1510.AppendText(item);
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList;
+            if (DgvListIdentificacaoEmpresa.RowCount > 0)
+            {
+                RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD1510.Portaria}");
+            }
+        }
+
+        if (IdentificacaoEmpresaAFD595.Portaria!.Contains("595"))
+        {
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD595.IdentificacaoEmpresaRepAfdList;
+            if (DgvListIdentificacaoEmpresa.RowCount > 0)
+            {
+                RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD595.Portaria}");
+            }
+        }
+
+        if (IdentificacaoEmpresaAFD671.Portaria!.Contains("671"))
+        {
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD671.IdentificacaoEmpresaRepAfdList;
+            if (DgvListIdentificacaoEmpresa.RowCount > 0)
+            {
+                RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD671.Portaria}");
+            }
+        }
+
+        foreach (var item in IdentificacaoEmpresaAFD1510.ErrosValidacao)
+        {
+            RTxtLogIdentificacaoEmpresa.AppendText(item);
         }
     }
     private void ListarMarcacaoPonto1510()
     {
-        RTxtLogMarcacaoPonto1510.Clear();
-        DgvListMarcacaoPonto1510.DataSource = null;
-        DgvListMarcacaoPonto1510.DataSource = MarcacaoPontoAFD.MarcacaoPontoAfdList;
-        foreach (var item in MarcacaoPontoAFD.ErrosValidacao)
+        RTxtLogMarcacaoPonto.Clear();
+        DgvListMarcacaoPonto.DataSource = null;
+
+        if (MarcacaoPontoAFD1510.Portaria!.Contains("1510"))
         {
-            RTxtLogMarcacaoPonto1510.AppendText(item);
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD1510.MarcacaoPontoAfdList;
+            if (DgvListMarcacaoPonto.RowCount > 0)
+            {
+                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
+            }
+        }
+
+        if (MarcacaoPontoAFD595.Portaria!.Contains("595"))
+        {
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD595.MarcacaoPontoAfdList;
+            if (DgvListMarcacaoPonto.RowCount > 0)
+            {
+                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
+            }
+        }
+
+        if (MarcacaoPontoAFD671.Portaria!.Contains("671"))
+        {
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD671.MarcacaoPontoAfdList;
+            if (DgvListMarcacaoPonto.RowCount > 0)
+            {
+                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
+            }
+        }
+
+
+        DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD1510.MarcacaoPontoAfdList;
+
+        foreach (var item in MarcacaoPontoAFD1510.ErrosValidacao)
+        {
+            RTxtLogMarcacaoPonto.AppendText(item);
         }
     }
     private void ListarRelogioTempoReal1510()

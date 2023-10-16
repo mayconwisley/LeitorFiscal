@@ -5,6 +5,66 @@ namespace LeitorFiscal.LeituraArquivo;
 
 public class LerArquivoAFD
 {
+
+    #region Funções para Limpar as classes
+    private static void LimparCabecalho()
+    {
+        CabecalhoAFD1510.CabecalhoAfdList.Clear();
+        CabecalhoAFD1510.ErrosValidacao.Clear();
+        CabecalhoAFD1510.Portaria = "";
+        CabecalhoAFD595.CabecalhoAfdList.Clear();
+        CabecalhoAFD595.ErrosValidacao.Clear();
+        CabecalhoAFD595.Portaria = "";
+        CabecalhoAFD671.CabecalhoAfdList.Clear();
+        CabecalhoAFD671.ErrosValidacao.Clear();
+        CabecalhoAFD671.Portaria = "";
+    }
+    private static void LimparIdentificacaoEmpresa()
+    {
+        IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Clear();
+        IdentificacaoEmpresaAFD1510.ErrosValidacao.Clear();
+        IdentificacaoEmpresaAFD1510.Portaria = "";
+        IdentificacaoEmpresaAFD595.IdentificacaoEmpresaRepAfdList.Clear();
+        IdentificacaoEmpresaAFD595.ErrosValidacao.Clear();
+        IdentificacaoEmpresaAFD595.Portaria = "";
+        IdentificacaoEmpresaAFD671.IdentificacaoEmpresaRepAfdList.Clear();
+        IdentificacaoEmpresaAFD671.ErrosValidacao.Clear();
+        IdentificacaoEmpresaAFD671.Portaria = "";
+    }
+    private static void LimparMarcacaoPonto()
+    {
+        MarcacaoPontoAFD1510.MarcacaoPontoAfdList.Clear();
+        MarcacaoPontoAFD1510.ErrosValidacao.Clear();
+        MarcacaoPontoAFD1510.Portaria = "";
+        MarcacaoPontoAFD595.MarcacaoPontoAfdList.Clear();
+        MarcacaoPontoAFD595.ErrosValidacao.Clear();
+        MarcacaoPontoAFD595.Portaria = "";
+        MarcacaoPontoAFD671.MarcacaoPontoAfdList.Clear();
+        MarcacaoPontoAFD671.ErrosValidacao.Clear();
+        MarcacaoPontoAFD671.Portaria = "";
+    }
+    private static void LimparTempoReal()
+    {
+        TempoRealRepAFD.TempoRealRepAfdList.Clear();
+        TempoRealRepAFD.ErrosValidacao.Clear();
+    }
+    private static void LimparEmpregadoMt()
+    {
+        EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
+        EmpregadoMtRepAFD.ErrosValidacao.Clear();
+    }
+    private static void LimparEventosSensiveis()
+    {
+        EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
+        EventosSensiveisRepAFD.ErrosValidacao.Clear();
+    }
+    private static void LimparTrailer()
+    {
+
+        TrailerAFD.TrailerAfdList.Clear();
+        TrailerAFD.ErrosValidacao.Clear();
+    }
+    #endregion
     public static void Arquivo(string caminho, bool portaria595)
     {
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
@@ -12,21 +72,13 @@ public class LerArquivoAFD
 
         int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
         int countEventoSensiveis = 0;
-
-        CabecalhoAFD.CabecalhoAfdList.Clear();
-        CabecalhoAFD.ErrosValidacao.Clear();
-        IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList.Clear();
-        IdentificacaoEmpresaRepAFD.ErrosValidacao.Clear();
-        MarcacaoPontoAFD.MarcacaoPontoAfdList.Clear();
-        MarcacaoPontoAFD.ErrosValidacao.Clear();
-        TempoRealRepAFD.TempoRealRepAfdList.Clear();
-        TempoRealRepAFD.ErrosValidacao.Clear();
-        EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
-        EmpregadoMtRepAFD.ErrosValidacao.Clear();
-        EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
-        EventosSensiveisRepAFD.ErrosValidacao.Clear();
-        TrailerAFD.TrailerAfdList.Clear();
-        TrailerAFD.ErrosValidacao.Clear();
+        LimparCabecalho();
+        LimparIdentificacaoEmpresa();
+        LimparMarcacaoPonto();
+        LimparTempoReal();
+        LimparEmpregadoMt();
+        LimparEventosSensiveis();
+        LimparTrailer();
 
         while ((linha = sr.ReadLine()) != null)
         {
@@ -55,19 +107,43 @@ public class LerArquivoAFD
                 TrailerAFD.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
             }
 
-
             switch (itemLinha)
             {
                 case "1":
-                    CabecalhoAFD.GetCabecalho(linha, portaria595);
+
+                    if (linha.Length == 232)
+                    {
+                        CabecalhoAFD1510.GetCabecalho(linha);
+                    }
+                    if (linha.Length == 236)
+                    {
+                        CabecalhoAFD595.GetCabecalho(linha);
+                    }
+                    if (linha.Length == 302)
+                    {
+                        CabecalhoAFD671.GetCabecalho(linha);
+                    }
+
                     break;
                 case "2":
                     countIdentEmpresa++;
-                    IdentificacaoEmpresaRepAFD.GetIdentificadorEmpresa(linha, portaria595);
+                    if (linha.Length == 299)
+                    {
+                        IdentificacaoEmpresaAFD1510.GetIdentificadorEmpresa(linha);
+                    }
+                    if (linha.Length == 317)
+                    {
+                        IdentificacaoEmpresaAFD595.GetIdentificadorEmpresa(linha);
+                    }
+                    if (linha.Length == 331)
+                    {
+                        IdentificacaoEmpresaAFD671.GetIdentificadorEmpresa(linha);
+                    }
+
                     break;
                 case "3":
                     countMarcacaoPonto++;
-                    MarcacaoPontoAFD.GetMarcacaoPonto(linha, portaria595);
+                    MarcacaoPontoAFD1510.GetMarcacaoPonto(linha, portaria595);
                     break;
                 case "4":
                     countTempoReal++;
@@ -95,8 +171,8 @@ public class LerArquivoAFD
         {
             MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            IdentificacaoEmpresaRepAFD.IdentificacaoEmpresaRepAfdList.Clear();
-            MarcacaoPontoAFD.MarcacaoPontoAfdList.Clear();
+            IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Clear();
+            MarcacaoPontoAFD1510.MarcacaoPontoAfdList.Clear();
             TempoRealRepAFD.TempoRealRepAfdList.Clear();
             EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
             EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
