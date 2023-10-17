@@ -5,33 +5,34 @@ namespace LeitorFiscal.AEJ;
 
 public class CabecalhoAEJ
 {
+    /*Sepador das informçãoes: |*/
     [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres com um comprimento máximo de '2'")]
-    public string? TipoReg { get; private set; }
+    public string? TipoReg { get; private set; }/*Tamanho: 2, Tipo: numérico, Dado: 01*/
     [MaxLength(1, ErrorMessage = "O campo TpIdtEmpregador deve ser um tipo de cadeia de caracteres com um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpIdtEmpregador deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
-    public string? TpIdtEmpregador { get; private set; }
+    public string? TpIdtEmpregador { get; private set; } /*Tamanho: 1, Tipo: numérico, Dado: 1 - CNPJ ou 2 - CPF */
     [MaxLength(14, ErrorMessage = "O campo IdtEmpregador deve ser um tipo de cadeia de caracteres com um comprimento máximo de '14'")]
     [MinLength(11, ErrorMessage = "O campo IdtEmpregador deve ser um tipo de cadeia de caracteres com um comprimento minimo de '11'")]
-    public string? IdtEmpregador { get; private set; }
+    public string? IdtEmpregador { get; private set; }/*Tamanho: 11 ou 14, Tipo: numérico*/
     [MaxLength(14, ErrorMessage = "O campo Caepf deve ser um tipo de cadeia de caracteres com um comprimento máximo de '14'")]
-    public string? Caepf { get; private set; }
+    public string? Caepf { get; private set; } /*Tamanho: 14, Tipo: numérico, Não Obrigatório*/
     [MaxLength(12, ErrorMessage = "O campo Cno deve ser um tipo de cadeia de caracteres com um comprimento máximo de '12'")]
-    public string? Cno { get; private set; }
+    public string? Cno { get; private set; } /*Tamanho: 12, Tipo: nmérico, Não Obrigatório*/
     [MaxLength(150, ErrorMessage = "O campo RazaoOuNome deve ser um tipo de cadeia de caracteres com um comprimento máximo de '150'")]
     [MinLength(1, ErrorMessage = "O campo RazaoOuNome deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
-    public string? RazaoOuNome { get; private set; }
+    public string? RazaoOuNome { get; private set; }/*Tamanho: 150, Tipo: alfanumérico*/
     [MaxLength(10, ErrorMessage = "O campo DataInicialAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '10'")]
     [MinLength(10, ErrorMessage = "O campo DataInicialAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '10'")]
-    public string? DataInicialAej { get; private set; }
+    public string? DataInicialAej { get; private set; }/*Tamanho: 10, Tipo: Data, Formato: AAAA-MM-dd*/
     [MaxLength(10, ErrorMessage = "O campo DataFinalAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '10'")]
     [MinLength(10, ErrorMessage = "O campo DataFinalAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '10'")]
-    public string? DataFinalAej { get; private set; }
+    public string? DataFinalAej { get; private set; }/*Tamanho: 10, Tipo: Data, Formato: AAAA-MM-dd*/
     [MaxLength(24, ErrorMessage = "O campo DataHoraGerAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataHoraGerAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '24'")]
-    public string? DataHoraGerAej { get; private set; }
+    public string? DataHoraGerAej { get; private set; } /*Tamanho: 24, Tipo: DataHora, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
     [MaxLength(3, ErrorMessage = "O campo VersaoAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '3'")]
     [MinLength(3, ErrorMessage = "O campo VersaoAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '3'")]
-    public string? VersaoAej { get; private set; }
+    public string? VersaoAej { get; private set; } /*Tamanho: 3, Tipo: alfanumérico, Dado: 003*/
 
     public static List<CabecalhoAEJ> CabecalhoAEJList { get; private set; } = new();
 

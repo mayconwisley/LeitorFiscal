@@ -97,7 +97,7 @@ public class LerArquivoAFD
     #endregion
     public static void Arquivo(string caminho)
     {
-        using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
+        using StreamReader sr = new(caminho, Encoding.UTF8, true, 1024 * 1024 * 1);
         string? linha;
         int trailer = 0;
 

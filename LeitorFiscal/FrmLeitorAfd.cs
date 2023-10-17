@@ -118,6 +118,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogMarcacaoPonto.AppendText(item);
             }
+            MenuConverter.Enabled = true;
         }
 
         if (MarcacaoPontoAFD595.Portaria!.Contains("595"))
@@ -131,6 +132,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogMarcacaoPonto.AppendText(item);
             }
+            MenuConverter.Enabled = true;
         }
 
         if (MarcacaoPontoAFD671.Portaria!.Contains("671"))
@@ -144,6 +146,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogMarcacaoPonto.AppendText(item);
             }
+            MenuConverter.Enabled = false;
         }
     }
     private void ListarRelogioTempoReal()
@@ -205,6 +208,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogEmpregadoMt.AppendText(item);
             }
+            MenuConverter.Enabled = true;
         }
 
         if (EmpregadoMtAFD595.Portaria!.Contains("595"))
@@ -218,6 +222,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogEmpregadoMt.AppendText(item);
             }
+            MenuConverter.Enabled = true;
         }
 
         if (EmpregadoMtAFD671.Portaria!.Contains("671"))
@@ -231,6 +236,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogEmpregadoMt.AppendText(item);
             }
+            MenuConverter.Enabled = false;
         }
     }
     private void ListarEventoSensiveis()
@@ -298,6 +304,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogTrailer.AppendText(item);
             }
+
         }
 
         if (TrailerAFD595.Portaria!.Contains("595"))
@@ -311,6 +318,7 @@ public partial class FrmLeitorAfd : Form
             {
                 RTxtLogTrailer.AppendText(item);
             }
+
         }
 
         if (TrailerAFD671.Portaria!.Contains("671"))
@@ -366,8 +374,6 @@ public partial class FrmLeitorAfd : Form
             ListarEventoSensiveis();
             ListarMarcacaoPontoRepP();
             ListarTrailer();
-
-            MenuConverter.Enabled = true;
         }
         catch (Exception ex)
         {

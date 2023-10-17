@@ -190,7 +190,7 @@ public class CabecalhoAFD671
             camposComErro.Add("NumeroFabRep");
         }
 
-        if (!double.TryParse(cabecalhoAFD.DataInicialRegistro, out _))
+        if (!DateTime.TryParse(cabecalhoAFD.DataInicialRegistro, out _))
         {
             camposComErro.Add("DataInicialRegistro");
         }
@@ -210,7 +210,7 @@ public class CabecalhoAFD671
             camposComErro.Add("DataHoraGeracao671");
         }
 
-        if (!double.TryParse(cabecalhoAFD.DataFinalRegistro, out _))
+        if (!DateTime.TryParse(cabecalhoAFD.DataFinalRegistro, out _))
         {
             camposComErro.Add("DataFinalRegistro");
         }

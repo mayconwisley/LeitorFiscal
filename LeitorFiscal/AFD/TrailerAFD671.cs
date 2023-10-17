@@ -45,7 +45,7 @@ public class TrailerAFD671
     {
         TrailerAFD671 trailer;
         int tamanhoLinha = linhaArquivo.Length;
-        if (tamanhoLinha != 55)
+        if (tamanhoLinha != 64)
         {
             ErrosValidacao.Add($"O registro de '9 - Trailer' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;
