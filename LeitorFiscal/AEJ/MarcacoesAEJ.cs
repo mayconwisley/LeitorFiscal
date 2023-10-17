@@ -5,28 +5,28 @@ namespace LeitorFiscal.AEJ;
 
 public class MarcacoesAEJ
 {
-    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres com um comprimento máximo de '2'")]
     public string? TipoReg { get; private set; }
-    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
-    [MinLength(1, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
+    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '9'")]
+    [MinLength(1, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? IdtVinculoAej { get; private set; }
-    [MaxLength(24, ErrorMessage = "O campo DataHoraMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '24'")]
-    [MinLength(24, ErrorMessage = "O campo DataHoraMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '24'")]
+    [MaxLength(24, ErrorMessage = "O campo DataHoraMarc deve ser um tipo de cadeia de caracteres com um comprimento máximo de '24'")]
+    [MinLength(24, ErrorMessage = "O campo DataHoraMarc deve ser um tipo de cadeia de caracteres com um comprimento minimo de '24'")]
     public string? DataHoraMarc { get; private set; }
-    [MaxLength(9, ErrorMessage = "O campo IdRepAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
+    [MaxLength(9, ErrorMessage = "O campo IdRepAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '9'")]
     public string? IdRepAej { get; private set; }
-    [MaxLength(1, ErrorMessage = "O campo TpMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
-    [MinLength(1, ErrorMessage = "O campo TpMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
+    [MaxLength(1, ErrorMessage = "O campo TpMarc deve ser um tipo de cadeia de caracteres com um comprimento máximo de '1'")]
+    [MinLength(1, ErrorMessage = "O campo TpMarc deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? TpMarc { get; private set; }
-    [MaxLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '3'")]
-    [MinLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '3'")]
+    [MaxLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres com um comprimento máximo de '3'")]
+    [MinLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres com um comprimento minimo de '3'")]
     public string? SeqEntSaida { get; private set; }
-    [MaxLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '1'")]
-    [MinLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
+    [MaxLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres com um comprimento máximo de '1'")]
+    [MinLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? FonteMarc { get; private set; }
-    [MaxLength(30, ErrorMessage = "O campo CodHorContratual deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '30'")]
+    [MaxLength(30, ErrorMessage = "O campo CodHorContratual deve ser um tipo de cadeia de caracteres com um comprimento máximo de '30'")]
     public string? CodHorContratual { get; private set; }
-    [MaxLength(150, ErrorMessage = "O campo Motivo deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '150'")]
+    [MaxLength(150, ErrorMessage = "O campo Motivo deve ser um tipo de cadeia de caracteres com um comprimento máximo de '150'")]
     public string? Motivo { get; private set; }
 
     public static List<MarcacoesAEJ> MarcacoesAEJList { get; private set; } = new();

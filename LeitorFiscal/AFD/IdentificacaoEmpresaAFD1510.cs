@@ -7,44 +7,44 @@ public class IdentificacaoEmpresaAFD1510
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 2*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 2*/
 
     [MaxLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento máximo de '8'")]
     [MinLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento minimo de '8'")]
-    public string? DataGravacao { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
+    public string? DataGravacao { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
 
     [MaxLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento minimo de '4'")]
-    public string? HoraGravacao { get; set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
+    public string? HoraGravacao { get; private set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
 
     [MaxLength(1, ErrorMessage = "O campo TpIdentEmpregador deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpIdentEmpregador deve ter um comprimento minimo de '1'")]
-    public string? TpIdentEmpregador { get; set; } /*Tamanho: 1, Posição: 23 a 23, Tipo: numérico, Dado: = 1-CNPJ ou 2-CPF*/
+    public string? TpIdentEmpregador { get; private set; } /*Tamanho: 1, Posição: 23 a 23, Tipo: numérico, Dado: = 1-CNPJ ou 2-CPF*/
 
     [MaxLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento máximo de '14'")]
     [MinLength(14, ErrorMessage = "O campo CnpjCpf deve ter um comprimento minimo de '14'")]
-    public string? CnpjCpf { get; set; } /*Tamanho: 14, Posição: 24 a 37, Tipo: numérico*/
+    public string? CnpjCpf { get; private set; } /*Tamanho: 14, Posição: 24 a 37, Tipo: numérico*/
 
     [MaxLength(12, ErrorMessage = "O campo Cei deve ter um comprimento máximo de '12'")]
     [MinLength(12, ErrorMessage = "O campo Cei deve ter um comprimento minimo de '12'")]
-    public string? Cei { get; set; } /*Tamanho: 12, Posição: 38 a 49, Tipo: numérico, Não Obrigatório*/
+    public string? Cei { get; private set; } /*Tamanho: 12, Posição: 38 a 49, Tipo: numérico, Não Obrigatório*/
 
     [MaxLength(150, ErrorMessage = "O campo RazaoSocial deve ter um comprimento máximo de '150'")]
     [MinLength(150, ErrorMessage = "O campo RazaoSocial deve ter um comprimento minimo de '150'")]
-    public string? RazaoSocial { get; set; } /*Tamanho: 150, Posição: 50 a 199, Tipo: alfanumérico*/
+    public string? RazaoSocial { get; private set; } /*Tamanho: 150, Posição: 50 a 199, Tipo: alfanumérico*/
 
     [MaxLength(100, ErrorMessage = "O campo LocalPrestServico deve ter um comprimento máximo de '100'")]
     [MinLength(100, ErrorMessage = "O campo LocalPrestServico deve ter um comprimento minimo de '100'")]
-    public string? LocalPrestServico { get; set; } /*Tamanho: 100, Posição: 200 a 299, Tipo: alfanumérico*/
+    public string? LocalPrestServico { get; private set; } /*Tamanho: 100, Posição: 200 a 299, Tipo: alfanumérico*/
 
-    public static List<IdentificacaoEmpresaAFD1510> IdentificacaoEmpresaRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<IdentificacaoEmpresaAFD1510> IdentificacaoEmpresaRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
-    
+
     #region Funções
     public static void GetIdentificadorEmpresa(string linhaArquivo)
     {

@@ -8,38 +8,38 @@ public class TempoRealAFD595
 
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 4*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 4*/
 
     [MaxLength(8, ErrorMessage = "O campo DataAntesAjuste deve ter um comprimento máximo de '8'")]
     [MinLength(8, ErrorMessage = "O campo DataAntesAjuste deve ter um comprimento minimo de '8'")]
-    public string? DataAntesAjuste { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
+    public string? DataAntesAjuste { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
 
     [MaxLength(4, ErrorMessage = "O campo HoraAntesAjuste deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo HoraAntesAjuste deve ter um comprimento minimo de '4'")]
-    public string? HoraAntesAjuste { get; set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
+    public string? HoraAntesAjuste { get; private set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
 
     [MaxLength(8, ErrorMessage = "O campo DataAjustada deve ter um comprimento máximo de '8'")]
     [MinLength(8, ErrorMessage = "O campo DataAjustada deve ter um comprimento minimo de '8'")]
-    public string? DataAjustada { get; set; } /*Tamanho: 8, Posição: 23 a 30, Tipo: numérico, Formato: ddmmaaaa*/
+    public string? DataAjustada { get; private set; } /*Tamanho: 8, Posição: 23 a 30, Tipo: numérico, Formato: ddmmaaaa*/
 
     [MaxLength(4, ErrorMessage = "O campo HoraAjustada deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo HoraAjustada deve ter um comprimento minimo de '4'")]
-    public string? HoraAjustada { get; set; } /*Tamanho: 4, Posição: 31 a 34, Tipo: numérico, Formato: hhmm*/
+    public string? HoraAjustada { get; private set; } /*Tamanho: 4, Posição: 31 a 34, Tipo: numérico, Formato: hhmm*/
 
     [MaxLength(11, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento máximo de '11'")]
     [MinLength(11, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento minimo de '11'")]
-    public string? CpfResponsavel { get; set; } /*Tamanho: 11, Posição: 35 a 45, Tipo: numérico*/
+    public string? CpfResponsavel { get; private set; } /*Tamanho: 11, Posição: 35 a 45, Tipo: numérico*/
 
     [MaxLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
-    public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 46 a 49, Tipo: alfanumérico*/
+    public string? Crc16 { get; private set; } /*Tamanho: 4, Posição: 46 a 49, Tipo: alfanumérico*/
 
-    public static List<TempoRealAFD595> TempoRealRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<TempoRealAFD595> TempoRealRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetTempoReal(string linhaArquivo)

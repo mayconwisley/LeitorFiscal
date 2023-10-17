@@ -76,7 +76,6 @@ public class LerArquivoAFD
         EventosSensiveisAFD671.ErrosValidacao.Clear();
         EventosSensiveisAFD671.Portaria = "";
     }
-
     private static void LimparMarcacaoPontoRepP()
     {
         MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList.Clear();
@@ -253,29 +252,24 @@ public class LerArquivoAFD
                 case "9":
                     if (linha.Length == 46)
                     {
-                        trailer = linha.Length;
                         TrailerAFD1510.GetTrailer(linha);
                     }
                     if (linha.Length == 55)
                     {
-                        trailer = linha.Length;
                         TrailerAFD595.GetTrailer(linha);
                     }
                     if (linha.Length == 64)
                     {
-                        trailer = linha.Length;
                         TrailerAFD671.GetTrailer(linha);
                     }
+                    trailer = linha.Length;
                     break;
                 default:
                     MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     sr.ReadToEnd();
                     break;
             }
-
         }
-
-
         if (trailer == 46)
         {
             if (TrailerAFD1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt))
@@ -316,9 +310,7 @@ public class LerArquivoAFD
                 LimparEmpregadoMt();
                 LimparEventosSensiveis();
                 LimparMarcacaoPontoRepP();
-
             }
         }
-
     }
 }

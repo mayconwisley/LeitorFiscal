@@ -7,42 +7,42 @@ public class EmpregadoMtAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
 
     [MaxLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento minimo de '24'")]
-    public string? DataHoraGravacao { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
+    public string? DataHoraGravacao { get; private set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
 
     [MaxLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento minimo de '1'")]
-    public string? TpOperacao { get; set; } /*Tamanho: 1, Posição? 35 a 35, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
+    public string? TpOperacao { get; private set; } /*Tamanho: 1, Posição? 35 a 35, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
 
     [MaxLength(12, ErrorMessage = "O campo Pis deve ter um comprimento máximo de '12'")]
     [MinLength(12, ErrorMessage = "O campo Pis deve ter um comprimento minimo de '12'")]
-    public string? Cpf { get; set; } /*Tamanho: 12, Posição: 36 a 47, Tipo: numérico*/
+    public string? Cpf { get; private set; } /*Tamanho: 12, Posição: 36 a 47, Tipo: numérico*/
 
     [MaxLength(52, ErrorMessage = "O campo Nome deve ter um comprimento máximo de '52'")]
     [MinLength(52, ErrorMessage = "O campo Nome deve ter um comprimento minimo de '52'")]
-    public string? Nome { get; set; } /*Tamanho: 52, Posição: 48 a 99, Tipo: alfanumérico*/
+    public string? Nome { get; private set; } /*Tamanho: 52, Posição: 48 a 99, Tipo: alfanumérico*/
 
     [MaxLength(4, ErrorMessage = "O campo DadosIdentificacao deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo DadosIdentificacao deve ter um comprimento minimo de '4'")]
-    public string? DadosIdentificacao { get; set; }/*Tamanho: 4, Posição: 100 a 103, Tipo: alfanumérico*/
+    public string? DadosIdentificacao { get; private set; }/*Tamanho: 4, Posição: 100 a 103, Tipo: alfanumérico*/
 
     [MaxLength(11, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento máximo de '11'")]
     [MinLength(11, ErrorMessage = "O campo CpfResponsavel deve ter um comprimento minimo de '11'")]
-    public string? CpfResponsavel { get; set; } /*Tamanho: 14, Posição: 104 a 114, Tipo: numérico*/
+    public string? CpfResponsavel { get; private set; } /*Tamanho: 14, Posição: 104 a 114, Tipo: numérico*/
 
     [MaxLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
-    public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 115 a 118, Tipo: alfanumérico*/
+    public string? Crc16 { get; private set; } /*Tamanho: 4, Posição: 115 a 118, Tipo: alfanumérico*/
 
-    public static List<EmpregadoMtAFD671> EmpregadoMtRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<EmpregadoMtAFD671> EmpregadoMtRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
 
     #region Funções

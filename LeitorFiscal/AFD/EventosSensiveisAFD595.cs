@@ -7,23 +7,23 @@ public class EventosSensiveisAFD595
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição: 10 a 10, Tipo: numérico, Dado: = 6*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição: 10 a 10, Tipo: numérico, Dado: = 6*/
 
     [MaxLength(8, ErrorMessage = "O campo DataRegistro deve ter um comprimento máximo de '8'")]
     [MinLength(8, ErrorMessage = "O campo DataRegistro deve ter um comprimento minimo de '8'")]
-    public string? DataRegistro { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numerico*/
+    public string? DataRegistro { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numerico*/
 
     [MaxLength(4, ErrorMessage = "O campo HoraRegistro deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo HoraRegistro deve ter um comprimento minimo de '4'")]
-    public string? HoraRegistro { get; set; } /*Tamanho: 4, POsição: 19 a 22, Tipo: numérico*/
+    public string? HoraRegistro { get; private set; } /*Tamanho: 4, POsição: 19 a 22, Tipo: numérico*/
 
     [MaxLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento máximo de '2'")]
     [MinLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento minimo de '2'")]
-    public string? TpEvento { get; set; } /*Tamanho: 2, Posição: 23 a 24, Tipo: numérico*/
+    public string? TpEvento { get; private set; } /*Tamanho: 2, Posição: 23 a 24, Tipo: numérico*/
     /*  Tipo de evento, “01” para abertura do REP por 
         manutenção ou violação, “02” para retorno de energia, 
         “03” para introdução de dispositivo externo de 
@@ -34,8 +34,8 @@ public class EventosSensiveisAFD595
      */
 
 
-    public static List<EventosSensiveisAFD595> EventosSensiveisRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<EventosSensiveisAFD595> EventosSensiveisRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetEventosSensiveis(string linhaArquivo)

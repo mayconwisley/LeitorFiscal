@@ -7,26 +7,26 @@ public class MarcacaoPontoAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 3*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 3*/
 
     [MaxLength(24, ErrorMessage = "O campo DataMarcacao deve ter um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataMarcacao deve ter um comprimento minimo de '24'")]
-    public string? DataHoraMarcacao { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
+    public string? DataHoraMarcacao { get; private set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
 
     [MaxLength(12, ErrorMessage = "O campo Pis deve ter um comprimento máximo de '12'")]
     [MinLength(12, ErrorMessage = "O campo Pis deve ter um comprimento minimo de '12'")]
-    public string? Cpf { get; set; } /*Tamanho: 12, Posição: 35 a 46, Tipo: numérico*/
+    public string? Cpf { get; private set; } /*Tamanho: 12, Posição: 35 a 46, Tipo: numérico*/
 
     [MaxLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
-    public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 47 a 50, Tipo: alfanumérico*/
+    public string? Crc16 { get; private set; } /*Tamanho: 4, Posição: 47 a 50, Tipo: alfanumérico*/
 
-    public static List<MarcacaoPontoAFD671> MarcacaoPontoAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<MarcacaoPontoAFD671> MarcacaoPontoAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetMarcacaoPonto(string linhaArquivo)

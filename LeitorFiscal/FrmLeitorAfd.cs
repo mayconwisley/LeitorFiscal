@@ -1,4 +1,5 @@
 ﻿using LeitorFiscal.AFD;
+using LeitorFiscal.GravarArquivo;
 using LeitorFiscal.LeituraArquivo;
 
 namespace LeitorFiscal;
@@ -6,6 +7,7 @@ namespace LeitorFiscal;
 public partial class FrmLeitorAfd : Form
 {
     string caminhoArquivo = string.Empty;
+    string caminhoSalvar = string.Empty;
 
     public FrmLeitorAfd()
     {
@@ -123,7 +125,7 @@ public partial class FrmLeitorAfd : Form
             DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD595.MarcacaoPontoAfdList;
             if (DgvListMarcacaoPonto.RowCount > 0)
             {
-                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
+                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD595.Portaria}");
             }
             foreach (var item in MarcacaoPontoAFD595.ErrosValidacao)
             {
@@ -136,7 +138,7 @@ public partial class FrmLeitorAfd : Form
             DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD671.MarcacaoPontoAfdList;
             if (DgvListMarcacaoPonto.RowCount > 0)
             {
-                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
+                RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD671.Portaria}");
             }
             foreach (var item in MarcacaoPontoAFD671.ErrosValidacao)
             {
@@ -336,6 +338,19 @@ public partial class FrmLeitorAfd : Form
         }
     }
 
+    private void SalvarArquivo()
+    {
+        using SaveFileDialog saveFileDialog = new();
+        saveFileDialog.Filter = "Arquivos de texto (*.txt)|*.txt";
+        saveFileDialog.Title = "Salvar Conversão Art. 96 Portaria 6710";
+        saveFileDialog.FileName = "AFDConvertido.txt";
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            caminhoSalvar = saveFileDialog.FileName;
+        }
+
+    }
+
     private void SubMenuArquivoLer_Click(object sender, EventArgs e)
     {
         LocalizarArquivo();
@@ -351,10 +366,19 @@ public partial class FrmLeitorAfd : Form
             ListarEventoSensiveis();
             ListarMarcacaoPontoRepP();
             ListarTrailer();
+
+            MenuConverter.Enabled = true;
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void SubMenuConverterArt96_Click(object sender, EventArgs e)
+    {
+        SalvarArquivo();
+        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar);
+        MessageBox.Show("Arquivo convertido!", "Aviso");
     }
 }

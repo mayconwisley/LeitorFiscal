@@ -7,19 +7,19 @@ public class EventosSensiveisAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição: 10 a 10, Tipo: numérico, Dado: = 6*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição: 10 a 10, Tipo: numérico, Dado: = 6*/
 
     [MaxLength(24, ErrorMessage = "O campo DataHoraRegistro deve ter um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataHoraRegistro deve ter um comprimento minimo de '24'")]
-    public string? DataHoraRegistro { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numerico*/
+    public string? DataHoraRegistro { get; private set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numerico*/
 
     [MaxLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento máximo de '2'")]
     [MinLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento minimo de '2'")]
-    public string? TpEvento { get; set; } /*Tamanho: 2, Posição: 35 a 36, Tipo: numérico*/
+    public string? TpEvento { get; private set; } /*Tamanho: 2, Posição: 35 a 36, Tipo: numérico*/
     /*  Tipo de evento, “01” para abertura do REP por 
         manutenção ou violação, “02” para retorno de energia, 
         “03” para introdução de dispositivo externo de 
@@ -29,8 +29,8 @@ public class EventosSensiveisAFD671
         “06” para erro de impressão.
      */
 
-    public static List<EventosSensiveisAFD671> EventosSensiveisRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<EventosSensiveisAFD671> EventosSensiveisRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetEventosSensiveis(string linhaArquivo)

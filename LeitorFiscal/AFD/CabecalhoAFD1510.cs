@@ -108,7 +108,7 @@ public class CabecalhoAFD1510
 
             CabecalhoAfdList.Add(cabecalho);
         }
-     
+
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
         {
             ErrosValidacao.Add(item + "\n");

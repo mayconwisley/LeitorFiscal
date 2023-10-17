@@ -121,6 +121,7 @@
             // MenuConverter
             // 
             MenuConverter.DropDownItems.AddRange(new ToolStripItem[] { SubMenuConverterArt96 });
+            MenuConverter.Enabled = false;
             MenuConverter.Name = "MenuConverter";
             MenuConverter.Size = new Size(71, 20);
             MenuConverter.Text = "Converter";
@@ -128,8 +129,9 @@
             // SubMenuConverterArt96
             // 
             SubMenuConverterArt96.Name = "SubMenuConverterArt96";
-            SubMenuConverterArt96.Size = new Size(173, 22);
+            SubMenuConverterArt96.Size = new Size(180, 22);
             SubMenuConverterArt96.Text = "Art. 96 Portaria 671";
+            SubMenuConverterArt96.Click += SubMenuConverterArt96_Click;
             // 
             // TabControlAfd
             // 

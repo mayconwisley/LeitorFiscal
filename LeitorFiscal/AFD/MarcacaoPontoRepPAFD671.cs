@@ -7,27 +7,27 @@ public class MarcacaoPontoRepPAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 7*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 7*/
 
     [MaxLength(24, ErrorMessage = "O campo DataHoraMarcacao deve ter um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataHoraMarcacao deve ter um comprimento minimo de '24'")]
-    public string? DataHoraMarcacao { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
+    public string? DataHoraMarcacao { get; private set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
 
     [MaxLength(12, ErrorMessage = "O campo Cpf deve ter um comprimento máximo de '12'")]
     [MinLength(12, ErrorMessage = "O campo Cpf deve ter um comprimento minimo de '12'")]
-    public string? Cpf { get; set; } /*Tamanho: 12, Posição: 35 a 46, Tipo: numérico*/
+    public string? Cpf { get; private set; } /*Tamanho: 12, Posição: 35 a 46, Tipo: numérico*/
 
     [MaxLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento máximo de '24'")]
     [MinLength(24, ErrorMessage = "O campo DataHoraGravacao deve ter um comprimento minimo de '24'")]
-    public string? DataHoraGravacao { get; set; } /*Tamanho: 24, Posição: 47 a 70, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
+    public string? DataHoraGravacao { get; private set; } /*Tamanho: 24, Posição: 47 a 70, Tipo: numérico, Formato: AAAA-MM-ddThh:mm:00ZZZZZ*/
 
     [MaxLength(2, ErrorMessage = "O campo IdentificadorColetor deve ter um comprimento máximo de '2'")]
     [MinLength(2, ErrorMessage = "O campo IdentificadorColetor deve ter um comprimento minimo de '2'")]
-    public string? IdentificadorColetor { get; set; } /*Tamanho: 2, Posição: 71 a 72, Tipo: numérico*/
+    public string? IdentificadorColetor { get; private set; } /*Tamanho: 2, Posição: 71 a 72, Tipo: numérico*/
     /*
       "01": aplicativomobile;
       "02": browser(navegador internet); 
@@ -38,14 +38,14 @@ public class MarcacaoPontoRepPAFD671
 
     [MaxLength(1, ErrorMessage = "O campo MarcacaoOnOff deve ter um comprimento máximo de '4'")]
     [MinLength(1, ErrorMessage = "O campo MarcacaoOnOff deve ter um comprimento minimo de '4'")]
-    public string? MarcacaoOnOff { get; set; } /*Tamanho: 1, Posição: 73 a 73, Tipo: numérico, Dado: Informar "0" para marcaçãoon-lineou "1" para marcaçãooff-line.*/
+    public string? MarcacaoOnOff { get; private set; } /*Tamanho: 1, Posição: 73 a 73, Tipo: numérico, Dado: Informar "0" para marcaçãoon-lineou "1" para marcaçãooff-line.*/
 
     [MaxLength(64, ErrorMessage = "O campo CódigoHash deve ter um comprimento máximo de '64'")]
     [MinLength(64, ErrorMessage = "O campo CódigoHash deve ter um comprimento minimo de '64'")]
-    public string? CódigoHash { get; set; } /*Tamanho: 64, Posição: 74 a 137, Tipo: alfanumérico*/
+    public string? CódigoHash { get; private set; } /*Tamanho: 64, Posição: 74 a 137, Tipo: alfanumérico*/
 
-    public static List<MarcacaoPontoRepPAFD671> MarcacaoPontoRepPAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<MarcacaoPontoRepPAFD671> MarcacaoPontoRepPAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetMarcacaoPonto(string linhaArquivo)

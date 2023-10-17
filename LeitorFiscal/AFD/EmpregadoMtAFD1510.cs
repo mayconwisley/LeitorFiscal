@@ -7,34 +7,34 @@ public class EmpregadoMtAFD1510
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
 
     [MaxLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento máximo de '8'")]
     [MinLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento minimo de '8'")]
-    public string? DataGravacao { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
+    public string? DataGravacao { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
 
     [MaxLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento máximo de '4'")]
     [MinLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento minimo de '4'")]
-    public string? HoraGravacao { get; set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
+    public string? HoraGravacao { get; private set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
 
     [MaxLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento minimo de '1'")]
-    public string? TpOperacao { get; set; } /*Tamanho: 1, Posição? 23 a 23, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
+    public string? TpOperacao { get; private set; } /*Tamanho: 1, Posição? 23 a 23, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
 
     [MaxLength(12, ErrorMessage = "O campo Pis deve ter um comprimento máximo de '12'")]
     [MinLength(12, ErrorMessage = "O campo Pis deve ter um comprimento minimo de '12'")]
-    public string? Pis { get; set; } /*Tamanho: 12, Posição: 24 a 35, Tipo: numérico*/
+    public string? Pis { get; private set; } /*Tamanho: 12, Posição: 24 a 35, Tipo: numérico*/
 
     [MaxLength(52, ErrorMessage = "O campo Nome deve ter um comprimento máximo de '52'")]
     [MinLength(52, ErrorMessage = "O campo Nome deve ter um comprimento minimo de '52'")]
-    public string? Nome { get; set; } /*Tamanho: 52, Posição: 36 a 87, Tipo: alfanumérico*/
+    public string? Nome { get; private set; } /*Tamanho: 52, Posição: 36 a 87, Tipo: alfanumérico*/
 
-    public static List<EmpregadoMtAFD1510> EmpregadoMtRepAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<EmpregadoMtAFD1510> EmpregadoMtRepAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetEmpregadoMtRep(string linhaArquivo)

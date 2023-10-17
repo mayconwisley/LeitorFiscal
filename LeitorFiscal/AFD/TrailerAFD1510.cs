@@ -7,30 +7,30 @@ public class TrailerAFD1510
 {
     [MaxLength(9, ErrorMessage = "O campo Noves deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Noves deve ter um comprimento minimo de '9'")]
-    public string? Noves { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico, Dado: = 999999999*/
+    public string? Noves { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico, Dado: = 999999999*/
 
     [MaxLength(9, ErrorMessage = "O campo QtdRegTipo2 deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo QtdRegTipo2 deve ter um comprimento minimo de '9'")]
-    public string? QtdRegTipo2 { get; set; } /*Tamanho: 9, Posição: 10 a 18, Tipo: numérico*/
+    public string? QtdRegTipo2 { get; private set; } /*Tamanho: 9, Posição: 10 a 18, Tipo: numérico*/
 
     [MaxLength(9, ErrorMessage = "O campo QtdRegTipo3 deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo QtdRegTipo3 deve ter um comprimento minimo de '9'")]
-    public string? QtdRegTipo3 { get; set; } /*Tamanho: 9, Posição: 19 a 27, Tipo: numérico*/
+    public string? QtdRegTipo3 { get; private set; } /*Tamanho: 9, Posição: 19 a 27, Tipo: numérico*/
 
     [MaxLength(9, ErrorMessage = "O campo QtdRegTipo4 deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo QtdRegTipo4 deve ter um comprimento minimo de '9'")]
-    public string? QtdRegTipo4 { get; set; } /*Tamanho: 9, Posição: 28 a 36, Tipo: numérico*/
+    public string? QtdRegTipo4 { get; private set; } /*Tamanho: 9, Posição: 28 a 36, Tipo: numérico*/
 
     [MaxLength(9, ErrorMessage = "O campo QtdRegTipo5 deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo QtdRegTipo5 deve ter um comprimento minimo de '9'")]
-    public string? QtdRegTipo5 { get; set; } /*Tamanho: 9, Posição: 37 a 45, Tipo: numérico*/
+    public string? QtdRegTipo5 { get; private set; } /*Tamanho: 9, Posição: 37 a 45, Tipo: numérico*/
 
     [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; set; } /*Tamanho: 1, Posição 46 a 46, Tipo: numérico, Dado: = 9*/
+    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 46 a 46, Tipo: numérico, Dado: = 9*/
 
-    public static List<TrailerAFD1510> TrailerAfdList { get; set; } = new();
-    public static List<string> ErrosValidacao { get; set; } = new();
+    public static List<TrailerAFD1510> TrailerAfdList { get; private set; } = new();
+    public static List<string> ErrosValidacao { get; private set; } = new();
     public static string? Portaria { get; set; }
     #region Funções
     public static void GetTrailer(string linhaArquivo)
@@ -105,7 +105,6 @@ public class TrailerAFD1510
                 ErrosValidacao.Add($"Quantidade de registros '5 - Empregado MT' inválido, quantidade verificada: {reg05}, quantidade no registro 9 - Trailer: {item.QtdRegTipo5}\n");
                 count++;
             }
-
 
             if (count > 0)
             {

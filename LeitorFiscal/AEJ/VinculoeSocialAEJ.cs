@@ -5,13 +5,13 @@ namespace LeitorFiscal.AEJ;
 
 public class VinculoeSocialAEJ
 {
-    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '2'")]
+    [MaxLength(2, ErrorMessage = "O campo TipoReg deve ser um tipo de cadeia de caracteres com um comprimento máximo de '2'")]
     public string? TipoReg { get; set; }
-    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '9'")]
-    [MinLength(1, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
+    [MaxLength(9, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres com um comprimento máximo de '9'")]
+    [MinLength(1, ErrorMessage = "O campo IdtVinculoAej deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? IdtVinculoAej { get; set; }
-    [MaxLength(30, ErrorMessage = "O campo MatEsocial deve ser um tipo de cadeia de caracteres ou matriz com um comprimento máximo de '30'")]
-    [MinLength(1, ErrorMessage = "O campo MatEsocial deve ser um tipo de cadeia de caracteres ou matriz com um comprimento minimo de '1'")]
+    [MaxLength(30, ErrorMessage = "O campo MatEsocial deve ser um tipo de cadeia de caracteres com um comprimento máximo de '30'")]
+    [MinLength(1, ErrorMessage = "O campo MatEsocial deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? MatEsocial { get; set; }
 
     public static List<VinculoeSocialAEJ> VinculoeSocialAEJList { get; private set; } = new();
