@@ -40,7 +40,7 @@ public class MarcacaoPontoAFD671
         }
         else
         {
-            Portaria = "Portaria Nº 671, de 8 de novembro de 2021";
+            Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
             marcacaoPonto = new()
             {
                 Nsr = linhaArquivo[..9],

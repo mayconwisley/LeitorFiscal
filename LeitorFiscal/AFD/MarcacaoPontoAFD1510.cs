@@ -29,7 +29,7 @@ public class MarcacaoPontoAFD1510
     public static List<string> ErrosValidacao { get; set; } = new();
     public static string? Portaria { get; set; }
 
-    public static void GetMarcacaoPonto(string linhaArquivo, bool portaria595)
+    public static void GetMarcacaoPonto(string linhaArquivo)
     {
         MarcacaoPontoAFD1510 marcacaoPonto;
         int tamanhoLinha = linhaArquivo.Length;
@@ -40,7 +40,7 @@ public class MarcacaoPontoAFD1510
         }
         else
         {
-            Portaria = "Portaria n.º 1510, de 21 de agosto de 2009";
+            Portaria = "Portaria n.º 1510, de 21 de agosto de 2009\n";
             marcacaoPonto = new()
             {
                 Nsr = linhaArquivo[..9],

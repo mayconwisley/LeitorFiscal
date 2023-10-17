@@ -60,7 +60,7 @@ public class IdentificacaoEmpresaAFD595
 
         if (tamanhoLinha != 317)
         {
-            ErrosValidacao.Add($"O registro '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '317'. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
         else

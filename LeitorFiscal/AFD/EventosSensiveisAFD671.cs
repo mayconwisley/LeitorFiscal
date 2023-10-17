@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
 
-public class EventosSensiveisRepAFD
+public class EventosSensiveisAFD671
 {
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
@@ -13,17 +13,13 @@ public class EventosSensiveisRepAFD
     [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
     public string? TpRegistro { get; set; } /*Tamanho: 1, Posição: 10 a 10, Tipo: numérico, Dado: = 6*/
 
-    [MaxLength(8, ErrorMessage = "O campo DataRegistro deve ter um comprimento máximo de '8'")]
-    [MinLength(8, ErrorMessage = "O campo DataRegistro deve ter um comprimento minimo de '8'")]
-    public string? DataRegistro { get; set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numerico*/
-
-    [MaxLength(4, ErrorMessage = "O campo HoraRegistro deve ter um comprimento máximo de '4'")]
-    [MinLength(4, ErrorMessage = "O campo HoraRegistro deve ter um comprimento minimo de '4'")]
-    public string? HoraRegistro { get; set; } /*Tamanho: 4, POsição: 19 a 22, Tipo: numérico*/
+    [MaxLength(24, ErrorMessage = "O campo DataHoraRegistro deve ter um comprimento máximo de '24'")]
+    [MinLength(24, ErrorMessage = "O campo DataHoraRegistro deve ter um comprimento minimo de '24'")]
+    public string? DataHoraRegistro { get; set; } /*Tamanho: 24, Posição: 11 a 34, Tipo: numerico*/
 
     [MaxLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento máximo de '2'")]
     [MinLength(2, ErrorMessage = "O campo TpEvento deve ter um comprimento minimo de '2'")]
-    public string? TpEvento { get; set; } /*Tamanho: 2, Posição: 23 a 24, Tipo: numérico*/
+    public string? TpEvento { get; set; } /*Tamanho: 2, Posição: 35 a 36, Tipo: numérico*/
     /*  Tipo de evento, “01” para abertura do REP por 
         manutenção ou violação, “02” para retorno de energia, 
         “03” para introdução de dispositivo externo de 
@@ -33,39 +29,43 @@ public class EventosSensiveisRepAFD
         “06” para erro de impressão.
      */
 
-
-    public static List<EventosSensiveisRepAFD> EventosSensiveisRepAfdList { get; set; } = new();
+    public static List<EventosSensiveisAFD671> EventosSensiveisRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
-
-    public static void GetEventosSensiveis(string linhaArquivo, bool portaria595)
+    public static string? Portaria { get; set; }
+    #region Funções
+    public static void GetEventosSensiveis(string linhaArquivo)
     {
-        EventosSensiveisRepAFD eventosSensiveis;
+        EventosSensiveisAFD671 eventosSensiveis;
         int tamanhoLinha = linhaArquivo.Length;
 
         if (tamanhoLinha != 24)
         {
-            ErrosValidacao.Add($"O registro de '6 - Eventos Sensíveis' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '24'. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '6 - Eventos Sensíveis' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
-
-        if (portaria595 == false)
+        else
         {
-            ErrosValidacao.Add("Registro 6 - Eventos Sensíveis não faz parte da portaria 1510 de 21 de agosto de 2009\n");
+            Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
+            eventosSensiveis = new()
+            {
+                Nsr = linhaArquivo[..9],
+                TpRegistro = linhaArquivo.Substring(9, 1),
+                DataHoraRegistro = linhaArquivo.Substring(10, 24),
+                TpEvento = linhaArquivo.Substring(34, 2)
+            };
         }
-        eventosSensiveis = new()
-        {
-            Nsr = linhaArquivo[..9],
-            TpRegistro = linhaArquivo.Substring(9, 1),
-            DataRegistro = linhaArquivo.Substring(10, 8),
-            HoraRegistro = linhaArquivo.Substring(18, 4),
-            TpEvento = linhaArquivo.Substring(22, 2)
-        };
-
         if (ValidacaoTamanhoDado.ValidarTamanho(eventosSensiveis) && ValidarTipoDados(eventosSensiveis))
         {
             if (eventosSensiveis.TpRegistro != "6")
             {
                 ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({eventosSensiveis.TpRegistro}) inválido, deve ter o valor '6'.\n");
+                return;
+            }
+
+            if (eventosSensiveis.TpEvento != "01" && eventosSensiveis.TpEvento != "02" && eventosSensiveis.TpEvento != "03" &&
+                eventosSensiveis.TpEvento != "04" && eventosSensiveis.TpEvento != "05" && eventosSensiveis.TpEvento != "06")
+            {
+                ErrosValidacao.Add($"O campo 'TpEvento' esta com o valor ({eventosSensiveis.TpEvento}) inválido, deve ter o valor '01', '02', '03', '04', '05' ou '06'.\n");
                 return;
             }
 
@@ -76,9 +76,8 @@ public class EventosSensiveisRepAFD
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(EventosSensiveisRepAFD eventosSensiveis)
+    private static bool ValidarTipoDados(EventosSensiveisAFD671 eventosSensiveis)
     {
-
         var camposComErro = new List<string>();
 
         if (!int.TryParse(eventosSensiveis.Nsr, out _))
@@ -91,14 +90,9 @@ public class EventosSensiveisRepAFD
             camposComErro.Add("TpRegistro");
         }
 
-        if (!double.TryParse(eventosSensiveis.DataRegistro, out _))
+        if (!DateTime.TryParse(eventosSensiveis.DataHoraRegistro, out _))
         {
-            camposComErro.Add("DataRegistro");
-        }
-
-        if (!double.TryParse(eventosSensiveis.HoraRegistro, out _))
-        {
-            camposComErro.Add("HoraRegistro");
+            camposComErro.Add("DataHoraRegistro");
         }
 
         if (!double.TryParse(eventosSensiveis.TpEvento, out _))
@@ -116,4 +110,5 @@ public class EventosSensiveisRepAFD
             return false;
         }
     }
+    #endregion
 }

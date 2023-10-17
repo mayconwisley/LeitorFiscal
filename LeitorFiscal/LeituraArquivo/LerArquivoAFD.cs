@@ -45,39 +45,72 @@ public class LerArquivoAFD
     }
     private static void LimparTempoReal()
     {
-        TempoRealRepAFD.TempoRealRepAfdList.Clear();
-        TempoRealRepAFD.ErrosValidacao.Clear();
+        TempoRealAFD1510.TempoRealRepAfdList.Clear();
+        TempoRealAFD1510.ErrosValidacao.Clear();
+        TempoRealAFD1510.Portaria = "";
+        TempoRealAFD595.TempoRealRepAfdList.Clear();
+        TempoRealAFD595.ErrosValidacao.Clear();
+        TempoRealAFD595.Portaria = "";
+        TempoRealAFD671.TempoRealRepAfdList.Clear();
+        TempoRealAFD671.ErrosValidacao.Clear();
+        TempoRealAFD671.Portaria = "";
     }
     private static void LimparEmpregadoMt()
     {
-        EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
-        EmpregadoMtRepAFD.ErrosValidacao.Clear();
+        EmpregadoMtAFD1510.EmpregadoMtRepAfdList.Clear();
+        EmpregadoMtAFD1510.ErrosValidacao.Clear();
+        EmpregadoMtAFD1510.Portaria = "";
+        EmpregadoMtAFD595.EmpregadoMtRepAfdList.Clear();
+        EmpregadoMtAFD595.ErrosValidacao.Clear();
+        EmpregadoMtAFD595.Portaria = "";
+        EmpregadoMtAFD671.EmpregadoMtRepAfdList.Clear();
+        EmpregadoMtAFD671.ErrosValidacao.Clear();
+        EmpregadoMtAFD671.Portaria = "";
     }
     private static void LimparEventosSensiveis()
     {
-        EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
-        EventosSensiveisRepAFD.ErrosValidacao.Clear();
+        EventosSensiveisAFD595.EventosSensiveisRepAfdList.Clear();
+        EventosSensiveisAFD595.ErrosValidacao.Clear();
+        EventosSensiveisAFD595.Portaria = "";
+        EventosSensiveisAFD671.EventosSensiveisRepAfdList.Clear();
+        EventosSensiveisAFD671.ErrosValidacao.Clear();
+        EventosSensiveisAFD671.Portaria = "";
+    }
+
+    private static void LimparMarcacaoPontoRepP()
+    {
+        MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList.Clear();
+        MarcacaoPontoRepPAFD671.ErrosValidacao.Clear();
+        MarcacaoPontoRepPAFD671.Portaria = "";
     }
     private static void LimparTrailer()
     {
-
-        TrailerAFD.TrailerAfdList.Clear();
-        TrailerAFD.ErrosValidacao.Clear();
+        TrailerAFD1510.TrailerAfdList.Clear();
+        TrailerAFD1510.ErrosValidacao.Clear();
+        TrailerAFD1510.Portaria = "";
+        TrailerAFD595.TrailerAfdList.Clear();
+        TrailerAFD595.ErrosValidacao.Clear();
+        TrailerAFD595.Portaria = "";
+        TrailerAFD671.TrailerAfdList.Clear();
+        TrailerAFD671.ErrosValidacao.Clear();
+        TrailerAFD671.Portaria = "";
     }
     #endregion
-    public static void Arquivo(string caminho, bool portaria595)
+    public static void Arquivo(string caminho)
     {
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
+        int trailer = 0;
 
         int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
-        int countEventoSensiveis = 0;
+        int countEventoSensiveis = 0, countMarcacaoPontoRepP = 0;
         LimparCabecalho();
         LimparIdentificacaoEmpresa();
         LimparMarcacaoPonto();
         LimparTempoReal();
         LimparEmpregadoMt();
         LimparEventosSensiveis();
+        LimparMarcacaoPontoRepP();
         LimparTrailer();
 
         while ((linha = sr.ReadLine()) != null)
@@ -87,24 +120,31 @@ public class LerArquivoAFD
 
             try
             {
-                if (portaria595)
-                {
-                    if (itemTrailer == "999999999")
-                    {
-                        itemLinha = linha.Substring(54, 1);
-                    }
-                }
-                else
+                if (linha.Length == 46)
                 {
                     if (itemTrailer == "999999999")
                     {
                         itemLinha = linha.Substring(45, 1);
                     }
                 }
+                if (linha.Length == 55)
+                {
+                    if (itemTrailer == "999999999")
+                    {
+                        itemLinha = linha.Substring(54, 1);
+                    }
+                }
+                if (linha.Length == 64)
+                {
+                    if (itemTrailer == "999999999")
+                    {
+                        itemLinha = linha.Substring(63, 1);
+                    }
+                }
             }
             catch
             {
-                TrailerAFD.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
+                TrailerAFD1510.ErrosValidacao.Add("Erro, tamanho da linha do registro 9 - Trailer incorreto.");
             }
 
             switch (itemLinha)
@@ -143,39 +183,142 @@ public class LerArquivoAFD
                     break;
                 case "3":
                     countMarcacaoPonto++;
-                    MarcacaoPontoAFD1510.GetMarcacaoPonto(linha, portaria595);
+                    if (linha.Length == 34)
+                    {
+                        MarcacaoPontoAFD1510.GetMarcacaoPonto(linha);
+                    }
+                    if (linha.Length == 38)
+                    {
+                        MarcacaoPontoAFD595.GetMarcacaoPonto(linha);
+                    }
+                    if (linha.Length == 50)
+                    {
+                        MarcacaoPontoAFD671.GetMarcacaoPonto(linha);
+                    }
                     break;
                 case "4":
                     countTempoReal++;
-                    TempoRealRepAFD.GetTempoReal(linha, portaria595);
+                    if (linha.Length == 34)
+                    {
+                        TempoRealAFD1510.GetTempoReal(linha);
+                    }
+                    if (linha.Length == 49)
+                    {
+                        TempoRealAFD595.GetTempoReal(linha);
+                    }
+                    if (linha.Length == 73)
+                    {
+                        TempoRealAFD671.GetTempoReal(linha);
+                    }
+
                     break;
                 case "5":
                     countEmpregadoMt++;
-                    EmpregadoMtRepAFD.GetEmpregadoMtRep(linha, portaria595);
+
+                    if (linha.Length == 87)
+                    {
+                        EmpregadoMtAFD1510.GetEmpregadoMtRep(linha);
+                    }
+                    if (linha.Length == 106)
+                    {
+                        EmpregadoMtAFD595.GetEmpregadoMtRep(linha);
+                    }
+                    if (linha.Length == 118)
+                    {
+                        EmpregadoMtAFD671.GetEmpregadoMtRep(linha);
+                    }
+
                     break;
                 case "6":
                     countEventoSensiveis++;
-                    EventosSensiveisRepAFD.GetEventosSensiveis(linha, portaria595);
+
+                    if (linha.Length == 24)
+                    {
+                        EventosSensiveisAFD595.GetEventosSensiveis(linha);
+                    }
+                    if (linha.Length == 36)
+                    {
+                        EventosSensiveisAFD671.GetEventosSensiveis(linha);
+                    }
+
+                    break;
+                case "7":
+                    countMarcacaoPontoRepP++;
+                    if (linha.Length == 137)
+                    {
+                        MarcacaoPontoRepPAFD671.GetMarcacaoPonto(linha);
+                    }
+
                     break;
                 case "9":
-                    TrailerAFD.GetTrailer(linha, portaria595);
+                    if (linha.Length == 46)
+                    {
+                        trailer = linha.Length;
+                        TrailerAFD1510.GetTrailer(linha);
+                    }
+                    if (linha.Length == 55)
+                    {
+                        trailer = linha.Length;
+                        TrailerAFD595.GetTrailer(linha);
+                    }
+                    if (linha.Length == 64)
+                    {
+                        trailer = linha.Length;
+                        TrailerAFD671.GetTrailer(linha);
+                    }
                     break;
                 default:
                     MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     sr.ReadToEnd();
                     break;
             }
+
         }
 
-        if (TrailerAFD.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis))
+
+        if (trailer == 46)
         {
-            MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (TrailerAFD1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt))
+            {
+                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Clear();
-            MarcacaoPontoAFD1510.MarcacaoPontoAfdList.Clear();
-            TempoRealRepAFD.TempoRealRepAfdList.Clear();
-            EmpregadoMtRepAFD.EmpregadoMtRepAfdList.Clear();
-            EventosSensiveisRepAFD.EventosSensiveisRepAfdList.Clear();
+                LimparCabecalho();
+                LimparIdentificacaoEmpresa();
+                LimparMarcacaoPonto();
+                LimparTempoReal();
+                LimparEmpregadoMt();
+            }
         }
+        if (trailer == 55)
+        {
+            if (TrailerAFD595.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis))
+            {
+                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                LimparCabecalho();
+                LimparIdentificacaoEmpresa();
+                LimparMarcacaoPonto();
+                LimparTempoReal();
+                LimparEmpregadoMt();
+                LimparEventosSensiveis();
+            }
+        }
+        if (trailer == 64)
+        {
+            if (TrailerAFD671.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis, countMarcacaoPontoRepP))
+            {
+                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                LimparCabecalho();
+                LimparIdentificacaoEmpresa();
+                LimparMarcacaoPonto();
+                LimparTempoReal();
+                LimparEmpregadoMt();
+                LimparEventosSensiveis();
+                LimparMarcacaoPontoRepP();
+
+            }
+        }
+
     }
 }

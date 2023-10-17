@@ -61,12 +61,12 @@ public class IdentificacaoEmpresaAFD671
 
         if (tamanhoLinha != 331)
         {
-            ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
         else
         {
-            Portaria = "Portaria Nº 671, de 8 de novembro de 2021";
+            Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
 
             identificacaoEmpresa = new()
             {

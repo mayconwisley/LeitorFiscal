@@ -52,12 +52,12 @@ public class IdentificacaoEmpresaAFD1510
         int tamanhoLinha = linhaArquivo.Length;
         if (tamanhoLinha != 299)
         {
-            ErrosValidacao.Add($"O registro de '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
         else
         {
-            Portaria = "Portaria n.º 1510, de 21 de agosto de 2009";
+            Portaria = "Portaria n.º 1510, de 21 de agosto de 2009\n";
             identificacaoEmpresa = new()
             {
                 Nsr = linhaArquivo[..9],

@@ -41,12 +41,12 @@ public class MarcacaoPontoAFD595
 
         if (tamanhoLinha != 38)
         {
-            ErrosValidacao.Add($"O registro de '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '3 - Marcação do Ponto' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
         else
         {
-            Portaria = "Portaria n.º 595, de 05 de dezembro de 2013";
+            Portaria = "Portaria n.º 595, de 05 de dezembro de 2013\n";
             marcacaoPonto = new()
             {
                 Nsr = linhaArquivo[..9],

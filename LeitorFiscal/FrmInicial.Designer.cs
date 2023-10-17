@@ -35,7 +35,7 @@
             // 
             // BtnValidadeAej
             // 
-            BtnValidadeAej.Location = new Point(13, 12);
+            BtnValidadeAej.Location = new Point(55, 14);
             BtnValidadeAej.Name = "BtnValidadeAej";
             BtnValidadeAej.Size = new Size(167, 75);
             BtnValidadeAej.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // BtnValidarAej
             // 
-            BtnValidarAej.Location = new Point(186, 12);
+            BtnValidarAej.Location = new Point(228, 14);
             BtnValidarAej.Name = "BtnValidarAej";
             BtnValidarAej.Size = new Size(167, 75);
             BtnValidarAej.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(367, 98);
+            ClientSize = new Size(451, 103);
             Controls.Add(BtnValidarAej);
             Controls.Add(BtnValidadeAej);
             FormBorderStyle = FormBorderStyle.FixedSingle;

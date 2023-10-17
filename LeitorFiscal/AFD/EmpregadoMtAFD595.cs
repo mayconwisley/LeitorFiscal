@@ -1,10 +1,16 @@
 ﻿using LeitorFiscal.Model.Util;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LeitorFiscal.AFD;
 
-public class EmpregadoMtRepAFD
+public class EmpregadoMtAFD595
 {
+
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
     public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
@@ -45,22 +51,22 @@ public class EmpregadoMtRepAFD
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 103 a 106, Tipo: alfanumérico*/
 
-    public static List<EmpregadoMtRepAFD> EmpregadoMtRepAfdList { get; set; } = new();
+    public static List<EmpregadoMtAFD595> EmpregadoMtRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
-
-    public static void GetEmpregadoMtRep(string linhaArquivo, bool portaria595)
+    public static string? Portaria { get; set; }
+    #region Funções
+    public static void GetEmpregadoMtRep(string linhaArquivo)
     {
-        EmpregadoMtRepAFD empregadoMt;
+        EmpregadoMtAFD595 empregadoMt;
         int tamanhoLinha = linhaArquivo.Length;
-
-
-        if (portaria595)
+        if (tamanhoLinha != 106)
         {
-            if (tamanhoLinha != 106)
-            {
-                ErrosValidacao.Add($"O registro de '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '106'. Tamanho encontrado: {tamanhoLinha}\n");
-                return;
-            }
+            ErrosValidacao.Add($"O registro '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encontrado: {tamanhoLinha}\n");
+            return;
+        }
+        else
+        {
+            Portaria = "Portaria n.º 595, de 05 de dezembro de 2013\n";
             empregadoMt = new()
             {
                 Nsr = linhaArquivo[..9],
@@ -75,34 +81,18 @@ public class EmpregadoMtRepAFD
                 Crc16 = linhaArquivo.Substring(102, 4)
             };
         }
-        else
-        {
-            if (tamanhoLinha != 87)
-            {
-                ErrosValidacao.Add($"O registro de '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '87'. Tamanho encontrado: {tamanhoLinha}\n");
-                return;
-            }
-            empregadoMt = new()
-            {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataGravacao = linhaArquivo.Substring(10, 8),
-                HoraGravacao = linhaArquivo.Substring(18, 4),
-                TpOperacao = linhaArquivo.Substring(22, 1),
-                Pis = linhaArquivo.Substring(23, 12),
-                Nome = linhaArquivo.Substring(35, 52)
-            };
-
-        }
-
-
-
 
         if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt) && ValidarTipoDados(empregadoMt))
         {
             if (empregadoMt.TpRegistro != "5")
             {
                 ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n");
+                return;
+            }
+
+            if (empregadoMt.TpOperacao != "I" && empregadoMt.TpOperacao != "A" && empregadoMt.TpOperacao != "E")
+            {
+                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n");
                 return;
             }
 
@@ -114,7 +104,7 @@ public class EmpregadoMtRepAFD
         }
 
     }
-    private static bool ValidarTipoDados(EmpregadoMtRepAFD empregadoMtRep)
+    private static bool ValidarTipoDados(EmpregadoMtAFD595 empregadoMtRep)
     {
 
         var camposComErro = new List<string>();
@@ -161,4 +151,5 @@ public class EmpregadoMtRepAFD
             return false;
         }
     }
+    #endregion
 }

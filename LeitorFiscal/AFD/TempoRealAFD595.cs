@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
 
-public class TempoRealRepAFD
+public class TempoRealAFD595
 {
+
     [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
     public string? Nsr { get; set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
@@ -37,22 +38,22 @@ public class TempoRealRepAFD
     [MinLength(4, ErrorMessage = "O campo Crc16 deve ter um comprimento minimo de '4'")]
     public string? Crc16 { get; set; } /*Tamanho: 4, Posição: 46 a 49, Tipo: alfanumérico*/
 
-
-    public static List<TempoRealRepAFD> TempoRealRepAfdList { get; set; } = new();
+    public static List<TempoRealAFD595> TempoRealRepAfdList { get; set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
-
-    public static void GetTempoReal(string linhaArquivo, bool portaria595)
+    public static string? Portaria { get; set; }
+    #region Funções
+    public static void GetTempoReal(string linhaArquivo)
     {
-        TempoRealRepAFD tempoRealRep;
+        TempoRealAFD595 tempoRealRep;
         int tamanhoLinha = linhaArquivo.Length;
-        if (portaria595)
+        if (tamanhoLinha != 49)
         {
-            if (tamanhoLinha != 49)
-            {
-                ErrosValidacao.Add($"O registro de '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013: '49'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
-
+            ErrosValidacao.Add($"O registro '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 595, de 05 de dezembro de 2013. Tamanho encotrado {tamanhoLinha}\n");
+            return;
+        }
+        else
+        {
+            Portaria = "Portaria n.º 595, de 05 de dezembro de 2013\n";
             tempoRealRep = new()
             {
                 Nsr = linhaArquivo[..9],
@@ -65,27 +66,6 @@ public class TempoRealRepAFD
                 Crc16 = linhaArquivo.Substring(45, 4)
             };
         }
-        else
-        {
-            if (tamanhoLinha != 34)
-            {
-                ErrosValidacao.Add($"O registro de '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009: '34'. Tamanho encotrado {tamanhoLinha}\n");
-                return;
-            }
-
-            tempoRealRep = new()
-            {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataAntesAjuste = linhaArquivo.Substring(10, 8),
-                HoraAntesAjuste = linhaArquivo.Substring(18, 4),
-                DataAjustada = linhaArquivo.Substring(22, 8),
-                HoraAjustada = linhaArquivo.Substring(30, 4)
-
-            };
-
-        }
-
 
         if (ValidacaoTamanhoDado.ValidarTamanho(tempoRealRep) && ValidarTipoDados(tempoRealRep))
         {
@@ -101,10 +81,8 @@ public class TempoRealRepAFD
         {
             ErrosValidacao.Add(item + "\n");
         }
-
-
     }
-    private static bool ValidarTipoDados(TempoRealRepAFD tempoRealRep)
+    private static bool ValidarTipoDados(TempoRealAFD595 tempoRealRep)
     {
 
         var camposComErro = new List<string>();
@@ -154,4 +132,5 @@ public class TempoRealRepAFD
             return false;
         }
     }
+    #endregion
 }
