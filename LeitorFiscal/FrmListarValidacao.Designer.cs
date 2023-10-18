@@ -49,6 +49,8 @@
             Controls.Add(RTxtListaValidacao);
             MinimizeBox = false;
             Name = "FrmListarValidacao";
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Listar Validação";
             Load += FrmListarValidacao_Load;

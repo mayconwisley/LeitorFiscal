@@ -1,6 +1,6 @@
 ﻿using LeitorFiscal.AEJ;
 
-namespace LeitorFiscal.Model.ListarValidacao;
+namespace LeitorFiscal.Model.ListarValidacaoAEJ;
 
 public class ValidacaoCabecalho
 {

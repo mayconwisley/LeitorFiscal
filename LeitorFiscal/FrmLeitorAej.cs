@@ -10,7 +10,6 @@ public partial class FrmLeitorFiscal : Form
     {
         InitializeComponent();
     }
-
     private void LocalizarArquivo()
     {
         using OpenFileDialog openFileDialog = new();
@@ -23,7 +22,6 @@ public partial class FrmLeitorFiscal : Form
             caminhoArquivo = openFileDialog.FileName;
         }
     }
-
     private void CabecalhoAej()
     {
         RTxtLogCabecalho.Clear();
@@ -96,7 +94,6 @@ public partial class FrmLeitorFiscal : Form
             RTxtLogAusenciaBancoHoras.AppendText(item);
         }
     }
-
     private void IdentificaoPTRPAej()
     {
         RTxtLogIdentificaoPTRP.Clear();
@@ -107,7 +104,6 @@ public partial class FrmLeitorFiscal : Form
             RTxtLogIdentificaoPTRP.AppendText(item);
         }
     }
-
     private void TrailerAej()
     {
         RTxtLogTrailer.Clear();
@@ -118,7 +114,16 @@ public partial class FrmLeitorFiscal : Form
             RTxtLogTrailer.AppendText(item);
         }
     }
-
+    private void AssinaturaDigitalAej()
+    {
+        RTxtLogAssinaturaDigital.Clear();
+        DgvListAssinaturaDigital.DataSource = null;
+        DgvListAssinaturaDigital.DataSource = AssinaturaDigitalAEJ.AssinaturaDigitalAEJList;
+        foreach (var item in AssinaturaDigitalAEJ.ErrosValidacao)
+        {
+            RTxtLogAssinaturaDigital.AppendText(item);
+        }
+    }
     private void SubMenuLerArquivo_Click(object sender, EventArgs e)
     {
         LocalizarArquivo();
@@ -135,22 +140,25 @@ public partial class FrmLeitorFiscal : Form
             AusenciaBancoHorasAej();
             IdentificaoPTRPAej();
             TrailerAej();
+            AssinaturaDigitalAej();
+
+            MenuVisualizar.Enabled = true;
+            MenuValidacao.Enabled = true;
+
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
     }
-
     private void SubMenuVisualizarListar_Click(object sender, EventArgs e)
     {
         FrmVisualizarDadosIndividual frmVisualizarDadosIndividual = new();
         frmVisualizarDadosIndividual.ShowDialog();
     }
-
     private void SubMenuValidacaoListar_Click(object sender, EventArgs e)
     {
-        FrmListarValidacao frmListarValidacao = new();
+        FrmListarValidacao frmListarValidacao = new("AEJ");
         frmListarValidacao.ShowDialog();
     }
 }

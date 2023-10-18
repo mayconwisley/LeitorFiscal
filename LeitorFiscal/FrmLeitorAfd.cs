@@ -334,6 +334,22 @@ public partial class FrmLeitorAfd : Form
             }
         }
     }
+
+    private void ListarAssinaturaDigiral()
+    {
+        RTxtLogAssinaturaDigital.Clear();
+        DgvListAssinaturaDigital.DataSource = null;
+        DgvListAssinaturaDigital.DataSource = AssinaturaDigitalAFD.AssinaturaDigitalAfdList;
+        if (DgvListAssinaturaDigital.RowCount > 0)
+        {
+            RTxtLogAssinaturaDigital.AppendText($"Assinatura Digital - {AssinaturaDigitalAFD.Portaria}");
+        }
+        foreach (var item in AssinaturaDigitalAFD.ErrosValidacao)
+        {
+            RTxtLogAssinaturaDigital.AppendText(item);
+        }
+
+    }
     private void LocalizarArquivo()
     {
         using OpenFileDialog openFileDialog = new();
@@ -374,6 +390,8 @@ public partial class FrmLeitorAfd : Form
             ListarEventoSensiveis();
             ListarMarcacaoPontoRepP();
             ListarTrailer();
+            ListarAssinaturaDigiral();
+            MenuValidacao.Enabled = true;
         }
         catch (Exception ex)
         {
@@ -381,10 +399,37 @@ public partial class FrmLeitorAfd : Form
         }
     }
 
-    private void SubMenuConverterArt96_Click(object sender, EventArgs e)
+    private void SubMenuValidacaoListar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            FrmListarValidacao frmListarValidacao = new("AFD");
+            frmListarValidacao.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    private void SubMenuFormaII_Click(object sender, EventArgs e)
     {
         SalvarArquivo();
-        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar);
+        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "II");
+        MessageBox.Show("Arquivo convertido!", "Aviso");
+    }
+
+    private void SubMenuFormaI_Click(object sender, EventArgs e)
+    {
+        SalvarArquivo();
+        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "I");
+        MessageBox.Show("Arquivo convertido!", "Aviso");
+    }
+
+    private void SubMenuFormaIII_Click(object sender, EventArgs e)
+    {
+        SalvarArquivo();
+        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "III");
         MessageBox.Show("Arquivo convertido!", "Aviso");
     }
 }

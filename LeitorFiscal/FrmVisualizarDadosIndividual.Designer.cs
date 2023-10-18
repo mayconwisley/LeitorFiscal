@@ -75,6 +75,8 @@
             Controls.Add(groupBox1);
             MinimizeBox = false;
             Name = "FrmVisualizarDadosIndividual";
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Visualizar Dados Individual";
             Load += FrmRelatorio_Load;

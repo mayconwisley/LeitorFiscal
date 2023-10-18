@@ -31,6 +31,8 @@ public class LerArquivoAEJ
         IdentificacaoPTRPAEJ.ErrosValidacao.Clear();
         TrailerAEJ.TrailerAEJList.Clear();
         TrailerAEJ.ErrosValidacao.Clear();
+        AssinaturaDigitalAEJ.AssinaturaDigitalAEJList.Clear();
+        AssinaturaDigitalAEJ.ErrosValidacao.Clear();
         ValidacaoTamanhoDado.ErrosValidacao.Clear();
 
         while ((linha = sr.ReadLine()) != null)
@@ -75,8 +77,15 @@ public class LerArquivoAEJ
                     TrailerAEJ.GetTrailer(linha);
                     break;
                 default:
-                    MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    sr.ReadToEnd();
+                    if (linha.Length == 100)
+                    {
+                        AssinaturaDigitalAEJ.GetAssinaturaDigital(linha);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        sr.ReadToEnd();
+                    }
                     break;
             }
         }

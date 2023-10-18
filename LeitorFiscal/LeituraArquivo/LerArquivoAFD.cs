@@ -94,6 +94,13 @@ public class LerArquivoAFD
         TrailerAFD671.ErrosValidacao.Clear();
         TrailerAFD671.Portaria = "";
     }
+    private static void LimparAssinaturaDigital()
+    {
+        AssinaturaDigitalAFD.AssinaturaDigitalAfdList.Clear();
+        AssinaturaDigitalAFD.ErrosValidacao.Clear();
+        AssinaturaDigitalAFD.Portaria = "";
+    }
+
     #endregion
     public static void Arquivo(string caminho)
     {
@@ -111,6 +118,7 @@ public class LerArquivoAFD
         LimparEventosSensiveis();
         LimparMarcacaoPontoRepP();
         LimparTrailer();
+        LimparAssinaturaDigital();
 
         while ((linha = sr.ReadLine()) != null)
         {
@@ -265,8 +273,15 @@ public class LerArquivoAFD
                     trailer = linha.Length;
                     break;
                 default:
-                    MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    sr.ReadToEnd();
+                    if (linha.Length == 100)
+                    {
+                        AssinaturaDigitalAFD.GetAssinaturaDigital(linha);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        sr.ReadToEnd();
+                    }
                     break;
             }
         }

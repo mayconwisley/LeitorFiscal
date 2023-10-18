@@ -31,11 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInicial));
             BtnValidadeAej = new Button();
             BtnValidarAej = new Button();
+            label1 = new Label();
+            LkPortarias = new LinkLabel();
+            LkProjetoGithub = new LinkLabel();
             SuspendLayout();
             // 
             // BtnValidadeAej
             // 
-            BtnValidadeAej.Location = new Point(55, 14);
+            BtnValidadeAej.Location = new Point(65, 38);
             BtnValidadeAej.Name = "BtnValidadeAej";
             BtnValidadeAej.Size = new Size(167, 75);
             BtnValidadeAej.TabIndex = 0;
@@ -45,7 +48,7 @@
             // 
             // BtnValidarAej
             // 
-            BtnValidarAej.Location = new Point(228, 14);
+            BtnValidarAej.Location = new Point(238, 38);
             BtnValidarAej.Name = "BtnValidarAej";
             BtnValidarAej.Size = new Size(167, 75);
             BtnValidarAej.TabIndex = 1;
@@ -53,11 +56,45 @@
             BtnValidarAej.UseVisualStyleBackColor = true;
             BtnValidarAej.Click += BtnValidarAej_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 126);
+            label1.Name = "label1";
+            label1.Size = new Size(185, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Desenvolvido por: Maycon Wisley";
+            // 
+            // LkPortarias
+            // 
+            LkPortarias.AutoSize = true;
+            LkPortarias.Location = new Point(405, 126);
+            LkPortarias.Name = "LkPortarias";
+            LkPortarias.Size = new Size(53, 15);
+            LkPortarias.TabIndex = 3;
+            LkPortarias.TabStop = true;
+            LkPortarias.Text = "Portarias";
+            LkPortarias.LinkClicked += LkPortarias_LinkClicked;
+            // 
+            // LkProjetoGithub
+            // 
+            LkProjetoGithub.AutoSize = true;
+            LkProjetoGithub.Location = new Point(203, 126);
+            LkProjetoGithub.Name = "LkProjetoGithub";
+            LkProjetoGithub.Size = new Size(84, 15);
+            LkProjetoGithub.TabIndex = 4;
+            LkProjetoGithub.TabStop = true;
+            LkProjetoGithub.Text = "Projeto Github";
+            LkProjetoGithub.LinkClicked += LkProjetoGithub_LinkClicked;
+            // 
             // FrmInicial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(451, 103);
+            ClientSize = new Size(470, 150);
+            Controls.Add(LkProjetoGithub);
+            Controls.Add(LkPortarias);
+            Controls.Add(label1);
             Controls.Add(BtnValidarAej);
             Controls.Add(BtnValidadeAej);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -67,11 +104,15 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Validador de Arquivos Fiscais AEJ e AFD";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button BtnValidadeAej;
         private Button BtnValidarAej;
+        private Label label1;
+        private LinkLabel LkPortarias;
+        private LinkLabel LkProjetoGithub;
     }
 }

@@ -13,4 +13,19 @@
     <Content Include="AEJ.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Portarias\Portaria_1510.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Portarias\Portaria_2233.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Portarias\Portaria_595.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Portarias\Portaria_671.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

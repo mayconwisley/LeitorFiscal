@@ -73,6 +73,10 @@
             groupBox8 = new GroupBox();
             RTxtLogTrailer = new RichTextBox();
             DgvListTrailer = new DataGridView();
+            AssinaturaDigital = new TabPage();
+            groupBox9 = new GroupBox();
+            RTxtLogAssinaturaDigital = new RichTextBox();
+            DgvListAssinaturaDigital = new DataGridView();
             MenuPrincipal.SuspendLayout();
             tabControl1.SuspendLayout();
             Cabecalho.SuspendLayout();
@@ -102,6 +106,9 @@
             Trailer.SuspendLayout();
             groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvListTrailer).BeginInit();
+            AssinaturaDigital.SuspendLayout();
+            groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvListAssinaturaDigital).BeginInit();
             SuspendLayout();
             // 
             // MenuPrincipal
@@ -110,7 +117,7 @@
             MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
-            MenuPrincipal.Size = new Size(1069, 24);
+            MenuPrincipal.Size = new Size(1221, 24);
             MenuPrincipal.TabIndex = 1;
             MenuPrincipal.Text = "MenuPrincipal";
             // 
@@ -131,6 +138,7 @@
             // MenuVisualizar
             // 
             MenuVisualizar.DropDownItems.AddRange(new ToolStripItem[] { SubMenuVisualizarListar });
+            MenuVisualizar.Enabled = false;
             MenuVisualizar.Name = "MenuVisualizar";
             MenuVisualizar.Size = new Size(123, 20);
             MenuVisualizar.Text = "Visualizar Individual";
@@ -138,13 +146,14 @@
             // SubMenuVisualizarListar
             // 
             SubMenuVisualizarListar.Name = "SubMenuVisualizarListar";
-            SubMenuVisualizarListar.Size = new Size(102, 22);
+            SubMenuVisualizarListar.Size = new Size(180, 22);
             SubMenuVisualizarListar.Text = "Listar";
             SubMenuVisualizarListar.Click += SubMenuVisualizarListar_Click;
             // 
             // MenuValidacao
             // 
             MenuValidacao.DropDownItems.AddRange(new ToolStripItem[] { SubMenuValidacaoListar });
+            MenuValidacao.Enabled = false;
             MenuValidacao.Name = "MenuValidacao";
             MenuValidacao.Size = new Size(74, 20);
             MenuValidacao.Text = "Validações";
@@ -168,10 +177,11 @@
             tabControl1.Controls.Add(AusenciasBancoHoras);
             tabControl1.Controls.Add(IdentificacaoPTRP);
             tabControl1.Controls.Add(Trailer);
+            tabControl1.Controls.Add(AssinaturaDigital);
             tabControl1.Location = new Point(12, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1045, 545);
+            tabControl1.Size = new Size(1153, 545);
             tabControl1.TabIndex = 2;
             // 
             // Cabecalho
@@ -181,7 +191,7 @@
             Cabecalho.Location = new Point(4, 24);
             Cabecalho.Name = "Cabecalho";
             Cabecalho.Padding = new Padding(3);
-            Cabecalho.Size = new Size(1037, 517);
+            Cabecalho.Size = new Size(1145, 517);
             Cabecalho.TabIndex = 0;
             Cabecalho.Text = "01 - Cabeçalho";
             Cabecalho.UseVisualStyleBackColor = true;
@@ -191,7 +201,7 @@
             GbValidacao.Controls.Add(RTxtLogCabecalho);
             GbValidacao.Location = new Point(3, 375);
             GbValidacao.Name = "GbValidacao";
-            GbValidacao.Size = new Size(1028, 136);
+            GbValidacao.Size = new Size(1136, 136);
             GbValidacao.TabIndex = 1;
             GbValidacao.TabStop = false;
             GbValidacao.Text = "Validações Cabeçalho";
@@ -202,7 +212,7 @@
             RTxtLogCabecalho.Location = new Point(3, 19);
             RTxtLogCabecalho.Name = "RTxtLogCabecalho";
             RTxtLogCabecalho.ReadOnly = true;
-            RTxtLogCabecalho.Size = new Size(1022, 114);
+            RTxtLogCabecalho.Size = new Size(1130, 114);
             RTxtLogCabecalho.TabIndex = 0;
             RTxtLogCabecalho.Text = "";
             // 
@@ -221,7 +231,7 @@
             DgvListCabecalho.ReadOnly = true;
             DgvListCabecalho.RowTemplate.Height = 25;
             DgvListCabecalho.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListCabecalho.Size = new Size(1031, 366);
+            DgvListCabecalho.Size = new Size(1139, 366);
             DgvListCabecalho.TabIndex = 0;
             // 
             // REPsUtilizados
@@ -231,7 +241,7 @@
             REPsUtilizados.Location = new Point(4, 24);
             REPsUtilizados.Name = "REPsUtilizados";
             REPsUtilizados.Padding = new Padding(3);
-            REPsUtilizados.Size = new Size(1037, 517);
+            REPsUtilizados.Size = new Size(1145, 517);
             REPsUtilizados.TabIndex = 1;
             REPsUtilizados.Text = "02 - REPs utilizados";
             REPsUtilizados.UseVisualStyleBackColor = true;
@@ -241,7 +251,7 @@
             groupBox1.Controls.Add(RTxtLogRepUtilizado);
             groupBox1.Location = new Point(3, 375);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1028, 136);
+            groupBox1.Size = new Size(1136, 136);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Validações REP Utilizados";
@@ -252,7 +262,7 @@
             RTxtLogRepUtilizado.Location = new Point(3, 19);
             RTxtLogRepUtilizado.Name = "RTxtLogRepUtilizado";
             RTxtLogRepUtilizado.ReadOnly = true;
-            RTxtLogRepUtilizado.Size = new Size(1022, 114);
+            RTxtLogRepUtilizado.Size = new Size(1130, 114);
             RTxtLogRepUtilizado.TabIndex = 0;
             RTxtLogRepUtilizado.Text = "";
             // 
@@ -271,7 +281,7 @@
             DgvListRepsUtilizados.ReadOnly = true;
             DgvListRepsUtilizados.RowTemplate.Height = 25;
             DgvListRepsUtilizados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListRepsUtilizados.Size = new Size(1031, 366);
+            DgvListRepsUtilizados.Size = new Size(1139, 366);
             DgvListRepsUtilizados.TabIndex = 0;
             // 
             // Vinculos
@@ -281,7 +291,7 @@
             Vinculos.Location = new Point(4, 24);
             Vinculos.Name = "Vinculos";
             Vinculos.Padding = new Padding(3);
-            Vinculos.Size = new Size(1037, 517);
+            Vinculos.Size = new Size(1145, 517);
             Vinculos.TabIndex = 2;
             Vinculos.Text = "03 - Vínculos";
             Vinculos.UseVisualStyleBackColor = true;
@@ -291,7 +301,7 @@
             groupBox2.Controls.Add(RTxtLogVinculo);
             groupBox2.Location = new Point(3, 375);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1028, 136);
+            groupBox2.Size = new Size(1136, 136);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "Validações Vínculos";
@@ -302,7 +312,7 @@
             RTxtLogVinculo.Location = new Point(3, 19);
             RTxtLogVinculo.Name = "RTxtLogVinculo";
             RTxtLogVinculo.ReadOnly = true;
-            RTxtLogVinculo.Size = new Size(1022, 114);
+            RTxtLogVinculo.Size = new Size(1130, 114);
             RTxtLogVinculo.TabIndex = 0;
             RTxtLogVinculo.Text = "";
             // 
@@ -321,7 +331,7 @@
             DgvListVinculo.ReadOnly = true;
             DgvListVinculo.RowTemplate.Height = 25;
             DgvListVinculo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListVinculo.Size = new Size(1031, 366);
+            DgvListVinculo.Size = new Size(1139, 366);
             DgvListVinculo.TabIndex = 0;
             // 
             // HorarioContratual
@@ -330,7 +340,7 @@
             HorarioContratual.Controls.Add(DgvListHorarioContratual);
             HorarioContratual.Location = new Point(4, 24);
             HorarioContratual.Name = "HorarioContratual";
-            HorarioContratual.Size = new Size(1037, 517);
+            HorarioContratual.Size = new Size(1145, 517);
             HorarioContratual.TabIndex = 3;
             HorarioContratual.Text = "04 - Horário contratual";
             HorarioContratual.UseVisualStyleBackColor = true;
@@ -340,7 +350,7 @@
             groupBox3.Controls.Add(RTxtLogHorarioContratual);
             groupBox3.Location = new Point(3, 375);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1028, 136);
+            groupBox3.Size = new Size(1136, 136);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Validações Horario Contratual";
@@ -351,7 +361,7 @@
             RTxtLogHorarioContratual.Location = new Point(3, 19);
             RTxtLogHorarioContratual.Name = "RTxtLogHorarioContratual";
             RTxtLogHorarioContratual.ReadOnly = true;
-            RTxtLogHorarioContratual.Size = new Size(1022, 114);
+            RTxtLogHorarioContratual.Size = new Size(1130, 114);
             RTxtLogHorarioContratual.TabIndex = 0;
             RTxtLogHorarioContratual.Text = "";
             // 
@@ -370,7 +380,7 @@
             DgvListHorarioContratual.ReadOnly = true;
             DgvListHorarioContratual.RowTemplate.Height = 25;
             DgvListHorarioContratual.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListHorarioContratual.Size = new Size(1031, 366);
+            DgvListHorarioContratual.Size = new Size(1139, 366);
             DgvListHorarioContratual.TabIndex = 0;
             // 
             // Marcacoes
@@ -379,7 +389,7 @@
             Marcacoes.Controls.Add(DgvListMarcacao);
             Marcacoes.Location = new Point(4, 24);
             Marcacoes.Name = "Marcacoes";
-            Marcacoes.Size = new Size(1037, 517);
+            Marcacoes.Size = new Size(1145, 517);
             Marcacoes.TabIndex = 4;
             Marcacoes.Text = "05 - Marcações";
             Marcacoes.UseVisualStyleBackColor = true;
@@ -389,7 +399,7 @@
             groupBox4.Controls.Add(RTxtLogMarcacoes);
             groupBox4.Location = new Point(3, 375);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(1028, 136);
+            groupBox4.Size = new Size(1136, 136);
             groupBox4.TabIndex = 2;
             groupBox4.TabStop = false;
             groupBox4.Text = "Validações Marcações";
@@ -400,7 +410,7 @@
             RTxtLogMarcacoes.Location = new Point(3, 19);
             RTxtLogMarcacoes.Name = "RTxtLogMarcacoes";
             RTxtLogMarcacoes.ReadOnly = true;
-            RTxtLogMarcacoes.Size = new Size(1022, 114);
+            RTxtLogMarcacoes.Size = new Size(1130, 114);
             RTxtLogMarcacoes.TabIndex = 0;
             RTxtLogMarcacoes.Text = "";
             // 
@@ -419,7 +429,7 @@
             DgvListMarcacao.ReadOnly = true;
             DgvListMarcacao.RowTemplate.Height = 25;
             DgvListMarcacao.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListMarcacao.Size = new Size(1031, 366);
+            DgvListMarcacao.Size = new Size(1139, 366);
             DgvListMarcacao.TabIndex = 0;
             // 
             // VinculoeSocial
@@ -428,7 +438,7 @@
             VinculoeSocial.Controls.Add(DgvListVinculoeSocial);
             VinculoeSocial.Location = new Point(4, 24);
             VinculoeSocial.Name = "VinculoeSocial";
-            VinculoeSocial.Size = new Size(1037, 517);
+            VinculoeSocial.Size = new Size(1145, 517);
             VinculoeSocial.TabIndex = 5;
             VinculoeSocial.Text = "06 - Vínculo no eSocial";
             VinculoeSocial.UseVisualStyleBackColor = true;
@@ -438,7 +448,7 @@
             groupBox5.Controls.Add(RTxtLogVinculoeSocial);
             groupBox5.Location = new Point(3, 375);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(1028, 136);
+            groupBox5.Size = new Size(1136, 136);
             groupBox5.TabIndex = 2;
             groupBox5.TabStop = false;
             groupBox5.Text = "Validações Vinculo eSocial";
@@ -449,7 +459,7 @@
             RTxtLogVinculoeSocial.Location = new Point(3, 19);
             RTxtLogVinculoeSocial.Name = "RTxtLogVinculoeSocial";
             RTxtLogVinculoeSocial.ReadOnly = true;
-            RTxtLogVinculoeSocial.Size = new Size(1022, 114);
+            RTxtLogVinculoeSocial.Size = new Size(1130, 114);
             RTxtLogVinculoeSocial.TabIndex = 0;
             RTxtLogVinculoeSocial.Text = "";
             // 
@@ -468,7 +478,7 @@
             DgvListVinculoeSocial.ReadOnly = true;
             DgvListVinculoeSocial.RowTemplate.Height = 25;
             DgvListVinculoeSocial.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListVinculoeSocial.Size = new Size(1031, 366);
+            DgvListVinculoeSocial.Size = new Size(1139, 366);
             DgvListVinculoeSocial.TabIndex = 0;
             // 
             // AusenciasBancoHoras
@@ -477,7 +487,7 @@
             AusenciasBancoHoras.Controls.Add(DgvListAusenciaBancoHoras);
             AusenciasBancoHoras.Location = new Point(4, 24);
             AusenciasBancoHoras.Name = "AusenciasBancoHoras";
-            AusenciasBancoHoras.Size = new Size(1037, 517);
+            AusenciasBancoHoras.Size = new Size(1145, 517);
             AusenciasBancoHoras.TabIndex = 6;
             AusenciasBancoHoras.Text = "07  - Ausências e Banco de Horas";
             AusenciasBancoHoras.UseVisualStyleBackColor = true;
@@ -487,7 +497,7 @@
             groupBox6.Controls.Add(RTxtLogAusenciaBancoHoras);
             groupBox6.Location = new Point(3, 375);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(1028, 136);
+            groupBox6.Size = new Size(1136, 136);
             groupBox6.TabIndex = 2;
             groupBox6.TabStop = false;
             groupBox6.Text = "Validações Ausência e Banco de Horas";
@@ -498,7 +508,7 @@
             RTxtLogAusenciaBancoHoras.Location = new Point(3, 19);
             RTxtLogAusenciaBancoHoras.Name = "RTxtLogAusenciaBancoHoras";
             RTxtLogAusenciaBancoHoras.ReadOnly = true;
-            RTxtLogAusenciaBancoHoras.Size = new Size(1022, 114);
+            RTxtLogAusenciaBancoHoras.Size = new Size(1130, 114);
             RTxtLogAusenciaBancoHoras.TabIndex = 0;
             RTxtLogAusenciaBancoHoras.Text = "";
             // 
@@ -517,7 +527,7 @@
             DgvListAusenciaBancoHoras.ReadOnly = true;
             DgvListAusenciaBancoHoras.RowTemplate.Height = 25;
             DgvListAusenciaBancoHoras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListAusenciaBancoHoras.Size = new Size(1031, 366);
+            DgvListAusenciaBancoHoras.Size = new Size(1139, 366);
             DgvListAusenciaBancoHoras.TabIndex = 0;
             // 
             // IdentificacaoPTRP
@@ -526,7 +536,7 @@
             IdentificacaoPTRP.Controls.Add(DgvListIdentificaoPTRP);
             IdentificacaoPTRP.Location = new Point(4, 24);
             IdentificacaoPTRP.Name = "IdentificacaoPTRP";
-            IdentificacaoPTRP.Size = new Size(1037, 517);
+            IdentificacaoPTRP.Size = new Size(1145, 517);
             IdentificacaoPTRP.TabIndex = 7;
             IdentificacaoPTRP.Text = "08 - Identificação do PTRP";
             IdentificacaoPTRP.UseVisualStyleBackColor = true;
@@ -536,7 +546,7 @@
             groupBox7.Controls.Add(RTxtLogIdentificaoPTRP);
             groupBox7.Location = new Point(3, 375);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(1028, 136);
+            groupBox7.Size = new Size(1136, 136);
             groupBox7.TabIndex = 2;
             groupBox7.TabStop = false;
             groupBox7.Text = "Validações Identificação PTRP";
@@ -547,7 +557,7 @@
             RTxtLogIdentificaoPTRP.Location = new Point(3, 19);
             RTxtLogIdentificaoPTRP.Name = "RTxtLogIdentificaoPTRP";
             RTxtLogIdentificaoPTRP.ReadOnly = true;
-            RTxtLogIdentificaoPTRP.Size = new Size(1022, 114);
+            RTxtLogIdentificaoPTRP.Size = new Size(1130, 114);
             RTxtLogIdentificaoPTRP.TabIndex = 0;
             RTxtLogIdentificaoPTRP.Text = "";
             // 
@@ -566,7 +576,7 @@
             DgvListIdentificaoPTRP.ReadOnly = true;
             DgvListIdentificaoPTRP.RowTemplate.Height = 25;
             DgvListIdentificaoPTRP.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListIdentificaoPTRP.Size = new Size(1031, 366);
+            DgvListIdentificaoPTRP.Size = new Size(1139, 366);
             DgvListIdentificaoPTRP.TabIndex = 0;
             // 
             // Trailer
@@ -575,7 +585,7 @@
             Trailer.Controls.Add(DgvListTrailer);
             Trailer.Location = new Point(4, 24);
             Trailer.Name = "Trailer";
-            Trailer.Size = new Size(1037, 517);
+            Trailer.Size = new Size(1145, 517);
             Trailer.TabIndex = 8;
             Trailer.Text = "99 - Trailer";
             Trailer.UseVisualStyleBackColor = true;
@@ -585,7 +595,7 @@
             groupBox8.Controls.Add(RTxtLogTrailer);
             groupBox8.Location = new Point(3, 375);
             groupBox8.Name = "groupBox8";
-            groupBox8.Size = new Size(1028, 136);
+            groupBox8.Size = new Size(1136, 136);
             groupBox8.TabIndex = 2;
             groupBox8.TabStop = false;
             groupBox8.Text = "Validações Trailer";
@@ -596,7 +606,7 @@
             RTxtLogTrailer.Location = new Point(3, 19);
             RTxtLogTrailer.Name = "RTxtLogTrailer";
             RTxtLogTrailer.ReadOnly = true;
-            RTxtLogTrailer.Size = new Size(1022, 114);
+            RTxtLogTrailer.Size = new Size(1130, 114);
             RTxtLogTrailer.TabIndex = 0;
             RTxtLogTrailer.Text = "";
             // 
@@ -615,14 +625,63 @@
             DgvListTrailer.ReadOnly = true;
             DgvListTrailer.RowTemplate.Height = 25;
             DgvListTrailer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvListTrailer.Size = new Size(1031, 366);
+            DgvListTrailer.Size = new Size(1139, 366);
             DgvListTrailer.TabIndex = 0;
+            // 
+            // AssinaturaDigital
+            // 
+            AssinaturaDigital.Controls.Add(groupBox9);
+            AssinaturaDigital.Controls.Add(DgvListAssinaturaDigital);
+            AssinaturaDigital.Location = new Point(4, 24);
+            AssinaturaDigital.Name = "AssinaturaDigital";
+            AssinaturaDigital.Size = new Size(1145, 517);
+            AssinaturaDigital.TabIndex = 9;
+            AssinaturaDigital.Text = "Assinatura Digital";
+            AssinaturaDigital.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(RTxtLogAssinaturaDigital);
+            groupBox9.Location = new Point(3, 375);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(1136, 136);
+            groupBox9.TabIndex = 3;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Validações Assinatura Digital";
+            // 
+            // RTxtLogAssinaturaDigital
+            // 
+            RTxtLogAssinaturaDigital.Dock = DockStyle.Fill;
+            RTxtLogAssinaturaDigital.Location = new Point(3, 19);
+            RTxtLogAssinaturaDigital.Name = "RTxtLogAssinaturaDigital";
+            RTxtLogAssinaturaDigital.ReadOnly = true;
+            RTxtLogAssinaturaDigital.Size = new Size(1130, 114);
+            RTxtLogAssinaturaDigital.TabIndex = 0;
+            RTxtLogAssinaturaDigital.Text = "";
+            // 
+            // DgvListAssinaturaDigital
+            // 
+            DgvListAssinaturaDigital.AllowUserToAddRows = false;
+            DgvListAssinaturaDigital.AllowUserToDeleteRows = false;
+            DgvListAssinaturaDigital.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvListAssinaturaDigital.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            DgvListAssinaturaDigital.BackgroundColor = SystemColors.Control;
+            DgvListAssinaturaDigital.BorderStyle = BorderStyle.Fixed3D;
+            DgvListAssinaturaDigital.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvListAssinaturaDigital.Location = new Point(3, 3);
+            DgvListAssinaturaDigital.MultiSelect = false;
+            DgvListAssinaturaDigital.Name = "DgvListAssinaturaDigital";
+            DgvListAssinaturaDigital.ReadOnly = true;
+            DgvListAssinaturaDigital.RowTemplate.Height = 25;
+            DgvListAssinaturaDigital.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvListAssinaturaDigital.Size = new Size(1139, 366);
+            DgvListAssinaturaDigital.TabIndex = 2;
             // 
             // FrmLeitorFiscal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1069, 584);
+            ClientSize = new Size(1221, 584);
             Controls.Add(tabControl1);
             Controls.Add(MenuPrincipal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -664,6 +723,9 @@
             Trailer.ResumeLayout(false);
             groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvListTrailer).EndInit();
+            AssinaturaDigital.ResumeLayout(false);
+            groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvListAssinaturaDigital).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -713,5 +775,9 @@
         private ToolStripMenuItem SubMenuVisualizarListar;
         private ToolStripMenuItem MenuValidacao;
         private ToolStripMenuItem SubMenuValidacaoListar;
+        private TabPage AssinaturaDigital;
+        private GroupBox groupBox9;
+        private RichTextBox RTxtLogAssinaturaDigital;
+        private DataGridView DgvListAssinaturaDigital;
     }
 }
