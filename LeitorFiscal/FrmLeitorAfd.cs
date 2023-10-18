@@ -411,25 +411,11 @@ public partial class FrmLeitorAfd : Form
             MessageBox.Show(ex.Message);
         }
     }
-
-    private void SubMenuFormaII_Click(object sender, EventArgs e)
+ 
+    private void SubMenuConverterArt96_Click(object sender, EventArgs e)
     {
         SalvarArquivo();
-        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "II");
-        MessageBox.Show("Arquivo convertido!", "Aviso");
-    }
-
-    private void SubMenuFormaI_Click(object sender, EventArgs e)
-    {
-        SalvarArquivo();
-        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "I");
-        MessageBox.Show("Arquivo convertido!", "Aviso");
-    }
-
-    private void SubMenuFormaIII_Click(object sender, EventArgs e)
-    {
-        SalvarArquivo();
-        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar, "III");
+        ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar);
         MessageBox.Show("Arquivo convertido!", "Aviso");
     }
 }

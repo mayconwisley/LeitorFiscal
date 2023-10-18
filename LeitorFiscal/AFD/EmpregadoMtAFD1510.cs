@@ -74,7 +74,36 @@ public class EmpregadoMtAFD1510
                 ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n");
                 return;
             }
+            string validacaoPis = empregadoMt.Pis[..1];
+            string pis = empregadoMt.Pis.Substring(1, 11);
+            if (validacaoPis == "0")
+            {
+                bool ePis = ValidacaoPIS.Validar(pis);
+                bool eCpf = ValidacaoCPF.Validar(pis);
 
+                if (!ePis)
+                {
+                    if (eCpf)
+                    {
+                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
+                    }
+                }
+            }
+
+            if (validacaoPis == "9")
+            {
+                bool ePis = ValidacaoPIS.Validar(pis);
+                bool eCpf = ValidacaoCPF.Validar(pis);
+
+                if (!eCpf)
+                {
+                    if (ePis)
+                    {
+                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n");
+                    }
+
+                }
+            }
             EmpregadoMtRepAfdList.Add(empregadoMt);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)

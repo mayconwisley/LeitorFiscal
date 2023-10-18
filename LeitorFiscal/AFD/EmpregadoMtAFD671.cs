@@ -85,6 +85,11 @@ public class EmpregadoMtAFD671
                 ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n");
                 return;
             }
+            string cpf = empregadoMt.Cpf.Substring(1, 11);
+            if (!ValidacaoCPF.Validar(cpf))
+            {
+                ErrosValidacao.Add("O campo 'Cpf' esta inválido");
+            }
 
             EmpregadoMtRepAfdList.Add(empregadoMt);
         }

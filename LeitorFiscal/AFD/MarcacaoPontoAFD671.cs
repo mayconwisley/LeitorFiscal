@@ -59,6 +59,12 @@ public class MarcacaoPontoAFD671
                 return;
             }
 
+            string cpf = marcacaoPonto.Cpf.Substring(1, 11);
+            if (!ValidacaoCPF.Validar(cpf))
+            {
+                ErrosValidacao.Add("O campo 'Cpf' esta inválido");
+            }
+
             MarcacaoPontoAfdList.Add(marcacaoPonto);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)

@@ -33,9 +33,6 @@
             SubMenuArquivoLer = new ToolStripMenuItem();
             MenuConverter = new ToolStripMenuItem();
             SubMenuConverterArt96 = new ToolStripMenuItem();
-            SubMenuFormaI = new ToolStripMenuItem();
-            SubMenuFormaII = new ToolStripMenuItem();
-            SubMenuFormaIII = new ToolStripMenuItem();
             MenuValidacao = new ToolStripMenuItem();
             SubMenuValidacaoListar = new ToolStripMenuItem();
             TabControlAfd = new TabControl();
@@ -140,31 +137,10 @@
             // 
             // SubMenuConverterArt96
             // 
-            SubMenuConverterArt96.DropDownItems.AddRange(new ToolStripItem[] { SubMenuFormaI, SubMenuFormaII, SubMenuFormaIII });
             SubMenuConverterArt96.Name = "SubMenuConverterArt96";
-            SubMenuConverterArt96.Size = new Size(173, 22);
+            SubMenuConverterArt96.Size = new Size(180, 22);
             SubMenuConverterArt96.Text = "Art. 96 Portaria 671";
-            // 
-            // SubMenuFormaI
-            // 
-            SubMenuFormaI.Name = "SubMenuFormaI";
-            SubMenuFormaI.Size = new Size(120, 22);
-            SubMenuFormaI.Text = "Forma I";
-            SubMenuFormaI.Click += SubMenuFormaI_Click;
-            // 
-            // SubMenuFormaII
-            // 
-            SubMenuFormaII.Name = "SubMenuFormaII";
-            SubMenuFormaII.Size = new Size(120, 22);
-            SubMenuFormaII.Text = "Forma II";
-            SubMenuFormaII.Click += SubMenuFormaII_Click;
-            // 
-            // SubMenuFormaIII
-            // 
-            SubMenuFormaIII.Name = "SubMenuFormaIII";
-            SubMenuFormaIII.Size = new Size(120, 22);
-            SubMenuFormaIII.Text = "Forma III";
-            SubMenuFormaIII.Click += SubMenuFormaIII_Click;
+            SubMenuConverterArt96.Click += SubMenuConverterArt96_Click;
             // 
             // MenuValidacao
             // 
@@ -736,9 +712,6 @@
         private DataGridView DgvListMarcacaoPontoRepP;
         private ToolStripMenuItem MenuValidacao;
         private ToolStripMenuItem SubMenuValidacaoListar;
-        private ToolStripMenuItem SubMenuFormaI;
-        private ToolStripMenuItem SubMenuFormaII;
-        private ToolStripMenuItem SubMenuFormaIII;
         private TabPage AssinaturaDigital;
         private GroupBox groupBox7;
         private RichTextBox RTxtLogAssinaturaDigital;
