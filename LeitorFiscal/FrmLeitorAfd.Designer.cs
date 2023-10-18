@@ -138,7 +138,7 @@
             // SubMenuConverterArt96
             // 
             SubMenuConverterArt96.Name = "SubMenuConverterArt96";
-            SubMenuConverterArt96.Size = new Size(180, 22);
+            SubMenuConverterArt96.Size = new Size(173, 22);
             SubMenuConverterArt96.Text = "Art. 96 Portaria 671";
             SubMenuConverterArt96.Click += SubMenuConverterArt96_Click;
             // 
@@ -536,7 +536,7 @@
             // 
             groupBox8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox8.Controls.Add(RTxtLogTrailer);
-            groupBox8.Location = new Point(3, 375);
+            groupBox8.Location = new Point(6, 375);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(1036, 139);
             groupBox8.TabIndex = 2;
@@ -585,7 +585,7 @@
             // groupBox7
             // 
             groupBox7.Controls.Add(RTxtLogAssinaturaDigital);
-            groupBox7.Location = new Point(5, 378);
+            groupBox7.Location = new Point(6, 375);
             groupBox7.Name = "groupBox7";
             groupBox7.Size = new Size(1036, 139);
             groupBox7.TabIndex = 3;
@@ -611,7 +611,7 @@
             DgvListAssinaturaDigital.BackgroundColor = SystemColors.Control;
             DgvListAssinaturaDigital.BorderStyle = BorderStyle.Fixed3D;
             DgvListAssinaturaDigital.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvListAssinaturaDigital.Location = new Point(5, 9);
+            DgvListAssinaturaDigital.Location = new Point(6, 6);
             DgvListAssinaturaDigital.MultiSelect = false;
             DgvListAssinaturaDigital.Name = "DgvListAssinaturaDigital";
             DgvListAssinaturaDigital.ReadOnly = true;

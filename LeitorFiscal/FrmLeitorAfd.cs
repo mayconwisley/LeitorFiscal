@@ -411,7 +411,7 @@ public partial class FrmLeitorAfd : Form
             MessageBox.Show(ex.Message);
         }
     }
- 
+
     private void SubMenuConverterArt96_Click(object sender, EventArgs e)
     {
         SalvarArquivo();
