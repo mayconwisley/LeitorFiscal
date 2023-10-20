@@ -5,7 +5,6 @@ namespace LeitorFiscal.AFD;
 
 public class TrailerAFD595
 {
-
     [MaxLength(9, ErrorMessage = "O campo Noves deve ter um comprimento máximo de '9'")]
     [MinLength(9, ErrorMessage = "O campo Noves deve ter um comprimento minimo de '9'")]
     public string? Noves { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico, Dado: = 999999999*/
