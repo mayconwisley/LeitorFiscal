@@ -121,6 +121,21 @@ public class EmpregadoMtAFD595
                 }
             }
 
+            if (validacaoPis == "8")
+            {
+                bool ePis = ValidacaoPIS.Validar(pis);
+                bool eCpf = ValidacaoCPF.Validar(pis);
+
+                if (eCpf)
+                {
+                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Cpf\n");
+                }
+                if (ePis)
+                {
+                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Pis\n");
+                }
+            }
+
             EmpregadoMtRepAfdList.Add(empregadoMt);
         }
         foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
