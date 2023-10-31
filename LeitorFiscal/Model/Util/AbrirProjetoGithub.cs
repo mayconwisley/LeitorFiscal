@@ -26,7 +26,7 @@ public class AbrirProjetoGithub
             string? defaultNavegador = registryKey.GetValue(null) as string;
             if (!string.IsNullOrEmpty(defaultNavegador))
             {
-                defaultNavegador = defaultNavegador.Replace("%1", "");
+                defaultNavegador = defaultNavegador.Replace("%1", "").Replace("--single-argument", "");
                 navegadorPadrao = defaultNavegador;
             }
         }
