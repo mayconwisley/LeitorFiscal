@@ -117,7 +117,7 @@
             MenuPrincipal.Items.AddRange(new ToolStripItem[] { MenuAej, MenuVisualizar, MenuValidacao });
             MenuPrincipal.Location = new Point(0, 0);
             MenuPrincipal.Name = "MenuPrincipal";
-            MenuPrincipal.Size = new Size(1221, 24);
+            MenuPrincipal.Size = new Size(1170, 24);
             MenuPrincipal.TabIndex = 1;
             MenuPrincipal.Text = "MenuPrincipal";
             // 
@@ -146,7 +146,7 @@
             // SubMenuVisualizarListar
             // 
             SubMenuVisualizarListar.Name = "SubMenuVisualizarListar";
-            SubMenuVisualizarListar.Size = new Size(180, 22);
+            SubMenuVisualizarListar.Size = new Size(102, 22);
             SubMenuVisualizarListar.Text = "Listar";
             SubMenuVisualizarListar.Click += SubMenuVisualizarListar_Click;
             // 
@@ -167,7 +167,6 @@
             // 
             // tabControl1
             // 
-            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(Cabecalho);
             tabControl1.Controls.Add(REPsUtilizados);
             tabControl1.Controls.Add(Vinculos);
@@ -181,7 +180,7 @@
             tabControl1.Location = new Point(12, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1153, 545);
+            tabControl1.Size = new Size(1154, 545);
             tabControl1.TabIndex = 2;
             // 
             // Cabecalho
@@ -191,7 +190,7 @@
             Cabecalho.Location = new Point(4, 24);
             Cabecalho.Name = "Cabecalho";
             Cabecalho.Padding = new Padding(3);
-            Cabecalho.Size = new Size(1145, 517);
+            Cabecalho.Size = new Size(1146, 517);
             Cabecalho.TabIndex = 0;
             Cabecalho.Text = "01 - Cabeçalho";
             Cabecalho.UseVisualStyleBackColor = true;
@@ -201,7 +200,7 @@
             GbValidacao.Controls.Add(RTxtLogCabecalho);
             GbValidacao.Location = new Point(3, 375);
             GbValidacao.Name = "GbValidacao";
-            GbValidacao.Size = new Size(1136, 136);
+            GbValidacao.Size = new Size(1139, 136);
             GbValidacao.TabIndex = 1;
             GbValidacao.TabStop = false;
             GbValidacao.Text = "Validações Cabeçalho";
@@ -212,7 +211,7 @@
             RTxtLogCabecalho.Location = new Point(3, 19);
             RTxtLogCabecalho.Name = "RTxtLogCabecalho";
             RTxtLogCabecalho.ReadOnly = true;
-            RTxtLogCabecalho.Size = new Size(1130, 114);
+            RTxtLogCabecalho.Size = new Size(1133, 114);
             RTxtLogCabecalho.TabIndex = 0;
             RTxtLogCabecalho.Text = "";
             // 
@@ -681,7 +680,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1221, 584);
+            ClientSize = new Size(1170, 584);
             Controls.Add(tabControl1);
             Controls.Add(MenuPrincipal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
