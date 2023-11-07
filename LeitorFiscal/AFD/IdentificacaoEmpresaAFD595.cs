@@ -154,14 +154,6 @@ public class IdentificacaoEmpresaAFD595
             }
         }
 
-        if (!string.IsNullOrWhiteSpace(identificacaoEmpresa.Crc16))
-        {
-            if (!double.TryParse(identificacaoEmpresa.Crc16, out _))
-            {
-                camposComErro.Add("Crc16");
-            }
-        }
-
         if (camposComErro.Count == 0)
         {
             return true;
