@@ -58,23 +58,18 @@ public class MarcacaoPontoAFD671
                 ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n");
                 return;
             }
-            string validacaoCpf = marcacaoPonto.Cpf[..1];
+
             string cpf = marcacaoPonto.Cpf.Substring(1, 11);
 
-            if (validacaoCpf == "0")
+
+            bool eCpf = ValidacaoCPF.Validar(cpf);
+
+            if (!eCpf)
             {
-                bool ePis = ValidacaoPIS.Validar(cpf);
-                bool eCpf = ValidacaoCPF.Validar(cpf);
-
-                if (!ePis)
-                {
-                    if (eCpf)
-                    {
-                        ErrosValidacao.Add("O campo 'Cpf' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
-                    }
-
-                }
+                ErrosValidacao.Add("O campo 'Cpf' esta com o cpf inválido\n");
             }
+
+
 
             MarcacaoPontoAfdList.Add(marcacaoPonto);
         }
