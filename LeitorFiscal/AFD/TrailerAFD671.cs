@@ -120,7 +120,7 @@ public class TrailerAFD671
                 count++;
             }
 
-            if (int.Parse(item.QtdRegTipo6!) != reg07)
+            if (int.Parse(item.QtdRegTipo7!) != reg07)
             {
                 ErrosValidacao.Add($"Quantidade de registros '7 - Marcação Ponto Rep P' inválido, quantidade verificada: {reg07}, quantidade no registro 9 - Trailer: {item.QtdRegTipo7}\n");
                 count++;
