@@ -36,6 +36,11 @@ public class MarcacoesAEJ
     {
         string[] itemLinha = linhaMarcacoes.Split("|");
 
+        if (itemLinha.Length < 9 || itemLinha.Length > 10)
+        {
+            throw new Exception("Layout da sessão 05 fora do padrão definido pela a portaria");
+        }
+
         var marcacoes = new MarcacoesAEJ
         {
             TipoReg = itemLinha[0].Trim(),
