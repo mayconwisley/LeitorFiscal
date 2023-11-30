@@ -59,14 +59,12 @@ public class MarcacoesAEJ
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'TpMarc' com o valor ({marcacoes.TpMarc}) inválido, deve ter os valores 'E' ou 'S' ou 'D'.\n");
                 return;
-
             }
 
             if (marcacoes.FonteMarc != "O" && marcacoes.FonteMarc != "I" && marcacoes.FonteMarc != "P" && marcacoes.FonteMarc != "X" && marcacoes.FonteMarc != "T")
             {
                 ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'FonteMarc' com o valor ({marcacoes.FonteMarc}) inválido, deve ter os valores 'O' ou 'I' ou 'P' ou 'X' ou 'T'.\n");
                 return;
-
             }
 
             if (marcacoes.TpMarc == "E" && marcacoes.SeqEntSaida == "1" && marcacoes.CodHorContratual == "")
@@ -90,7 +88,6 @@ public class MarcacoesAEJ
 
     private static bool ValidarTipoDados(MarcacoesAEJ marcacoesAEJ)
     {
-
         var camposComErro = new List<string>();
 
         if (!int.TryParse(marcacoesAEJ.TipoReg, out _))
