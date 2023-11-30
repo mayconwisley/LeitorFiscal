@@ -31,7 +31,10 @@ public class IdentificacaoPTRPAEJ
     public static void GetIdentificacaoPTRP(string linhaIdentificacaoPTRPAEJ)
     {
         string[] itemLinha = linhaIdentificacaoPTRPAEJ.Split("|");
-
+        if (itemLinha.Length < 7 || itemLinha.Length > 8)
+        {
+            throw new Exception("Layout da sessão 08 fora do padrão definido pela a portaria");
+        }
         var identificacaoPTRP = new IdentificacaoPTRPAEJ
         {
             TipoReg = itemLinha[0].Trim(),

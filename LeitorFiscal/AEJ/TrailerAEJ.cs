@@ -38,7 +38,10 @@ public class TrailerAEJ
     public static void GetTrailer(string linhaTrailer)
     {
         string[] itemLinha = linhaTrailer.Split("|");
-
+        if (itemLinha.Length < 9 || itemLinha.Length > 10)
+        {
+            throw new Exception("Layout da sessão 99 fora do padrão definido pela a portaria");
+        }
         var trailer = new TrailerAEJ
         {
             TipoReg = itemLinha[0].Trim(),

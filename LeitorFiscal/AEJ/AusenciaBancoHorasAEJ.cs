@@ -26,7 +26,10 @@ public class AusenciaBancoHorasAEJ
     public static void GetAusenciaBancoHoras(string linhaAusenciaBancoHoras)
     {
         string[] itemLinha = linhaAusenciaBancoHoras.Split("|");
-
+        if (itemLinha.Length < 6 || itemLinha.Length > 7)
+        {
+            throw new Exception("Layout da sessão 07 fora do padrão definido pela a portaria");
+        }
         var ausenciaBancoHoras = new AusenciaBancoHorasAEJ
         {
             TipoReg = itemLinha[0].Trim(),

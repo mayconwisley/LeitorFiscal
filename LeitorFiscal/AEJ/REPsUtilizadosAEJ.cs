@@ -24,7 +24,10 @@ public class REPsUtilizadosAEJ
     public static void GetREPsUtilizados(string linhaRep)
     {
         string[] itemLinha = linhaRep.Split("|");
-
+        if (itemLinha.Length < 4 || itemLinha.Length > 5)
+        {
+            throw new Exception("Layout da sessão 02 fora do padrão definido pela a portaria");
+        }
         var repsUtilizado = new REPsUtilizadosAEJ
         {
             TipoReg = itemLinha[0].Trim(),

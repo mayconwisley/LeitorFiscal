@@ -49,7 +49,10 @@ public class HorarioContratualAEJ
     public static void GetHorarioContratual(string linhaHoraContratual)
     {
         string[] itemLinha = linhaHoraContratual.Split("|");
-
+        if (itemLinha.Length < 7 || itemLinha.Length > 8)
+        {
+            throw new Exception("Layout da sessão 04 fora do padrão definido pela a portaria");
+        }
         var horarioContratual = new HorarioContratualAEJ
         {
             TipoReg = itemLinha[0].Trim(),

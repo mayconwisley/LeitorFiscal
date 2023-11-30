@@ -20,7 +20,10 @@ public class VinculoeSocialAEJ
     public static void GetVinculoeSocial(string linhaVinculoeSocial)
     {
         string[] itemLinha = linhaVinculoeSocial.Split("|");
-
+        if (itemLinha.Length < 3 || itemLinha.Length > 4)
+        {
+            throw new Exception("Layout da sessão 06 fora do padrão definido pela a portaria");
+        }
         var vinculoeSocial = new VinculoeSocialAEJ
         {
             TipoReg = itemLinha[0].Trim(),

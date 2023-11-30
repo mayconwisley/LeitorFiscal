@@ -23,7 +23,10 @@ public class VinculosAEJ
     public static void GetVinculos(string linhaVinculo)
     {
         string[] itemLinha = linhaVinculo.Split("|");
-
+        if (itemLinha.Length < 4 || itemLinha.Length > 5)
+        {
+            throw new Exception("Layout da sessão 03 fora do padrão definido pela a portaria");
+        }
         var vinculo = new VinculosAEJ
         {
             TipoReg = itemLinha[0].Trim(),

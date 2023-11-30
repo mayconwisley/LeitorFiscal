@@ -41,7 +41,10 @@ public class CabecalhoAEJ
     public static void GetCabecalhos(string linhaCabecalho)
     {
         string[] itemLinha = linhaCabecalho.Split("|");
-
+        if (itemLinha.Length < 10 || itemLinha.Length > 11)
+        {
+            throw new Exception("Layout da sessão 01 fora do padrão definido pela a portaria");
+        }
         var cabecalho = new CabecalhoAEJ
         {
             TipoReg = itemLinha[0].Trim(),
