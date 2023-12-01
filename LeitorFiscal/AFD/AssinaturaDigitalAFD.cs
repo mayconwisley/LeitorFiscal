@@ -35,7 +35,7 @@ public class AssinaturaDigitalAFD
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(assinaturaDigital))
+        if (ValidacaoTamanhoDado.ValidarTamanho(assinaturaDigital,linhaArquivo))
         {
             AssinaturaDigitalAfdList.Add(assinaturaDigital);
         }

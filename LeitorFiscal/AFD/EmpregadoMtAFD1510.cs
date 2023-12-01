@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -62,16 +63,16 @@ public class EmpregadoMtAFD1510
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt) && ValidarTipoDados(empregadoMt))
+        if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt, linhaArquivo) && ValidarTipoDados(empregadoMt, linhaArquivo))
         {
             if (empregadoMt.TpRegistro != "5")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
             if (empregadoMt.TpOperacao != "I" && empregadoMt.TpOperacao != "A" && empregadoMt.TpOperacao != "E")
             {
-                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n");
+                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
             string validacaoPis = empregadoMt.Pis[..1];
@@ -126,7 +127,7 @@ public class EmpregadoMtAFD1510
         }
 
     }
-    private static bool ValidarTipoDados(EmpregadoMtAFD1510 empregadoMtRep)
+    private static bool ValidarTipoDados(EmpregadoMtAFD1510 empregadoMtRep, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -162,7 +163,7 @@ public class EmpregadoMtAFD1510
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

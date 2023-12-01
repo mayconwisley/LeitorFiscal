@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -54,18 +55,18 @@ public class EventosSensiveisAFD671
                 TpEvento = linhaArquivo.Substring(34, 2)
             };
         }
-        if (ValidacaoTamanhoDado.ValidarTamanho(eventosSensiveis) && ValidarTipoDados(eventosSensiveis))
+        if (ValidacaoTamanhoDado.ValidarTamanho(eventosSensiveis, linhaArquivo) && ValidarTipoDados(eventosSensiveis, linhaArquivo))
         {
             if (eventosSensiveis.TpRegistro != "6")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({eventosSensiveis.TpRegistro}) inválido, deve ter o valor '6'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({eventosSensiveis.TpRegistro}) inválido, deve ter o valor '6'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (eventosSensiveis.TpEvento != "01" && eventosSensiveis.TpEvento != "02" && eventosSensiveis.TpEvento != "03" &&
                 eventosSensiveis.TpEvento != "04" && eventosSensiveis.TpEvento != "05" && eventosSensiveis.TpEvento != "06")
             {
-                ErrosValidacao.Add($"O campo 'TpEvento' esta com o valor ({eventosSensiveis.TpEvento}) inválido, deve ter o valor '01', '02', '03', '04', '05' ou '06'.\n");
+                ErrosValidacao.Add($"O campo 'TpEvento' esta com o valor ({eventosSensiveis.TpEvento}) inválido, deve ter o valor '01', '02', '03', '04', '05' ou '06'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -76,7 +77,7 @@ public class EventosSensiveisAFD671
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(EventosSensiveisAFD671 eventosSensiveis)
+    private static bool ValidarTipoDados(EventosSensiveisAFD671 eventosSensiveis, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -106,7 +107,7 @@ public class EventosSensiveisAFD671
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

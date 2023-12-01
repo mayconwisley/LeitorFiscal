@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -76,17 +77,17 @@ public class EmpregadoMtAFD595
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt) && ValidarTipoDados(empregadoMt))
+        if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt, linhaArquivo) && ValidarTipoDados(empregadoMt,linhaArquivo))
         {
             if (empregadoMt.TpRegistro != "5")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (empregadoMt.TpOperacao != "I" && empregadoMt.TpOperacao != "A" && empregadoMt.TpOperacao != "E")
             {
-                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n");
+                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
             string validacaoPis = empregadoMt.Pis[..1];
@@ -100,7 +101,7 @@ public class EmpregadoMtAFD595
                 {
                     if (eCpf)
                     {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
+                        ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                     }
 
                 }
@@ -115,7 +116,7 @@ public class EmpregadoMtAFD595
                 {
                     if (ePis)
                     {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n");
+                        ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                     }
 
                 }
@@ -128,11 +129,11 @@ public class EmpregadoMtAFD595
 
                 if (eCpf)
                 {
-                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Cpf\n");
+                    ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Cpf\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 }
                 if (ePis)
                 {
-                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Pis\n");
+                    ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Pis\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 }
             }
 
@@ -144,7 +145,7 @@ public class EmpregadoMtAFD595
         }
 
     }
-    private static bool ValidarTipoDados(EmpregadoMtAFD595 empregadoMtRep)
+    private static bool ValidarTipoDados(EmpregadoMtAFD595 empregadoMtRep, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -187,7 +188,7 @@ public class EmpregadoMtAFD595
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

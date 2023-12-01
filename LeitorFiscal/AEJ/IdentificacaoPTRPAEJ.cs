@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -33,7 +34,7 @@ public class IdentificacaoPTRPAEJ
         string[] itemLinha = linhaIdentificacaoPTRPAEJ.Split("|");
         if (itemLinha.Length < 7 || itemLinha.Length > 8)
         {
-            throw new Exception("Layout da sessão 08 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 08 esta fora do padrão definido pela a portaria\n{linhaIdentificacaoPTRPAEJ}");
         }
         var identificacaoPTRP = new IdentificacaoPTRPAEJ
         {
@@ -46,18 +47,18 @@ public class IdentificacaoPTRPAEJ
             EmailDesenv = itemLinha[6].Trim()
         };
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP) && ValidarTipoDados(identificacaoPTRP))
+        if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoPTRP, linhaIdentificacaoPTRPAEJ) && ValidarTipoDados(identificacaoPTRP, linhaIdentificacaoPTRPAEJ))
         {
             if (identificacaoPTRP.TpIdtDesenv != "1" && identificacaoPTRP.TpIdtDesenv != "2")
             {
-                ErrosValidacao.Add($"O campo 'TpIdtDesenv' esta com o valor ({identificacaoPTRP.TpIdtDesenv}) inválido, deve ter o valor igual a '1' ou '2'\n");
+                ErrosValidacao.Add($"O campo 'TpIdtDesenv' esta com o valor ({identificacaoPTRP.TpIdtDesenv}) inválido, deve ter o valor igual a '1' ou '2'\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaIdentificacaoPTRPAEJ}\n");
                 return;
             }
 
 
             if (decimal.Parse(identificacaoPTRP.IdtDesenv) > 11 && decimal.Parse(identificacaoPTRP.IdtDesenv) < 14)
             {
-                ErrosValidacao.Add($"O campo 'IdtDesenv' esta com a quantidade de digitos inválidos ({identificacaoPTRP.IdtDesenv.Length}) deve ter a quantidade igual a '11' ou '14'\n");
+                ErrosValidacao.Add($"O campo 'IdtDesenv' esta com a quantidade de digitos inválidos ({identificacaoPTRP.IdtDesenv.Length}) deve ter a quantidade igual a '11' ou '14'\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaIdentificacaoPTRPAEJ}\n");
                 return;
             }
 
@@ -69,7 +70,7 @@ public class IdentificacaoPTRPAEJ
         }
 
     }
-    private static bool ValidarTipoDados(IdentificacaoPTRPAEJ identificacaoPTRP)
+    private static bool ValidarTipoDados(IdentificacaoPTRPAEJ identificacaoPTRP, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -94,7 +95,7 @@ public class IdentificacaoPTRPAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

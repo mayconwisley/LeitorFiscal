@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -73,24 +74,24 @@ public class MarcacaoPontoRepPAFD671
                 CódigoHash = linhaArquivo.Substring(73, 64)
             };
         }
-        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
+        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto, linhaArquivo) && ValidarTipoDados(marcacaoPonto, linhaArquivo))
         {
             if (marcacaoPonto.TpRegistro != "7")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '7'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '7'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (marcacaoPonto.IdentificadorColetor != "01" && marcacaoPonto.IdentificadorColetor != "02" && marcacaoPonto.IdentificadorColetor != "03" &&
                 marcacaoPonto.IdentificadorColetor != "04" && marcacaoPonto.IdentificadorColetor != "05")
             {
-                ErrosValidacao.Add($"O campo 'IdentificadorColetor' esta com o valor ({marcacaoPonto.IdentificadorColetor}) inválido, deve ter o valor '01', '02', '03', '04' ou '05'.\n");
+                ErrosValidacao.Add($"O campo 'IdentificadorColetor' esta com o valor ({marcacaoPonto.IdentificadorColetor}) inválido, deve ter o valor '01', '02', '03', '04' ou '05'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (marcacaoPonto.MarcacaoOnOff != "0" && marcacaoPonto.MarcacaoOnOff != "1")
             {
-                ErrosValidacao.Add($"O campo 'MarcacaoOnOff' esta com o valor ({marcacaoPonto.MarcacaoOnOff}) inválido, deve ter o valor '1' ou '2'.\n");
+                ErrosValidacao.Add($"O campo 'MarcacaoOnOff' esta com o valor ({marcacaoPonto.MarcacaoOnOff}) inválido, deve ter o valor '1' ou '2'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -101,7 +102,7 @@ public class MarcacaoPontoRepPAFD671
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(MarcacaoPontoRepPAFD671 marcacaoPonto1510)
+    private static bool ValidarTipoDados(MarcacaoPontoRepPAFD671 marcacaoPonto1510, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -146,7 +147,7 @@ public class MarcacaoPontoRepPAFD671
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

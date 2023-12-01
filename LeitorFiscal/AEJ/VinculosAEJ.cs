@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -25,7 +26,7 @@ public class VinculosAEJ
         string[] itemLinha = linhaVinculo.Split("|");
         if (itemLinha.Length < 4 || itemLinha.Length > 5)
         {
-            throw new Exception("Layout da sessão 03 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 03 esta fora do padrão definido pela a portaria\n{linhaVinculo}");
         }
         var vinculo = new VinculosAEJ
         {
@@ -34,7 +35,7 @@ public class VinculosAEJ
             CPF = itemLinha[2].Trim(),
             NomeEmp = itemLinha[3].Trim()
         };
-        if (ValidacaoTamanhoDado.ValidarTamanho(vinculo) && ValidarTipoDados(vinculo))
+        if (ValidacaoTamanhoDado.ValidarTamanho(vinculo, linhaVinculo) && ValidarTipoDados(vinculo, linhaVinculo))
         {
             VinculosAEJList.Add(vinculo);
         }
@@ -43,7 +44,7 @@ public class VinculosAEJ
             ErrosValidacao.Add(item);
         }
     }
-    private static bool ValidarTipoDados(VinculosAEJ vinculosAEJ)
+    private static bool ValidarTipoDados(VinculosAEJ vinculosAEJ, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -69,7 +70,7 @@ public class VinculosAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -50,11 +51,11 @@ public class MarcacaoPontoAFD1510
                 Pis = linhaArquivo.Substring(22, 12)
             };
         }
-        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
+        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto, linhaArquivo) && ValidarTipoDados(marcacaoPonto, linhaArquivo))
         {
             if (marcacaoPonto.TpRegistro != "3")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
             string validacaoPis = marcacaoPonto.Pis[..1];
@@ -68,7 +69,7 @@ public class MarcacaoPontoAFD1510
                 {
                     if (eCpf)
                     {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
+                        ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                     }
 
                 }
@@ -83,7 +84,7 @@ public class MarcacaoPontoAFD1510
                 {
                     if (ePis)
                     {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n");
+                        ErrosValidacao.Add($"O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                     }
 
                 }
@@ -96,7 +97,7 @@ public class MarcacaoPontoAFD1510
         }
 
     }
-    private static bool ValidarTipoDados(MarcacaoPontoAFD1510 marcacaoPonto1510)
+    private static bool ValidarTipoDados(MarcacaoPontoAFD1510 marcacaoPonto1510, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -132,7 +133,7 @@ public class MarcacaoPontoAFD1510
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

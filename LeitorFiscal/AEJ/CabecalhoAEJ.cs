@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -43,7 +44,7 @@ public class CabecalhoAEJ
         string[] itemLinha = linhaCabecalho.Split("|");
         if (itemLinha.Length < 10 || itemLinha.Length > 11)
         {
-            throw new Exception("Layout da sessão 01 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 01 esta fora do padrão definido pela a portaria\n{linhaCabecalho}");
         }
         var cabecalho = new CabecalhoAEJ
         {
@@ -60,35 +61,35 @@ public class CabecalhoAEJ
         };
 
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho) && ValidarTipoDados(cabecalho))
+        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho, linhaCabecalho) && ValidarTipoDados(cabecalho, linhaCabecalho))
         {
             if (cabecalho.TpIdtEmpregador != "1" && cabecalho.TpIdtEmpregador != "2")
             {
-                ErrosValidacao.Add($"O campo 'TpIdtEmpregador' esta com o valor ({cabecalho.TpIdtEmpregador}) inválido, deve ter o valor '1' ou '2'.\n");
+                ErrosValidacao.Add($"O campo 'TpIdtEmpregador' esta com o valor ({cabecalho.TpIdtEmpregador}) inválido, deve ter o valor '1' ou '2'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaCabecalho}\n");
                 return;
             }
 
 
             if (cabecalho.VersaoAej != "001")
             {
-                ErrosValidacao.Add($"O campo 'VersaoAej' esta com o valor ({cabecalho.VersaoAej}) inválido, deve ter o valor '001'.\n");
+                ErrosValidacao.Add($"O campo 'VersaoAej' esta com o valor ({cabecalho.VersaoAej}) inválido, deve ter o valor '001'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaCabecalho}\n");
                 return;
             }
 
             if (decimal.Parse(cabecalho.IdtEmpregador) > 11 && decimal.Parse(cabecalho.IdtEmpregador) < 14)
             {
-                ErrosValidacao.Add($"O campo 'IdtEmpregador' esta com o valor ({cabecalho.IdtEmpregador.Length}) inválido, deve ter a quantidade de digitos igual a '11' ou '14'\n");
+                ErrosValidacao.Add($"O campo 'IdtEmpregador' esta com o valor ({cabecalho.IdtEmpregador.Length}) inválido, deve ter a quantidade de digitos igual a '11' ou '14'\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaCabecalho}\n");
                 return;
             }
 
             if (decimal.Parse(cabecalho.Caepf) != 0 && decimal.Parse(cabecalho.Caepf) < 14)
             {
-                ErrosValidacao.Add($"O campo 'Caepf' esta com o valor ({cabecalho.Caepf.Length}) inválido, deve ter o valor igual a '14'\n");
+                ErrosValidacao.Add($"O campo 'Caepf' esta com o valor ({cabecalho.Caepf.Length}) inválido, deve ter o valor igual a '14'\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaCabecalho}\n");
                 return;
             }
             if (decimal.Parse(cabecalho.Cno) != 0 && decimal.Parse(cabecalho.Cno) < 12)
             {
-                ErrosValidacao.Add($"O campo 'Cno' esta com o valor ({cabecalho.Cno.Length}) inválido, deve ter o valor igual a '12'\n");
+                ErrosValidacao.Add($"O campo 'Cno' esta com o valor ({cabecalho.Cno.Length}) inválido, deve ter o valor igual a '12'\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaCabecalho}\n");
                 return;
             }
 
@@ -103,7 +104,7 @@ public class CabecalhoAEJ
 
     }
 
-    private static bool ValidarTipoDados(CabecalhoAEJ cabecalhoAEJ)
+    private static bool ValidarTipoDados(CabecalhoAEJ cabecalhoAEJ, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -154,7 +155,7 @@ public class CabecalhoAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

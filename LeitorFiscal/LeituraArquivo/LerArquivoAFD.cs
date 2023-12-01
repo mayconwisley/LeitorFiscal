@@ -5,6 +5,7 @@ namespace LeitorFiscal.LeituraArquivo;
 
 public class LerArquivoAFD
 {
+    public static int NumeroLinha { get; private set; } = 0;
 
     #region Funções para Limpar as classes
     private static void LimparCabecalho()
@@ -104,6 +105,7 @@ public class LerArquivoAFD
     #endregion
     public static void Arquivo(string caminho)
     {
+        NumeroLinha = 0;
         using StreamReader sr = new(caminho, Encoding.UTF8, true, 1024 * 1024 * 1);
         string? linha;
         int trailer = 0;
@@ -124,7 +126,7 @@ public class LerArquivoAFD
         {
             string itemLinha = linha.Substring(9, 1);
             string itemTrailer = linha[..9];
-
+            NumeroLinha++;
             try
             {
                 if (linha.Length == 46)

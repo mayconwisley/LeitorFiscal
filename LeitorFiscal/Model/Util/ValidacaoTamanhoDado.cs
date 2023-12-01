@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LeitorFiscal.LeituraArquivo;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.Model.Util;
 
@@ -6,7 +7,7 @@ public static class ValidacaoTamanhoDado
 {
     public static List<string> ErrosValidacao { get; } = new List<string>();
 
-    public static bool ValidarTamanho<T>(T objeto)
+    public static bool ValidarTamanho<T>(T objeto, string linha)
     {
         var validarResultados = new List<ValidationResult>();
         var validarContexto = new ValidationContext(objeto!, null, null);
@@ -20,7 +21,7 @@ public static class ValidacaoTamanhoDado
         {
             foreach (ValidationResult validarResultado in validarResultados)
             {
-                ErrosValidacao.Add(validarResultado.ErrorMessage! + "\n");
+                ErrosValidacao.Add(validarResultado.ErrorMessage! + $"\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             }
             return false;
         }

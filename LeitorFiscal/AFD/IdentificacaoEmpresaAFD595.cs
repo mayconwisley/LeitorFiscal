@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -82,17 +83,17 @@ public class IdentificacaoEmpresaAFD595
                 Crc16 = linhaArquivo.Substring(313, 4)
             };
         }
-        if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoEmpresa) && ValidarTipoDados(identificacaoEmpresa))
+        if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoEmpresa, linhaArquivo) && ValidarTipoDados(identificacaoEmpresa, linhaArquivo))
         {
             if (identificacaoEmpresa.TpRegistro != "2")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({identificacaoEmpresa.TpRegistro}) inválido, deve ter o valor '2'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({identificacaoEmpresa.TpRegistro}) inválido, deve ter o valor '2'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (identificacaoEmpresa.TpIdentEmpregador != "2" && identificacaoEmpresa.TpIdentEmpregador != "1")
             {
-                ErrosValidacao.Add($"O campo 'TpIdentEmpregador' esta com o valor ({identificacaoEmpresa.TpIdentEmpregador}) inválido, deve ter o valor '1' ou '2'.\n");
+                ErrosValidacao.Add($"O campo 'TpIdentEmpregador' esta com o valor ({identificacaoEmpresa.TpIdentEmpregador}) inválido, deve ter o valor '1' ou '2'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -104,7 +105,7 @@ public class IdentificacaoEmpresaAFD595
         }
 
     }
-    private static bool ValidarTipoDados(IdentificacaoEmpresaAFD595 identificacaoEmpresa)
+    private static bool ValidarTipoDados(IdentificacaoEmpresaAFD595 identificacaoEmpresa, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -160,7 +161,7 @@ public class IdentificacaoEmpresaAFD595
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

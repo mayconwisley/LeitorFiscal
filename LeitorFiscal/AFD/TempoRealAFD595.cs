@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -66,11 +67,11 @@ public class TempoRealAFD595
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(tempoRealRep) && ValidarTipoDados(tempoRealRep))
+        if (ValidacaoTamanhoDado.ValidarTamanho(tempoRealRep, linhaArquivo) && ValidarTipoDados(tempoRealRep, linhaArquivo))
         {
             if (tempoRealRep.TpRegistro != "4")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({tempoRealRep.TpRegistro}) inválido, deve ter o valor '4'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({tempoRealRep.TpRegistro}) inválido, deve ter o valor '4'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -81,7 +82,7 @@ public class TempoRealAFD595
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(TempoRealAFD595 tempoRealRep)
+    private static bool ValidarTipoDados(TempoRealAFD595 tempoRealRep, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -127,7 +128,7 @@ public class TempoRealAFD595
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

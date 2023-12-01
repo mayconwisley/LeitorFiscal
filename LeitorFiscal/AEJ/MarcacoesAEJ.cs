@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -38,7 +39,7 @@ public class MarcacoesAEJ
 
         if (itemLinha.Length < 9 || itemLinha.Length > 10)
         {
-            throw new Exception("Layout da sessão 05 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 05 esta fora do padrão definido pela a portaria\n{linhaMarcacoes}");
         }
 
         var marcacoes = new MarcacoesAEJ
@@ -53,29 +54,29 @@ public class MarcacoesAEJ
             CodHorContratual = itemLinha[7].Trim(),
             Motivo = itemLinha[8].Trim()
         };
-        if (ValidacaoTamanhoDado.ValidarTamanho(marcacoes) && ValidarTipoDados(marcacoes))
+        if (ValidacaoTamanhoDado.ValidarTamanho(marcacoes, linhaMarcacoes) && ValidarTipoDados(marcacoes, linhaMarcacoes))
         {
             if (marcacoes.TpMarc != "E" && marcacoes.TpMarc != "S" && marcacoes.TpMarc != "D")
             {
-                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'TpMarc' com o valor ({marcacoes.TpMarc}) inválido, deve ter os valores 'E' ou 'S' ou 'D'.\n");
+                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'TpMarc' com o valor ({marcacoes.TpMarc}) inválido, deve ter os valores 'E' ou 'S' ou 'D'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaMarcacoes}\n");
                 return;
             }
 
             if (marcacoes.FonteMarc != "O" && marcacoes.FonteMarc != "I" && marcacoes.FonteMarc != "P" && marcacoes.FonteMarc != "X" && marcacoes.FonteMarc != "T")
             {
-                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'FonteMarc' com o valor ({marcacoes.FonteMarc}) inválido, deve ter os valores 'O' ou 'I' ou 'P' ou 'X' ou 'T'.\n");
+                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'FonteMarc' com o valor ({marcacoes.FonteMarc}) inválido, deve ter os valores 'O' ou 'I' ou 'P' ou 'X' ou 'T'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaMarcacoes}\n");
                 return;
             }
 
             if (marcacoes.TpMarc == "E" && marcacoes.SeqEntSaida == "1" && marcacoes.CodHorContratual == "")
             {
-                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'CodHorContratual' com o valor ({marcacoes.CodHorContratual}) inválido, deve ser informado quando o TpMarc = 'E' e SeqEntSaida = '1'.\n");
+                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'CodHorContratual' com o valor ({marcacoes.CodHorContratual}) inválido, deve ser informado quando o TpMarc = 'E' e SeqEntSaida = '1'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaMarcacoes}\n");
                 return;
             }
 
             if (marcacoes.TpMarc == "D" && marcacoes.FonteMarc == "I")
             {
-                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'Motivo' inválido, campo OBRIGATÓRIO quando o TpMarc = 'D' e FonteMarc = 'I'.\n");
+                ErrosValidacao.Add($"Marcação {marcacoes.DataHoraMarc} esta com o campo 'Motivo' inválido, campo OBRIGATÓRIO quando o TpMarc = 'D' e FonteMarc = 'I'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaMarcacoes}\n");
                 return;
             }
             MarcacoesAEJList.Add(marcacoes);
@@ -86,7 +87,7 @@ public class MarcacoesAEJ
         }
     }
 
-    private static bool ValidarTipoDados(MarcacoesAEJ marcacoesAEJ)
+    private static bool ValidarTipoDados(MarcacoesAEJ marcacoesAEJ, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -121,7 +122,7 @@ public class MarcacoesAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

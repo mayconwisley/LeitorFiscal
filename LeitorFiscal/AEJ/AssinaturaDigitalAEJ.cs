@@ -23,7 +23,7 @@ public class AssinaturaDigitalAEJ
         };
 
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho))
+        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho, linhaCabecalho))
         {
             AssinaturaDigitalAEJList.Add(cabecalho);
         }

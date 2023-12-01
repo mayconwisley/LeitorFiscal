@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -26,7 +27,7 @@ public class REPsUtilizadosAEJ
         string[] itemLinha = linhaRep.Split("|");
         if (itemLinha.Length < 4 || itemLinha.Length > 5)
         {
-            throw new Exception("Layout da sessão 02 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 02 esta fora do padrão definido pela a portaria\n{linhaRep}");
         }
         var repsUtilizado = new REPsUtilizadosAEJ
         {
@@ -36,7 +37,7 @@ public class REPsUtilizadosAEJ
             NrRep = itemLinha[3].Trim(),
         };
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(repsUtilizado) && ValidarTipoDados(repsUtilizado))
+        if (ValidacaoTamanhoDado.ValidarTamanho(repsUtilizado,linhaRep) && ValidarTipoDados(repsUtilizado, linhaRep))
         {
             if (repsUtilizado.TpRep == "1" || repsUtilizado.TpRep == "2" || repsUtilizado.TpRep == "3")
             {
@@ -44,7 +45,7 @@ public class REPsUtilizadosAEJ
             }
             else
             {
-                ErrosValidacao.Add("Tipo de REP inválido\n");
+                ErrosValidacao.Add($"Tipo de REP inválido\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaRep}\n");
 
             }
 
@@ -54,7 +55,7 @@ public class REPsUtilizadosAEJ
             ErrosValidacao.Add(item);
         }
     }
-    private static bool ValidarTipoDados(REPsUtilizadosAEJ repsUtilizado)
+    private static bool ValidarTipoDados(REPsUtilizadosAEJ repsUtilizado, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -80,7 +81,7 @@ public class REPsUtilizadosAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

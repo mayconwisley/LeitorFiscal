@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -90,23 +91,23 @@ public class CabecalhoAFD595
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho) && ValidarTipoDados(cabecalho))
+        if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho, linhaArquivo) && ValidarTipoDados(cabecalho, linhaArquivo))
         {
             if (cabecalho.Zeros != "000000000")
             {
-                ErrosValidacao.Add($"O campo 'Zeros' esta com o valor ({cabecalho.Zeros}) inválido, deve ter o valor '000000000'.\n");
+                ErrosValidacao.Add($"O campo 'Zeros' esta com o valor ({cabecalho.Zeros}) inválido, deve ter o valor '000000000'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (cabecalho.TpRegistro != "1")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
             if (cabecalho.TpIdentEmpregador != "1" && cabecalho.TpIdentEmpregador != "2")
             {
-                ErrosValidacao.Add($"O campo 'TpIdentEmpregador' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1' ou '2'.\n");
+                ErrosValidacao.Add($"O campo 'TpIdentEmpregador' esta com o valor ({cabecalho.TpRegistro}) inválido, deve ter o valor '1' ou '2'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -117,7 +118,7 @@ public class CabecalhoAFD595
             ErrosValidacao.Add(item + "\n");
         }
     }
-    private static bool ValidarTipoDados(CabecalhoAFD595 cabecalhoAFD)
+    private static bool ValidarTipoDados(CabecalhoAFD595 cabecalhoAFD, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -180,7 +181,7 @@ public class CabecalhoAFD595
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

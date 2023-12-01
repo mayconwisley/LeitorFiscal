@@ -1,5 +1,7 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace LeitorFiscal.AEJ;
 
@@ -28,7 +30,7 @@ public class AusenciaBancoHorasAEJ
         string[] itemLinha = linhaAusenciaBancoHoras.Split("|");
         if (itemLinha.Length < 6 || itemLinha.Length > 7)
         {
-            throw new Exception("Layout da sessão 07 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 07 esta fora do padrão definido pela a portaria\n{linhaAusenciaBancoHoras}");
         }
         var ausenciaBancoHoras = new AusenciaBancoHorasAEJ
         {
@@ -40,18 +42,18 @@ public class AusenciaBancoHorasAEJ
             TipoMovBH = itemLinha[5].Trim()
         };
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(ausenciaBancoHoras) && ValidarTipoDados(ausenciaBancoHoras))
+        if (ValidacaoTamanhoDado.ValidarTamanho(ausenciaBancoHoras, linhaAusenciaBancoHoras) && ValidarTipoDados(ausenciaBancoHoras, linhaAusenciaBancoHoras))
         {
             if (ausenciaBancoHoras.TipoAusenOuComp != "1" && ausenciaBancoHoras.TipoAusenOuComp != "2" &&
                 ausenciaBancoHoras.TipoAusenOuComp != "3" && ausenciaBancoHoras.TipoAusenOuComp != "4")
             {
-                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoAusenOuComp' com o valor ({ausenciaBancoHoras.TipoAusenOuComp}) inválido, deve ter os valores '1' ou '2' ou '3' ou '4'.\n");
+                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoAusenOuComp' com o valor ({ausenciaBancoHoras.TipoAusenOuComp}) inválido, deve ter os valores '1' ou '2' ou '3' ou '4'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaAusenciaBancoHoras}\n");
                 return;
             }
 
             if (ausenciaBancoHoras.TipoMovBH != "0" && ausenciaBancoHoras.TipoMovBH != "1" && ausenciaBancoHoras.TipoMovBH != "2")
             {
-                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoMovBH' com o valor ({ausenciaBancoHoras.TipoMovBH}) inválido, deve ter os valores '0' ou '1' ou '2'.\n");
+                ErrosValidacao.Add($"Data {ausenciaBancoHoras.Data} esta com o campo 'TipoMovBH' com o valor ({ausenciaBancoHoras.TipoMovBH}) inválido, deve ter os valores '0' ou '1' ou '2'.\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linhaAusenciaBancoHoras}\n");
                 return;
             }
 
@@ -63,7 +65,7 @@ public class AusenciaBancoHorasAEJ
         }
 
     }
-    private static bool ValidarTipoDados(AusenciaBancoHorasAEJ ausenciaBancoHorasAEJ)
+    private static bool ValidarTipoDados(AusenciaBancoHorasAEJ ausenciaBancoHorasAEJ, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -104,7 +106,7 @@ public class AusenciaBancoHorasAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

@@ -6,13 +6,17 @@ namespace LeitorFiscal.LeituraArquivo;
 
 public class LerArquivoAEJ
 {
+    public static int NumeroLinha { get; private set; } = 0;
+
     public static void Arquivo(string caminho)
     {
+        NumeroLinha = 0;
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
 
         int contaCabecalho = 0, contaReps = 0, contaVinculo = 0, contaHorarioContrato = 0;
         int contaMacacoes = 0, contaVinculoeSocial = 0, contaAusenciaBancoHoras = 0, contaIdentificadorPTRP = 0;
+
         CabecalhoAEJ.CabecalhoAEJList.Clear();
         CabecalhoAEJ.ErrosValidacao.Clear();
         REPsUtilizadosAEJ.REPsUtilizadosAEJList.Clear();
@@ -38,6 +42,8 @@ public class LerArquivoAEJ
         while ((linha = sr.ReadLine()) != null)
         {
             string itemLinha = linha[..2];
+
+            NumeroLinha++;
 
             switch (itemLinha)
             {

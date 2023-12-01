@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -67,16 +68,16 @@ public class TrailerAFD671
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(trailer) && ValidarTipoDados(trailer))
+        if (ValidacaoTamanhoDado.ValidarTamanho(trailer, linhaArquivo) && ValidarTipoDados(trailer, linhaArquivo))
         {
             if (trailer.TpRegistro != "9")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({trailer.TpRegistro}) inválido, deve ter o valor '9'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({trailer.TpRegistro}) inválido, deve ter o valor '9'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
             if (trailer.Noves != "999999999")
             {
-                ErrosValidacao.Add($"O campo 'Noves' esta com o valor ({trailer.Noves}) inválido, deve ter o valor '999999999'.\n");
+                ErrosValidacao.Add($"O campo 'Noves' esta com o valor ({trailer.Noves}) inválido, deve ter o valor '999999999'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -134,7 +135,7 @@ public class TrailerAFD671
         return false;
     }
 
-    private static bool ValidarTipoDados(TrailerAFD671 trailer)
+    private static bool ValidarTipoDados(TrailerAFD671 trailer, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -185,7 +186,7 @@ public class TrailerAFD671
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

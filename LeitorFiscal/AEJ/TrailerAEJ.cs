@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -40,7 +41,7 @@ public class TrailerAEJ
         string[] itemLinha = linhaTrailer.Split("|");
         if (itemLinha.Length < 9 || itemLinha.Length > 10)
         {
-            throw new Exception("Layout da sessão 99 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 99 esta fora do padrão definido pela a portaria\n{linhaTrailer}");
         }
         var trailer = new TrailerAEJ
         {
@@ -56,7 +57,7 @@ public class TrailerAEJ
         };
 
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(trailer) && ValidarTipoDados(trailer))
+        if (ValidacaoTamanhoDado.ValidarTamanho(trailer,linhaTrailer) && ValidarTipoDados(trailer, linhaTrailer))
         {
             TrailerAEJList.Add(trailer);
         }
@@ -119,7 +120,7 @@ public class TrailerAEJ
         return false;
     }
 
-    private static bool ValidarTipoDados(TrailerAEJ trailerAEJ)
+    private static bool ValidarTipoDados(TrailerAEJ trailerAEJ, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -169,7 +170,7 @@ public class TrailerAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }

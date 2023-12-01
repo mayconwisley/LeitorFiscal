@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AFD;
@@ -51,11 +52,11 @@ public class MarcacaoPontoAFD671
             };
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto) && ValidarTipoDados(marcacaoPonto))
+        if (ValidacaoTamanhoDado.ValidarTamanho(marcacaoPonto, linhaArquivo) && ValidarTipoDados(marcacaoPonto, linhaArquivo))
         {
             if (marcacaoPonto.TpRegistro != "3")
             {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n");
+                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({marcacaoPonto.TpRegistro}) inválido, deve ter o valor '3'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
                 return;
             }
 
@@ -66,7 +67,7 @@ public class MarcacaoPontoAFD671
 
             if (!eCpf)
             {
-                ErrosValidacao.Add("O campo 'Cpf' esta com o cpf inválido\n");
+                ErrosValidacao.Add($"O campo 'Cpf' esta com o cpf inválido\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
             }
 
 
@@ -79,7 +80,7 @@ public class MarcacaoPontoAFD671
         }
 
     }
-    private static bool ValidarTipoDados(MarcacaoPontoAFD671 marcacaoPonto1510)
+    private static bool ValidarTipoDados(MarcacaoPontoAFD671 marcacaoPonto1510, string linha)
     {
 
         var camposComErro = new List<string>();
@@ -112,7 +113,7 @@ public class MarcacaoPontoAFD671
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
             return false;
         }
     }

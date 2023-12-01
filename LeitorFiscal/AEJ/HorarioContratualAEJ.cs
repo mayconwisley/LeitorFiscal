@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.AEJ;
@@ -51,7 +52,7 @@ public class HorarioContratualAEJ
         string[] itemLinha = linhaHoraContratual.Split("|");
         if (itemLinha.Length < 7 || itemLinha.Length > 8)
         {
-            throw new Exception("Layout da sessão 04 fora do padrão definido pela a portaria");
+            throw new Exception($"Layout da sessão 04 esta fora do padrão definido pela a portaria\n{linhaHoraContratual}");
         }
         var horarioContratual = new HorarioContratualAEJ
         {
@@ -93,7 +94,7 @@ public class HorarioContratualAEJ
             horarioContratual.HrSaida06 = itemLinha[14].Trim();
         }
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(horarioContratual) && ValidarTipoDados(horarioContratual))
+        if (ValidacaoTamanhoDado.ValidarTamanho(horarioContratual,linhaHoraContratual) && ValidarTipoDados(horarioContratual, linhaHoraContratual))
         {
             HorarioContratualAEJList.Add(horarioContratual);
         }
@@ -103,7 +104,7 @@ public class HorarioContratualAEJ
         }
     }
 
-    private static bool ValidarTipoDados(HorarioContratualAEJ horarioContratualAEJ)
+    private static bool ValidarTipoDados(HorarioContratualAEJ horarioContratualAEJ, string linha)
     {
         var camposComErro = new List<string>();
 
@@ -179,7 +180,7 @@ public class HorarioContratualAEJ
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAEJ.NumeroLinha}): {linha}\n");
             return false;
         }
     }
