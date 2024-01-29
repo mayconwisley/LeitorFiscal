@@ -72,6 +72,9 @@
             groupBox7 = new GroupBox();
             RTxtLogAssinaturaDigital = new RichTextBox();
             DgvListAssinaturaDigital = new DataGridView();
+            LblInfoPaginas = new Label();
+            BtnProximo = new Button();
+            BtnAnterior = new Button();
             MenuAfd.SuspendLayout();
             TabControlAfd.SuspendLayout();
             Cabecalho.SuspendLayout();
@@ -620,13 +623,45 @@
             DgvListAssinaturaDigital.Size = new Size(1036, 363);
             DgvListAssinaturaDigital.TabIndex = 2;
             // 
+            // LblInfoPaginas
+            // 
+            LblInfoPaginas.AutoSize = true;
+            LblInfoPaginas.Location = new Point(198, 585);
+            LblInfoPaginas.Name = "LblInfoPaginas";
+            LblInfoPaginas.Size = new Size(92, 15);
+            LblInfoPaginas.TabIndex = 4;
+            LblInfoPaginas.Text = "Página 0 de 000.";
+            // 
+            // BtnProximo
+            // 
+            BtnProximo.Location = new Point(93, 581);
+            BtnProximo.Name = "BtnProximo";
+            BtnProximo.Size = new Size(75, 23);
+            BtnProximo.TabIndex = 3;
+            BtnProximo.Text = ">>";
+            BtnProximo.UseVisualStyleBackColor = true;
+            BtnProximo.Click += BtnProximo_Click;
+            // 
+            // BtnAnterior
+            // 
+            BtnAnterior.Location = new Point(12, 581);
+            BtnAnterior.Name = "BtnAnterior";
+            BtnAnterior.Size = new Size(75, 23);
+            BtnAnterior.TabIndex = 3;
+            BtnAnterior.Text = "<<";
+            BtnAnterior.UseVisualStyleBackColor = true;
+            BtnAnterior.Click += BtnAnterior_Click;
+            // 
             // FrmLeitorAfd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1067, 586);
+            ClientSize = new Size(1067, 616);
+            Controls.Add(LblInfoPaginas);
             Controls.Add(TabControlAfd);
+            Controls.Add(BtnProximo);
             Controls.Add(MenuAfd);
+            Controls.Add(BtnAnterior);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = MenuAfd;
             MaximizeBox = false;
@@ -716,5 +751,8 @@
         private GroupBox groupBox7;
         private RichTextBox RTxtLogAssinaturaDigital;
         private DataGridView DgvListAssinaturaDigital;
+        private Button BtnProximo;
+        private Button BtnAnterior;
+        private Label LblInfoPaginas;
     }
 }

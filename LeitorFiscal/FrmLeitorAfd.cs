@@ -14,6 +14,9 @@ public partial class FrmLeitorAfd : Form
         InitializeComponent();
     }
 
+    private int paginaAtual = 1;
+    private decimal totalPagina = 0;
+
     private void ListarCabecalho()
     {
         RTxtLogCabecalho.Clear();
@@ -193,13 +196,22 @@ public partial class FrmLeitorAfd : Form
             }
         }
     }
-    private void ListarEmpregadoMt()
+    private void ListarEmpregadoMt(int pgAtual = 1, int tamanhoPg = 200)
     {
         RTxtLogEmpregadoMt.Clear();
         DgvListEmpregadoMt.DataSource = null;
         if (EmpregadoMtAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD1510.EmpregadoMtRepAfdList;
+            decimal totalDados = EmpregadoMtAFD1510.EmpregadoMtRepAfdList.Count;
+
+            totalPagina = (totalDados / tamanhoPg) <= 0 ? 1 : Math.Ceiling(totalDados / tamanhoPg);
+
+            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD1510
+                .EmpregadoMtRepAfdList
+                .Skip((pgAtual - 1) * tamanhoPg)
+                .Take(tamanhoPg)
+                .ToList();
+
             if (DgvListEmpregadoMt.RowCount > 0)
             {
                 RTxtLogEmpregadoMt.AppendText($"Versão do Registro 5 - {EmpregadoMtAFD1510.Portaria}");
@@ -238,6 +250,8 @@ public partial class FrmLeitorAfd : Form
             }
             MenuConverter.Enabled = false;
         }
+
+        LblInfoPaginas.Text = $"Página {paginaAtual} de {totalPagina}";
     }
     private void ListarEventoSensiveis()
     {
@@ -334,7 +348,6 @@ public partial class FrmLeitorAfd : Form
             }
         }
     }
-
     private void ListarAssinaturaDigiral()
     {
         RTxtLogAssinaturaDigital.Clear();
@@ -361,7 +374,6 @@ public partial class FrmLeitorAfd : Form
             caminhoArquivo = openFileDialog.FileName;
         }
     }
-
     private void SalvarArquivo()
     {
         using SaveFileDialog saveFileDialog = new();
@@ -371,6 +383,21 @@ public partial class FrmLeitorAfd : Form
         if (saveFileDialog.ShowDialog() == DialogResult.OK)
         {
             caminhoSalvar = saveFileDialog.FileName;
+        }
+
+    }
+
+    private void ValidacaoDePagina(decimal totalPagina)
+    {
+        if (totalPagina == 1)
+        {
+            BtnAnterior.Enabled = false;
+            BtnProximo.Enabled = false;
+        }
+        else
+        {
+            BtnProximo.Enabled = true;
+            BtnAnterior.Enabled = true;
         }
 
     }
@@ -387,18 +414,24 @@ public partial class FrmLeitorAfd : Form
             ListarMarcacaoPonto();
             ListarRelogioTempoReal();
             ListarEmpregadoMt();
+            
+            
+
             ListarEventoSensiveis();
             ListarMarcacaoPontoRepP();
             ListarTrailer();
             ListarAssinaturaDigiral();
+
+            ValidacaoDePagina(totalPagina);
+
             MenuValidacao.Enabled = true;
+            MessageBox.Show($"Tipo de registro inválido: \n{ErrosDeLeitura.ListaDeErro()}");
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
     }
-
     private void SubMenuValidacaoListar_Click(object sender, EventArgs e)
     {
         try
@@ -411,11 +444,34 @@ public partial class FrmLeitorAfd : Form
             MessageBox.Show(ex.Message);
         }
     }
-
     private void SubMenuConverterArt96_Click(object sender, EventArgs e)
     {
         SalvarArquivo();
         ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar);
         MessageBox.Show("Arquivo convertido!", "Aviso");
+    }
+
+    private void BtnProximo_Click(object sender, EventArgs e)
+    {
+        paginaAtual++;
+
+        if (paginaAtual > 1)
+        {
+            BtnAnterior.Enabled = true;
+        }
+      
+        ListarEmpregadoMt(paginaAtual);
+
+    }
+
+    private void BtnAnterior_Click(object sender, EventArgs e)
+    {
+        paginaAtual--;
+
+        if (paginaAtual <= 1)
+        {
+            BtnAnterior.Enabled = false;
+        }
+        ListarEmpregadoMt(paginaAtual);
     }
 }

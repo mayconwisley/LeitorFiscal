@@ -106,7 +106,7 @@ public class LerArquivoAFD
     public static void Arquivo(string caminho)
     {
         NumeroLinha = 0;
-        using StreamReader sr = new(caminho, Encoding.UTF8, true, 1024 * 1024 * 1);
+        using StreamReader sr = new(caminho, Encoding.UTF8, true, 1024 * 1024 * 5);
         string? linha;
         int trailer = 0;
 
@@ -121,6 +121,8 @@ public class LerArquivoAFD
         LimparMarcacaoPontoRepP();
         LimparTrailer();
         LimparAssinaturaDigital();
+        
+        ErrosDeLeitura.Erros.Clear();
 
         while ((linha = sr.ReadLine()) != null)
         {
@@ -281,8 +283,10 @@ public class LerArquivoAFD
                     }
                     else
                     {
-                        MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        sr.ReadToEnd();
+                        ErrosDeLeitura.Erros.Add($"Linha{linha} - {itemLinha}");
+
+                        //MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //sr.ReadToEnd();
                     }
                     break;
             }
