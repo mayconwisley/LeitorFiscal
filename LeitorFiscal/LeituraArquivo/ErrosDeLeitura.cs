@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace LeitorFiscal.LeituraArquivo;
 
-namespace LeitorFiscal.LeituraArquivo
+public class ErrosDeLeitura
 {
-    public class ErrosDeLeitura
+    public static List<string> Erros { get; set; } = [];
+
+    public static string ListaDeErro()
     {
-        public static List<string> Erros { get; set; } = new();
+        string erro = string.Empty;
 
-        public static string ListaDeErro()
+        foreach (var item in Erros)
         {
-            string erro = string.Empty;
-
-            foreach (var item in Erros)
-            {
-                erro += item + "\n";
-            }
-
-            return erro;
+            erro += item + "\n";
         }
 
+        return erro;
     }
+
 }

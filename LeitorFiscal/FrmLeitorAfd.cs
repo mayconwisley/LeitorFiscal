@@ -422,7 +422,6 @@ public partial class FrmLeitorAfd : Form
 
         totalItens = DgvListAssinaturaDigital.RowCount;
     }
-
     private void LocalizarArquivo()
     {
         using OpenFileDialog openFileDialog = new();
@@ -446,7 +445,6 @@ public partial class FrmLeitorAfd : Form
         }
 
     }
-
     private void ValidacaoDePagina(decimal totalPagina)
     {
         if (totalPagina == 1)
@@ -475,16 +473,13 @@ public partial class FrmLeitorAfd : Form
     {
         if (totalItens > 1)
         {
-            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal} - Total de Itens {totalItens}";
+            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal}";
         }
         else
         {
-            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal} - Total de Item {totalItens}";
+            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal}";
         }
-
-
     }
-
     private void AtualizarDados(int pgAtual)
     {
         ListarCabecalho(pgAtual);
@@ -497,7 +492,6 @@ public partial class FrmLeitorAfd : Form
         ListarTrailer(pgAtual);
         ListarAssinaturaDigiral(pgAtual);
     }
-
     private void SubMenuArquivoLer_Click(object sender, EventArgs e)
     {
         LocalizarArquivo();
@@ -519,7 +513,10 @@ public partial class FrmLeitorAfd : Form
             InformacaoPaginaTab(paginaAtual, totalPagina);
 
             MenuValidacao.Enabled = true;
-            MessageBox.Show($"Tipo de registro inválido: \n{ErrosDeLeitura.ListaDeErro()}");
+            if (ErrosDeLeitura.Erros.Count > 0)
+            {
+                MessageBox.Show($"Tipo de registro inválido: \n{ErrosDeLeitura.ListaDeErro()}");
+            }
         }
         catch (Exception ex)
         {
@@ -544,7 +541,6 @@ public partial class FrmLeitorAfd : Form
         ConverterArt96Por671.Converter(caminhoArquivo, caminhoSalvar);
         MessageBox.Show("Arquivo convertido!", "Aviso");
     }
-
     private void BtnProximo_Click(object sender, EventArgs e)
     {
         paginaAtual++;
@@ -559,7 +555,6 @@ public partial class FrmLeitorAfd : Form
         ValidacaoDePagina(totalPagina);
 
     }
-
     private void BtnAnterior_Click(object sender, EventArgs e)
     {
         paginaAtual--;
@@ -572,7 +567,6 @@ public partial class FrmLeitorAfd : Form
         InformacaoPaginaTab(paginaAtual, totalPagina);
         ValidacaoDePagina(totalPagina);
     }
-
     private void TabControlAfd_SelectedIndexChanged(object sender, EventArgs e)
     {
         int tabIndex = TabControlAfd.SelectedIndex;
