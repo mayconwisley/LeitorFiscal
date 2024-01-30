@@ -1,7 +1,6 @@
 ﻿using LeitorFiscal.LeituraArquivo;
 using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
-using static System.Windows.Forms.LinkLabel;
 
 namespace LeitorFiscal.AFD;
 

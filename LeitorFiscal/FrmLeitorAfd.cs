@@ -492,12 +492,13 @@ public partial class FrmLeitorAfd : Form
         ListarTrailer(pgAtual);
         ListarAssinaturaDigiral(pgAtual);
     }
-    private void SubMenuArquivoLer_Click(object sender, EventArgs e)
+    private async void SubMenuArquivoLer_Click(object sender, EventArgs e)
     {
         LocalizarArquivo();
 
         try
         {
+            decimal totalLinha = await LerArquivoAFD.TotalLinhaArquivo(caminhoArquivo);
             LerArquivoAFD.Arquivo(caminhoArquivo);
             ListarCabecalho();
             ListarIdentificacaoEmpresa();
@@ -576,40 +577,38 @@ public partial class FrmLeitorAfd : Form
         {
             case 0:
                 totalDados = CabecalhoAFD1510.CabecalhoAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 1:
                 totalDados = IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 2:
                 totalDados = MarcacaoPontoAFD1510.MarcacaoPontoAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
-
                 break;
             case 3:
                 totalDados = TempoRealAFD1510.TempoRealRepAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 4:
                 totalDados = EmpregadoMtAFD1510.EmpregadoMtRepAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 5:
                 totalDados = EventosSensiveisAFD595.EventosSensiveisRepAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 6:
                 totalDados = MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 7:
                 totalDados = TrailerAFD1510.TrailerAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             case 8:
                 totalDados = AssinaturaDigitalAFD.AssinaturaDigitalAfdList.Count;
-                InformacaoPaginaTab(paginaAtual, totalPagina);
+
                 break;
             default:
                 break;
@@ -617,10 +616,8 @@ public partial class FrmLeitorAfd : Form
         }
 
         totalPagina = (totalDados / tamanhoPg) <= 0 ? 1 : Math.Ceiling(totalDados / tamanhoPg);
-
+        InformacaoPaginaTab(paginaAtual, totalPagina);
         AtualizarDados(paginaAtual);
         ValidacaoDePagina(totalPagina);
-       
-
     }
 }
