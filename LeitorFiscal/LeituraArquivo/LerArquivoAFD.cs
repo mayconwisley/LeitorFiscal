@@ -106,7 +106,7 @@ public class LerArquivoAFD
     public static void Arquivo(string caminho)
     {
         NumeroLinha = 0;
-        using StreamReader sr = new(caminho, Encoding.UTF8, true, 1024 * 1024 * 5);
+        using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
         int trailer = 0;
 

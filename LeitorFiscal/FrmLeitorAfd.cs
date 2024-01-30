@@ -15,16 +15,20 @@ public partial class FrmLeitorAfd : Form
     }
 
     private int paginaAtual = 1;
-    private decimal totalPagina = 0;
+    decimal totalPagina = 1;
+    int totalItens = 0;
+    const int tamanhoPg = 250;
 
-    private void ListarCabecalho()
+    private void ListarCabecalho(int pgAtual = 1)
     {
         RTxtLogCabecalho.Clear();
         DgvListCabecalho.DataSource = null;
 
         if (CabecalhoAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListCabecalho.DataSource = CabecalhoAFD1510.CabecalhoAfdList;
+            DgvListCabecalho.DataSource = CabecalhoAFD1510.CabecalhoAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListCabecalho.RowCount > 0)
             {
                 RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD1510.Portaria}");
@@ -37,7 +41,9 @@ public partial class FrmLeitorAfd : Form
 
         if (CabecalhoAFD595.Portaria!.Contains("595"))
         {
-            DgvListCabecalho.DataSource = CabecalhoAFD595.CabecalhoAfdList;
+            DgvListCabecalho.DataSource = CabecalhoAFD595.CabecalhoAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListCabecalho.RowCount > 0)
             {
                 RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD595.Portaria}");
@@ -50,7 +56,9 @@ public partial class FrmLeitorAfd : Form
 
         if (CabecalhoAFD671.Portaria!.Contains("671"))
         {
-            DgvListCabecalho.DataSource = CabecalhoAFD671.CabecalhoAfdList;
+            DgvListCabecalho.DataSource = CabecalhoAFD671.CabecalhoAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListCabecalho.RowCount > 0)
             {
                 RTxtLogCabecalho.AppendText($"Versão do Registro 1 - {CabecalhoAFD671.Portaria}");
@@ -60,15 +68,19 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogCabecalho.AppendText(item);
             }
         }
+
+        totalItens = DgvListCabecalho.RowCount;
     }
-    private void ListarIdentificacaoEmpresa()
+    private void ListarIdentificacaoEmpresa(int pgAtual = 1)
     {
         RTxtLogIdentificacaoEmpresa.Clear();
         DgvListIdentificacaoEmpresa.DataSource = null;
 
         if (IdentificacaoEmpresaAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList;
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListIdentificacaoEmpresa.RowCount > 0)
             {
                 RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD1510.Portaria}");
@@ -81,7 +93,9 @@ public partial class FrmLeitorAfd : Form
 
         if (IdentificacaoEmpresaAFD595.Portaria!.Contains("595"))
         {
-            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD595.IdentificacaoEmpresaRepAfdList;
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD595.IdentificacaoEmpresaRepAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListIdentificacaoEmpresa.RowCount > 0)
             {
                 RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD595.Portaria}");
@@ -94,7 +108,9 @@ public partial class FrmLeitorAfd : Form
 
         if (IdentificacaoEmpresaAFD671.Portaria!.Contains("671"))
         {
-            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD671.IdentificacaoEmpresaRepAfdList;
+            DgvListIdentificacaoEmpresa.DataSource = IdentificacaoEmpresaAFD671.IdentificacaoEmpresaRepAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListIdentificacaoEmpresa.RowCount > 0)
             {
                 RTxtLogIdentificacaoEmpresa.AppendText($"Versão do Registro 2 - {IdentificacaoEmpresaAFD671.Portaria}");
@@ -104,15 +120,20 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogIdentificacaoEmpresa.AppendText(item);
             }
         }
+        totalItens = DgvListIdentificacaoEmpresa.RowCount;
     }
-    private void ListarMarcacaoPonto()
+    private void ListarMarcacaoPonto(int pgAtual = 1)
     {
         RTxtLogMarcacaoPonto.Clear();
         DgvListMarcacaoPonto.DataSource = null;
 
         if (MarcacaoPontoAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD1510.MarcacaoPontoAfdList;
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD1510
+                                              .MarcacaoPontoAfdList
+                                              .Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListMarcacaoPonto.RowCount > 0)
             {
                 RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD1510.Portaria}");
@@ -126,7 +147,11 @@ public partial class FrmLeitorAfd : Form
 
         if (MarcacaoPontoAFD595.Portaria!.Contains("595"))
         {
-            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD595.MarcacaoPontoAfdList;
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD595
+                                              .MarcacaoPontoAfdList
+                                              .Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListMarcacaoPonto.RowCount > 0)
             {
                 RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD595.Portaria}");
@@ -140,7 +165,11 @@ public partial class FrmLeitorAfd : Form
 
         if (MarcacaoPontoAFD671.Portaria!.Contains("671"))
         {
-            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD671.MarcacaoPontoAfdList;
+            DgvListMarcacaoPonto.DataSource = MarcacaoPontoAFD671
+                                             .MarcacaoPontoAfdList
+                                             .Skip((pgAtual - 1) * tamanhoPg)
+                                             .Take(tamanhoPg)
+                                             .ToList();
             if (DgvListMarcacaoPonto.RowCount > 0)
             {
                 RTxtLogMarcacaoPonto.AppendText($"Versão do Registro 3 - {MarcacaoPontoAFD671.Portaria}");
@@ -151,15 +180,17 @@ public partial class FrmLeitorAfd : Form
             }
             MenuConverter.Enabled = false;
         }
+
+        totalItens = DgvListMarcacaoPonto.RowCount;
     }
-    private void ListarRelogioTempoReal()
+    private void ListarRelogioTempoReal(int pgAtual = 1)
     {
         RTxtLogRelogioTempoReal.Clear();
         DgvListRelogioTempoReal.DataSource = null;
 
         if (TempoRealAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList;
+            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList.Skip((pgAtual - 1) * tamanhoPg).Take(tamanhoPg).ToList();
             if (DgvListRelogioTempoReal.RowCount > 0)
             {
                 RTxtLogRelogioTempoReal.AppendText($"Versão do Registro 3 - {TempoRealAFD1510.Portaria}");
@@ -172,7 +203,7 @@ public partial class FrmLeitorAfd : Form
 
         if (TempoRealAFD1510.Portaria!.Contains("595"))
         {
-            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList;
+            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList.Skip((pgAtual - 1) * tamanhoPg).Take(tamanhoPg).ToList();
             if (DgvListRelogioTempoReal.RowCount > 0)
             {
                 RTxtLogRelogioTempoReal.AppendText($"Versão do Registro 3 - {TempoRealAFD1510.Portaria}");
@@ -185,7 +216,7 @@ public partial class FrmLeitorAfd : Form
 
         if (TempoRealAFD1510.Portaria!.Contains("671"))
         {
-            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList;
+            DgvListRelogioTempoReal.DataSource = TempoRealAFD1510.TempoRealRepAfdList.Skip((pgAtual - 1) * tamanhoPg).Take(tamanhoPg).ToList();
             if (DgvListRelogioTempoReal.RowCount > 0)
             {
                 RTxtLogRelogioTempoReal.AppendText($"Versão do Registro 3 - {TempoRealAFD1510.Portaria}");
@@ -195,22 +226,20 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogRelogioTempoReal.AppendText(item);
             }
         }
+
+        totalItens = DgvListRelogioTempoReal.RowCount;
     }
-    private void ListarEmpregadoMt(int pgAtual = 1, int tamanhoPg = 200)
+    private void ListarEmpregadoMt(int pgAtual = 1)
     {
         RTxtLogEmpregadoMt.Clear();
         DgvListEmpregadoMt.DataSource = null;
         if (EmpregadoMtAFD1510.Portaria!.Contains("1510"))
         {
-            decimal totalDados = EmpregadoMtAFD1510.EmpregadoMtRepAfdList.Count;
-
-            totalPagina = (totalDados / tamanhoPg) <= 0 ? 1 : Math.Ceiling(totalDados / tamanhoPg);
-
             DgvListEmpregadoMt.DataSource = EmpregadoMtAFD1510
-                .EmpregadoMtRepAfdList
-                .Skip((pgAtual - 1) * tamanhoPg)
-                .Take(tamanhoPg)
-                .ToList();
+                                             .EmpregadoMtRepAfdList
+                                             .Skip((pgAtual - 1) * tamanhoPg)
+                                             .Take(tamanhoPg)
+                                             .ToList();
 
             if (DgvListEmpregadoMt.RowCount > 0)
             {
@@ -225,7 +254,11 @@ public partial class FrmLeitorAfd : Form
 
         if (EmpregadoMtAFD595.Portaria!.Contains("595"))
         {
-            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD595.EmpregadoMtRepAfdList;
+            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD595
+                                              .EmpregadoMtRepAfdList
+                                              .Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListEmpregadoMt.RowCount > 0)
             {
                 RTxtLogEmpregadoMt.AppendText($"Versão do Registro 5 - {EmpregadoMtAFD595.Portaria}");
@@ -239,7 +272,11 @@ public partial class FrmLeitorAfd : Form
 
         if (EmpregadoMtAFD671.Portaria!.Contains("671"))
         {
-            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD671.EmpregadoMtRepAfdList;
+            DgvListEmpregadoMt.DataSource = EmpregadoMtAFD671
+                                            .EmpregadoMtRepAfdList
+                                            .Skip((pgAtual - 1) * tamanhoPg)
+                                            .Take(tamanhoPg)
+                                            .ToList();
             if (DgvListEmpregadoMt.RowCount > 0)
             {
                 RTxtLogEmpregadoMt.AppendText($"Versão do Registro 5 - {EmpregadoMtAFD671.Portaria}");
@@ -251,16 +288,19 @@ public partial class FrmLeitorAfd : Form
             MenuConverter.Enabled = false;
         }
 
-        LblInfoPaginas.Text = $"Página {paginaAtual} de {totalPagina}";
+        totalItens = DgvListEmpregadoMt.RowCount;
+
     }
-    private void ListarEventoSensiveis()
+    private void ListarEventoSensiveis(int pgAtual = 1)
     {
         RTxtLogEventoSensiveis.Clear();
         DgvListEventoSensiveis.DataSource = null;
 
         if (EventosSensiveisAFD595.Portaria!.Contains("595"))
         {
-            DgvListEventoSensiveis.DataSource = EventosSensiveisAFD595.EventosSensiveisRepAfdList;
+            DgvListEventoSensiveis.DataSource = EventosSensiveisAFD595.EventosSensiveisRepAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListEventoSensiveis.RowCount > 0)
             {
                 RTxtLogEventoSensiveis.AppendText($"Versão do Registro 6 - {EventosSensiveisAFD595.Portaria}");
@@ -273,7 +313,9 @@ public partial class FrmLeitorAfd : Form
 
         if (EventosSensiveisAFD671.Portaria!.Contains("671"))
         {
-            DgvListEventoSensiveis.DataSource = EventosSensiveisAFD671.EventosSensiveisRepAfdList;
+            DgvListEventoSensiveis.DataSource = EventosSensiveisAFD671.EventosSensiveisRepAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListEventoSensiveis.RowCount > 0)
             {
                 RTxtLogEventoSensiveis.AppendText($"Versão do Registro 6 - {EventosSensiveisAFD671.Portaria}");
@@ -283,15 +325,19 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogEventoSensiveis.AppendText(item);
             }
         }
+
+        totalItens = DgvListEventoSensiveis.RowCount;
     }
-    private void ListarMarcacaoPontoRepP()
+    private void ListarMarcacaoPontoRepP(int pgAtual = 1)
     {
         RTxtLogMarcacaoPontoRepP.Clear();
         DgvListMarcacaoPontoRepP.DataSource = null;
 
         if (MarcacaoPontoRepPAFD671.Portaria!.Contains("671"))
         {
-            DgvListMarcacaoPontoRepP.DataSource = MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList;
+            DgvListMarcacaoPontoRepP.DataSource = MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListMarcacaoPontoRepP.RowCount > 0)
             {
                 RTxtLogMarcacaoPontoRepP.AppendText($"Versão do Registro 7 - {MarcacaoPontoRepPAFD671.Portaria}");
@@ -301,15 +347,19 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogMarcacaoPontoRepP.AppendText(item);
             }
         }
+
+        totalItens = DgvListMarcacaoPontoRepP.RowCount;
     }
-    private void ListarTrailer()
+    private void ListarTrailer(int pgAtual = 1)
     {
         RTxtLogTrailer.Clear();
         DgvListTrailer.DataSource = null;
 
         if (TrailerAFD1510.Portaria!.Contains("1510"))
         {
-            DgvListTrailer.DataSource = TrailerAFD1510.TrailerAfdList;
+            DgvListTrailer.DataSource = TrailerAFD1510.TrailerAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListTrailer.RowCount > 0)
             {
                 RTxtLogTrailer.AppendText($"Versão do Registro 9 - {TrailerAFD1510.Portaria}");
@@ -323,7 +373,9 @@ public partial class FrmLeitorAfd : Form
 
         if (TrailerAFD595.Portaria!.Contains("595"))
         {
-            DgvListTrailer.DataSource = TrailerAFD595.TrailerAfdList;
+            DgvListTrailer.DataSource = TrailerAFD595.TrailerAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListTrailer.RowCount > 0)
             {
                 RTxtLogTrailer.AppendText($"Versão do Registro 9 - {TrailerAFD595.Portaria}");
@@ -337,7 +389,9 @@ public partial class FrmLeitorAfd : Form
 
         if (TrailerAFD671.Portaria!.Contains("671"))
         {
-            DgvListTrailer.DataSource = TrailerAFD671.TrailerAfdList;
+            DgvListTrailer.DataSource = TrailerAFD671.TrailerAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
             if (DgvListTrailer.RowCount > 0)
             {
                 RTxtLogTrailer.AppendText($"Versão do Registro 9 - {TrailerAFD671.Portaria}");
@@ -347,12 +401,16 @@ public partial class FrmLeitorAfd : Form
                 RTxtLogTrailer.AppendText(item);
             }
         }
+
+        totalItens = DgvListTrailer.RowCount;
     }
-    private void ListarAssinaturaDigiral()
+    private void ListarAssinaturaDigiral(int pgAtual = 1)
     {
         RTxtLogAssinaturaDigital.Clear();
         DgvListAssinaturaDigital.DataSource = null;
-        DgvListAssinaturaDigital.DataSource = AssinaturaDigitalAFD.AssinaturaDigitalAfdList;
+        DgvListAssinaturaDigital.DataSource = AssinaturaDigitalAFD.AssinaturaDigitalAfdList.Skip((pgAtual - 1) * tamanhoPg)
+                                              .Take(tamanhoPg)
+                                              .ToList();
         if (DgvListAssinaturaDigital.RowCount > 0)
         {
             RTxtLogAssinaturaDigital.AppendText($"Assinatura Digital - {AssinaturaDigitalAFD.Portaria}");
@@ -362,7 +420,9 @@ public partial class FrmLeitorAfd : Form
             RTxtLogAssinaturaDigital.AppendText(item);
         }
 
+        totalItens = DgvListAssinaturaDigital.RowCount;
     }
+
     private void LocalizarArquivo()
     {
         using OpenFileDialog openFileDialog = new();
@@ -400,6 +460,42 @@ public partial class FrmLeitorAfd : Form
             BtnAnterior.Enabled = true;
         }
 
+        if (paginaAtual == 1)
+        {
+            BtnAnterior.Enabled = false;
+        }
+
+        if (paginaAtual == totalPagina)
+        {
+            BtnProximo.Enabled = false;
+        }
+
+    }
+    private void InformacaoPaginaTab(int pgAtual, decimal pgTotal)
+    {
+        if (totalItens > 1)
+        {
+            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal} - Total de Itens {totalItens}";
+        }
+        else
+        {
+            LblInfoPaginas.Text = $"Página {pgAtual} de {pgTotal} - Total de Item {totalItens}";
+        }
+
+
+    }
+
+    private void AtualizarDados(int pgAtual)
+    {
+        ListarCabecalho(pgAtual);
+        ListarIdentificacaoEmpresa(pgAtual);
+        ListarMarcacaoPonto(pgAtual);
+        ListarRelogioTempoReal(pgAtual);
+        ListarEmpregadoMt(pgAtual);
+        ListarEventoSensiveis(pgAtual);
+        ListarMarcacaoPontoRepP(pgAtual);
+        ListarTrailer(pgAtual);
+        ListarAssinaturaDigiral(pgAtual);
     }
 
     private void SubMenuArquivoLer_Click(object sender, EventArgs e)
@@ -414,15 +510,13 @@ public partial class FrmLeitorAfd : Form
             ListarMarcacaoPonto();
             ListarRelogioTempoReal();
             ListarEmpregadoMt();
-            
-            
 
             ListarEventoSensiveis();
             ListarMarcacaoPontoRepP();
             ListarTrailer();
             ListarAssinaturaDigiral();
 
-            ValidacaoDePagina(totalPagina);
+            InformacaoPaginaTab(paginaAtual, totalPagina);
 
             MenuValidacao.Enabled = true;
             MessageBox.Show($"Tipo de registro inválido: \n{ErrosDeLeitura.ListaDeErro()}");
@@ -459,8 +553,10 @@ public partial class FrmLeitorAfd : Form
         {
             BtnAnterior.Enabled = true;
         }
-      
-        ListarEmpregadoMt(paginaAtual);
+        AtualizarDados(paginaAtual);
+
+        InformacaoPaginaTab(paginaAtual, totalPagina);
+        ValidacaoDePagina(totalPagina);
 
     }
 
@@ -472,6 +568,57 @@ public partial class FrmLeitorAfd : Form
         {
             BtnAnterior.Enabled = false;
         }
-        ListarEmpregadoMt(paginaAtual);
+        AtualizarDados(paginaAtual);
+        InformacaoPaginaTab(paginaAtual, totalPagina);
+        ValidacaoDePagina(totalPagina);
+    }
+
+    private void TabControlAfd_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int tabIndex = TabControlAfd.SelectedIndex;
+        decimal totalDados = 0;
+        paginaAtual = 1;
+        switch (tabIndex)
+        {
+            case 0:
+                totalDados = CabecalhoAFD1510.CabecalhoAfdList.Count;
+                break;
+            case 1:
+                totalDados = IdentificacaoEmpresaAFD1510.IdentificacaoEmpresaRepAfdList.Count;
+                break;
+            case 2:
+                totalDados = MarcacaoPontoAFD1510.MarcacaoPontoAfdList.Count;
+
+                break;
+            case 3:
+                totalDados = TempoRealAFD1510.TempoRealRepAfdList.Count;
+                break;
+            case 4:
+                totalDados = EmpregadoMtAFD1510.EmpregadoMtRepAfdList.Count;
+
+                break;
+            case 5:
+                totalDados = EventosSensiveisAFD595.EventosSensiveisRepAfdList.Count;
+                break;
+            case 6:
+                totalDados = MarcacaoPontoRepPAFD671.MarcacaoPontoRepPAfdList.Count;
+                break;
+            case 7:
+                totalDados = TrailerAFD1510.TrailerAfdList.Count;
+                break;
+            case 8:
+                totalDados = AssinaturaDigitalAFD.AssinaturaDigitalAfdList.Count;
+                break;
+            default:
+                break;
+
+        }
+
+        totalPagina = (totalDados / tamanhoPg) <= 0 ? 1 : Math.Ceiling(totalDados / tamanhoPg);
+
+        AtualizarDados(paginaAtual);
+        ValidacaoDePagina(totalPagina);
+        InformacaoPaginaTab(paginaAtual, totalPagina);
+
     }
 }

@@ -176,6 +176,7 @@
             TabControlAfd.SelectedIndex = 0;
             TabControlAfd.Size = new Size(1056, 548);
             TabControlAfd.TabIndex = 3;
+            TabControlAfd.SelectedIndexChanged += TabControlAfd_SelectedIndexChanged;
             // 
             // Cabecalho
             // 
@@ -222,7 +223,6 @@
             DgvListCabecalho.MultiSelect = false;
             DgvListCabecalho.Name = "DgvListCabecalho";
             DgvListCabecalho.ReadOnly = true;
-            DgvListCabecalho.RowTemplate.Height = 25;
             DgvListCabecalho.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListCabecalho.Size = new Size(1036, 363);
             DgvListCabecalho.TabIndex = 0;
@@ -272,7 +272,6 @@
             DgvListIdentificacaoEmpresa.MultiSelect = false;
             DgvListIdentificacaoEmpresa.Name = "DgvListIdentificacaoEmpresa";
             DgvListIdentificacaoEmpresa.ReadOnly = true;
-            DgvListIdentificacaoEmpresa.RowTemplate.Height = 25;
             DgvListIdentificacaoEmpresa.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListIdentificacaoEmpresa.Size = new Size(1036, 363);
             DgvListIdentificacaoEmpresa.TabIndex = 0;
@@ -322,7 +321,6 @@
             DgvListMarcacaoPonto.MultiSelect = false;
             DgvListMarcacaoPonto.Name = "DgvListMarcacaoPonto";
             DgvListMarcacaoPonto.ReadOnly = true;
-            DgvListMarcacaoPonto.RowTemplate.Height = 25;
             DgvListMarcacaoPonto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListMarcacaoPonto.Size = new Size(1036, 363);
             DgvListMarcacaoPonto.TabIndex = 0;
@@ -371,7 +369,6 @@
             DgvListRelogioTempoReal.MultiSelect = false;
             DgvListRelogioTempoReal.Name = "DgvListRelogioTempoReal";
             DgvListRelogioTempoReal.ReadOnly = true;
-            DgvListRelogioTempoReal.RowTemplate.Height = 25;
             DgvListRelogioTempoReal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListRelogioTempoReal.Size = new Size(1036, 363);
             DgvListRelogioTempoReal.TabIndex = 0;
@@ -420,7 +417,6 @@
             DgvListEmpregadoMt.MultiSelect = false;
             DgvListEmpregadoMt.Name = "DgvListEmpregadoMt";
             DgvListEmpregadoMt.ReadOnly = true;
-            DgvListEmpregadoMt.RowTemplate.Height = 25;
             DgvListEmpregadoMt.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListEmpregadoMt.Size = new Size(1036, 363);
             DgvListEmpregadoMt.TabIndex = 0;
@@ -469,7 +465,6 @@
             DgvListEventoSensiveis.MultiSelect = false;
             DgvListEventoSensiveis.Name = "DgvListEventoSensiveis";
             DgvListEventoSensiveis.ReadOnly = true;
-            DgvListEventoSensiveis.RowTemplate.Height = 25;
             DgvListEventoSensiveis.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListEventoSensiveis.Size = new Size(1036, 363);
             DgvListEventoSensiveis.TabIndex = 0;
@@ -519,7 +514,6 @@
             DgvListMarcacaoPontoRepP.MultiSelect = false;
             DgvListMarcacaoPontoRepP.Name = "DgvListMarcacaoPontoRepP";
             DgvListMarcacaoPontoRepP.ReadOnly = true;
-            DgvListMarcacaoPontoRepP.RowTemplate.Height = 25;
             DgvListMarcacaoPontoRepP.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListMarcacaoPontoRepP.Size = new Size(1036, 363);
             DgvListMarcacaoPontoRepP.TabIndex = 2;
@@ -569,7 +563,6 @@
             DgvListTrailer.MultiSelect = false;
             DgvListTrailer.Name = "DgvListTrailer";
             DgvListTrailer.ReadOnly = true;
-            DgvListTrailer.RowTemplate.Height = 25;
             DgvListTrailer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListTrailer.Size = new Size(1036, 363);
             DgvListTrailer.TabIndex = 0;
@@ -618,7 +611,6 @@
             DgvListAssinaturaDigital.MultiSelect = false;
             DgvListAssinaturaDigital.Name = "DgvListAssinaturaDigital";
             DgvListAssinaturaDigital.ReadOnly = true;
-            DgvListAssinaturaDigital.RowTemplate.Height = 25;
             DgvListAssinaturaDigital.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvListAssinaturaDigital.Size = new Size(1036, 363);
             DgvListAssinaturaDigital.TabIndex = 2;
@@ -634,6 +626,7 @@
             // 
             // BtnProximo
             // 
+            BtnProximo.Enabled = false;
             BtnProximo.Location = new Point(93, 581);
             BtnProximo.Name = "BtnProximo";
             BtnProximo.Size = new Size(75, 23);
@@ -644,6 +637,7 @@
             // 
             // BtnAnterior
             // 
+            BtnAnterior.Enabled = false;
             BtnAnterior.Location = new Point(12, 581);
             BtnAnterior.Name = "BtnAnterior";
             BtnAnterior.Size = new Size(75, 23);
