@@ -38,23 +38,38 @@ public class TempoRealAFD671
     {
         TempoRealAFD671 tempoRealRep;
         int tamanhoLinha = linhaArquivo.Length;
-        if (tamanhoLinha != 49)
+        if (tamanhoLinha != 73 && tamanhoLinha != 69)
         {
-            ErrosValidacao.Add($"O registro '4 - Tempo Real' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
+            ErrosValidacao.Add($"O registro '4 - Ajuste do relógio' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;
         }
         else
         {
             Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
-            tempoRealRep = new()
+            if (tamanhoLinha == 69)
             {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataHoraDoAjuste = linhaArquivo.Substring(10, 24),
-                DataHoraAjustada = linhaArquivo.Substring(34, 24),
-                CpfResponsavel = linhaArquivo.Substring(58, 11),
-                Crc16 = linhaArquivo.Substring(69, 4)
-            };
+                tempoRealRep = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraDoAjuste = linhaArquivo.Substring(10, 24),
+                    DataHoraAjustada = linhaArquivo.Substring(34, 24),
+                    CpfResponsavel = linhaArquivo.Substring(58, 11)
+                };
+            }
+            else
+            {
+                tempoRealRep = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraDoAjuste = linhaArquivo.Substring(10, 24),
+                    DataHoraAjustada = linhaArquivo.Substring(34, 24),
+                    CpfResponsavel = linhaArquivo.Substring(58, 11),
+                    Crc16 = linhaArquivo.Substring(69, 4)
+                };
+            }
+
         }
 
         if (ValidacaoTamanhoDado.ValidarTamanho(tempoRealRep, linhaArquivo) && ValidarTipoDados(tempoRealRep, linhaArquivo))

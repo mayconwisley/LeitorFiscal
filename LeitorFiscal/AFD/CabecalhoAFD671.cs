@@ -77,7 +77,7 @@ public class CabecalhoAFD671
 
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 302)
+        if (tamanhoLinha != 302 && tamanhoLinha != 298)
         {
             ErrosValidacao.Add($"O registro '1 - Cabeçalho' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encontrado: {tamanhoLinha}\n");
             return;
@@ -86,24 +86,49 @@ public class CabecalhoAFD671
         {
             Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
 
-            cabecalho = new()
+            if (tamanhoLinha == 298)
             {
-                Zeros = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                TpIdentEmpregador = linhaArquivo.Substring(10, 1),
-                CnpjCpf = linhaArquivo.Substring(11, 14),
-                Cno = linhaArquivo.Substring(25, 14),
-                RazaoSocial = linhaArquivo.Substring(39, 150),
-                NumeroFabRep = linhaArquivo.Substring(189, 17),
-                DataInicialRegistro = linhaArquivo.Substring(206, 10),
-                DataFinalRegistro = linhaArquivo.Substring(216, 10),
-                DataHoraGeracao = linhaArquivo.Substring(226, 24),
-                VersaoAfd = linhaArquivo.Substring(250, 3),
-                TpIdentFabricante = linhaArquivo.Substring(253, 1),
-                CnpjCpfFabricante = linhaArquivo.Substring(254, 14),
-                ModeloRep = linhaArquivo.Substring(268, 30),
-                Crc16 = linhaArquivo.Substring(298, 4)
-            };
+                cabecalho = new()
+                {
+                    Zeros = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    TpIdentEmpregador = linhaArquivo.Substring(10, 1),
+                    CnpjCpf = linhaArquivo.Substring(11, 14),
+                    Cno = linhaArquivo.Substring(25, 14),
+                    RazaoSocial = linhaArquivo.Substring(39, 150),
+                    NumeroFabRep = linhaArquivo.Substring(189, 17),
+                    DataInicialRegistro = linhaArquivo.Substring(206, 10),
+                    DataFinalRegistro = linhaArquivo.Substring(216, 10),
+                    DataHoraGeracao = linhaArquivo.Substring(226, 24),
+                    VersaoAfd = linhaArquivo.Substring(250, 3),
+                    TpIdentFabricante = linhaArquivo.Substring(253, 1),
+                    CnpjCpfFabricante = linhaArquivo.Substring(254, 14),
+                    ModeloRep = linhaArquivo.Substring(268, 30)
+
+                };
+            }
+            else
+            {
+                cabecalho = new()
+                {
+                    Zeros = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    TpIdentEmpregador = linhaArquivo.Substring(10, 1),
+                    CnpjCpf = linhaArquivo.Substring(11, 14),
+                    Cno = linhaArquivo.Substring(25, 14),
+                    RazaoSocial = linhaArquivo.Substring(39, 150),
+                    NumeroFabRep = linhaArquivo.Substring(189, 17),
+                    DataInicialRegistro = linhaArquivo.Substring(206, 10),
+                    DataFinalRegistro = linhaArquivo.Substring(216, 10),
+                    DataHoraGeracao = linhaArquivo.Substring(226, 24),
+                    VersaoAfd = linhaArquivo.Substring(250, 3),
+                    TpIdentFabricante = linhaArquivo.Substring(253, 1),
+                    CnpjCpfFabricante = linhaArquivo.Substring(254, 14),
+                    ModeloRep = linhaArquivo.Substring(268, 30),
+                    Crc16 = linhaArquivo.Substring(298, 4)
+                };
+            }
+
         }
 
         if (ValidacaoTamanhoDado.ValidarTamanho(cabecalho, linhaArquivo) && ValidarTipoDados(cabecalho, linhaArquivo))

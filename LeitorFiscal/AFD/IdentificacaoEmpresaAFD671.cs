@@ -55,7 +55,7 @@ public class IdentificacaoEmpresaAFD671
         IdentificacaoEmpresaAFD671 identificacaoEmpresa;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 331)
+        if (tamanhoLinha != 331 && tamanhoLinha != 327)
         {
             ErrosValidacao.Add($"O registro '2 - Identificação da Empresa' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;
@@ -64,19 +64,38 @@ public class IdentificacaoEmpresaAFD671
         {
             Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
 
-            identificacaoEmpresa = new()
+            if (tamanhoLinha == 327)
             {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataHoraGravacao = linhaArquivo.Substring(10, 24),
-                CpfResponsavel = linhaArquivo.Substring(34, 14),
-                TpIdentEmpregador = linhaArquivo.Substring(48, 1),
-                CnpjCpf = linhaArquivo.Substring(49, 14),
-                Cno = linhaArquivo.Substring(63, 14),
-                RazaoSocial = linhaArquivo.Substring(77, 150),
-                LocalPrestServico = linhaArquivo.Substring(227, 100),
-                Crc16 = linhaArquivo.Substring(327, 4)
-            };
+                identificacaoEmpresa = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraGravacao = linhaArquivo.Substring(10, 24),
+                    CpfResponsavel = linhaArquivo.Substring(34, 14),
+                    TpIdentEmpregador = linhaArquivo.Substring(48, 1),
+                    CnpjCpf = linhaArquivo.Substring(49, 14),
+                    Cno = linhaArquivo.Substring(63, 14),
+                    RazaoSocial = linhaArquivo.Substring(77, 150),
+                    LocalPrestServico = linhaArquivo.Substring(227, 100)
+                };
+            }
+            else
+            {
+                identificacaoEmpresa = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraGravacao = linhaArquivo.Substring(10, 24),
+                    CpfResponsavel = linhaArquivo.Substring(34, 14),
+                    TpIdentEmpregador = linhaArquivo.Substring(48, 1),
+                    CnpjCpf = linhaArquivo.Substring(49, 14),
+                    Cno = linhaArquivo.Substring(63, 14),
+                    RazaoSocial = linhaArquivo.Substring(77, 150),
+                    LocalPrestServico = linhaArquivo.Substring(227, 100),
+                    Crc16 = linhaArquivo.Substring(327, 4)
+                };
+            }
+
         }
         if (ValidacaoTamanhoDado.ValidarTamanho(identificacaoEmpresa, linhaArquivo) && ValidarTipoDados(identificacaoEmpresa, linhaArquivo))
         {

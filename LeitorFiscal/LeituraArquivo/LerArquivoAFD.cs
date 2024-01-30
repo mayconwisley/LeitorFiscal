@@ -103,15 +103,21 @@ public class LerArquivoAFD
     }
 
     #endregion
+
     public static void Arquivo(string caminho)
     {
         NumeroLinha = 0;
+        string[] linhasArquivo = File.ReadAllLines(caminho);
+        int totalLinhas = linhasArquivo.Length;
+
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
+
         string? linha;
         int trailer = 0;
 
         int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
         int countEventoSensiveis = 0, countMarcacaoPontoRepP = 0;
+
         LimparCabecalho();
         LimparIdentificacaoEmpresa();
         LimparMarcacaoPonto();
@@ -121,7 +127,7 @@ public class LerArquivoAFD
         LimparMarcacaoPontoRepP();
         LimparTrailer();
         LimparAssinaturaDigital();
-        
+
         ErrosDeLeitura.Erros.Clear();
 
         while ((linha = sr.ReadLine()) != null)
@@ -170,7 +176,7 @@ public class LerArquivoAFD
                     {
                         CabecalhoAFD595.GetCabecalho(linha);
                     }
-                    if (linha.Length == 302)
+                    if (linha.Length == 298 || linha.Length == 302)
                     {
                         CabecalhoAFD671.GetCabecalho(linha);
                     }
@@ -186,7 +192,7 @@ public class LerArquivoAFD
                     {
                         IdentificacaoEmpresaAFD595.GetIdentificadorEmpresa(linha);
                     }
-                    if (linha.Length == 331)
+                    if (linha.Length == 327 || linha.Length == 331)
                     {
                         IdentificacaoEmpresaAFD671.GetIdentificadorEmpresa(linha);
                     }
@@ -202,7 +208,7 @@ public class LerArquivoAFD
                     {
                         MarcacaoPontoAFD595.GetMarcacaoPonto(linha);
                     }
-                    if (linha.Length == 50)
+                    if (linha.Length == 46 || linha.Length == 50)
                     {
                         MarcacaoPontoAFD671.GetMarcacaoPonto(linha);
                     }
@@ -217,7 +223,7 @@ public class LerArquivoAFD
                     {
                         TempoRealAFD595.GetTempoReal(linha);
                     }
-                    if (linha.Length == 73)
+                    if (linha.Length == 69 || linha.Length == 73)
                     {
                         TempoRealAFD671.GetTempoReal(linha);
                     }
@@ -234,7 +240,7 @@ public class LerArquivoAFD
                     {
                         EmpregadoMtAFD595.GetEmpregadoMtRep(linha);
                     }
-                    if (linha.Length == 118)
+                    if (linha.Length == 114 || linha.Length == 118)
                     {
                         EmpregadoMtAFD671.GetEmpregadoMtRep(linha);
                     }
@@ -255,7 +261,7 @@ public class LerArquivoAFD
                     break;
                 case "7":
                     countMarcacaoPontoRepP++;
-                    if (linha.Length == 137)
+                    if (linha.Length == 133 || linha.Length == 137)
                     {
                         MarcacaoPontoRepPAFD671.GetMarcacaoPonto(linha);
                     }
@@ -270,7 +276,7 @@ public class LerArquivoAFD
                     {
                         TrailerAFD595.GetTrailer(linha);
                     }
-                    if (linha.Length == 64)
+                    if (linha.Length == 60 || linha.Length == 64)
                     {
                         TrailerAFD671.GetTrailer(linha);
                     }

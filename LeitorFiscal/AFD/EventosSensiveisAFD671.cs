@@ -39,7 +39,7 @@ public class EventosSensiveisAFD671
         EventosSensiveisAFD671 eventosSensiveis;
         int tamanhoLinha = linhaArquivo.Length;
 
-        if (tamanhoLinha != 24)
+        if (tamanhoLinha != 36)
         {
             ErrosValidacao.Add($"O registro '6 - Eventos Sensíveis' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encotrado {tamanhoLinha}\n");
             return;

@@ -51,7 +51,8 @@ public class EmpregadoMtAFD671
     {
         EmpregadoMtAFD671 empregadoMt;
         int tamanhoLinha = linhaArquivo.Length;
-        if (tamanhoLinha != 118)
+        
+        if (tamanhoLinha != 118 && tamanhoLinha != 114)
         {
             ErrosValidacao.Add($"O registro '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria Nº 671, de 8 de novembro de 2021. Tamanho encontrado: {tamanhoLinha}\n");
             return;
@@ -59,18 +60,37 @@ public class EmpregadoMtAFD671
         else
         {
             Portaria = "Portaria Nº 671, de 8 de novembro de 2021\n";
-            empregadoMt = new()
+
+            if (tamanhoLinha == 114)
             {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataHoraGravacao = linhaArquivo.Substring(10, 24),
-                TpOperacao = linhaArquivo.Substring(34, 1),
-                Cpf = linhaArquivo.Substring(35, 12),
-                Nome = linhaArquivo.Substring(47, 52),
-                DadosIdentificacao = linhaArquivo.Substring(99, 4),
-                CpfResponsavel = linhaArquivo.Substring(103, 11),
-                Crc16 = linhaArquivo.Substring(114, 4)
-            };
+                empregadoMt = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraGravacao = linhaArquivo.Substring(10, 24),
+                    TpOperacao = linhaArquivo.Substring(34, 1),
+                    Cpf = linhaArquivo.Substring(35, 12),
+                    Nome = linhaArquivo.Substring(47, 52),
+                    DadosIdentificacao = linhaArquivo.Substring(99, 4),
+                    CpfResponsavel = linhaArquivo.Substring(103, 11)                  
+                };
+            }
+            else
+            {
+                empregadoMt = new()
+                {
+                    Nsr = linhaArquivo[..9],
+                    TpRegistro = linhaArquivo.Substring(9, 1),
+                    DataHoraGravacao = linhaArquivo.Substring(10, 24),
+                    TpOperacao = linhaArquivo.Substring(34, 1),
+                    Cpf = linhaArquivo.Substring(35, 12),
+                    Nome = linhaArquivo.Substring(47, 52),
+                    DadosIdentificacao = linhaArquivo.Substring(99, 4),
+                    CpfResponsavel = linhaArquivo.Substring(103, 11),
+                    Crc16 = linhaArquivo.Substring(114, 4)
+                };
+            }
+            
         }
 
         if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt, linhaArquivo) && ValidarTipoDados(empregadoMt, linhaArquivo))
