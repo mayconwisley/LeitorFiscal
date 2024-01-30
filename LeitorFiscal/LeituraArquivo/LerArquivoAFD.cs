@@ -107,8 +107,16 @@ public class LerArquivoAFD
     public static void Arquivo(string caminho)
     {
         NumeroLinha = 0;
-        string[] linhasArquivo = File.ReadAllLines(caminho);
-        int totalLinhas = linhasArquivo.Length;
+
+        /*Contar Linhas*/
+        int totalLinhas = 0;
+
+        using StreamReader srLinha = new(caminho);
+        while (srLinha.ReadLine() != null)
+        {
+            totalLinhas++;
+        }
+        /****************/
 
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
 
