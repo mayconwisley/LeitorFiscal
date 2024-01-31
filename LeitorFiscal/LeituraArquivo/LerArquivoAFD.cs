@@ -30,6 +30,10 @@ public class LerArquivoAFD
     public async static Task Arquivo(string caminho)
     {
         NumeroLinha = 0;
+        countIdentEmpresa = 0; countMarcacaoPonto = 0; countTempoReal = 0; countEmpregadoMt = 0;
+        countEventoSensiveis = 0; countMarcacaoPontoRepP = 0;
+        trailer = 0;
+
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
 
