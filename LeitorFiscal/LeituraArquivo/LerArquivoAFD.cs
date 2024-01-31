@@ -1,5 +1,6 @@
 ﻿using LeitorFiscal.AFD;
 using LeitorFiscal.AFD.LimparDados;
+using LeitorFiscal.LeituraArquivo.Enum;
 using System.Text;
 
 namespace LeitorFiscal.LeituraArquivo;
@@ -11,6 +12,7 @@ public class LerArquivoAFD
     static int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
     static int countEventoSensiveis = 0, countMarcacaoPontoRepP = 0;
     static int trailer = 0;
+
     public async static Task<decimal> TotalLinhaArquivo(string caminho)
     {
         decimal totalLinhas = 0;
@@ -25,7 +27,7 @@ public class LerArquivoAFD
         return await Task.FromResult(totalLinhas);
     }
 
-    public static void Arquivo(string caminho)
+    public async static Task Arquivo(string caminho)
     {
         NumeroLinha = 0;
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
@@ -43,20 +45,31 @@ public class LerArquivoAFD
             if (!string.IsNullOrEmpty(ValidarTrailer(linha)))
             {
                 itemLinha = ValidarTrailer(linha);
-                ItemLinha(itemLinha, linha);
+                ValidarTipoRegistro(itemLinha, linha);
             }
-
-            ItemLinha(itemLinha, linha);
+            else
+            {
+                ValidarTipoRegistro(itemLinha, linha);
+            }
         }
         ValidarTrailerRegistro();
     }
 
-    private static void ItemLinha(string itemLinha, string linha)
+    private static void ValidarTipoRegistro(string itemLinha, string linha)
     {
-        switch (itemLinha)
+        bool isItem = int.TryParse(itemLinha, out int item);
+        if (isItem)
         {
-            case "1":
+            TipoRegistro tipoRegistro = (TipoRegistro)item;
+            ItemLinha(tipoRegistro, linha);
+        }
+    }
 
+    private static void ItemLinha(TipoRegistro tipoRegistro, string linha)
+    {
+        switch (tipoRegistro)
+        {
+            case TipoRegistro.Cabecalho:
                 if (linha.Length == 232)
                 {
                     CabecalhoAFD1510.GetCabecalho(linha);
@@ -69,9 +82,8 @@ public class LerArquivoAFD
                 {
                     CabecalhoAFD671.GetCabecalho(linha);
                 }
-
                 break;
-            case "2":
+            case TipoRegistro.IdentificacaoEmpresa:
                 countIdentEmpresa++;
                 if (linha.Length == 299)
                 {
@@ -85,9 +97,8 @@ public class LerArquivoAFD
                 {
                     IdentificacaoEmpresaAFD671.GetIdentificadorEmpresa(linha);
                 }
-
                 break;
-            case "3":
+            case TipoRegistro.MarcacaoPontoREP_C_A:
                 countMarcacaoPonto++;
                 if (linha.Length == 34)
                 {
@@ -102,7 +113,7 @@ public class LerArquivoAFD
                     MarcacaoPontoAFD671.GetMarcacaoPonto(linha);
                 }
                 break;
-            case "4":
+            case TipoRegistro.AjusteRelogio:
                 countTempoReal++;
                 if (linha.Length == 34)
                 {
@@ -116,11 +127,9 @@ public class LerArquivoAFD
                 {
                     TempoRealAFD671.GetTempoReal(linha);
                 }
-
                 break;
-            case "5":
+            case TipoRegistro.EmpregadoREP:
                 countEmpregadoMt++;
-
                 if (linha.Length == 87)
                 {
                     EmpregadoMtAFD1510.GetEmpregadoMtRep(linha);
@@ -133,9 +142,8 @@ public class LerArquivoAFD
                 {
                     EmpregadoMtAFD671.GetEmpregadoMtRep(linha);
                 }
-
                 break;
-            case "6":
+            case TipoRegistro.EventosSensiveisREP:
                 countEventoSensiveis++;
 
                 if (linha.Length == 24)
@@ -146,17 +154,15 @@ public class LerArquivoAFD
                 {
                     EventosSensiveisAFD671.GetEventosSensiveis(linha);
                 }
-
                 break;
-            case "7":
+            case TipoRegistro.MarcacaoPontoREP_P:
                 countMarcacaoPontoRepP++;
                 if (linha.Length == 133 || linha.Length == 137)
                 {
                     MarcacaoPontoRepPAFD671.GetMarcacaoPonto(linha);
                 }
-
                 break;
-            case "9":
+            case TipoRegistro.Trailer:
                 if (linha.Length == 46)
                 {
                     TrailerAFD1510.GetTrailer(linha);
@@ -178,7 +184,7 @@ public class LerArquivoAFD
                 }
                 else
                 {
-                    ErrosDeLeitura.Erros.Add($"Linha: {linha} - {itemLinha}");
+                    ErrosDeLeitura.Erros.Add($"Linha: {linha} - {tipoRegistro}");
 
                     //MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //sr.ReadToEnd();
@@ -190,32 +196,15 @@ public class LerArquivoAFD
     private static string ValidarTrailer(string linha)
     {
         string itemTrailer = linha[..9];
-        string itemLinha = string.Empty;
-
         try
         {
-            if (linha.Length == 46)
+            return linha.Length switch
             {
-                if (itemTrailer == "999999999")
-                {
-                    itemLinha = linha.Substring(45, 1);
-                }
-            }
-            if (linha.Length == 55)
-            {
-                if (itemTrailer == "999999999")
-                {
-                    itemLinha = linha.Substring(54, 1);
-                }
-            }
-            if (linha.Length == 64)
-            {
-                if (itemTrailer == "999999999")
-                {
-                    itemLinha = linha.Substring(63, 1);
-                }
-            }
-            return itemLinha;
+                46 when itemTrailer == "999999999" => linha.Substring(45, 1),
+                55 when itemTrailer == "999999999" => linha.Substring(54, 1),
+                64 when itemTrailer == "999999999" => linha.Substring(63, 1),
+                _ => string.Empty,
+            };
         }
         catch
         {
@@ -226,33 +215,24 @@ public class LerArquivoAFD
 
     private static void ValidarTrailerRegistro()
     {
-        if (trailer == 46)
-        {
-            if (TrailerAFD1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt))
-            {
-                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        TamanhoTrailer tamanhoTrailer = (TamanhoTrailer)trailer;
 
-                LimparAFD.Limpar();
-            }
-        }
-        if (trailer == 55)
+        if (ValidarRegistrosAEJ(tamanhoTrailer))
         {
-            if (TrailerAFD595.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis))
-            {
-                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                LimparAFD.Limpar();
-            }
+            MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            LimparAFD.Limpar();
         }
-        if (trailer == 64)
+    }
+
+    private static bool ValidarRegistrosAEJ(TamanhoTrailer tamanhoTrailer)
+    {
+        return tamanhoTrailer switch
         {
-            if (TrailerAFD671.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis, countMarcacaoPontoRepP))
-            {
-                MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                LimparAFD.Limpar();
-            }
-        }
+            TamanhoTrailer.AFD1510 => TrailerAFD1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt),
+            TamanhoTrailer.AFD595 => TrailerAFD595.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis),
+            TamanhoTrailer.AFD671 => TrailerAFD671.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis, countMarcacaoPontoRepP),
+            _ => false,
+        };
     }
 
 }
