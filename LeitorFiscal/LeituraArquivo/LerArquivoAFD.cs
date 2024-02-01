@@ -71,6 +71,35 @@ public class LerArquivoAFD
 
     private static void ItemLinha(TipoRegistro tipoRegistro, string linha)
     {
+        Dictionary<TipoRegistro, Func<string, bool>> registroHandlers = new()
+    {
+        { TipoRegistro.Cabecalho, ProcessarGets.ProcessarCabecalho },
+        { TipoRegistro.IdentificacaoEmpresa, ProcessarGets.ProcessarIdentificacaoEmpresa },
+        { TipoRegistro.MarcacaoPontoREP_C_A, ProcessarGets.ProcessarMarcacaoPonto },
+        { TipoRegistro.AjusteRelogio,ProcessarGets.ProcessarAjusteRelogio },
+        { TipoRegistro.EmpregadoREP, ProcessarGets.ProcessarEmpregado },
+        { TipoRegistro.EventosSensiveisREP,ProcessarGets.ProcessarEventoSensivel },
+        { TipoRegistro.MarcacaoPontoREP_P, ProcessarGets.ProcessarMarcacaoPontoRepP },
+        { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer }
+    };
+
+        if (registroHandlers.TryGetValue(tipoRegistro, out var handler))
+        {
+            if (handler(linha))
+            {
+                // Lógica adicional, se necessário
+            }
+        }
+        else
+        {
+            ProcessarGets.ProcessarDefault(linha, tipoRegistro);
+        }
+    }
+
+
+
+    private static void ItemLinha0(TipoRegistro tipoRegistro, string linha)
+    {
         switch (tipoRegistro)
         {
             case TipoRegistro.Cabecalho:
