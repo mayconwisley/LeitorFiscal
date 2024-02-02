@@ -5,9 +5,24 @@ namespace LeitorFiscal.AFD;
 
 public class ProcessarGets
 {
-    static int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
-    static int countEventoSensiveis = 0, countMarcacaoPontoRepP = 0;
-    static int trailer = 0;
+    public static int CountIdentEmpresa { get; private set; } = 0;
+    public static int CountMarcacaoPonto { get; private set; } = 0;
+    public static int CountTempoReal { get; private set; } = 0;
+    public static int CountEmpregadoMt { get; private set; } = 0;
+    public static int CountEventoSensiveis { get; private set; } = 0;
+    public static int CountMarcacaoPontoRepP { get; private set; } = 0;
+    public static int Trailer { get; private set; } = 0;
+
+    public ProcessarGets()
+    {
+        CountIdentEmpresa = 0;
+        CountMarcacaoPonto = 0;
+        CountTempoReal = 0;
+        CountEmpregadoMt = 0;
+        CountEventoSensiveis = 0;
+        CountMarcacaoPontoRepP = 0;
+        Trailer = 0;
+    }
 
     public static bool ProcessarCabecalho(string linha)
     {
@@ -16,42 +31,43 @@ public class ProcessarGets
 
     public static bool ProcessarIdentificacaoEmpresa(string linha)
     {
-        countIdentEmpresa++;
+        CountIdentEmpresa++;
         return ProcessarRegistro(linha, IdentificacaoEmpresaAFD1510.GetIdentificadorEmpresa, IdentificacaoEmpresaAFD595.GetIdentificadorEmpresa, IdentificacaoEmpresaAFD671.GetIdentificadorEmpresa);
     }
 
     public static bool ProcessarMarcacaoPonto(string linha)
     {
-        countMarcacaoPonto++;
+        CountMarcacaoPonto++;
         return ProcessarRegistro(linha, MarcacaoPontoAFD1510.GetMarcacaoPonto, MarcacaoPontoAFD595.GetMarcacaoPonto, MarcacaoPontoAFD671.GetMarcacaoPonto);
     }
 
     public static bool ProcessarAjusteRelogio(string linha)
     {
-        countTempoReal++;
+        CountTempoReal++;
         return ProcessarRegistro(linha, TempoRealAFD1510.GetTempoReal, TempoRealAFD595.GetTempoReal, TempoRealAFD671.GetTempoReal);
     }
 
     public static bool ProcessarEmpregado(string linha)
     {
-        countEmpregadoMt++;
+        CountEmpregadoMt++;
         return ProcessarRegistro(linha, EmpregadoMtAFD1510.GetEmpregadoMtRep, EmpregadoMtAFD595.GetEmpregadoMtRep, EmpregadoMtAFD671.GetEmpregadoMtRep);
     }
 
     public static bool ProcessarEventoSensivel(string linha)
     {
-        countEventoSensiveis++;
+        CountEventoSensiveis++;
         return ProcessarRegistro(linha, EventosSensiveisAFD595.GetEventosSensiveis, EventosSensiveisAFD671.GetEventosSensiveis);
     }
 
     public static bool ProcessarMarcacaoPontoRepP(string linha)
     {
-        countMarcacaoPontoRepP++;
+        CountMarcacaoPontoRepP++;
         return ProcessarRegistro(linha, MarcacaoPontoRepPAFD671.GetMarcacaoPonto);
     }
 
     public static bool ProcessarTrailer(string linha)
     {
+        Trailer++;
         return ProcessarRegistro(linha, TrailerAFD1510.GetTrailer, TrailerAFD595.GetTrailer, TrailerAFD671.GetTrailer);
     }
     private static bool ProcessarRegistro(string linha, params Action<string>[] actions)

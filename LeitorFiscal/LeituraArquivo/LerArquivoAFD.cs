@@ -9,10 +9,6 @@ public class LerArquivoAFD
 {
     public static int NumeroLinha { get; private set; } = 0;
 
-    static int countIdentEmpresa = 0, countMarcacaoPonto = 0, countTempoReal = 0, countEmpregadoMt = 0;
-    static int countEventoSensiveis = 0, countMarcacaoPontoRepP = 0;
-    static int trailer = 0;
-
     public async static Task<decimal> TotalLinhaArquivo(string caminho)
     {
         decimal totalLinhas = 0;
@@ -30,9 +26,6 @@ public class LerArquivoAFD
     public async static Task Arquivo(string caminho)
     {
         NumeroLinha = 0;
-        countIdentEmpresa = 0; countMarcacaoPonto = 0; countTempoReal = 0; countEmpregadoMt = 0;
-        countEventoSensiveis = 0; countMarcacaoPontoRepP = 0;
-        trailer = 0;
 
         using StreamReader sr = new(caminho, Encoding.Latin1, true, 1024 * 1024 * 1);
         string? linha;
@@ -72,16 +65,16 @@ public class LerArquivoAFD
     private static void ItemLinha(TipoRegistro tipoRegistro, string linha)
     {
         Dictionary<TipoRegistro, Func<string, bool>> registroHandlers = new()
-    {
-        { TipoRegistro.Cabecalho, ProcessarGets.ProcessarCabecalho },
-        { TipoRegistro.IdentificacaoEmpresa, ProcessarGets.ProcessarIdentificacaoEmpresa },
-        { TipoRegistro.MarcacaoPontoREP_C_A, ProcessarGets.ProcessarMarcacaoPonto },
-        { TipoRegistro.AjusteRelogio,ProcessarGets.ProcessarAjusteRelogio },
-        { TipoRegistro.EmpregadoREP, ProcessarGets.ProcessarEmpregado },
-        { TipoRegistro.EventosSensiveisREP,ProcessarGets.ProcessarEventoSensivel },
-        { TipoRegistro.MarcacaoPontoREP_P, ProcessarGets.ProcessarMarcacaoPontoRepP },
-        { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer }
-    };
+        {
+            { TipoRegistro.Cabecalho, ProcessarGets.ProcessarCabecalho },
+            { TipoRegistro.IdentificacaoEmpresa, ProcessarGets.ProcessarIdentificacaoEmpresa },
+            { TipoRegistro.MarcacaoPontoREP_C_A, ProcessarGets.ProcessarMarcacaoPonto },
+            { TipoRegistro.AjusteRelogio,ProcessarGets.ProcessarAjusteRelogio },
+            { TipoRegistro.EmpregadoREP, ProcessarGets.ProcessarEmpregado },
+            { TipoRegistro.EventosSensiveisREP,ProcessarGets.ProcessarEventoSensivel },
+            { TipoRegistro.MarcacaoPontoREP_P, ProcessarGets.ProcessarMarcacaoPontoRepP },
+            { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer }
+        };
 
         if (registroHandlers.TryGetValue(tipoRegistro, out var handler))
         {
@@ -93,136 +86,6 @@ public class LerArquivoAFD
         else
         {
             ProcessarGets.ProcessarDefault(linha, tipoRegistro);
-        }
-    }
-
-
-
-    private static void ItemLinha0(TipoRegistro tipoRegistro, string linha)
-    {
-        switch (tipoRegistro)
-        {
-            case TipoRegistro.Cabecalho:
-                if (linha.Length == 232)
-                {
-                    CabecalhoAFD1510.GetCabecalho(linha);
-                }
-                if (linha.Length == 236)
-                {
-                    CabecalhoAFD595.GetCabecalho(linha);
-                }
-                if (linha.Length == 298 || linha.Length == 302)
-                {
-                    CabecalhoAFD671.GetCabecalho(linha);
-                }
-                break;
-            case TipoRegistro.IdentificacaoEmpresa:
-                countIdentEmpresa++;
-                if (linha.Length == 299)
-                {
-                    IdentificacaoEmpresaAFD1510.GetIdentificadorEmpresa(linha);
-                }
-                if (linha.Length == 317)
-                {
-                    IdentificacaoEmpresaAFD595.GetIdentificadorEmpresa(linha);
-                }
-                if (linha.Length == 327 || linha.Length == 331)
-                {
-                    IdentificacaoEmpresaAFD671.GetIdentificadorEmpresa(linha);
-                }
-                break;
-            case TipoRegistro.MarcacaoPontoREP_C_A:
-                countMarcacaoPonto++;
-                if (linha.Length == 34)
-                {
-                    MarcacaoPontoAFD1510.GetMarcacaoPonto(linha);
-                }
-                if (linha.Length == 38)
-                {
-                    MarcacaoPontoAFD595.GetMarcacaoPonto(linha);
-                }
-                if (linha.Length == 46 || linha.Length == 50)
-                {
-                    MarcacaoPontoAFD671.GetMarcacaoPonto(linha);
-                }
-                break;
-            case TipoRegistro.AjusteRelogio:
-                countTempoReal++;
-                if (linha.Length == 34)
-                {
-                    TempoRealAFD1510.GetTempoReal(linha);
-                }
-                if (linha.Length == 49)
-                {
-                    TempoRealAFD595.GetTempoReal(linha);
-                }
-                if (linha.Length == 69 || linha.Length == 73)
-                {
-                    TempoRealAFD671.GetTempoReal(linha);
-                }
-                break;
-            case TipoRegistro.EmpregadoREP:
-                countEmpregadoMt++;
-                if (linha.Length == 87)
-                {
-                    EmpregadoMtAFD1510.GetEmpregadoMtRep(linha);
-                }
-                if (linha.Length == 106)
-                {
-                    EmpregadoMtAFD595.GetEmpregadoMtRep(linha);
-                }
-                if (linha.Length == 114 || linha.Length == 118)
-                {
-                    EmpregadoMtAFD671.GetEmpregadoMtRep(linha);
-                }
-                break;
-            case TipoRegistro.EventosSensiveisREP:
-                countEventoSensiveis++;
-
-                if (linha.Length == 24)
-                {
-                    EventosSensiveisAFD595.GetEventosSensiveis(linha);
-                }
-                if (linha.Length == 36)
-                {
-                    EventosSensiveisAFD671.GetEventosSensiveis(linha);
-                }
-                break;
-            case TipoRegistro.MarcacaoPontoREP_P:
-                countMarcacaoPontoRepP++;
-                if (linha.Length == 133 || linha.Length == 137)
-                {
-                    MarcacaoPontoRepPAFD671.GetMarcacaoPonto(linha);
-                }
-                break;
-            case TipoRegistro.Trailer:
-                if (linha.Length == 46)
-                {
-                    TrailerAFD1510.GetTrailer(linha);
-                }
-                if (linha.Length == 55)
-                {
-                    TrailerAFD595.GetTrailer(linha);
-                }
-                if (linha.Length == 60 || linha.Length == 64)
-                {
-                    TrailerAFD671.GetTrailer(linha);
-                }
-                trailer = linha.Length;
-                break;
-            default:
-                if (linha.Length == 100)
-                {
-                    AssinaturaDigitalAFD.GetAssinaturaDigital(linha);
-                }
-                else
-                {
-                    ErrosDeLeitura.Erros.Add($"Linha: {linha} - {tipoRegistro}");
-
-                    //MessageBox.Show($"Tipo de registro inválido: {itemLinha}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //sr.ReadToEnd();
-                }
-                break;
         }
     }
 
@@ -248,7 +111,7 @@ public class LerArquivoAFD
 
     private static void ValidarTrailerRegistro()
     {
-        TamanhoTrailer tamanhoTrailer = (TamanhoTrailer)trailer;
+        TamanhoTrailer tamanhoTrailer = (TamanhoTrailer)ProcessarGets.Trailer;
 
         if (ValidarRegistrosAEJ(tamanhoTrailer))
         {
@@ -261,9 +124,9 @@ public class LerArquivoAFD
     {
         return tamanhoTrailer switch
         {
-            TamanhoTrailer.AFD1510 => TrailerAFD1510.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt),
-            TamanhoTrailer.AFD595 => TrailerAFD595.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis),
-            TamanhoTrailer.AFD671 => TrailerAFD671.ValidarResgistrosAEJ(countIdentEmpresa, countMarcacaoPonto, countTempoReal, countEmpregadoMt, countEventoSensiveis, countMarcacaoPontoRepP),
+            TamanhoTrailer.AFD1510 => TrailerAFD1510.ValidarResgistrosAEJ(ProcessarGets.CountIdentEmpresa, ProcessarGets.CountMarcacaoPonto, ProcessarGets.CountTempoReal, ProcessarGets.CountEmpregadoMt),
+            TamanhoTrailer.AFD595 => TrailerAFD595.ValidarResgistrosAEJ(ProcessarGets.CountIdentEmpresa, ProcessarGets.CountMarcacaoPonto, ProcessarGets.CountTempoReal, ProcessarGets.CountEmpregadoMt, ProcessarGets.CountEventoSensiveis),
+            TamanhoTrailer.AFD671 => TrailerAFD671.ValidarResgistrosAEJ(ProcessarGets.CountIdentEmpresa, ProcessarGets.CountMarcacaoPonto, ProcessarGets.CountTempoReal, ProcessarGets.CountEmpregadoMt, ProcessarGets.CountEventoSensiveis, ProcessarGets.CountMarcacaoPontoRepP),
             _ => false,
         };
     }
