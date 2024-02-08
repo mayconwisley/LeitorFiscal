@@ -9,18 +9,26 @@ public class ValidacaoAssinaturaDigital
         string? validacao = string.Empty;
         string? portaria = string.Empty;
 
-        if (AssinaturaDigitalAFD.Portaria!.Contains("595"))
+        try
         {
-            AssinaturaDigitalAFD.ErrosValidacao.ForEach(ar => { validacao += $"{ar}\n"; });
-            portaria = AssinaturaDigitalAFD.Portaria;
-        }
+            if (!string.IsNullOrEmpty(AssinaturaDigitalAFD.Portaria!.Contains("595").ToString()))
+            {
+                AssinaturaDigitalAFD.ErrosValidacao.ForEach(ar => { validacao += $"{ar}\n"; });
+                portaria = AssinaturaDigitalAFD.Portaria;
+            }
 
-        if (AssinaturaDigitalAFD.Portaria!.Contains("671"))
+            if (!string.IsNullOrEmpty(AssinaturaDigitalAFD.Portaria!.Contains("671").ToString()))
+            {
+                AssinaturaDigitalAFD.ErrosValidacao.ForEach(ar => { validacao += $"{ar}\n"; });
+                portaria = AssinaturaDigitalAFD.Portaria;
+            }
+
+            return $"Assinatura Digital: {portaria}\n{validacao}\n";
+        }
+        catch (Exception ex)
         {
-            AssinaturaDigitalAFD.ErrosValidacao.ForEach(ar => { validacao += $"{ar}\n"; });
-            portaria = AssinaturaDigitalAFD.Portaria;
-        }
 
-        return $"Assinatura Digital: {portaria}\n{validacao}\n";
+            throw new Exception(ex.Message);
+        }
     }
 }

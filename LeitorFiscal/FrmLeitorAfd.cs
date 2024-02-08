@@ -492,10 +492,20 @@ public partial class FrmLeitorAfd : Form
         ListarTrailer(pgAtual);
         ListarAssinaturaDigiral(pgAtual);
     }
+    private void LimparCampos()
+    {
+        ProcessarGets.CountIdentEmpresa = 0;
+        ProcessarGets.CountMarcacaoPonto = 0;
+        ProcessarGets.CountTempoReal = 0;
+        ProcessarGets.CountEmpregadoMt = 0;
+        ProcessarGets.CountEventoSensiveis = 0;
+        ProcessarGets.CountMarcacaoPontoRepP = 0;
+        ProcessarGets.Trailer = 0;
+    }
     private async void SubMenuArquivoLer_Click(object sender, EventArgs e)
     {
         LocalizarArquivo();
-
+        LimparCampos();
         try
         {
             decimal totalLinha = await LerArquivoAFD.TotalLinhaArquivo(caminhoArquivo);

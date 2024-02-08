@@ -50,7 +50,6 @@ public class LerArquivoAFD
             }
             ValidarTrailerRegistro(linha!.Length);
         }
-        
     }
 
     private static void ValidarTipoRegistro(string itemLinha, string linha)
@@ -59,6 +58,11 @@ public class LerArquivoAFD
         if (isItem)
         {
             TipoRegistro tipoRegistro = (TipoRegistro)item;
+            ItemLinha(tipoRegistro, linha);
+        }
+        else
+        {
+            TipoRegistro tipoRegistro = (TipoRegistro)linha.Length;
             ItemLinha(tipoRegistro, linha);
         }
     }
@@ -74,8 +78,9 @@ public class LerArquivoAFD
             { TipoRegistro.EmpregadoREP, ProcessarGets.ProcessarEmpregado },
             { TipoRegistro.EventosSensiveisREP,ProcessarGets.ProcessarEventoSensivel },
             { TipoRegistro.MarcacaoPontoREP_P, ProcessarGets.ProcessarMarcacaoPontoRepP },
-            { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer },
+            { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer }
             
+
         };
 
         if (registroHandlers.TryGetValue(tipoRegistro, out var handler))
@@ -118,7 +123,7 @@ public class LerArquivoAFD
         if (ValidarRegistrosAEJ(tamanhoTrailer))
         {
             MessageBox.Show("Não foi possivel validar a quantidade de registros!\nVeja a guia 9 - Trailer", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            LimparAFD.Limpar();
+            //LimparAFD.Limpar();
         }
     }
 

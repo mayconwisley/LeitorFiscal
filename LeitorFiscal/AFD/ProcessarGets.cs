@@ -5,24 +5,13 @@ namespace LeitorFiscal.AFD;
 
 public class ProcessarGets
 {
-    public static int CountIdentEmpresa { get; private set; } = 0;
-    public static int CountMarcacaoPonto { get; private set; } = 0;
-    public static int CountTempoReal { get; private set; } = 0;
-    public static int CountEmpregadoMt { get; private set; } = 0;
-    public static int CountEventoSensiveis { get; private set; } = 0;
-    public static int CountMarcacaoPontoRepP { get; private set; } = 0;
-    public static int Trailer { get; private set; } = 0;
-
-    public ProcessarGets()
-    {
-        CountIdentEmpresa = 0;
-        CountMarcacaoPonto = 0;
-        CountTempoReal = 0;
-        CountEmpregadoMt = 0;
-        CountEventoSensiveis = 0;
-        CountMarcacaoPontoRepP = 0;
-        Trailer = 0;
-    }
+    public static int CountIdentEmpresa { get; set; } = 0;
+    public static int CountMarcacaoPonto { get; set; } = 0;
+    public static int CountTempoReal { get; set; } = 0;
+    public static int CountEmpregadoMt { get; set; } = 0;
+    public static int CountEventoSensiveis { get; set; } = 0;
+    public static int CountMarcacaoPontoRepP { get; set; } = 0;
+    public static int Trailer { get; set; } = 0;
 
     public static bool ProcessarCabecalho(string linha)
     {

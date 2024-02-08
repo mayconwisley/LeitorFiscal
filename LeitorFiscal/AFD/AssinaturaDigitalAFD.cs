@@ -11,7 +11,7 @@ public class AssinaturaDigitalAFD
 
     public static List<AssinaturaDigitalAFD> AssinaturaDigitalAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
 
     #region Funções
     public static void GetAssinaturaDigital(string linhaArquivo)
@@ -19,7 +19,7 @@ public class AssinaturaDigitalAFD
         AssinaturaDigitalAFD assinaturaDigital;
 
         int tamanhoLinha = linhaArquivo.Length;
-
+        AssinaturaDigitalAfdList.Clear();
         if (tamanhoLinha != 100)
         {
             ErrosValidacao.Add($"A 'Assinatura Digital' possui o tamanho de caracteres diferentes que o definido pela as Portarias 595 e 671. Tamanho encontrado: {tamanhoLinha}\n");

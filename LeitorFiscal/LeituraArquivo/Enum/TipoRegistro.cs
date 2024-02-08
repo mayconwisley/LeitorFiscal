@@ -9,5 +9,7 @@ public enum TipoRegistro
     EmpregadoREP = 5,
     EventosSensiveisREP = 6,
     MarcacaoPontoREP_P = 7,
-    Trailer = 9
+    Trailer = 9,
+    Assinatura = 100
+
 }
