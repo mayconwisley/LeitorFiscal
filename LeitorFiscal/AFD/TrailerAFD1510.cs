@@ -117,7 +117,6 @@ public class TrailerAFD1510
 
     private static bool ValidarTipoDados(TrailerAFD1510 trailer, string linha)
     {
-
         var camposComErro = new List<string>();
 
         if (!int.TryParse(trailer.Noves, out _))

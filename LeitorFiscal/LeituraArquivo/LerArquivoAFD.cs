@@ -48,8 +48,9 @@ public class LerArquivoAFD
             {
                 ValidarTipoRegistro(itemLinha, linha);
             }
+            ValidarTrailerRegistro(linha!.Length);
         }
-        ValidarTrailerRegistro();
+        
     }
 
     private static void ValidarTipoRegistro(string itemLinha, string linha)
@@ -73,7 +74,8 @@ public class LerArquivoAFD
             { TipoRegistro.EmpregadoREP, ProcessarGets.ProcessarEmpregado },
             { TipoRegistro.EventosSensiveisREP,ProcessarGets.ProcessarEventoSensivel },
             { TipoRegistro.MarcacaoPontoREP_P, ProcessarGets.ProcessarMarcacaoPontoRepP },
-            { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer }
+            { TipoRegistro.Trailer, ProcessarGets.ProcessarTrailer },
+            
         };
 
         if (registroHandlers.TryGetValue(tipoRegistro, out var handler))
@@ -109,9 +111,9 @@ public class LerArquivoAFD
         }
     }
 
-    private static void ValidarTrailerRegistro()
+    private static void ValidarTrailerRegistro(int len)
     {
-        TamanhoTrailer tamanhoTrailer = (TamanhoTrailer)ProcessarGets.Trailer;
+        TamanhoTrailer tamanhoTrailer = (TamanhoTrailer)len;
 
         if (ValidarRegistrosAEJ(tamanhoTrailer))
         {
