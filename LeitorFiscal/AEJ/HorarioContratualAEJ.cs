@@ -24,8 +24,6 @@ public class HorarioContratualAEJ
     public string? HrEntrada02 { get; set; }
     [MaxLength(4, ErrorMessage = "O campo HrSaida02 deve ser um tipo de cadeia de caracteres com um comprimento máximo de '4'")]
     public string? HrSaida02 { get; set; }
-
-
     [MaxLength(4, ErrorMessage = "O campo HrEntrada03 deve ser um tipo de cadeia de caracteres com um comprimento máximo de '4'")]
     public string? HrEntrada03 { get; set; }
     [MaxLength(4, ErrorMessage = "O campo HrSaida03 deve ser um tipo de cadeia de caracteres com um comprimento máximo de '4'")]
@@ -43,14 +41,13 @@ public class HorarioContratualAEJ
     [MaxLength(4, ErrorMessage = "O campo HrSaida06 deve ser um tipo de cadeia de caracteres com um comprimento máximo de '4'")]
     public string? HrSaida06 { get; set; }
 
-
     public static List<HorarioContratualAEJ> HorarioContratualAEJList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; set; } = new();
 
     public static void GetHorarioContratual(string linhaHoraContratual)
     {
         string[] itemLinha = linhaHoraContratual.Split("|");
-        if (itemLinha.Length < 7 || itemLinha.Length > 8)
+        if (itemLinha.Length < 5)
         {
             throw new Exception($"Layout da sessão 04 esta fora do padrão definido pela a portaria\n{linhaHoraContratual}");
         }
