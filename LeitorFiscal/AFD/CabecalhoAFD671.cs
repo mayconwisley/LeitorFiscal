@@ -68,7 +68,7 @@ public class CabecalhoAFD671
 
     public static List<CabecalhoAFD671> CabecalhoAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
 
     #region Funções
     public static void GetCabecalho(string linhaArquivo)

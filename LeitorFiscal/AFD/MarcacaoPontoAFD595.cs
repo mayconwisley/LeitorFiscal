@@ -33,7 +33,7 @@ public class MarcacaoPontoAFD595
 
     public static List<MarcacaoPontoAFD595> MarcacaoPontoAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetMarcacaoPonto(string linhaArquivo)
     {

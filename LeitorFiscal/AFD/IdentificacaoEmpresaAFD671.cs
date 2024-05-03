@@ -48,7 +48,7 @@ public class IdentificacaoEmpresaAFD671
 
     public static List<IdentificacaoEmpresaAFD671> IdentificacaoEmpresaRepAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetIdentificadorEmpresa(string linhaArquivo)
     {

@@ -47,7 +47,8 @@ public class MarcacaoPontoRepPAFD671
 
     public static List<MarcacaoPontoRepPAFD671> MarcacaoPontoRepPAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
+    
     #region Funções
     public static void GetMarcacaoPonto(string linhaArquivo)
     {

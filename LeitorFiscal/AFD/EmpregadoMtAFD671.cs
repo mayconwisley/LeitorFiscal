@@ -44,7 +44,7 @@ public class EmpregadoMtAFD671
 
     public static List<EmpregadoMtAFD671> EmpregadoMtRepAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
 
     #region Funções
     public static void GetEmpregadoMtRep(string linhaArquivo)

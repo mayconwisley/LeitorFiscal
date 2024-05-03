@@ -32,7 +32,7 @@ public class TempoRealAFD1510
 
     public static List<TempoRealAFD1510> TempoRealRepAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetTempoReal(string linhaArquivo)
     {

@@ -18,7 +18,7 @@ public partial class FrmLeitorAfd : Form
     decimal totalPagina = 1;
     int totalItens = 0;
     const int tamanhoPg = 250;
-
+    
     private void ListarCabecalho(int pgAtual = 1)
     {
         RTxtLogCabecalho.Clear();

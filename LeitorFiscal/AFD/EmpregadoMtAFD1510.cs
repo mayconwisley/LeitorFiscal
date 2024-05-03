@@ -36,7 +36,7 @@ public class EmpregadoMtAFD1510
 
     public static List<EmpregadoMtAFD1510> EmpregadoMtRepAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetEmpregadoMtRep(string linhaArquivo)
     {

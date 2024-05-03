@@ -37,7 +37,7 @@ public class EventosSensiveisAFD595
 
     public static List<EventosSensiveisAFD595> EventosSensiveisRepAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetEventosSensiveis(string linhaArquivo)
     {

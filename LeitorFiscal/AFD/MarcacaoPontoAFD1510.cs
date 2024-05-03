@@ -28,7 +28,7 @@ public class MarcacaoPontoAFD1510
 
     public static List<MarcacaoPontoAFD1510> MarcacaoPontoAfdList { get; private set; } = new();
     public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static string? Portaria { get; set; } = string.Empty;
 
     public static void GetMarcacaoPonto(string linhaArquivo)
     {

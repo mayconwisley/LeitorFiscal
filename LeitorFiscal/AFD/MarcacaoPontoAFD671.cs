@@ -27,8 +27,8 @@ public class MarcacaoPontoAFD671
     public string? Crc16 { get; private set; } /*Tamanho: 4, Posição: 47 a 50, Tipo: alfanumérico*/
 
     public static List<MarcacaoPontoAFD671> MarcacaoPontoAfdList { get; private set; } = new();
-    public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; }
+    public static List<string> ErrosValidacao { get; private set; } = new() ;
+    public static string? Portaria { get; set; } = string.Empty;
     #region Funções
     public static void GetMarcacaoPonto(string linhaArquivo)
     {
