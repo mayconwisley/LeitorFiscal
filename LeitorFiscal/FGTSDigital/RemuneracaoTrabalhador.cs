@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.FGTSDigital;
@@ -14,7 +15,6 @@ public class RemuneracaoTrabalhador
     public string? Categoria { get; set; }
     public string? ValorPrincipal { get; set; }
     public string? Valor13Salario { get; set; }
-    [MaxLength(1, ErrorMessage = "O campo 'Competencia' deve ser um tipo de cadeia de caracteres com um comprimento de '1' posição")]
     public string? IndAusenciaFGTS { get; set; }
 
     public static List<RemuneracaoTrabalhador> RemuneracaoTrabalhadors { get; private set; } = [];
@@ -38,14 +38,21 @@ public class RemuneracaoTrabalhador
         {
             if (linha.Identificador != "2")
             {
-                ErrosValidacao.Add($"O campo 'Identificador' esta com o valor({linha.Identificador}) inválido, o valor deve ser 2.\n\tLinha({1}): {linhaUm}\n");
+                ErrosValidacao.Add($"O campo 'Identificador' esta com o valor({linha.Identificador}) inválido, o valor deve ser 2.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
 
             }
 
-            if (linha.IndAusenciaFGTS != "S")
+            if (linha.IndAusenciaFGTS != "S" && linha.IndAusenciaFGTS == string.Empty)
             {
-                ErrosValidacao.Add($"O campo 'Ind. Ausencia FGTS' esta com o valor({linha.IndAusenciaFGTS}) inválido, o valor deve ser 'S'\n\tLinha({1}): {linhaUm}\n");
+                ErrosValidacao.Add($"O campo 'Ind. Ausencia FGTS' esta com o valor({linha.IndAusenciaFGTS}) inválido, o valor deve ser 'S'\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
             }
+        }
+
+        RemuneracaoTrabalhadors.Add(linha);
+
+        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+        {
+            ErrosValidacao.Add(item + "\n");
         }
     }
 
@@ -58,12 +65,12 @@ public class RemuneracaoTrabalhador
             campoErro.Add("Competência");
         }
 
-        if (!decimal.TryParse(remuneracaoTrabalhador.ValorPrincipal, out _))
+        if (!decimal.TryParse(remuneracaoTrabalhador.ValorPrincipal, out _) && !string.IsNullOrEmpty(remuneracaoTrabalhador.ValorPrincipal))
         {
             campoErro.Add("Valor Princial");
         }
 
-        if (!decimal.TryParse(remuneracaoTrabalhador.Valor13Salario, out _))
+        if (!decimal.TryParse(remuneracaoTrabalhador.Valor13Salario, out _) && !string.IsNullOrEmpty(remuneracaoTrabalhador.Valor13Salario))
         {
             campoErro.Add("Valor 13º Salario");
         }
@@ -73,7 +80,7 @@ public class RemuneracaoTrabalhador
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", campoErro)}\n\tLinha({1}: {linha})");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", campoErro)}\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}: {linha})");
             return false;
         }
     }

@@ -34,11 +34,12 @@
             label1 = new Label();
             LkPortarias = new LinkLabel();
             LkProjetoGithub = new LinkLabel();
+            BtnFgtsDigital = new Button();
             SuspendLayout();
             // 
             // BtnValidadeAej
             // 
-            BtnValidadeAej.Location = new Point(65, 38);
+            BtnValidadeAej.Location = new Point(60, 44);
             BtnValidadeAej.Name = "BtnValidadeAej";
             BtnValidadeAej.Size = new Size(167, 75);
             BtnValidadeAej.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             // BtnValidarAej
             // 
-            BtnValidarAej.Location = new Point(238, 38);
+            BtnValidarAej.Location = new Point(233, 44);
             BtnValidarAej.Name = "BtnValidarAej";
             BtnValidarAej.Size = new Size(167, 75);
             BtnValidarAej.TabIndex = 1;
@@ -59,7 +60,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 126);
+            label1.Location = new Point(12, 138);
             label1.Name = "label1";
             label1.Size = new Size(185, 15);
             label1.TabIndex = 2;
@@ -68,7 +69,7 @@
             // LkPortarias
             // 
             LkPortarias.AutoSize = true;
-            LkPortarias.Location = new Point(405, 126);
+            LkPortarias.Location = new Point(577, 138);
             LkPortarias.Name = "LkPortarias";
             LkPortarias.Size = new Size(53, 15);
             LkPortarias.TabIndex = 3;
@@ -79,7 +80,7 @@
             // LkProjetoGithub
             // 
             LkProjetoGithub.AutoSize = true;
-            LkProjetoGithub.Location = new Point(203, 126);
+            LkProjetoGithub.Location = new Point(203, 138);
             LkProjetoGithub.Name = "LkProjetoGithub";
             LkProjetoGithub.Size = new Size(84, 15);
             LkProjetoGithub.TabIndex = 4;
@@ -87,14 +88,25 @@
             LkProjetoGithub.Text = "Projeto Github";
             LkProjetoGithub.LinkClicked += LkProjetoGithub_LinkClicked;
             // 
+            // BtnFgtsDigital
+            // 
+            BtnFgtsDigital.Location = new Point(406, 44);
+            BtnFgtsDigital.Name = "BtnFgtsDigital";
+            BtnFgtsDigital.Size = new Size(167, 75);
+            BtnFgtsDigital.TabIndex = 1;
+            BtnFgtsDigital.Text = "Validar FGTS Digital";
+            BtnFgtsDigital.UseVisualStyleBackColor = true;
+            BtnFgtsDigital.Click += BtnFgtsDigital_Click;
+            // 
             // FrmInicial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(470, 150);
+            ClientSize = new Size(633, 162);
             Controls.Add(LkProjetoGithub);
             Controls.Add(LkPortarias);
             Controls.Add(label1);
+            Controls.Add(BtnFgtsDigital);
             Controls.Add(BtnValidarAej);
             Controls.Add(BtnValidadeAej);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -102,7 +114,7 @@
             MaximizeBox = false;
             Name = "FrmInicial";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Validador de Arquivos Fiscais AEJ e AFD";
+            Text = "Validador de Arquivos Fiscais AEJ e AFD e FGTS Digital";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,5 +126,6 @@
         private Label label1;
         private LinkLabel LkPortarias;
         private LinkLabel LkProjetoGithub;
+        private Button BtnFgtsDigital;
     }
 }

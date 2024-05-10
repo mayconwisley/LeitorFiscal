@@ -1,5 +1,4 @@
 ﻿using LeitorFiscal.Model.Util;
-using System.Diagnostics;
 
 namespace LeitorFiscal;
 
@@ -59,6 +58,19 @@ public partial class FrmInicial : Form
         catch (Exception ex)
         {
 
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    private void BtnFgtsDigital_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            FrmLeitorFgtsDigital frmLeitorFgtsDigital = new();
+            frmLeitorFgtsDigital.ShowDialog();
+        }
+        catch (Exception ex)
+        {
             MessageBox.Show(ex.Message);
         }
     }

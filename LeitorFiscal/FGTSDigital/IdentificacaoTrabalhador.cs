@@ -1,4 +1,5 @@
-﻿using LeitorFiscal.Model.Util;
+﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeitorFiscal.FGTSDigital;
@@ -8,8 +9,8 @@ public class IdentificacaoTrabalhador
     [MaxLength(1, ErrorMessage = "O campo 'Identificador' deve ser um tipo de cadeia de caracteres com um comprimento máximo de '1'")]
     [AllowedValues("1")]
     public string? Identificador { get; set; } = "1";
-    [MaxLength(14, ErrorMessage = "O campo 'CNPJ_CPF' deve ser um tipo de cadeia de caracteres com um comprimento máximo de '14'")]
-    [MinLength(11, ErrorMessage = "O campo 'CNPJ_CPF' deve ser um tipo de cadeia de caracteres com um comprimento minimo de '11'")]
+    [MaxLength(11, ErrorMessage = "O campo 'CNPJ_CPF' deve ser um tipo de cadeia de caracteres com um comprimento máximo de '11'")]
+    [MinLength(8, ErrorMessage = "O campo 'CNPJ_CPF' deve ser um tipo de cadeia de caracteres com um comprimento minimo de '8'")]
     public string? CNPJ_CPF { get; set; }
     [MaxLength(11, ErrorMessage = "O campo 'CPF' deve ser um tipo de cadeia de caracteres com um comprimento máximo de '11'")]
     [MinLength(11, ErrorMessage = "O campo 'CPF' deve ser um tipo de cadeia de caracteres com um comprimento minimo de '11'")]
@@ -41,9 +42,21 @@ public class IdentificacaoTrabalhador
         {
             if (linha.Identificador != "1")
             {
-                ErrosValidacao.Add($"O campo 'Identificador' esta com o valor({linha.Identificador}) inválido, o valor deve ser 2.\n\tLinha({1}): {linhaUm}\n");
+                ErrosValidacao.Add($"O campo 'Identificador' esta com o valor({linha.Identificador}) inválido, o valor deve ser 2.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
 
             }
+
+            if (linha.CNPJ_CPF.Count() != 8 && linha.CNPJ_CPF.Count() != 11)
+            {
+                ErrosValidacao.Add($"O campo 'CNPJ_CPF' esta com o valor({linha.CNPJ_CPF}) inválido, o valor deve conter 8 ou 11 digitos.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
+            }
+        }
+
+        IdentificacaoTrabalhadors.Add(linha);
+
+        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+        {
+            ErrosValidacao.Add(item + "\n");
         }
     }
 
@@ -61,7 +74,7 @@ public class IdentificacaoTrabalhador
         }
         else
         {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", campoErro)}\n\tLinha({1}: {linha})");
+            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", campoErro)}\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}: {linha})");
             return false;
         }
     }
