@@ -11,6 +11,12 @@
     <Content Include="icoLeitorFiscal.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Portarias\manual-do-orientacao-do-fgts-digital-versao-1-1-01-03-2024.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Portarias\Portaria nº 671, de 8 de novembro de 2021 - compilada 20.10.2023.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Portarias\Portaria_1510.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
