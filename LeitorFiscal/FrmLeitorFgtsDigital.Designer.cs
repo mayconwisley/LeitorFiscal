@@ -81,7 +81,7 @@
             // SubMenuLerArquivo
             // 
             SubMenuLerArquivo.Name = "SubMenuLerArquivo";
-            SubMenuLerArquivo.Size = new Size(180, 22);
+            SubMenuLerArquivo.Size = new Size(135, 22);
             SubMenuLerArquivo.Text = "Ler Arquivo";
             SubMenuLerArquivo.Click += SubMenuLerArquivo_Click;
             // 
@@ -130,6 +130,7 @@
             // 
             DgvIdentificacao.AllowUserToAddRows = false;
             DgvIdentificacao.AllowUserToDeleteRows = false;
+            DgvIdentificacao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DgvIdentificacao.BackgroundColor = SystemColors.Control;
             DgvIdentificacao.BorderStyle = BorderStyle.Fixed3D;
             DgvIdentificacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -155,6 +156,7 @@
             CnpjCpf.HeaderText = "CNPJ/CPF";
             CnpjCpf.Name = "CnpjCpf";
             CnpjCpf.ReadOnly = true;
+            CnpjCpf.Width = 85;
             // 
             // Cpf
             // 
@@ -162,6 +164,7 @@
             Cpf.HeaderText = "CPF";
             Cpf.Name = "Cpf";
             Cpf.ReadOnly = true;
+            Cpf.Width = 53;
             // 
             // DataAdmissao
             // 
@@ -169,6 +172,7 @@
             DataAdmissao.HeaderText = "Data Admissão";
             DataAdmissao.Name = "DataAdmissao";
             DataAdmissao.ReadOnly = true;
+            DataAdmissao.Width = 102;
             // 
             // Matricula
             // 
@@ -176,6 +180,7 @@
             Matricula.HeaderText = "Matricula";
             Matricula.Name = "Matricula";
             Matricula.ReadOnly = true;
+            Matricula.Width = 82;
             // 
             // Categoria_Tsve
             // 
@@ -183,6 +188,7 @@
             Categoria_Tsve.HeaderText = "Categoria TSVE";
             Categoria_Tsve.Name = "Categoria_Tsve";
             Categoria_Tsve.ReadOnly = true;
+            Categoria_Tsve.Width = 102;
             // 
             // TabRemuneracao
             // 
@@ -219,6 +225,7 @@
             // 
             DgvRemuneracao.AllowUserToAddRows = false;
             DgvRemuneracao.AllowUserToDeleteRows = false;
+            DgvRemuneracao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DgvRemuneracao.BackgroundColor = SystemColors.Control;
             DgvRemuneracao.BorderStyle = BorderStyle.Fixed3D;
             DgvRemuneracao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -244,6 +251,7 @@
             Competencia.HeaderText = "Competência";
             Competencia.Name = "Competencia";
             Competencia.ReadOnly = true;
+            Competencia.Width = 103;
             // 
             // Categoria
             // 
@@ -251,6 +259,7 @@
             Categoria.HeaderText = "Categoria";
             Categoria.Name = "Categoria";
             Categoria.ReadOnly = true;
+            Categoria.Width = 83;
             // 
             // Valor_principal
             // 
@@ -258,6 +267,7 @@
             Valor_principal.HeaderText = "Valor Principal";
             Valor_principal.Name = "Valor_principal";
             Valor_principal.ReadOnly = true;
+            Valor_principal.Width = 98;
             // 
             // valor_13_salario
             // 
@@ -265,6 +275,7 @@
             valor_13_salario.HeaderText = "Valor 13º Salário";
             valor_13_salario.Name = "valor_13_salario";
             valor_13_salario.ReadOnly = true;
+            valor_13_salario.Width = 75;
             // 
             // Ind_ausencia_FGTS
             // 
@@ -272,6 +283,7 @@
             Ind_ausencia_FGTS.HeaderText = "Ind. Ausencia FGTS";
             Ind_ausencia_FGTS.Name = "Ind_ausencia_FGTS";
             Ind_ausencia_FGTS.ReadOnly = true;
+            Ind_ausencia_FGTS.Width = 97;
             // 
             // FrmLeitorFgtsDigital
             // 

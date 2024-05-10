@@ -50,6 +50,13 @@ public class IdentificacaoTrabalhador
             {
                 ErrosValidacao.Add($"O campo 'CNPJ_CPF' esta com o valor({linha.CNPJ_CPF}) inválido, o valor deve conter 8 ou 11 digitos.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
             }
+
+            bool eCpf = ValidacaoCPF.Validar(linha.CPF);
+
+            if (!eCpf)
+            {
+                ErrosValidacao.Add($"O campo 'CPF' esta com o valor({linha.CNPJ_CPF}) inválido, o valor deve ser um CPF valido.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
+            }
         }
 
         IdentificacaoTrabalhadors.Add(linha);
