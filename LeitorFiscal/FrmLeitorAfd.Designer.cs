@@ -296,7 +296,7 @@
             groupBox2.Size = new Size(1036, 139);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Validações Marcao Ponto";
+            groupBox2.Text = "Validações Marcação Ponto";
             // 
             // RTxtLogMarcacaoPonto
             // 

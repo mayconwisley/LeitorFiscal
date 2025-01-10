@@ -46,7 +46,7 @@ public class IdentificacaoTrabalhador
 
             }
 
-            if (linha.CNPJ_CPF.Count() != 8 && linha.CNPJ_CPF.Count() != 11)
+            if (linha.CNPJ_CPF.Length != 8 && linha.CNPJ_CPF.Length != 11)
             {
                 ErrosValidacao.Add($"O campo 'CNPJ_CPF' esta com o valor({linha.CNPJ_CPF}) inválido, o valor deve conter 8 ou 11 digitos.\n\tLinha({LerArquivoFGTSDigital.NumeroLinha}): {linhaUm}\n");
             }
