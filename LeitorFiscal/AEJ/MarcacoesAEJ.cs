@@ -20,7 +20,7 @@ public class MarcacoesAEJ
     [MinLength(1, ErrorMessage = "O campo TpMarc deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? TpMarc { get; private set; }
     [MaxLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres com um comprimento máximo de '3'")]
-    [MinLength(3, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres com um comprimento minimo de '3'")]
+    [MinLength(1, ErrorMessage = "O campo SeqEntSaida deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
     public string? SeqEntSaida { get; private set; }
     [MaxLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres com um comprimento máximo de '1'")]
     [MinLength(1, ErrorMessage = "O campo FonteMarc deve ser um tipo de cadeia de caracteres com um comprimento minimo de '1'")]
