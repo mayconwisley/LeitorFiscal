@@ -1,4 +1,5 @@
 ﻿using LeitorFiscal.LeituraArquivo;
+using LeitorFiscal.Model.Empregado;
 using LeitorFiscal.Model.Util;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,166 +7,180 @@ namespace LeitorFiscal.AFD;
 
 public class EmpregadoMtAFD1510
 {
-    [MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
-    [MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
-    public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
+	[MaxLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento máximo de '9'")]
+	[MinLength(9, ErrorMessage = "O campo Nsr deve ter um comprimento minimo de '9'")]
+	public string? Nsr { get; private set; } /*Tamanho: 9, Posição: 1 a 9, Tipo: numérico*/
 
-    [MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
-    [MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
-    public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
+	[MaxLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento máximo de '1'")]
+	[MinLength(1, ErrorMessage = "O campo TpRegistro deve ter um comprimento minimo de '1'")]
+	public string? TpRegistro { get; private set; } /*Tamanho: 1, Posição 10 a 10, Tipo: numérico, Dado: = 5*/
 
-    [MaxLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento máximo de '8'")]
-    [MinLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento minimo de '8'")]
-    public string? DataGravacao { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
+	[MaxLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento máximo de '8'")]
+	[MinLength(8, ErrorMessage = "O campo DataGravacao deve ter um comprimento minimo de '8'")]
+	public string? DataGravacao { get; private set; } /*Tamanho: 8, Posição: 11 a 18, Tipo: numérico, Formato: ddmmaaaa*/
 
-    [MaxLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento máximo de '4'")]
-    [MinLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento minimo de '4'")]
-    public string? HoraGravacao { get; private set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
+	[MaxLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento máximo de '4'")]
+	[MinLength(4, ErrorMessage = "O campo HoraGravacao deve ter um comprimento minimo de '4'")]
+	public string? HoraGravacao { get; private set; } /*Tamanho: 4, Posição: 19 a 22, Tipo: numérico, Formato: hhmm*/
 
-    [MaxLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento máximo de '1'")]
-    [MinLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento minimo de '1'")]
-    public string? TpOperacao { get; private set; } /*Tamanho: 1, Posição? 23 a 23, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
+	[MaxLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento máximo de '1'")]
+	[MinLength(1, ErrorMessage = "O campo TpOperacao deve ter um comprimento minimo de '1'")]
+	public string? TpOperacao { get; private set; } /*Tamanho: 1, Posição? 23 a 23, Tipo: alfanumérico, Dado: = I - Inclusão ou A - Alteracao ou E - Exclusão*/
 
-    [MaxLength(12, ErrorMessage = "O campo Pis deve ter um comprimento máximo de '12'")]
-    [MinLength(12, ErrorMessage = "O campo Pis deve ter um comprimento minimo de '12'")]
-    public string? Pis { get; private set; } /*Tamanho: 12, Posição: 24 a 35, Tipo: numérico*/
+	[MaxLength(12, ErrorMessage = "O campo Pis deve ter um comprimento máximo de '12'")]
+	[MinLength(12, ErrorMessage = "O campo Pis deve ter um comprimento minimo de '12'")]
+	public string? Pis { get; private set; } /*Tamanho: 12, Posição: 24 a 35, Tipo: numérico*/
 
-    [MaxLength(52, ErrorMessage = "O campo Nome deve ter um comprimento máximo de '52'")]
-    [MinLength(52, ErrorMessage = "O campo Nome deve ter um comprimento minimo de '52'")]
-    public string? Nome { get; private set; } /*Tamanho: 52, Posição: 36 a 87, Tipo: alfanumérico*/
+	[MaxLength(52, ErrorMessage = "O campo Nome deve ter um comprimento máximo de '52'")]
+	[MinLength(52, ErrorMessage = "O campo Nome deve ter um comprimento minimo de '52'")]
+	public string? Nome { get; private set; } /*Tamanho: 52, Posição: 36 a 87, Tipo: alfanumérico*/
 
-    public static List<EmpregadoMtAFD1510> EmpregadoMtRepAfdList { get; private set; } = new();
-    public static List<string> ErrosValidacao { get; private set; } = new();
-    public static string? Portaria { get; set; } = string.Empty;
-    #region Funções
-    public static void GetEmpregadoMtRep(string linhaArquivo)
-    {
-        EmpregadoMtAFD1510 empregadoMt;
-        int tamanhoLinha = linhaArquivo.Length;
-        if (tamanhoLinha != 87)
-        {
-            ErrosValidacao.Add($"O registro '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009. Tamanho encontrado: {tamanhoLinha}\n");
-            return;
-        }
-        else
-        {
-            Portaria = "Portaria n.º 1510, de 21 de agosto de 2009\n";
+	public static List<EmpregadoMtAFD1510> EmpregadoMtRepAfdList { get; private set; } = new();
+	public static List<string> ErrosValidacao { get; private set; } = new();
+	public static string? Portaria { get; set; } = string.Empty;
 
-            empregadoMt = new()
-            {
-                Nsr = linhaArquivo[..9],
-                TpRegistro = linhaArquivo.Substring(9, 1),
-                DataGravacao = linhaArquivo.Substring(10, 8),
-                HoraGravacao = linhaArquivo.Substring(18, 4),
-                TpOperacao = linhaArquivo.Substring(22, 1),
-                Pis = linhaArquivo.Substring(23, 12),
-                Nome = linhaArquivo.Substring(35, 52)
-            };
-        }
+	public static List<Empregado> Empregados { get; set; } = [];
+	#region Funções
+	public static void GetEmpregadoMtRep(string linhaArquivo)
+	{
+		EmpregadoMtAFD1510 empregadoMt;
+		int tamanhoLinha = linhaArquivo.Length;
+		if (tamanhoLinha != 87)
+		{
+			ErrosValidacao.Add($"O registro '5 - Empregado MT' possui o tamanho de caracteres diferentes que o definido pela a Portaria n.º 1510, de 21 de agosto de 2009. Tamanho encontrado: {tamanhoLinha}\n");
+			return;
+		}
+		else
+		{
+			Portaria = "Portaria n.º 1510, de 21 de agosto de 2009\n";
 
-        if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt, linhaArquivo) && ValidarTipoDados(empregadoMt, linhaArquivo))
-        {
-            if (empregadoMt.TpRegistro != "5")
-            {
-                ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
-                return;
-            }
-            if (empregadoMt.TpOperacao != "I" && empregadoMt.TpOperacao != "A" && empregadoMt.TpOperacao != "E")
-            {
-                ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
-                return;
-            }
-            string validacaoPis = empregadoMt.Pis[..1];
-            string pis = empregadoMt.Pis.Substring(1, 11);
-            if (validacaoPis == "0")
-            {
-                bool ePis = ValidacaoPIS.Validar(pis);
-                bool eCpf = ValidacaoCPF.Validar(pis);
+			empregadoMt = new()
+			{
+				Nsr = linhaArquivo[..9],
+				TpRegistro = linhaArquivo.Substring(9, 1),
+				DataGravacao = linhaArquivo.Substring(10, 8),
+				HoraGravacao = linhaArquivo.Substring(18, 4),
+				TpOperacao = linhaArquivo.Substring(22, 1),
+				Pis = linhaArquivo.Substring(23, 12),
+				Nome = linhaArquivo.Substring(35, 52)
+			};
+		}
 
-                if (!ePis)
-                {
-                    if (eCpf)
-                    {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
-                    }
-                }
-            }
+		if (ValidacaoTamanhoDado.ValidarTamanho(empregadoMt, linhaArquivo) && ValidarTipoDados(empregadoMt, linhaArquivo))
+		{
+			if (empregadoMt.TpRegistro != "5")
+			{
+				ErrosValidacao.Add($"O campo 'TpRegistro' esta com o valor ({empregadoMt.TpRegistro}) inválido, deve ter o valor '5'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
+				return;
+			}
+			if (empregadoMt.TpOperacao != "I" && empregadoMt.TpOperacao != "A" && empregadoMt.TpOperacao != "E")
+			{
+				ErrosValidacao.Add($"O campo 'TpOperacao' esta com o valor ({empregadoMt.TpOperacao}) inválido, deve ter o valor 'I' ou 'A' ou 'E'.\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linhaArquivo}\n");
+				return;
+			}
+			string validacaoPis = empregadoMt.Pis[..1];
+			string pis = empregadoMt.Pis.Substring(1, 11);
+			if (validacaoPis == "0")
+			{
+				bool ePis = ValidacaoPIS.Validar(pis);
+				bool eCpf = ValidacaoCPF.Validar(pis);
 
-            if (validacaoPis == "9")
-            {
-                bool ePis = ValidacaoPIS.Validar(pis);
-                bool eCpf = ValidacaoCPF.Validar(pis);
+				if (!ePis)
+				{
+					if (eCpf)
+					{
+						ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 0(zero) no inicio, mas se trata de um Cpf\n");
+					}
+				}
+			}
 
-                if (!eCpf)
-                {
-                    if (ePis)
-                    {
-                        ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n");
-                    }
+			if (validacaoPis == "9")
+			{
+				bool ePis = ValidacaoPIS.Validar(pis);
+				bool eCpf = ValidacaoCPF.Validar(pis);
 
-                }
-            }
-            if (validacaoPis == "8")
-            {
-                bool ePis = ValidacaoPIS.Validar(pis);
-                bool eCpf = ValidacaoCPF.Validar(pis);
+				if (!eCpf)
+				{
+					if (ePis)
+					{
+						ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 9(nove) no inicio, mas se trata de um Pis\n");
+					}
 
-                if (eCpf)
-                {
-                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Cpf\n");
-                }
-                if (ePis)
-                {
-                    ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Pis\n");
-                }
-            }
-            EmpregadoMtRepAfdList.Add(empregadoMt);
-        }
-        foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
-        {
-            ErrosValidacao.Add(item + "\n");
-        }
+				}
+			}
+			if (validacaoPis == "8")
+			{
+				bool ePis = ValidacaoPIS.Validar(pis);
+				bool eCpf = ValidacaoCPF.Validar(pis);
 
-    }
-    private static bool ValidarTipoDados(EmpregadoMtAFD1510 empregadoMtRep, string linha)
-    {
+				if (eCpf)
+				{
+					ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Cpf\n");
+				}
+				if (ePis)
+				{
+					ErrosValidacao.Add("O campo 'Pis' esta indicado o valor 8(oito) no inicio, mas é valido para Pis\n");
+				}
+			}
+			EmpregadoMtRepAfdList.Add(empregadoMt);
+			AddEmpregado(empregadoMt);
+		}
+		foreach (var item in ValidacaoTamanhoDado.ErrosValidacao)
+		{
+			ErrosValidacao.Add(item + "\n");
+		}
 
-        var camposComErro = new List<string>();
+	}
+	private static void AddEmpregado(EmpregadoMtAFD1510 empregadoMtAFD1510)
+	{
+		int id = 0;
+		Empregados.Add(new Empregado
+		{
+			Id = id++,
+			Nome = empregadoMtAFD1510.Nome.Trim(),
+			PisCpf = empregadoMtAFD1510.Pis.Trim()
+		});
+	}
 
-        if (!int.TryParse(empregadoMtRep.Nsr, out _))
-        {
-            camposComErro.Add("Nsr");
-        }
+	private static bool ValidarTipoDados(EmpregadoMtAFD1510 empregadoMtRep, string linha)
+	{
 
-        if (!int.TryParse(empregadoMtRep.TpRegistro, out _))
-        {
-            camposComErro.Add("TpRegistro");
-        }
+		var camposComErro = new List<string>();
 
-        if (!double.TryParse(empregadoMtRep.DataGravacao, out _))
-        {
-            camposComErro.Add("DataGravacao");
-        }
+		if (!int.TryParse(empregadoMtRep.Nsr, out _))
+		{
+			camposComErro.Add("Nsr");
+		}
 
-        if (!double.TryParse(empregadoMtRep.HoraGravacao, out _))
-        {
-            camposComErro.Add("HoraGravacao");
-        }
+		if (!int.TryParse(empregadoMtRep.TpRegistro, out _))
+		{
+			camposComErro.Add("TpRegistro");
+		}
 
-        if (!double.TryParse(empregadoMtRep.Pis, out _))
-        {
-            camposComErro.Add("Pis");
-        }
+		if (!double.TryParse(empregadoMtRep.DataGravacao, out _))
+		{
+			camposComErro.Add("DataGravacao");
+		}
 
-        if (camposComErro.Count == 0)
-        {
-            return true;
-        }
-        else
-        {
-            ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
-            return false;
-        }
-    }
-    #endregion
+		if (!double.TryParse(empregadoMtRep.HoraGravacao, out _))
+		{
+			camposComErro.Add("HoraGravacao");
+		}
+
+		if (!double.TryParse(empregadoMtRep.Pis, out _))
+		{
+			camposComErro.Add("Pis");
+		}
+
+		if (camposComErro.Count == 0)
+		{
+			return true;
+		}
+		else
+		{
+			ErrosValidacao.Add($"Erro de tipo de dados nos campos: {string.Join(", ", camposComErro)}\n\tLinha ({LerArquivoAFD.NumeroLinha}): {linha}\n");
+			return false;
+		}
+	}
+	#endregion
 }
